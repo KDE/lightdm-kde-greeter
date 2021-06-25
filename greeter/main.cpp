@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,30 +18,31 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 // KDE
-#include <KCmdLineArgs>
-#include <KApplication>
 #include <KAboutData>
-#include <KLocale>
+#include <KLocalizedString>
+
+#include <QCommandLineParser>
+#include <QApplication>
 
 #include "../about.h"
 #include "greeterwindow.h"
 
 int main(int argc, char *argv[])
 {
+    QApplication app(argc, argv);
+    QCommandLineParser options;
+
     KAboutData aboutData(
         "lightdm-kde-greeter",        // appName
-        "lightdm_greeter",                // catalogName
-        ki18n("LightDM KDE Greeter"), // programName
-        "0");                         // version (set by initAboutData)
+        ki18n("LightDM KDE Greeter").toString(), // programName
+        "0",                          // version (set by initAboutData)
+        ki18n("Login screen using the LightDM framework").toString(),
+        KAboutLicense::GPL);
 
     initAboutData(&aboutData);
+    aboutData.setupCommandLine(&options);
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
-
-    KCmdLineOptions options;
-    KCmdLineArgs::addCmdLineOptions(options);
-    KCmdLineArgs::parsedArgs();
-    KApplication app;
+    options.process(app);
 
     GreeterWindow *w = new GreeterWindow();
     w->show();

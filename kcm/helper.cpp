@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,7 +19,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "helper.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KConfig>
 #include <KConfigGroup>
 
@@ -53,7 +54,7 @@ static QSharedPointer<KConfig> openConfig(WhichConfig which)
 
 KAuth::ActionReply Helper::save(const QVariantMap &args)
 {
-    KAuth::ActionReply errorReply = KAuth::ActionReply::HelperErrorReply;
+    KAuth::ActionReply errorReply = KAuth::ActionReply::HelperErrorReply();
     QSharedPointer<KConfig> coreConfig = openConfig(CoreConfig);
     QSharedPointer<KConfig> greeterConfig = openConfig(GreeterConfig);
 
@@ -83,9 +84,7 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
     coreConfig->sync();
     greeterConfig->sync();
 
-    return KAuth::ActionReply::SuccessReply;
+    return KAuth::ActionReply::SuccessReply();
 }
 
-KDE4_AUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper);
-
-#include "moc_helper.cpp"
+KAUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper);

@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,11 +17,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <faceimageprovider.h>
+#include "faceimageprovider.h"
 
 #include <QLightDM/UsersModel>
 
-#include <KDebug>
+#include <QDebug>
 #include <KIconLoader>
 
 #include <QIcon>
@@ -28,7 +29,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFile>
 
 FaceImageProvider::FaceImageProvider(QAbstractItemModel* model)
-: QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
+: QQuickImageProvider(QQuickImageProvider::Pixmap)
 , m_model(model)
 {
 }
@@ -45,7 +46,7 @@ QPixmap FaceImageProvider::requestPixmap(const QString& id, QSize* size, const Q
         }
     }
     if (!userIndex.isValid()) {
-        kWarning() << "Couldn't find user" << id << "in UsersModel";
+        qWarning() << "Couldn't find user" << id << "in UsersModel";
         return QPixmap();
     }
 

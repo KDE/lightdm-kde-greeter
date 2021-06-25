@@ -64,16 +64,11 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="KLineEdit" name="kcfg_GreetMessage"/>
+    <widget class="QLineEdit" name="kcfg_GreetMessage"/>
    </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>SelectImageButton</class>
    <extends>QToolButton</extends>

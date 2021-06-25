@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,8 +22,9 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QObject>
 #include <QDir>
+#include <QUrl>
 
-#include <Plasma/ConfigLoader>
+#include <KConfigLoader>
 
 
 /** This class exposes the lightdm-kde config to QML*/
@@ -31,12 +33,12 @@ class ConfigWrapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit ConfigWrapper(const KUrl &kcfgPath, QObject *parent = 0);
+    explicit ConfigWrapper(const QUrl &kcfgPath, QObject *parent = 0);
 
     Q_INVOKABLE QVariant readEntry(const QString &key) const;
 
 private:
-    Plasma::ConfigLoader *m_config;
+    KConfigLoader *m_config;
 
 };
 

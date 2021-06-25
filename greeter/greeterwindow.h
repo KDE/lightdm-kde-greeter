@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,16 +20,16 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef GREETER_WINDOW_H
 #define GREETER_WINDOW_H
 
-#include <QDeclarativeView>
+#include <QQuickView>
 
 class GreeterWrapper;
 
-class GreeterWindow: public QDeclarativeView
+class GreeterWindow: public QQuickView
 {
     Q_OBJECT
 
 public:
-    GreeterWindow(QWidget *parent = 0);
+    GreeterWindow(QWindow *parent = 0);
 
     ~GreeterWindow();
 
@@ -37,9 +38,6 @@ public Q_SLOTS:
 
 protected:
     void resizeEvent(QResizeEvent *);
-
-private Q_SLOTS:
-    void screenshot();
 
 private:
     GreeterWrapper *m_greeter;

@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,6 +33,8 @@ public:
     int rowCount(const QModelIndex &parent=QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role=Qt::DisplayRole) const;
 
+    QHash<int, QByteArray> roleNames() const override;
+
 private slots:
     void onScreenResized(int screen);
     void onScreenCountChanged(int newCount);
@@ -39,6 +42,8 @@ private slots:
 private:
     void loadScreens();
     QList<QRect> m_screens;
+
+    QHash<int, QByteArray> m_roles;
 };
 
 #endif // SCREENSMODEL_H

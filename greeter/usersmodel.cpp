@@ -28,7 +28,7 @@ UsersModel::UsersModel(QObject *parent) :
     ExtraRowProxyModel(parent),
     m_showGuest(false)
 {
-    setSourceModel(new QLightDM::UsersModel(this));
+    setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::UsersModel(this)));
 }
 
 void UsersModel::setShowGuest(bool showGuest)

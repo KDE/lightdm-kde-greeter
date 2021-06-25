@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,10 +38,12 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const; // reimp
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const; // reimp
 
-    void setSourceModel(QAbstractItemModel* model);
+    void setSourceModel(const QSharedPointer<QAbstractItemModel> &model);
 
     /** Returns a pointer to the extra row model, which can be edited as appropriate*/
     QStandardItemModel* extraRowModel() const;
+
+    QHash<int, QByteArray> roleNames() const override;
 
 private slots:
     void onSourceRowsInserted(const QModelIndex &parent,int start,int end);
@@ -59,7 +62,7 @@ private:
 
     int sourceRowCount() const;
 
-    QWeakPointer<QAbstractItemModel> m_model;
+    QSharedPointer<QAbstractItemModel> m_model;
     QStandardItemModel *m_extraRowModel;
     Rows m_rows;
 };

@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2011  Martin Klapetek <martin.klapetek@gmail.com>
  * Copyright (C) 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+ * Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +23,7 @@
 #ifndef SELECTIMAGEBUTTON_H
 #define SELECTIMAGEBUTTON_H
 
-#include <QtGui/QToolButton>
+#include <QtWidgets/QToolButton>
 
 class SelectImageButton : public QToolButton
 {

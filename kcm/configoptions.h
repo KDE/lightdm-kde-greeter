@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,7 +24,6 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QWidget>
 #include <QDir>
 
-#include <KSharedConfigPtr>
 #include <KSharedConfig>
 
 class AuthKitConfigLoader;
@@ -54,7 +54,7 @@ private slots:
 private:
     KSharedConfigPtr m_config;
 
-    QWeakPointer<QWidget> m_wrapperWidget;
+    QSharedPointer<QWidget> m_wrapperWidget;
     KConfigDialogManager* m_manager;
     AuthKitConfigLoader* m_configLoader;
 };

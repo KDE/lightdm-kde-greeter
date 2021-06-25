@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2011  Martin Klapetek <martin.klapetek@gmail.com>
  * Copyright (C) 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+ * Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,24 +22,27 @@
 
 #include "selectimagebutton.h"
 
-#include <QtGui/QWidgetAction>
+#include <QtWidgets/QWidgetAction>
 
-#include <KFileDialog>
-#include <KMenu>
+#include <QImageReader>
+#include <QFileDialog>
+#include <QMenu>
+#include <QIcon>
 #include <KLocalizedString>
-#include <KMessageBox>
+#include <KIconEngine>
+#include <KIconLoader>
 
 SelectImageButton::SelectImageButton(QWidget *parent)
     : QToolButton(parent)
 {
-    KMenu *menu = new KMenu(this);
+    QMenu *menu = new QMenu(this);
 
     setPopupMode(QToolButton::InstantPopup);
 
     setIconSize(QSize(64,64));
 
-    menu->addAction(KIcon(QLatin1String("document-open-folder")), i18n("Load from file..."), this, SLOT(onLoadImageFromFile()));
-    menu->addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Image"), this, SLOT(onClearImage()));
+    menu->addAction(QIcon(new KIconEngine(QLatin1String("document-open-folder"), KIconLoader::global())), i18n("Load from file..."), this, SLOT(onLoadImageFromFile()));
+    menu->addAction(QIcon(new KIconEngine(QLatin1String("edit-clear"), KIconLoader::global())), i18n("Clear Image"), this, SLOT(onClearImage()));
     setMenu(menu);
 
     onClearImage();
@@ -54,12 +58,12 @@ void SelectImageButton::setImagePath(const QString &imagePath) {
 
     QPixmap image(imagePath);
     if (! image.isNull()) {
-        KIcon imageIcon;
+        QIcon imageIcon;
         //scale oversized avatars to fit, but don't stretch smaller images
         imageIcon.addPixmap(image.scaled(iconSize().boundedTo(image.size()), Qt::KeepAspectRatio));
         setIcon(imageIcon);
     } else {
-        setIcon(KIcon(QLatin1String("image-x-generic")));
+        setIcon(QIcon(new KIconEngine(QLatin1String("image-x-generic"), KIconLoader::global())));
     }
     Q_EMIT imagePathChanged(m_imagePath);
 }
@@ -71,11 +75,10 @@ QString SelectImageButton::imagePath() const {
 
 void SelectImageButton::onLoadImageFromFile()
 {
-    KUrl fileUrl = KFileDialog::getImageOpenUrl(KUrl(), this,
-                                                i18n("Select image"));
+    QString fileUrl = QFileDialog::getOpenFileName(this, ki18n("Select image").toString(), QString(), QImageReader::supportedMimeTypes().join(" "), nullptr, QFileDialog::Options(QFileDialog::ReadOnly));
 
     if (!fileUrl.isEmpty()) {
-        setImagePath(fileUrl.path());
+        setImagePath(fileUrl);
     } else {
         return;
     }

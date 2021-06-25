@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,10 +20,10 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "lightdmkcm.h"
 
 #include <KAboutData>
-#include <KAuth/Action>
-#include <KAuth/ActionReply>
-#include <KDebug>
-#include <KTabWidget>
+#include <KAuth/KAuthAction>
+#include <KAuth/KAuthExecuteJob>
+#include <QDebug>
+#include <QTabWidget>
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <KConfigDialogManager>
@@ -33,19 +34,20 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "themeconfig.h"
 #include "coreconfig.h"
 
-K_PLUGIN_FACTORY(LightDMKcmFactory, registerPlugin<LightDMKcm>();)
+K_PLUGIN_FACTORY_WITH_JSON(LightDMKcmFactory, "kcm_lightdm.json", registerPlugin<LightDMKcm>();)
 K_EXPORT_PLUGIN(LightDMKcmFactory("kcm_lightdm", "kcm_lightdm"))
 
 Q_IMPORT_PLUGIN(lightdm_config_widgets)
 
 LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args) :
-    KCModule(LightDMKcmFactory::componentData(), parent, args)
+    KCModule(parent, args)
 {
     KAboutData* aboutData = new KAboutData(
         "kcmlightdm",                // appName
-        0,                           // catalogName
-        ki18n("LightDM KDE Config"), // programName
-        "0");                        // version (set by initAboutData)
+        ki18n("LightDM KDE Config").toString(), // programName
+        "0",                        // version (set by initAboutData)
+        ki18n("Login screen using the LightDM framework").toString(),
+        KAboutLicense::GPL);
 
     initAboutData(aboutData);
 
@@ -54,7 +56,7 @@ LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args) :
     setNeedsAuthorization(true);
 
     QHBoxLayout* layout = new QHBoxLayout(this);
-    KTabWidget* tabWidget = new KTabWidget(this);
+    QTabWidget* tabWidget = new QTabWidget(this);
     layout->addWidget(tabWidget);
 
     //make our configwidgets work with KConfigXT
@@ -78,12 +80,12 @@ void LightDMKcm::save()
     args.unite(m_coreConfig->save());
 
     KAuth::Action saveAction("org.kde.kcontrol.kcmlightdm.save");
-    saveAction.setHelperID("org.kde.kcontrol.kcmlightdm");
+    saveAction.setHelperId("org.kde.kcontrol.kcmlightdm");
     saveAction.setArguments(args);
-    KAuth::ActionReply reply = saveAction.execute();
-    if (reply.failed()) {
+    KAuth::ExecuteJob *job = saveAction.execute();
+    if (!job->exec()) {
         // FIXME: Show a message here
-        kWarning() << "save failed:" << reply.errorDescription();
+        qWarning() << "save failed:" << job->errorText() << ", " << job->errorString();
     } else {
         changed(false);
     }

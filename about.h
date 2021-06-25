@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,13 +28,13 @@ static void initAboutData(KAboutData* aboutData)
 {
     aboutData->setVersion(LIGHTDM_KDE_VERSION);
 
-    aboutData->setShortDescription(ki18n("Login screen using the LightDM framework"));
-    aboutData->setLicense(KAboutData::License_GPL);
-    aboutData->setCopyrightStatement(ki18n("(c) 2012 David Edmundson"));
+    aboutData->setShortDescription(ki18n("Login screen using the LightDM framework").toString());
+    aboutData->setLicense(KAboutLicense::GPL, KAboutLicense::OrLaterVersions);
+    aboutData->setCopyrightStatement(ki18n("(c) 2012 David Edmundson").toString());
     aboutData->setHomepage("https://projects.kde.org/projects/playground/base/lightdm");
 
-    aboutData->addAuthor(ki18n("David Edmundson"), ki18n("Author"), "kde@davidedmundson.co.uk");
-    aboutData->addAuthor(ki18n("Aurélien Gâteau"), ki18n("Developer"), "aurelien.gateau@canonical.com");
+    aboutData->addAuthor(ki18n("David Edmundson").toString(), ki18n("Author").toString(), "kde@davidedmundson.co.uk");
+    aboutData->addAuthor(ki18n("Aurélien Gâteau").toString(), ki18n("Developer").toString(), "aurelien.gateau@canonical.com");
 }
 
 #endif /* ABOUT_H */

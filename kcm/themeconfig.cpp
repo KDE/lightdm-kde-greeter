@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,14 +28,14 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPixmap>
 #include <QDir>
 
-#include <KMessageBox> //note only used for temporary warning.
-#include <KDebug>
+#include <QDebug>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KConfigDialog>
-#include <KConfigSkeletonItem>
+#include <KConfigSkeleton>
+#include <KLocalizedString>
 
-#include <KAuth/Action>
+#include <KAuth/KAuthAction>
 
 #include "config.h"
 
@@ -57,10 +58,10 @@ ThemeConfig::ThemeConfig(QWidget *parent) :
 
     QModelIndex index = findIndexForTheme(theme);
     if (!index.isValid()) {
-        kWarning() << "Could not find" << theme << "in theme list. Falling back to \"userbar\" theme.";
+        qWarning() << "Could not find" << theme << "in theme list. Falling back to \"userbar\" theme.";
         index = findIndexForTheme("userbar");
         if (!index.isValid()) {
-            kWarning() << "Could not find \"userbar\" theme. Something is wrong with this installation. Falling back to first available theme.";
+            qWarning() << "Could not find \"userbar\" theme. Something is wrong with this installation. Falling back to first available theme.";
             index = model->index(0);
         }
     }
@@ -107,7 +108,7 @@ void ThemeConfig::onThemeSelected(const QModelIndex &index)
 
     const QString theme = ui->themesList->currentIndex().data(ThemesModel::IdRole).toString();
 
-    KGlobal::locale()->insertCatalog("lightdm_theme_" + theme);
+    KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());
 
     ui->options->setTheme(themeDir());
 
@@ -136,5 +137,3 @@ void ThemeConfig::defaults()
 {
     ui->options->defaults();
 }
-
-#include "moc_themeconfig.cpp"

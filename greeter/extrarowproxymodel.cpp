@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,9 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <extrarowproxymodel.h>
 
-#include <KDebug>
+#include "extrarowproxymodel.h"
+
 #include <QAbstractItemModel>
 
 ExtraRowProxyModel::ExtraRowProxyModel(QObject* parent)
@@ -30,7 +31,7 @@ ExtraRowProxyModel::ExtraRowProxyModel(QObject* parent)
     connect(m_extraRowModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(onExtraDataChanged(QModelIndex,QModelIndex)));
 }
 
-void ExtraRowProxyModel::setSourceModel(QAbstractItemModel* model)
+void ExtraRowProxyModel::setSourceModel(const QSharedPointer<QAbstractItemModel> &model)
 {
     if (! m_model.isNull()) {
         disconnect(m_model.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(onSourceRowsInserted(QModelIndex,int,int)));
@@ -38,9 +39,7 @@ void ExtraRowProxyModel::setSourceModel(QAbstractItemModel* model)
         disconnect(m_model.data(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(onSourceDataChanged(QModelIndex,QModelIndex)));
     }
 
-    m_model = QWeakPointer<QAbstractItemModel>(model);
-    reset();
-    setRoleNames(m_model.data()->roleNames());
+    m_model = model;
 
     connect(m_model.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(onSourceRowsInserted(QModelIndex,int,int)));
     connect(m_model.data(), SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(onSourceRowsRemoved(QModelIndex,int,int)));
@@ -50,6 +49,18 @@ void ExtraRowProxyModel::setSourceModel(QAbstractItemModel* model)
 QStandardItemModel *ExtraRowProxyModel::extraRowModel() const
 {
     return m_extraRowModel;
+}
+
+QHash<int, QByteArray> ExtraRowProxyModel::roleNames() const
+{
+    if (!m_model.isNull())
+    {
+        return m_model.data()->roleNames();
+    }
+    else
+    {
+        return QAbstractListModel::roleNames();
+    }
 }
 
 int ExtraRowProxyModel::rowCount(const QModelIndex &) const

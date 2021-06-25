@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,34 +18,31 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "greeterwindow.h"
-#include "powermanagement.h"
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QApplication>
-#include <QDeclarativeView>
-#include <QDeclarativeEngine>
-#include <QDeclarativeContext>
+#include <QQuickView>
+#include <QQmlEngine>
+#include <QQmlContext>
 #include <QDesktopWidget>
 #include <QDir>
 #include <QPixmap>
-#include <QShortcut>
 #include <QProcess>
 #include <QtCore/QDebug>
-#include <QtDeclarative/qdeclarative.h>
 #include <QPainter>
 #include <QPixmap>
 #include <QProcess>
+#include <QUrl>
+#include <QStandardPaths>
+#include <QDebug>
 
 #include <QLightDM/Power>
 
-#include <kdeclarative.h>
+#include <KDeclarative/KDeclarative>
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KStandardDirs>
-#include <KUrl>
-#include <KDebug>
-#include <KGlobal>
+#include <KLocalizedString>
 #include <Plasma/Theme>
 
 #include "extrarowproxymodel.h"
@@ -57,18 +55,14 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <config.h>
 
-GreeterWindow::GreeterWindow(QWidget *parent)
-    : QDeclarativeView(parent),
+GreeterWindow::GreeterWindow(QWindow *parent)
+    : QQuickView(parent),
       m_greeter(new GreeterWrapper(this))
 {
     QRect screen = QApplication::desktop()->rect();
     setGeometry(screen);
     
-    KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(engine());
-    kdeclarative.initialize();
-    //binds things like kconfig and icons
-    kdeclarative.setupBindings();
+    KDeclarative::KDeclarative::setupEngine(engine());
 
     UsersModel* usersModel = new UsersModel(this);
 
@@ -82,44 +76,32 @@ GreeterWindow::GreeterWindow(QWidget *parent)
     KConfigGroup configGroup = config.group("greeter");
 
     QString theme = configGroup.readEntry("theme-name", "userbar");
-    KUrl source = KGlobal::dirs()->locate("appdata", "themes/" + theme + "/main.qml");
+    QUrl source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/" + theme + "/main.qml");
 
     if (source.isEmpty()) {
-        kError() << "Cannot find QML file for" << theme << "theme. Falling back to \"userbar\" theme.";
+        qCritical() << "Cannot find QML file for" << theme << "theme. Falling back to \"userbar\" theme.";
         theme = "userbar";
-        source = KGlobal::dirs()->locate("appdata", "themes/userbar/main.qml");
+        source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/userbar/main.qml");
         if (source.isEmpty()) {
-            kFatal() << "Cannot find QML file for \"userbar\" theme. Something is wrong with this installation. Aborting.";
+            qFatal("Cannot find QML file for \"userbar\" theme. Something is wrong with this installation. Aborting.");
         }
     }
-    kDebug() << "Loading" << source;
+    qDebug() << "Loading" << source;
 
-    KGlobal::locale()->insertCatalog("lightdm_theme_" + theme);
-    
-    rootContext()->setContextProperty("config", new ConfigWrapper(KGlobal::dirs()->locate("appdata", "themes/" + theme + "/main.xml"), this));
+    KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());
+
+    rootContext()->setContextProperty("config", new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/" + theme + "/main.xml"), this));
     rootContext()->setContextProperty("screenSize", size());
     rootContext()->setContextProperty("greeter", m_greeter);
     rootContext()->setContextProperty("usersModel", usersModel);
     rootContext()->setContextProperty("sessionsModel", new SessionsModel(this));
     rootContext()->setContextProperty("screensModel", new ScreensModel(this));
     rootContext()->setContextProperty("power", new QLightDM::PowerInterface(this));
-    rootContext()->setContextProperty("plasmaTheme", Plasma::Theme::defaultTheme());
+    rootContext()->setContextProperty("plasmaTheme", new Plasma::Theme(this));
 
     setSource(source);
-    // Prevent screen flickering when the greeter starts up. This really needs to be sorted out in QML/Qt...
-    setAttribute(Qt::WA_OpaquePaintEvent);
-    setAttribute(Qt::WA_NoSystemBackground);
-
-    // Shortcut to take a screenshot of the screen. Handy because it is not
-    // possible to take a screenshot of the greeter in test mode without
-    // including the cursor.
-    QShortcut* cut = new QShortcut(this);
-    cut->setKey(Qt::CTRL + Qt::ALT + Qt::Key_S);
-    connect(cut, SIGNAL(activated()), SLOT(screenshot()));
 
     connect(m_greeter, SIGNAL(aboutToLogin()), SLOT(setRootImage()));
-
-    new PowerManagement(this);
 }
 
 GreeterWindow::~GreeterWindow()
@@ -129,32 +111,15 @@ GreeterWindow::~GreeterWindow()
 void GreeterWindow::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-    rootContext()->setContextProperty("screenSize", size());
-    setSceneRect(QRectF(0, 0, width(), height()));
+    rootContext()->setContextProperty("screenSize", event->size());
 }
 
 void GreeterWindow::setRootImage()
 {
     QPixmap pix = QPixmap::grabWindow(winId());
     QProcess process;
-    process.start(QFile::encodeName(KGlobal::dirs()->findExe("lightdm-kde-greeter-rootimage")).data(), QIODevice::WriteOnly);
+    process.start(QFile::encodeName(QStandardPaths::findExecutable("lightdm-kde-greeter-rootimage")).data(), QIODevice::WriteOnly);
     pix.save(&process, "xpm"); //write pixmap to rootimage
     process.closeWriteChannel();
     process.waitForFinished();
 }
-
-void GreeterWindow::screenshot()
-{
-    QPixmap pix = QPixmap::grabWindow(winId());
-
-    QString path = QDir::temp().absoluteFilePath("lightdm-kde-greeter-screenshot.png");
-    bool ok = pix.save(path);
-    if (ok) {
-        kDebug() << "Saved screenshot as" << path;
-    } else {
-        kWarning() << "Failed to save screenshot as" << path;
-    }
-}
-
-#include "moc_greeterwindow.cpp"
-

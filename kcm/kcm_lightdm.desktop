@@ -1,5 +1,4 @@
 [Desktop Entry]
-Exec=kcmshell4 kcm_lightdm
 Icon=preferences-system-login
 Type=Service
 X-KDE-ServiceTypes=KCModule

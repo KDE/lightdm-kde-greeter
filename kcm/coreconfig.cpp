@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,10 +26,9 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLightDM/SessionsModel>
 #include <QLightDM/UsersModel>
 
-#include <KAuth/Action>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KDebug>
+#include <QDebug>
 
 static const char* GUEST_NAME = "*guest";
 
@@ -41,7 +41,7 @@ inline void setCurrentItemFromData(QComboBox* combo, int role, const QVariant& d
 {
     int index = combo->findData(data, role);
     if (index == -1) {
-        kWarning() << "Couldn't find" << data << "(role" << role << ") in combobox" << combo;
+        qWarning() << "Couldn't find" << data << "(role" << role << ") in combobox" << combo;
         return;
     }
     combo->setCurrentIndex(index);

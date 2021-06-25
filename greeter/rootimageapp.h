@@ -17,26 +17,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "configwrapper.h"
 
-#include "config.h"
-#include <QDebug>
-#include <QFile>
+#ifndef ROOTIMAGEAPP_H
+#define ROOTIMAGEAPP_H
 
-ConfigWrapper::ConfigWrapper(const QUrl &kcfgPath, QObject *parent) :
-    QObject(parent)
+#include <QApplication>
+
+class RootImageApp: public QApplication
 {
-    KSharedConfigPtr config = KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig);
+    Q_OBJECT
 
-    QFile xmlFile(kcfgPath.toLocalFile());
-    xmlFile.open(QFile::ReadOnly);
+public:
+    RootImageApp(int &argc, char **argv);
 
-    m_config = new KConfigLoader(config, &xmlFile, this);
-}
+private slots:
+    void setBackground();
+};
 
-QVariant ConfigWrapper::readEntry(const QString &key) const
-{
-    //FIXME I should use a KConfigSkeleton which loads the KCFG, then remove the "default" parameter
-
-    return m_config->property(key);
-}
+#endif /* ROOTIMAGEAPP_H */

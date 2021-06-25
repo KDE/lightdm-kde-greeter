@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,8 +26,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDir>
 #include <QSettings>
 
-#include <KStandardDirs>
-#include <KGlobal>
+#include <QStandardPaths>
 #include <KDesktopFile>
 #include <KConfigGroup>
 
@@ -88,7 +88,7 @@ QVariant ThemesModel::data(const QModelIndex &index, int role) const
 void ThemesModel::load()
 {
     qDebug() << "loading themes";
-    QStringList themeDirPaths = KGlobal::dirs()->findDirs("data", "lightdm-kde-greeter/themes");
+    QStringList themeDirPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "lightdm-kde-greeter/themes", QStandardPaths::LocateDirectory);
     qDebug() << themeDirPaths;
 
     //get a list of possible theme directories, loop through each of these finding themes.

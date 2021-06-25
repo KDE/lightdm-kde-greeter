@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,38 +23,36 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFile>
 #include <QUiLoader>
 #include <QVBoxLayout>
+#include <QDebug>
 
 #include <KConfigDialogManager>
-#include <KDebug>
-
-#include <kdemacros.h>
-
-#include <Plasma/ConfigLoader>
+#include <KConfigGui/KConfigLoader>
 
 
-
-class AuthKitConfigLoader : public Plasma::ConfigLoader {
+class AuthKitConfigLoader : public KConfigLoader {
 public:
     AuthKitConfigLoader(KSharedConfigPtr config, QIODevice *xml, QObject *parent=0);
     QVariantMap entryMap() const;
 protected:
-    void usrWriteConfig();
+    bool usrSave() override;
 private:
     QVariantMap m_entryMap;
 };
 
 AuthKitConfigLoader::AuthKitConfigLoader(KSharedConfigPtr config, QIODevice *xml, QObject *parent)
-    : Plasma::ConfigLoader(config, xml, parent)
+    : KConfigLoader(config, xml, parent)
 {}
 
 //normal write fails due to needing root, worse it "readConfig" at the end of a write, deleting any values we once had
 //we overrise the usrWrite event to save all settings to entry map then retrieve that.
-void AuthKitConfigLoader::usrWriteConfig()
+bool AuthKitConfigLoader::usrSave()
 {
     m_entryMap.clear();
     foreach(KConfigSkeletonItem* item, items()) {
         m_entryMap["greeter/greeter-settings/" + item->key()] = item->property();
     }
+
+    return true;
 }
 
 QVariantMap AuthKitConfigLoader::entryMap() const
@@ -75,8 +74,8 @@ void ConfigOptions::setConfig(const KSharedConfigPtr &config)
 
 void ConfigOptions::setTheme(const QDir &themeDir)
 {
-    if(KDE_ISUNLIKELY(m_config.isNull())) {
-        kFatal() << "setConfig must be called before setTheme";
+    if(Q_UNLIKELY(!m_config)) {
+        qFatal("setConfig must be called before setTheme");
     }
 
     //delete existing widgets.
@@ -93,7 +92,7 @@ void ConfigOptions::setTheme(const QDir &themeDir)
         QUiLoader loader;
         loader.setLanguageChangeEnabled(true);
         QFile uiFile(themeDir.filePath(QLatin1String("config.ui")));
-        m_wrapperWidget = loader.load(&uiFile, this);
+        m_wrapperWidget.reset(loader.load(&uiFile, this));
 
         //both the following get deleted when the wrapped widget is deleted.
         //FIXME I don't really like having so many dangly pointers about...

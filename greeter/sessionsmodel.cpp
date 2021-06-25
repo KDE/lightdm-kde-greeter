@@ -27,7 +27,7 @@ SessionsModel::SessionsModel(QObject *parent) :
     ExtraRowProxyModel(parent),
     m_showLastUsedSession(false)
 {
-    setSourceModel(new QLightDM::SessionsModel(this));
+    setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::SessionsModel(this)));
 
 
 }

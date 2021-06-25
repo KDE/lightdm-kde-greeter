@@ -1,18 +1,11 @@
-find_package(KDE4 REQUIRED)
-
-include(KDE4Defaults)
-include(MacroLibrary)
-
 # Makes it easy to reuse code from the greeter. A bit ugly but I don't feel
 # like setting up a static library for one class.
 set(GREETER_DIR ${CMAKE_SOURCE_DIR}/greeter)
 
 # Add the compiler flags
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(
-  ${CMAKE_SOURCE_DIR}
-  ${CMAKE_BINARY_DIR}
-  ${KDE4_INCLUDES}
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}
   ${QLIGHTDM_INCLUDE_DIR}
   ${GREETER_DIR}
 )
@@ -30,42 +23,64 @@ set(LIGHTDM_KCM_SRCS
     ${GREETER_DIR}/usersmodel.cpp
 )
 
+set(LIGHTDM_KCM_HDRS
+    themeconfig.h
+    themesmodel.h
+    coreconfig.h
+    lightdmkcm.h
+    configoptions.h
+    ${GREETER_DIR}/extrarowproxymodel.h
+    ${GREETER_DIR}/usersmodel.h
+)
+
 set(LIGHTDM_KCM_UI
     themeconfig.ui
     coreconfig.ui)
 
-kde4_add_ui_files(LIGHTDM_KCM_SRCS ${LIGHTDM_KCM_UI})
+qt5_wrap_ui(LIGHTDM_KCM_UI_SRCS ${LIGHTDM_KCM_UI})
 
-kde4_add_plugin(kcm_lightdm
-                ${LIGHTDM_KCM_SRCS})
+qt5_wrap_cpp(LIGHTDM_KCM_HDRS_MOCS ${LIGHTDM_KCM_HDRS})
+
+add_library(kcm_lightdm MODULE
+                ${LIGHTDM_KCM_SRCS}
+                ${LIGHTDM_KCM_HDRS}
+                ${LIGHTDM_KCM_HDRS_MOCS}
+                ${LIGHTDM_KCM_UI_SRCS})
 
 
 # Link against the needed libraries
 target_link_libraries(kcm_lightdm
-  ${KDE4_KDEUI_LIBS}
-  ${QT_QTUITOOLS_LIBRARY}
-  ${QT_QTDECLARATIVE_LIBRARY}
-  ${KDE4_PLASMA_LIBS}
   ${QLIGHTDM_LIBRARIES}
-  ${KDE4_KIO_LIBS}
+  Qt5::UiTools
+  KF5::ConfigCore
+  KF5::ConfigGui
+  KF5::ConfigWidgets
   lightdm_config_widgets
 )
 
+kcoreaddons_desktop_to_json(kcm_lightdm "kcm_lightdm.desktop")
+
 install(TARGETS kcm_lightdm
-          DESTINATION ${PLUGIN_INSTALL_DIR})
+          DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
 
 install(FILES kcm_lightdm.desktop
-         DESTINATION ${SERVICES_INSTALL_DIR}
+         DESTINATION ${CMAKE_INSTALL_KSERVICES5DIR}
 )
 
-kde4_add_executable(kcmlightdmhelper helper.cpp)
-target_link_libraries(kcmlightdmhelper ${KDE4_KDECORE_LIBS})
+set(KCMLIGHTDMHELPER_SRCS
+    helper.cpp
+)
 
-kde4_install_auth_helper_files(kcmlightdmhelper org.kde.kcontrol.kcmlightdm root)
-install(TARGETS kcmlightdmhelper DESTINATION ${LIBEXEC_INSTALL_DIR})
+set(KCMLIGHTDMHELPER_HDRS
+    helper.h
+)
 
-kde4_install_auth_actions(org.kde.kcontrol.kcmlightdm kcm_lightdm.actions)
+qt5_wrap_cpp(KCMLIGHTDMHELPER_HDRS_MOCS ${KCMLIGHTDMHELPER_HDRS})
 
-macro_display_feature_log()
+add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS} ${KCMLIGHTDMHELPER_HDRS_MOCS})
+target_link_libraries(kcmlightdmhelper KF5::Auth KF5::ConfigCore)
+install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
+kauth_install_helper_files(kcmlightdmhelper org.kde.kcontrol.kcmlightdm root)
 
+kauth_install_actions(org.kde.kcontrol.kcmlightdm kcm_lightdm.actions)
