@@ -69,14 +69,14 @@ CoreConfig::CoreConfig(QWidget *parent) :
 
     loadFromConfig();
 
-    connect(ui->allowGuest, SIGNAL(toggled(bool)), SIGNAL(changed()));
-    connect(ui->allowGuest, SIGNAL(toggled(bool)), SLOT(onAllowGuestChanged(bool)));
-    connect(ui->autoLogin, SIGNAL(toggled(bool)), SIGNAL(changed()));
-    connect(ui->autoLoginUser, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
-    connect(ui->autoLoginSession, SIGNAL(currentIndexChanged(int)), SIGNAL(changed()));
-    connect(ui->autoLoginTimeout, SIGNAL(valueChanged(int)), SIGNAL(changed()));
-    connect(ui->enableXdmcp, SIGNAL(toggled(bool)), SIGNAL(changed()));
-    connect(ui->enableVnc, SIGNAL(toggled(bool)), SIGNAL(changed()));
+    connect(ui->allowGuest, &QCheckBox::toggled, this, &CoreConfig::changed);
+    connect(ui->allowGuest, &QCheckBox::toggled, this, &CoreConfig::onAllowGuestChanged);
+    connect(ui->autoLogin, &QCheckBox::toggled, this, &CoreConfig::changed);
+    connect(ui->autoLoginUser, &QComboBox::currentIndexChanged, this, &CoreConfig::changed);
+    connect(ui->autoLoginSession, &QComboBox::currentIndexChanged, this, &CoreConfig::changed);
+    connect(ui->autoLoginTimeout, &QSpinBox::valueChanged, this, &CoreConfig::changed);
+    connect(ui->enableXdmcp, &QCheckBox::toggled, this, &CoreConfig::changed);
+    connect(ui->enableVnc, &QCheckBox::toggled, this, &CoreConfig::changed);
 }
 
 CoreConfig::~CoreConfig()

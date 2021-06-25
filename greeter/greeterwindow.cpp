@@ -102,7 +102,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     setSource(source);
 
-    connect(m_greeter, SIGNAL(aboutToLogin()), SLOT(setRootImage()));
+    connect(m_greeter, &GreeterWrapper::aboutToLogin, this, &GreeterWindow::setRootImage);
 }
 
 GreeterWindow::~GreeterWindow()

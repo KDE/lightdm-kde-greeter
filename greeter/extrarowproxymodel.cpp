@@ -26,24 +26,24 @@ ExtraRowProxyModel::ExtraRowProxyModel(QObject* parent)
 : QAbstractListModel(parent),
   m_extraRowModel(new QStandardItemModel(this))
 {
-    connect(m_extraRowModel, SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(onExtraRowsInserted(QModelIndex,int,int)));
-    connect(m_extraRowModel, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(onExtraRowsRemoved(QModelIndex,int,int)));
-    connect(m_extraRowModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(onExtraDataChanged(QModelIndex,QModelIndex)));
+    connect(m_extraRowModel, &QStandardItemModel::rowsInserted, this, &ExtraRowProxyModel::onExtraRowsInserted);
+    connect(m_extraRowModel, &QStandardItemModel::rowsRemoved, this, &ExtraRowProxyModel::onExtraRowsRemoved);
+    connect(m_extraRowModel, &QStandardItemModel::dataChanged, this, &ExtraRowProxyModel::onExtraDataChanged);
 }
 
 void ExtraRowProxyModel::setSourceModel(const QSharedPointer<QAbstractItemModel> &model)
 {
     if (! m_model.isNull()) {
-        disconnect(m_model.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(onSourceRowsInserted(QModelIndex,int,int)));
-        disconnect(m_model.data(), SIGNAL(rowsRemoved(QModelIndex,int,int)), this, SLOT(onSourceRowsRemoved(QModelIndex,int,int)));
-        disconnect(m_model.data(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(onSourceDataChanged(QModelIndex,QModelIndex)));
+        disconnect(m_model.data(), &QAbstractItemModel::rowsInserted, this, &ExtraRowProxyModel::onSourceRowsInserted);
+        disconnect(m_model.data(), &QAbstractItemModel::rowsRemoved, this, &ExtraRowProxyModel::onSourceRowsRemoved);
+        disconnect(m_model.data(), &QAbstractItemModel::dataChanged, this, &ExtraRowProxyModel::onSourceDataChanged);
     }
 
     m_model = model;
 
-    connect(m_model.data(), SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(onSourceRowsInserted(QModelIndex,int,int)));
-    connect(m_model.data(), SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(onSourceRowsRemoved(QModelIndex,int,int)));
-    connect(m_model.data(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), SLOT(onSourceDataChanged(QModelIndex,QModelIndex)));
+    connect(m_model.data(), &QAbstractItemModel::rowsInserted, this, &ExtraRowProxyModel::onSourceRowsInserted);
+    connect(m_model.data(), &QAbstractItemModel::rowsRemoved, this, &ExtraRowProxyModel::onSourceRowsRemoved);
+    connect(m_model.data(), &QAbstractItemModel::dataChanged, this, &ExtraRowProxyModel::onSourceDataChanged);
 }
 
 QStandardItemModel *ExtraRowProxyModel::extraRowModel() const

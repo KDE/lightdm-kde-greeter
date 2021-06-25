@@ -99,7 +99,7 @@ void ConfigOptions::setTheme(const QDir &themeDir)
         m_config->reparseConfiguration();
         m_configLoader = new AuthKitConfigLoader(m_config, &kcfgFile, m_wrapperWidget.data());
         m_manager = new KConfigDialogManager(m_wrapperWidget.data(), m_configLoader);
-        connect(m_manager, SIGNAL(widgetModified()), SLOT(onSettingsChanged()));
+        connect(m_manager, &KConfigDialogManager::widgetModified, this, &ConfigOptions::onSettingsChanged);
 
         layout()->addWidget(m_wrapperWidget.data());
     }

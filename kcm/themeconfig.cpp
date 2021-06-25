@@ -50,9 +50,9 @@ ThemeConfig::ThemeConfig(QWidget *parent) :
     ThemesModel *model = new ThemesModel(this);
     ui->themesList->setModel(model);
 
-    connect(ui->themesList, SIGNAL(activated(QModelIndex)), SLOT(onThemeSelected(QModelIndex)));
-    connect(ui->themesList, SIGNAL(clicked(QModelIndex)), SLOT(onThemeSelected(QModelIndex)));
-    connect(ui->options, SIGNAL(changed(bool)), SIGNAL(changed(bool)));
+    connect(ui->themesList, &QListView::activated, this, &ThemeConfig::onThemeSelected);
+    connect(ui->themesList, &QListView::clicked, this, &ThemeConfig::onThemeSelected);
+    connect(ui->options, &ConfigOptions::changed, this, &ThemeConfig::changed);
 
     QString theme = m_config->group("greeter").readEntry("theme-name", "userbar");
 
