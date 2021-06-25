@@ -21,17 +21,18 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "screensmodel.h"
 
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QScreen>
 
 ScreensModel::ScreensModel(QObject *parent) :
     QAbstractListModel(parent)
 {
-    loadScreens();
-    QDesktopWidget *dw = QApplication::desktop();
-    connect(dw, SIGNAL(screenCountChanged(int)), SLOT(onScreenCountChanged(int)));
-    connect(dw, SIGNAL(resized(int)), SLOT(onScreenResized(int)));
+    connect(qGuiApp, &QApplication::screenAdded,          this, [this] (QScreen */*screen*/) { loadScreens(); });
+    connect(qGuiApp, &QApplication::screenRemoved,        this, [this] (QScreen */*screen*/) { loadScreens(); });
+    connect(qGuiApp, &QApplication::primaryScreenChanged, this, [this] (QScreen */*screen*/) { loadScreens(); });
 
     m_roles[Qt::UserRole] = "geometry";
+
+    loadScreens();
 }
 
 QHash<int, QByteArray> ScreensModel::roleNames() const
@@ -56,35 +57,40 @@ QVariant ScreensModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::UserRole) {
-        return m_screens[row];
+        return m_screens[row].geometry;
     }
     return QVariant();
 }
 
-void ScreensModel::onScreenResized(int screen)
+void ScreensModel::onScreenResized(size_t screen, const QRect &geometry)
 {
-    QDesktopWidget *dw = QApplication::desktop();
-
-    if (screen >= 0 && screen < m_screens.size()) {
-        m_screens[screen] = dw->screenGeometry(screen);
+    if (screen < m_screens.size()) {
+        m_screens[screen].geometry = geometry;
     }
+
     QModelIndex index = createIndex(screen,0);
     dataChanged(index, index);
-}
-
-void ScreensModel::onScreenCountChanged(int newCount)
-{
-    Q_UNUSED(newCount);
-    loadScreens();
 }
 
 void ScreensModel::loadScreens()
 {
     beginResetModel();
-    m_screens.clear();
-    QDesktopWidget *dw = QApplication::desktop();
-    for (int i=0;i<dw->screenCount();i++) {
-        m_screens.append(dw->screenGeometry(i));
+
+    for (const auto &screen_data: m_screens)
+    {
+        disconnect(screen_data.ptr, &QScreen::geometryChanged, this, nullptr);
     }
+
+    m_screens.clear();
+
+    size_t screen_number = 0;
+    auto screens_list = qGuiApp->screens();
+
+    for (auto screen = screens_list.constBegin(); screen != screens_list.constEnd(); ++screen, ++screen_number)
+    {
+        connect(*screen, &QScreen::geometryChanged, this, [this, screen_number] (const QRect &geometry) { onScreenResized(screen_number, geometry); });
+        m_screens.append(ScreenData{*screen, (*screen)->geometry()});
+    }
+
     endResetModel();
 }

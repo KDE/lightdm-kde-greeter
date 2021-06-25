@@ -23,6 +23,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
 #include <KIconLoader>
+#include <KIconEngine>
 
 #include <QIcon>
 #include <QPixmap>
@@ -68,7 +69,7 @@ QPixmap FaceImageProvider::requestPixmap(const QString& id, QSize* size, const Q
     }
 
     if (pix.isNull()) {
-        pix = DesktopIcon("user-identity", extent);
+        pix = QIcon(new KIconEngine(QLatin1String("user-identity"), KIconLoader::global())).pixmap(extent);
     }
 
     if (size) {

@@ -35,7 +35,6 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "coreconfig.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(LightDMKcmFactory, "kcm_lightdm.json", registerPlugin<LightDMKcm>();)
-K_EXPORT_PLUGIN(LightDMKcmFactory("kcm_lightdm", "kcm_lightdm"))
 
 Q_IMPORT_PLUGIN(lightdm_config_widgets)
 
@@ -59,9 +58,6 @@ LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args) :
     QTabWidget* tabWidget = new QTabWidget(this);
     layout->addWidget(tabWidget);
 
-    //make our configwidgets work with KConfigXT
-    KConfigDialogManager::changedMap()->insert("SelectImageButton", SIGNAL(imagePathChanged(QString)));
-
     m_coreConfig = new CoreConfig(this);
     m_themeConfig = new ThemeConfig(this);
 
@@ -77,7 +73,7 @@ void LightDMKcm::save()
     QVariantMap args;
 
     args = m_themeConfig->save();
-    args.unite(m_coreConfig->save());
+    args.insert(m_coreConfig->save());
 
     KAuth::Action saveAction("org.kde.kcontrol.kcmlightdm.save");
     saveAction.setHelperId("org.kde.kcontrol.kcmlightdm");

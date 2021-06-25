@@ -25,6 +25,10 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QList>
 #include <QRect>
 
+#include <stddef.h>
+
+class QScreen;
+
 class ScreensModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -36,12 +40,18 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private slots:
-    void onScreenResized(int screen);
-    void onScreenCountChanged(int newCount);
+    void onScreenResized(size_t screen, const QRect &geometry);
 
 private:
     void loadScreens();
-    QList<QRect> m_screens;
+
+    struct ScreenData
+    {
+        QScreen *ptr;
+        QRect geometry;
+    };
+
+    QList<ScreenData> m_screens;
 
     QHash<int, QByteArray> m_roles;
 };

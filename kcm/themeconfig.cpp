@@ -129,7 +129,7 @@ QVariantMap ThemeConfig::save()
     QVariantMap args;
     args["greeter/greeter/theme-name"] = currentIndex.data(ThemesModel::IdRole);
 
-    args.unite(ui->options->save());
+    args.insert(ui->options->save());
     return args;
 }
 

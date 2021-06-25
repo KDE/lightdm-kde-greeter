@@ -32,6 +32,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPainter>
 #include <QPixmap>
 #include <QProcess>
+#include <QScreen>
 #include <QUrl>
 #include <QStandardPaths>
 #include <QDebug>
@@ -116,9 +117,9 @@ void GreeterWindow::resizeEvent(QResizeEvent *event)
 
 void GreeterWindow::setRootImage()
 {
-    QPixmap pix = QPixmap::grabWindow(winId());
+    QPixmap pix = screen()->grabWindow(winId());
     QProcess process;
-    process.start(QFile::encodeName(QStandardPaths::findExecutable("lightdm-kde-greeter-rootimage")).data(), QIODevice::WriteOnly);
+    process.start(QStandardPaths::findExecutable("lightdm-kde-greeter-rootimage"), QStringList(), QIODevice::WriteOnly);
     pix.save(&process, "xpm"); //write pixmap to rootimage
     process.closeWriteChannel();
     process.waitForFinished();
