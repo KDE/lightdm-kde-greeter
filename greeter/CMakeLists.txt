@@ -31,11 +31,6 @@ set(GREETER_HDRS
 
 qt5_wrap_cpp(GREETER_HDRS_MOCS ${GREETER_HDRS})
 
-qt5_add_dbus_interface(GREETER_SRCS
-    org.freedesktop.UPower.xml
-    upower
-)
-
 # Create the greeter
 add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS} ${GREETER_HDRS_MOCS})
 
