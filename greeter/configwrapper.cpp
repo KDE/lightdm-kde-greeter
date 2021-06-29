@@ -20,11 +20,12 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "configwrapper.h"
 
 #include "config.h"
+
 #include <QDebug>
 #include <QFile>
 
-ConfigWrapper::ConfigWrapper(const QUrl &kcfgPath, QObject *parent) :
-    QObject(parent)
+ConfigWrapper::ConfigWrapper(const QUrl &kcfgPath, QObject *parent)
+    : QObject(parent)
 {
     KSharedConfigPtr config = KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig);
 

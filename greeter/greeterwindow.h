@@ -29,20 +29,17 @@ class GreeterWindow: public QQuickView
     Q_OBJECT
 
 public:
-    GreeterWindow(QWindow *parent = 0);
-
+    explicit GreeterWindow(QWindow *parent = nullptr);
     ~GreeterWindow();
 
 public Q_SLOTS:
     void setRootImage();
 
 protected:
-    void resizeEvent(QResizeEvent *);
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     GreeterWrapper *m_greeter;
-
 };
 
-#endif  //  GREETER_WINDOW_H
-
+#endif // GREETER_WINDOW_H

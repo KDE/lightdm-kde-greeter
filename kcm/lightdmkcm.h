@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,17 +25,16 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 class CoreConfig;
 class ThemeConfig;
 
-class LightDMKcm : public KCModule
+class LightDMKcm: public KCModule
 {
     Q_OBJECT
+
 public:
     explicit LightDMKcm(QWidget *parent, const QVariantList &args);
 
-signals:
-
 public slots:
-    void save();
-    void defaults();
+    void save() override;
+    void defaults() override;
 
 private:
     CoreConfig *m_coreConfig;

@@ -19,16 +19,16 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "lightdmkcm.h"
 
+#include <QDebug>
+#include <QHBoxLayout>
+#include <QTabWidget>
+
 #include <KAboutData>
 #include <KAuth/KAuthAction>
 #include <KAuth/KAuthExecuteJob>
-#include <QDebug>
-#include <QTabWidget>
+#include <KConfigDialogManager>
 #include <KLocalizedString>
 #include <KPluginFactory>
-#include <KConfigDialogManager>
-
-#include <QHBoxLayout>
 
 #include "../about.h"
 #include "themeconfig.h"
@@ -38,8 +38,8 @@ K_PLUGIN_FACTORY_WITH_JSON(LightDMKcmFactory, "kcm_lightdm.json", registerPlugin
 
 Q_IMPORT_PLUGIN(lightdm_config_widgets)
 
-LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args) :
-    KCModule(parent, args)
+LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args)
+    : KCModule(parent, args)
 {
     KAboutData* aboutData = new KAboutData(
         "kcmlightdm",                // appName
@@ -54,8 +54,8 @@ LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args) :
 
     setNeedsAuthorization(true);
 
-    QHBoxLayout* layout = new QHBoxLayout(this);
-    QTabWidget* tabWidget = new QTabWidget(this);
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    QTabWidget *tabWidget = new QTabWidget(this);
     layout->addWidget(tabWidget);
 
     m_coreConfig = new CoreConfig(this);
@@ -79,10 +79,13 @@ void LightDMKcm::save()
     saveAction.setHelperId("org.kde.kcontrol.kcmlightdm");
     saveAction.setArguments(args);
     KAuth::ExecuteJob *job = saveAction.execute();
-    if (!job->exec()) {
+    if (!job->exec())
+    {
         // FIXME: Show a message here
         qWarning() << "save failed:" << job->errorText() << ", " << job->errorString();
-    } else {
+    }
+    else
+    {
         changed(false);
     }
 }

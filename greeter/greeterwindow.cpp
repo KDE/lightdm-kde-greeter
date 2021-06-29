@@ -19,32 +19,28 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "greeterwindow.h"
 
-#include <QtWidgets/QWidget>
 #include <QApplication>
-#include <QQuickView>
-#include <QQmlEngine>
-#include <QQmlContext>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QDir>
-#include <QPixmap>
-#include <QProcess>
-#include <QtCore/QDebug>
 #include <QPainter>
 #include <QPixmap>
 #include <QProcess>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickView>
 #include <QScreen>
-#include <QUrl>
 #include <QStandardPaths>
-#include <QDebug>
-
-#include <QLightDM/Power>
-
-#include <KDeclarative/KDeclarative>
+#include <QUrl>
+#include <QWidget>
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
 #include <Plasma/Theme>
+
+#include <QLightDM/Power>
 
 #include "extrarowproxymodel.h"
 #include "faceimageprovider.h"
@@ -57,17 +53,18 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <config.h>
 
 GreeterWindow::GreeterWindow(QWindow *parent)
-    : QQuickView(parent),
-      m_greeter(new GreeterWrapper(this))
+    : QQuickView(parent)
+    , m_greeter(new GreeterWrapper(this))
 {
     QRect screen = QApplication::desktop()->rect();
     setGeometry(screen);
-    
+
     KDeclarative::KDeclarative::setupEngine(engine());
 
-    UsersModel* usersModel = new UsersModel(this);
+    UsersModel *usersModel = new UsersModel(this);
 
-    if (m_greeter->hasGuestAccountHint()) {
+    if (m_greeter->hasGuestAccountHint())
+    {
         usersModel->setShowGuest(true);
     }
 
@@ -79,7 +76,8 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     QString theme = configGroup.readEntry("theme-name", "userbar");
     QUrl source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/" + theme + "/main.qml");
 
-    if (source.isEmpty()) {
+    if (source.isEmpty())
+    {
         qCritical() << "Cannot find QML file for" << theme << "theme. Falling back to \"userbar\" theme.";
         theme = "userbar";
         source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/userbar/main.qml");
@@ -87,6 +85,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
             qFatal("Cannot find QML file for \"userbar\" theme. Something is wrong with this installation. Aborting.");
         }
     }
+
     qDebug() << "Loading" << source;
 
     KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());

@@ -29,10 +29,10 @@ namespace QLightDM
 
 class QAbstractItemModel;
 
-class FaceImageProvider : public QQuickImageProvider
+class FaceImageProvider: public QQuickImageProvider
 {
 public:
-    FaceImageProvider(QAbstractItemModel*);
+    explicit FaceImageProvider(QAbstractItemModel *model);
 
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
 

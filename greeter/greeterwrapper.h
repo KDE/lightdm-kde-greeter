@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,10 +21,11 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef GREETERWRAPPER_H
 #define GREETERWRAPPER_H
 
-#include <QLightDM/Greeter>
 #include <KSharedConfig>
 
-class GreeterWrapper : public QLightDM::Greeter
+#include <QLightDM/Greeter>
+
+class GreeterWrapper: public QLightDM::Greeter
 {
     Q_OBJECT
 
@@ -31,7 +33,7 @@ class GreeterWrapper : public QLightDM::Greeter
     Q_PROPERTY(QString guestLoginName READ guestLoginName CONSTANT)
 
 public:
-    explicit GreeterWrapper(QObject *parent = 0);
+    explicit GreeterWrapper(QObject *parent = nullptr);
 
     QString lastLoggedInUser() const;
     QString guestLoginName() const;
@@ -40,7 +42,7 @@ signals:
     void aboutToLogin();
 
 public slots:
-    bool startSessionSync(const QString &session=QString());
+    bool startSessionSync(const QString &session = QString());
 
 private:
     void saveLastUser(const QString &user);

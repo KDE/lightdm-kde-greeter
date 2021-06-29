@@ -22,27 +22,26 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "themesmodel.h"
 
-#include <QUiLoader>
+#include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QHBoxLayout>
 #include <QPixmap>
-#include <QDir>
-
-#include <QDebug>
-#include <KSharedConfig>
-#include <KConfigGroup>
-#include <KConfigDialog>
-#include <KConfigSkeleton>
-#include <KLocalizedString>
+#include <QUiLoader>
 
 #include <KAuth/KAuthAction>
+#include <KConfigDialog>
+#include <KConfigGroup>
+#include <KConfigSkeleton>
+#include <KSharedConfig>
+#include <KLocalizedString>
 
 #include "config.h"
 
-ThemeConfig::ThemeConfig(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ThemeConfig),
-    m_config(KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig))
+ThemeConfig::ThemeConfig(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::ThemeConfig)
+    , m_config(KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig))
 {
     ui->setupUi(this);
     ui->options->setConfig(m_config);
@@ -57,14 +56,17 @@ ThemeConfig::ThemeConfig(QWidget *parent) :
     QString theme = m_config->group("greeter").readEntry("theme-name", "userbar");
 
     QModelIndex index = findIndexForTheme(theme);
-    if (!index.isValid()) {
+    if (!index.isValid())
+    {
         qWarning() << "Could not find" << theme << "in theme list. Falling back to \"userbar\" theme.";
         index = findIndexForTheme("userbar");
-        if (!index.isValid()) {
+        if (!index.isValid())
+        {
             qWarning() << "Could not find \"userbar\" theme. Something is wrong with this installation. Falling back to first available theme.";
             index = model->index(0);
         }
     }
+
     ui->themesList->setCurrentIndex(index);
     onThemeSelected(index);
 }
@@ -74,15 +76,18 @@ ThemeConfig::~ThemeConfig()
     delete ui;
 }
 
-QModelIndex ThemeConfig::findIndexForTheme(const QString& theme) const
+QModelIndex ThemeConfig::findIndexForTheme(const QString &theme) const
 {
-    QAbstractItemModel* model = ui->themesList->model();
-    for (int i=0; i < model->rowCount(); i++) {
+    QAbstractItemModel *model = ui->themesList->model();
+    for (int i = 0; i < model->rowCount(); ++i)
+    {
         QModelIndex index = model->index(i, 0);
-        if (index.data(ThemesModel::IdRole).toString() == theme) {
+        if (index.data(ThemesModel::IdRole).toString() == theme)
+        {
             return index;
         }
     }
+
     return QModelIndex();
 }
 
@@ -99,9 +104,11 @@ void ThemeConfig::onThemeSelected(const QModelIndex &index)
     //could make a private lib for all this - but that seems overkill when we won't need any of that in the 4.8 only versions.
  
     QPixmap preview = index.data(ThemesModel::PreviewRole).value<QPixmap>();
-    if (! preview.isNull()) {
+    if (! preview.isNull())
+    {
         ui->preview->setPixmap(preview.scaled(QSize(250, 250), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    } else
+    }
+    else
     {
         ui->preview->setPixmap(QPixmap());
     }
@@ -123,9 +130,11 @@ QDir ThemeConfig::themeDir() const
 QVariantMap ThemeConfig::save()
 {
     QModelIndex currentIndex = ui->themesList->currentIndex();
-    if (!currentIndex.isValid()) {
+    if (!currentIndex.isValid())
+    {
         return QVariantMap();
     }
+
     QVariantMap args;
     args["greeter/greeter/theme-name"] = currentIndex.data(ThemesModel::IdRole);
 

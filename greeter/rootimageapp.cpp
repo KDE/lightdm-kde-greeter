@@ -19,20 +19,20 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
-#include <QPixmap>
-#include <QX11Info>
-#include <QDesktopWidget>
-#include <QTimer>
 #include <QDebug>
+#include <QDesktopWidget>
 #include <QFile>
+#include <QPixmap>
+#include <QTimer>
+#include <QX11Info>
 
 #include <X11/Xlib.h>
 #include <X11/cursorfont.h>
 
 #include "rootimageapp.h"
 
-RootImageApp::RootImageApp(int &argc, char **argv):
-    QApplication(argc, argv)
+RootImageApp::RootImageApp(int &argc, char **argv)
+    : QApplication(argc, argv)
 {
     Cursor arrow_cursor = XCreateFontCursor(QX11Info::display(), XC_left_ptr);
     XDefineCursor(QX11Info::display(), QX11Info::appRootWindow(), arrow_cursor);
@@ -56,8 +56,7 @@ void RootImageApp::setBackground()
     quit();
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
     RootImageApp app(argc, argv);
     XSetCloseDownMode(QX11Info::display(), RetainTemporary);

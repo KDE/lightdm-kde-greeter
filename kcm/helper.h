@@ -23,13 +23,12 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <KAuth/KAuthActionReply>
 #include <KAuth/KAuthHelperSupport>
 
-using namespace KAuth;
-
 class Helper: public QObject
 {
     Q_OBJECT
+
 public slots:
-    ActionReply save(const QVariantMap &args);
+    KAuth::ActionReply save(const QVariantMap &args);
 };
 
 #endif

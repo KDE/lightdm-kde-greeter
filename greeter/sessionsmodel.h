@@ -23,25 +23,21 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "extrarowproxymodel.h"
 
-class SessionsModel : public ExtraRowProxyModel
+class SessionsModel: public ExtraRowProxyModel
 {
     Q_OBJECT
 
     Q_PROPERTY(bool showLastUsedSession READ showLastUsedSession WRITE setShowLastUsedSession)
+
 public:
-    explicit SessionsModel(QObject *parent = 0);
-    
+    explicit SessionsModel(QObject *parent = nullptr);
+
     /** Add a row to the sessions model titled "Last Used Session" */
     void setShowLastUsedSession(bool showLastUsedSession);
     bool showLastUsedSession() const;
 
-signals:
-    
-public slots:
-
 private:
     bool m_showLastUsedSession;
-    
 };
 
 #endif // SESSIONSMODEL_H

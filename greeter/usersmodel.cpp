@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,25 +25,30 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KLocalizedString>
 
-UsersModel::UsersModel(QObject *parent) :
-    ExtraRowProxyModel(parent),
-    m_showGuest(false)
+UsersModel::UsersModel(QObject *parent)
+    : ExtraRowProxyModel(parent)
+    , m_showGuest(false)
 {
     setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::UsersModel(this)));
 }
 
 void UsersModel::setShowGuest(bool showGuest)
 {
-    if (showGuest == m_showGuest) {
+    if (showGuest == m_showGuest)
+    {
         return;
     }
+
     m_showGuest = showGuest;
 
-    if (m_showGuest) {
+    if (m_showGuest)
+    {
         QStandardItem *guest = new QStandardItem(i18n("Guest"));
         guest->setData("*guest", QLightDM::UsersModel::NameRole);
         extraRowModel()->appendRow(guest);
-    } else {
+    }
+    else
+    {
         extraRowModel()->removeRow(0);
     }
 }

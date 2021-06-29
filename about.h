@@ -24,7 +24,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 // Helper function to factorize common part s of KAboutData definition between
 // greeter and kcm
-static void initAboutData(KAboutData* aboutData)
+static void initAboutData(KAboutData *aboutData)
 {
     aboutData->setVersion(LIGHTDM_KDE_VERSION);
 

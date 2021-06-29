@@ -31,11 +31,11 @@ class KConfigDialogManager;
 
 /** This class shows all config options for a given theme, and updates a shared KConfig*/
 
-class ConfigOptions : public QWidget
+class ConfigOptions: public QWidget
 {
     Q_OBJECT
 public:
-    explicit ConfigOptions(QWidget *parent = 0);
+    explicit ConfigOptions(QWidget *parent = nullptr);
 
     void setConfig(const KSharedConfigPtr &config);
     void setTheme(const QDir &themeDir);
@@ -46,8 +46,6 @@ public:
 signals:
     void changed(bool);
 
-public slots:
-
 private slots:
     void onSettingsChanged();
 
@@ -55,8 +53,8 @@ private:
     KSharedConfigPtr m_config;
 
     QSharedPointer<QWidget> m_wrapperWidget;
-    KConfigDialogManager* m_manager;
-    AuthKitConfigLoader* m_configLoader;
+    KConfigDialogManager *m_manager;
+    AuthKitConfigLoader *m_configLoader;
 };
 
 #endif // CONFIGOPTIONS_H

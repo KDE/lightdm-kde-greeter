@@ -19,18 +19,19 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "themesmodel.h"
 
-#include <QString>
-#include <QPixmap>
-#include <QList>
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
-
+#include <QPixmap>
+#include <QList>
 #include <QStandardPaths>
-#include <KDesktopFile>
-#include <KConfigGroup>
+#include <QSettings>
+#include <QString>
 
-class ThemeItem {
+#include <KConfigGroup>
+#include <KDesktopFile>
+
+class ThemeItem
+{
 public:
     QString id;
     QString name;
@@ -41,8 +42,8 @@ public:
     QString path;
 };
 
-ThemesModel::ThemesModel(QObject *parent) :
-    QAbstractListModel(parent)
+ThemesModel::ThemesModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
     //FUTURE FIXME: do the single shot trick so we can start displaying the UI
     //before bothering to do the loading.
@@ -59,11 +60,14 @@ int ThemesModel::rowCount(const QModelIndex &parent) const
 QVariant ThemesModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
-    switch(role) {
+
+    switch (role)
+    {
     case Qt::DisplayRole:
         return m_themes[row]->name;
     case Qt::DecorationRole:
-        if (m_themes[row]->preview.isNull()) {
+        if (m_themes[row]->preview.isNull())
+        {
             return QVariant();
         }
         //FIXME shouldn't really be scaling here, it's a bit slow - in the delegate is better.
@@ -94,19 +98,22 @@ void ThemesModel::load()
     //get a list of possible theme directories, loop through each of these finding themes.
     //FIXME I think this can be simplified to return all possible themes directly
 
-    foreach(const QString &themeDirPath, themeDirPaths)
+    for (const auto &themeDirPath: themeDirPaths)
     {
         QDir themeDir(themeDirPath);
-        foreach(const QString &dirPath, themeDir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
+        foreach (const QString &dirPath, themeDir.entryList(QDir::NoDotAndDotDot | QDir::Dirs))
+        {
             qDebug() << themeDir.filePath(dirPath + "/theme.desktop");
-            if (QFile::exists(themeDir.filePath(dirPath + "/theme.desktop"))) {
+            if (QFile::exists(themeDir.filePath(dirPath + "/theme.desktop")))
+            {
                 loadTheme(QDir(themeDir.filePath(dirPath)));
             }
         }
     }
 }
 
-void ThemesModel::loadTheme(const QDir &themePath) {
+void ThemesModel::loadTheme(const QDir &themePath)
+{
     KDesktopFile themeInfo(themePath.filePath("theme.desktop"));
 
     ThemeItem *theme = new ThemeItem;

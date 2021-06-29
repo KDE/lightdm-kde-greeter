@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,21 +29,22 @@ namespace Ui {
 
 class UsersModel;
 
-class CoreConfig : public QWidget
+class CoreConfig: public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CoreConfig(QWidget *parent = 0);
+    explicit CoreConfig(QWidget *parent = nullptr);
     ~CoreConfig();
 
     QVariantMap save();
 
 Q_SIGNALS:
-    void changed(bool state=true);
+    void changed(bool state = true);
 
 private Q_SLOTS:
     void onAllowGuestChanged(bool allow);
+
 private:
     void loadFromConfig();
 

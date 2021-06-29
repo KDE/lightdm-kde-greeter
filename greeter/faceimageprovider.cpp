@@ -22,31 +22,36 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLightDM/UsersModel>
 
 #include <QDebug>
+#include <QFile>
+#include <QIcon>
+#include <QPixmap>
+
 #include <KIconLoader>
 #include <KIconEngine>
 
-#include <QIcon>
-#include <QPixmap>
-#include <QFile>
-
-FaceImageProvider::FaceImageProvider(QAbstractItemModel* model)
-: QQuickImageProvider(QQuickImageProvider::Pixmap)
-, m_model(model)
+FaceImageProvider::FaceImageProvider(QAbstractItemModel *model)
+    : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    , m_model(model)
 {
 }
 
-QPixmap FaceImageProvider::requestPixmap(const QString& id, QSize* size, const QSize& requestedSize)
+QPixmap FaceImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
     // Lookup user in model
     QModelIndex userIndex;
-    for (int row = 0; row < m_model->rowCount(QModelIndex()); ++row) {
+
+    for (int row = 0; row < m_model->rowCount(QModelIndex()); ++row)
+    {
         QModelIndex index = m_model->index(row, 0);
-        if (index.data(QLightDM::UsersModel::NameRole).toString() == id) {
+        if (index.data(QLightDM::UsersModel::NameRole).toString() == id)
+        {
             userIndex = index;
             break;
         }
     }
-    if (!userIndex.isValid()) {
+
+    if (!userIndex.isValid())
+    {
         qWarning() << "Couldn't find user" << id << "in UsersModel";
         return QPixmap();
     }
@@ -60,23 +65,29 @@ QPixmap FaceImageProvider::requestPixmap(const QString& id, QSize* size, const Q
     //we check if it exists, and also search "~/.face.icon"
 
     //if there is an image path, and the image actually exists
-    if (!imagePath.isNull()) {
-
+    if (!imagePath.isNull())
+    {
         pix.load(imagePath + QLatin1String(".icon"));
-        if (pix.isNull()) {
+        if (pix.isNull())
+        {
             pix.load(imagePath);
         }
     }
 
-    if (pix.isNull()) {
+    if (pix.isNull())
+    {
         pix = QIcon(new KIconEngine(QLatin1String("user-identity"), KIconLoader::global())).pixmap(extent);
     }
 
-    if (size) {
+    if (size)
+    {
         *size = pix.size();
     }
-    if (requestedSize.isValid()) {
+
+    if (requestedSize.isValid())
+    {
         pix = pix.scaled(requestedSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
+
     return pix;
 }

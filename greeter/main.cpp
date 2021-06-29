@@ -17,17 +17,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-// KDE
-#include <KAboutData>
-#include <KLocalizedString>
 
 #include <QCommandLineParser>
 #include <QApplication>
 
+#include <KAboutData>
+#include <KLocalizedString>
+
 #include "../about.h"
 #include "greeterwindow.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
     QCommandLineParser options;
@@ -49,4 +49,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-

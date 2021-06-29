@@ -50,25 +50,30 @@ SelectImageButton::SelectImageButton(QWidget *parent)
 
 SelectImageButton::~SelectImageButton()
 {
-
 }
 
-void SelectImageButton::setImagePath(const QString &imagePath) {
+void SelectImageButton::setImagePath(const QString &imagePath)
+{
     m_imagePath = imagePath;
 
     QPixmap image(imagePath);
-    if (! image.isNull()) {
+    if (! image.isNull())
+    {
         QIcon imageIcon;
         //scale oversized avatars to fit, but don't stretch smaller images
         imageIcon.addPixmap(image.scaled(iconSize().boundedTo(image.size()), Qt::KeepAspectRatio));
         setIcon(imageIcon);
-    } else {
+    }
+    else
+    {
         setIcon(QIcon(new KIconEngine(QLatin1String("image-x-generic"), KIconLoader::global())));
     }
+
     Q_EMIT imagePathChanged(m_imagePath);
 }
 
-QString SelectImageButton::imagePath() const {
+QString SelectImageButton::imagePath() const
+{
     return m_imagePath;
 }
 
@@ -77,10 +82,9 @@ void SelectImageButton::onLoadImageFromFile()
 {
     QString fileUrl = QFileDialog::getOpenFileName(this, ki18n("Select image").toString(), QString(), QImageReader::supportedMimeTypes().join(" "), nullptr, QFileDialog::Options(QFileDialog::ReadOnly));
 
-    if (!fileUrl.isEmpty()) {
+    if (!fileUrl.isEmpty())
+    {
         setImagePath(fileUrl);
-    } else {
-        return;
     }
 }
 

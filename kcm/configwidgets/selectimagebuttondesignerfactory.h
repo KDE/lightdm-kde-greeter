@@ -29,17 +29,18 @@ class SelectImageButtonDesignerFactory : public QObject, public QDesignerCustomW
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.alt.lightdm_config_widgets" FILE "lightdm_config_widgets.json")
     Q_INTERFACES(QDesignerCustomWidgetInterface)
-public:
-    SelectImageButtonDesignerFactory(QObject *parent = 0);
 
-    bool isContainer() const;
-    QIcon icon() const;
-    QString group() const;
-    QString includeFile() const;
-    QString name() const;
-    QString toolTip() const;
-    QString whatsThis() const;
-    QWidget *createWidget(QWidget *parent);
+public:
+    explicit SelectImageButtonDesignerFactory(QObject *parent = nullptr);
+
+    bool isContainer() const override;
+    QIcon icon() const override;
+    QString group() const override;
+    QString includeFile() const override;
+    QString name() const override;
+    QString toolTip() const override;
+    QString whatsThis() const override;
+    QWidget* createWidget(QWidget *parent);
 };
 
 

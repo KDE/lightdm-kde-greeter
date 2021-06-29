@@ -29,26 +29,32 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfigGui/KConfigLoader>
 
 
-class AuthKitConfigLoader : public KConfigLoader {
+class AuthKitConfigLoader: public KConfigLoader
+{
 public:
-    AuthKitConfigLoader(KSharedConfigPtr config, QIODevice *xml, QObject *parent=0);
+    AuthKitConfigLoader(const KSharedConfigPtr &config, QIODevice *xml, QObject *parent = nullptr);
     QVariantMap entryMap() const;
+
 protected:
     bool usrSave() override;
+
 private:
     QVariantMap m_entryMap;
 };
 
-AuthKitConfigLoader::AuthKitConfigLoader(KSharedConfigPtr config, QIODevice *xml, QObject *parent)
+AuthKitConfigLoader::AuthKitConfigLoader(const KSharedConfigPtr &config, QIODevice *xml, QObject *parent)
     : KConfigLoader(config, xml, parent)
-{}
+{
+}
 
 //normal write fails due to needing root, worse it "readConfig" at the end of a write, deleting any values we once had
-//we overrise the usrWrite event to save all settings to entry map then retrieve that.
+//we override the usrWrite event to save all settings to entry map then retrieve that.
 bool AuthKitConfigLoader::usrSave()
 {
     m_entryMap.clear();
-    foreach(KConfigSkeletonItem* item, items()) {
+
+    foreach (KConfigSkeletonItem* item, items())
+    {
         m_entryMap["greeter/greeter-settings/" + item->key()] = item->property();
     }
 
@@ -60,9 +66,8 @@ QVariantMap AuthKitConfigLoader::entryMap() const
     return m_entryMap;
 }
 
-
-ConfigOptions::ConfigOptions(QWidget *parent) :
-    QWidget(parent)
+ConfigOptions::ConfigOptions(QWidget *parent)
+    : QWidget(parent)
 {
     new QVBoxLayout(this);
 }
@@ -74,18 +79,20 @@ void ConfigOptions::setConfig(const KSharedConfigPtr &config)
 
 void ConfigOptions::setTheme(const QDir &themeDir)
 {
-    if(Q_UNLIKELY(!m_config)) {
+    if (Q_UNLIKELY(!m_config))
+    {
         qFatal("setConfig must be called before setTheme");
     }
 
     //delete existing widgets.
-    if (!m_wrapperWidget.isNull()) {
+    if (!m_wrapperWidget.isNull())
+    {
         m_wrapperWidget.data()->deleteLater();
     }
 
     //if contains a valid config
-    if (themeDir.exists(QLatin1String("main.xml"))
-            && themeDir.exists(QLatin1String("config.ui"))) {
+    if (themeDir.exists(QLatin1String("main.xml")) && themeDir.exists(QLatin1String("config.ui")))
+    {
         QFile kcfgFile(themeDir.filePath(QLatin1String("main.xml")));
         kcfgFile.open(QFile::ReadOnly);
 
@@ -115,7 +122,8 @@ void ConfigOptions::onSettingsChanged()
 
 QVariantMap ConfigOptions::save()
 {
-    if(m_wrapperWidget.isNull()) {
+    if (m_wrapperWidget.isNull())
+    {
         return QVariantMap();
     }
 
@@ -125,7 +133,8 @@ QVariantMap ConfigOptions::save()
 
 void ConfigOptions::defaults()
 {
-    if(m_wrapperWidget.isNull()) {
+    if (m_wrapperWidget.isNull())
+    {
         return;
     }
 

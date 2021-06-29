@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,31 +25,29 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 class ThemeItem;
 class QDir;
 
-class ThemesModel : public QAbstractListModel
+class ThemesModel: public QAbstractListModel
 {
     Q_OBJECT
+
 public:
-    enum Roles {IdRole = Qt::UserRole,
-               AuthorRole,
-               DescriptionRole,
-               VersionRole,
-               PreviewRole,
-               PathRole};
+    enum Roles {
+        IdRole = Qt::UserRole,
+        AuthorRole,
+        DescriptionRole,
+        VersionRole,
+        PreviewRole,
+        PathRole
+    };
 
-    explicit ThemesModel(QObject *parent = 0);
+    explicit ThemesModel(QObject *parent = nullptr);
 
-    int rowCount(const QModelIndex &parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
-
-signals:
-
-public slots:
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
 private:
     void load();
     void loadTheme(const QDir &themePath);
     QList<ThemeItem*> m_themes;
-
 };
 
 #endif // THEMESMODEL_H

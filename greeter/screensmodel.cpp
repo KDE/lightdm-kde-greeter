@@ -23,8 +23,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QApplication>
 #include <QScreen>
 
-ScreensModel::ScreensModel(QObject *parent) :
-    QAbstractListModel(parent)
+ScreensModel::ScreensModel(QObject *parent)
+    : QAbstractListModel(parent)
 {
     connect(qGuiApp, &QApplication::screenAdded,          this, [this] (QScreen */*screen*/) { loadScreens(); });
     connect(qGuiApp, &QApplication::screenRemoved,        this, [this] (QScreen */*screen*/) { loadScreens(); });
@@ -42,9 +42,11 @@ QHash<int, QByteArray> ScreensModel::roleNames() const
 
 int ScreensModel::rowCount(const QModelIndex &parent) const
 {
-    if (parent == QModelIndex()) {
+    if (parent == QModelIndex())
+    {
         return m_screens.size();
     }
+
     return 0;
 }
 
@@ -52,19 +54,23 @@ QVariant ScreensModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
 
-    if(row < 0 || row >= m_screens.size()) {
+    if (row < 0 || row >= m_screens.size())
+    {
         return QVariant();
     }
 
-    if (role == Qt::UserRole) {
+    if (role == Qt::UserRole)
+    {
         return m_screens[row].geometry;
     }
+
     return QVariant();
 }
 
 void ScreensModel::onScreenResized(size_t screen, const QRect &geometry)
 {
-    if (screen < m_screens.size()) {
+    if (screen < m_screens.size())
+    {
         m_screens[screen].geometry = geometry;
     }
 

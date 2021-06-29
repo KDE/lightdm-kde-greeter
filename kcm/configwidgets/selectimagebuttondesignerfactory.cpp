@@ -25,7 +25,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "selectimagebutton.h"
 
 SelectImageButtonDesignerFactory::SelectImageButtonDesignerFactory(QObject *parent)
-: QObject(parent)
+    : QObject(parent)
 {
 }
 
@@ -64,7 +64,7 @@ QString SelectImageButtonDesignerFactory::whatsThis() const
     return QString();
 }
 
-QWidget * SelectImageButtonDesignerFactory::createWidget(QWidget *parent)
+QWidget* SelectImageButtonDesignerFactory::createWidget(QWidget *parent)
 {
     return new SelectImageButton(parent);
 }

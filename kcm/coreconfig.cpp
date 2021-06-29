@@ -23,33 +23,36 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config.h"
 
-#include <QLightDM/SessionsModel>
-#include <QLightDM/UsersModel>
+#include <QDebug>
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <QDebug>
 
-static const char* GUEST_NAME = "*guest";
+#include <QLightDM/SessionsModel>
+#include <QLightDM/UsersModel>
 
-inline QVariant currentItemData(QComboBox* combo, int role)
+static const char *GUEST_NAME = "*guest";
+
+inline static QVariant currentItemData(QComboBox *combo, int role)
 {
     return combo->itemData(combo->currentIndex(), role);
 }
 
-inline void setCurrentItemFromData(QComboBox* combo, int role, const QVariant& data)
+inline static void setCurrentItemFromData(QComboBox *combo, int role, const QVariant &data)
 {
     int index = combo->findData(data, role);
-    if (index == -1) {
+    if (index == -1)
+    {
         qWarning() << "Couldn't find" << data << "(role" << role << ") in combobox" << combo;
         return;
     }
+
     combo->setCurrentIndex(index);
 }
 
-CoreConfig::CoreConfig(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::CoreConfig)
+CoreConfig::CoreConfig(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::CoreConfig)
 {
     ui->setupUi(this);
 
@@ -94,19 +97,25 @@ void CoreConfig::loadFromConfig()
     m_usersModel->setShowGuest(ui->allowGuest->isChecked());
 
     QString user = seatDefaultsGroup.readEntry("autologin-user");
-    if (user.isEmpty() && seatDefaultsGroup.readEntry("autologin-guest", false)) {
+    if (user.isEmpty() && seatDefaultsGroup.readEntry("autologin-guest", false))
+    {
         // from user (string), guest (bool) to combobox user
         user = GUEST_NAME;
     }
-    if (!user.isEmpty()) {
+
+    if (!user.isEmpty())
+    {
         setCurrentItemFromData(ui->autoLoginUser, QLightDM::UsersModel::NameRole, user);
     }
+
     ui->autoLogin->setChecked(!user.isEmpty());
 
     QString session = seatDefaultsGroup.readEntry("autologin-session");
-    if (!session.isEmpty()) {
+    if (!session.isEmpty())
+    {
         setCurrentItemFromData(ui->autoLoginSession, QLightDM::SessionsModel::IdRole, session);
     }
+
     ui->autoLoginTimeout->setValue(seatDefaultsGroup.readEntry("autologin-user-timeout", 0) / 60);
 
     ui->enableXdmcp->setChecked(config.group("XDMCPServer").readEntry("enabled", false));
@@ -116,28 +125,39 @@ void CoreConfig::loadFromConfig()
 QVariantMap CoreConfig::save()
 {
     QVariantMap args;
-    if (ui->autoLogin->isChecked()) {
+
+    if (ui->autoLogin->isChecked())
+    {
         // from combobox user to user (string), guest (bool)
         QString user = currentItemData(ui->autoLoginUser, QLightDM::UsersModel::NameRole).toString();
         bool guest;
-        if (user == GUEST_NAME) {
+
+        if (user == GUEST_NAME)
+        {
             guest = true;
             user.clear();
-        } else {
+        }
+        else
+        {
             guest = false;
         }
+
         args["core/SeatDefaults/autologin-user"] = user;
         args["core/SeatDefaults/autologin-guest"] = guest;
         // If LightDM gains support for these settings before us, we should not overwrite them
         //args["core/SeatDefaults/autologin-session"] = currentItemData(ui->autoLoginSession, QLightDM::SessionsModel::IdRole);
         //args["core/SeatDefaults/autologin-user-timeout"] = ui->autoLoginTimeout->value() * 60;
-    } else {
+    }
+    else
+    {
         args["core/SeatDefaults/autologin-user"].clear();
         args["core/SeatDefaults/autologin-guest"] = false;
     }
+
     args["core/SeatDefaults/allow-guest"] = ui->allowGuest->isChecked();
     args["core/XDMCPServer/enabled"] = ui->enableXdmcp->isChecked();
     args["core/VNCServer/enabled"] = ui->enableVnc->isChecked();
+
     return args;
 }
 

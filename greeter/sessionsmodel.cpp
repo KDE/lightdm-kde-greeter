@@ -24,27 +24,30 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KLocalizedString>
 
-SessionsModel::SessionsModel(QObject *parent) :
-    ExtraRowProxyModel(parent),
-    m_showLastUsedSession(false)
+SessionsModel::SessionsModel(QObject *parent)
+    : ExtraRowProxyModel(parent)
+    , m_showLastUsedSession(false)
 {
     setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::SessionsModel(this)));
-
-
 }
 
 void SessionsModel::setShowLastUsedSession(bool showLastUsedSession)
 {
-    if (showLastUsedSession == m_showLastUsedSession) {
+    if (showLastUsedSession == m_showLastUsedSession)
+    {
         return;
     }
+
     m_showLastUsedSession = showLastUsedSession;
 
-    if (m_showLastUsedSession) {
+    if (m_showLastUsedSession)
+    {
         QStandardItem *guest = new QStandardItem(i18n("Previously Used Session"));
         guest->setData("", QLightDM::SessionsModel::KeyRole);
         extraRowModel()->appendRow(guest);
-    } else {
+    }
+    else
+    {
         extraRowModel()->removeRow(0);
     }
 }

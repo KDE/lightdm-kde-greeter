@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -30,12 +31,12 @@ namespace Ui {
 class QDir;
 class QModelIndex;
 
-class ThemeConfig : public QWidget
+class ThemeConfig: public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ThemeConfig(QWidget *parent = 0);
+    explicit ThemeConfig(QWidget *parent = nullptr);
     ~ThemeConfig();
 
     QVariantMap save();
@@ -52,7 +53,7 @@ private:
     KSharedConfigPtr m_config;
 
     QDir themeDir() const;
-    QModelIndex findIndexForTheme(const QString& theme) const;
+    QModelIndex findIndexForTheme(const QString &theme) const;
 };
 
 #endif // THEMECONFIG_H

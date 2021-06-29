@@ -20,23 +20,24 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef EXTRAROWPROXYMODEL_H
 #define EXTRAROWPROXYMODEL_H
 
-#include <QSortFilterProxyModel>
 #include <QHash>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
 #include <QVector>
 #include <QWeakPointer>
-#include <QStandardItemModel>
 
 /**
  * A proxy model which makes it possible to append extra rows at the end
  */
-class ExtraRowProxyModel : public QAbstractListModel
+class ExtraRowProxyModel: public QAbstractListModel
 {
     Q_OBJECT
-public:
-    ExtraRowProxyModel(QObject *parent = 0);
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const; // reimp
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const; // reimp
+public:
+    explicit ExtraRowProxyModel(QObject *parent = nullptr);
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override; 
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     void setSourceModel(const QSharedPointer<QAbstractItemModel> &model);
 
@@ -46,14 +47,13 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private slots:
-    void onSourceRowsInserted(const QModelIndex &parent,int start,int end);
-    void onSourceRowsRemoved(const QModelIndex &parent,int start,int end);
+    void onSourceRowsInserted(const QModelIndex &parent, int start, int end);
+    void onSourceRowsRemoved(const QModelIndex &parent, int start, int end);
     void onSourceDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 
-    void onExtraRowsInserted(const QModelIndex &parent,int start,int end);
-    void onExtraRowsRemoved(const QModelIndex &parent,int start,int end);
+    void onExtraRowsInserted(const QModelIndex &parent, int start, int end);
+    void onExtraRowsRemoved(const QModelIndex &parent, int start, int end);
     void onExtraDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
-
 
 private:
     typedef QHash<int, QVariant> Item; //role, item.

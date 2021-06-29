@@ -29,13 +29,13 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 class QScreen;
 
-class ScreensModel : public QAbstractListModel
+class ScreensModel: public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit ScreensModel(QObject *parent = 0);
-    int rowCount(const QModelIndex &parent=QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role=Qt::DisplayRole) const;
+    explicit ScreensModel(QObject *parent = nullptr);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     QHash<int, QByteArray> roleNames() const override;
 

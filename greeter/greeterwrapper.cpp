@@ -23,8 +23,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 
-GreeterWrapper::GreeterWrapper(QObject *parent) :
-    QLightDM::Greeter(parent)
+GreeterWrapper::GreeterWrapper(QObject *parent)
+    : QLightDM::Greeter(parent)
 {
     connectSync();
     m_config = KSharedConfig::openConfig("state-kde");
@@ -33,10 +33,13 @@ GreeterWrapper::GreeterWrapper(QObject *parent) :
 QString GreeterWrapper::lastLoggedInUser() const
 {
     //use suggested user from lightdm.conf if they exist, otherwise load from local config file of last logged in user.
-    if (selectGuestHint()) {
+    if (selectGuestHint())
+    {
         return "*guest";
     }
-    if (!selectUserHint().isEmpty()) {
+
+    if (!selectUserHint().isEmpty())
+    {
         return selectUserHint();
     }
 
