@@ -1,6 +1,7 @@
 /*
 *   Copyright (C) 2011 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
 *   Copyright (C) 2011 by Marco Martin <mart@kde.org>
+*   Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -56,8 +57,8 @@ Signals:
         The signal is being emmited when the button is being clicked.
 **/
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.core 2.0 as PlasmaCore
 import "private" as Private
 
 FocusScope {
@@ -87,7 +88,7 @@ FocusScope {
             return icon.width + label.paintedWidth + surface.margins.left + surface.margins.right + ((icon.valid) ? surface.margins.left : 0)
         }
     }
-    implicitHeight: Math.max(theme.defaultFont.mSize.height*1.6, Math.max(icon.height, label.paintedHeight) + surface.margins.top/2 + surface.margins.bottom/2)
+    implicitHeight: Math.max(theme.mSize(theme.defaultFont).height*1.6, Math.max(icon.height, label.paintedHeight) + surface.margins.top/2 + surface.margins.bottom/2)
 
     // TODO: needs to define if there will be specific graphics for
     //     disabled buttons

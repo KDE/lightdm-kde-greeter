@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,9 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-import QtQuick 1.0
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: screen
@@ -31,7 +32,7 @@ Item {
              // default to keeping aspect ratio
             fillMode: config.readEntry("BackgroundKeepAspectRatio") == false ? Image.Stretch : Image.PreserveAspectCrop;
             //read from config, if there's no entry use plasma theme
-            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath(Qt.size(width,height));
+            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath;
         }
     }
 
@@ -78,7 +79,7 @@ Item {
         NumberAnimation { target: loginButtonItem; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: sessionButton; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        onCompleted: doSessionSync()
+        onFinished: doSessionSync()
     }
 
     Component.onCompleted: {
@@ -127,7 +128,6 @@ Item {
             id: wrapper
 
             property bool isCurrent: ListView.isCurrentItem
-            property bool activeFocus: ListView.view.activeFocus
 
             /* Expose current item info to the outer world. I can't find
              * another way to access this from outside the list. */
@@ -295,13 +295,14 @@ Item {
 
         property bool isGuestLogin: usersList.currentItem.username == greeter.guestLoginName
 
-        /*PlasmaComponents.*/TextField {
+        PlasmaComponents.TextField {
             id: passwordInput
             anchors.horizontalCenter: parent.horizontalCenter
             width: 200
             height: parent.height
             focus: !loginButtonItem.isGuestLogin
-            opacity: loginButtonItem.isGuestLogin ? 0 : 1
+            enabled: !loginButtonItem.isGuestLogin
+            visible: !loginButtonItem.isGuestLogin
 
             echoMode: TextInput.Password
             placeholderText: i18n("Password")
@@ -336,7 +337,8 @@ Item {
             width: userFaceSize + 2 * padding
             height: parent.height
             focus: loginButtonItem.isGuestLogin
-            opacity: 1 - passwordInput.opacity
+            enabled: loginButtonItem.isGuestLogin
+            visible: loginButtonItem.isGuestLogin
 
             iconSource: loginButton.iconSource
             text: i18n("Login")
@@ -360,7 +362,7 @@ Item {
         model: sessionsModel
         dataRole: "key"
         currentIndex: {
-            index = indexForData(usersList.currentItem.usersession)
+            var index = indexForData(usersList.currentItem.usersession)
             if (index >= 0) {
                 return index;
             }
@@ -388,7 +390,7 @@ Item {
             x: parent.margins.left
             y: parent.margins.top
 
-            /*PlasmaComponents.*/ToolButton {
+            ToolButton {
                 id: suspendButton
                 text: i18n("Suspend")
                 iconSource: "system-suspend"
@@ -396,7 +398,7 @@ Item {
                 onClicked: power.suspend();
             }
 
-            /*PlasmaComponents.*/ToolButton {
+            ToolButton {
                 id: hibernateButton
                 text: i18n("Hibernate")
                 iconSource: "system-suspend-hibernate"
@@ -405,7 +407,7 @@ Item {
                 onClicked: power.hibernate();
             }
 
-            /*PlasmaComponents.*/ToolButton {
+            ToolButton {
                 id: restartButton
                 text: i18n("Restart")
                 iconSource: "system-reboot"
@@ -413,7 +415,7 @@ Item {
                 onClicked: power.restart();
             }
 
-            /*PlasmaComponents.*/ToolButton {
+            ToolButton {
                 id: shutdownButton
                 text: i18n("Shutdown")
                 iconSource: "system-shutdown"

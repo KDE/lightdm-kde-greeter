@@ -1,6 +1,7 @@
 /*
  *   Copyright (C) 2011 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
  *   Copyright (C) 2011 by Marco Martin <mart@kde.org>
+ *   Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -23,7 +24,7 @@ Inherits:
         Item
 
 Imports:
-        QtQuick 1.0
+        QtQuick 2.12
         org.kde.plasma.core
 
 Description:
@@ -33,8 +34,8 @@ TODO i need more info here
 Properties:
 **/
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: main

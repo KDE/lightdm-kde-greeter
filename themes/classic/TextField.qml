@@ -1,5 +1,6 @@
 /*
 *   Copyright (C) 2011 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*   Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -154,8 +155,8 @@ Methods:
      The x, y, and height properties correspond to the cursor that would describe that position.
 **/
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.core 2.0 as PlasmaCore
 import "private" as Private
 
 FocusScope {
@@ -228,8 +229,8 @@ FocusScope {
     property alias activeFocus: textInput.activeFocus
 
     // TODO: fix default size
-    implicitWidth: theme.defaultFont.mSize.width*12
-    implicitHeight: theme.defaultFont.mSize.height*1.6
+    implicitWidth: theme.mSize(theme.defaultFont).width*12
+    implicitHeight: theme.mSize(theme.defaultFont).height*1.6
     // TODO: needs to define if there will be specific graphics for
     //     disabled text fields
     opacity: enabled ? 1.0 : 0.5
@@ -312,7 +313,7 @@ FocusScope {
     Private.IconLoader {
         id: clearButton
         source: "edit-clear-locationbar-rtl"
-        height: Math.max(textInput.height, theme.smallIconSize)
+        height: Math.max(textInput.height, units.iconSizes.small)
         width: height
         opacity: (textInput.text != "" && clearButtonShown) ? 1 : 0
         Behavior on opacity {

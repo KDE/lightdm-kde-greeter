@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,12 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-import QtQuick 1.0
-//TODO phase this out
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1 as ExtraComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     width: screenSize.width;
@@ -33,7 +31,7 @@ Item {
             // default to keeping aspect ratio
             fillMode: config.readEntry("BackgroundKeepAspectRatio") == false ? Image.Stretch : Image.PreserveAspectCrop;
             //read from config, if there's no entry use plasma theme
-            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath(Qt.size(width,height));
+            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath;
         }
     }
 
@@ -81,7 +79,7 @@ Item {
         id: loginAnimation
         NumberAnimation { target: dialog; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerDialog; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        onCompleted: doSessionSync()
+        onFinished: doSessionSync()
     }
 
     PlasmaCore.FrameSvgItem {
@@ -130,13 +128,13 @@ Item {
                     columns: 2
                     spacing: 15
                     
-                    ExtraComponents.QIconItem {
-                        icon: "meeting-participant"
+                    PlasmaCore.IconItem {
+                        source: "user"
                         height: usernameInput.height;
                         width: usernameInput.height;
                     }
 
-                    /*PlasmaComponents.*/TextField {
+                    PlasmaComponents.TextField {
                         id: usernameInput;
                         placeholderText: i18n("Username");
                         text: greeter.lastLoggedInUser
@@ -156,13 +154,13 @@ Item {
                         KeyNavigation.tab: passwordInput
                     }
 
-                    ExtraComponents.QIconItem {
-                        icon: "object-locked"
+                    PlasmaCore.IconItem {
+                        source: "object-locked"
                         height: passwordInput.height;
                         width: passwordInput.height;
                     }
 
-                    /*PlasmaComponents.*/TextField {
+                    PlasmaComponents.TextField {
                         id: passwordInput
                         echoMode: TextInput.Password
                         placeholderText: i18n("Password")
@@ -175,7 +173,7 @@ Item {
                     }
                 }
                 
-                /*PlasmaComponents.*/ToolButton {
+                ToolButton {
                     id: loginButton
                     anchors.verticalCenter: parent.verticalCenter
                     iconSource: "go-next"
@@ -193,8 +191,8 @@ Item {
             
             Row {               
                 spacing: 8;
-                IconButton {
-                    icon: "system-shutdown"                    
+                PlasmaComponents.Button {
+                    iconSource: "system-shutdown"
                     onClicked: {
                         if (powerDialog.opacity == 1) {
                             powerDialog.opacity = 0;
@@ -206,11 +204,10 @@ Item {
 
                 PlasmaComponents.ContextMenu {
                     id: sessionMenu
-                    visualParent: sessionMenuOption
+                    visualParent: sessionMenuOption.action
                 }
 
                 Repeater {
-                    parent: sessionMenu
                     model: sessionsModel
                     delegate : PlasmaComponents.MenuItem {
                         text: model.display
@@ -251,9 +248,9 @@ Item {
                     }
                 }
 
-                IconButton {
+                PlasmaComponents.Button {
                     id: optionsButton
-                    icon: "system-log-out"
+                    iconSource: "system-log-out"
                     onClicked: {
                         optionsMenu.open();
                     }
@@ -269,6 +266,7 @@ Item {
         anchors.horizontalCenter: activeScreen.horizontalCenter
         imagePath: "translucent/dialogs/background"
         opacity: 0
+        enabled: powerDialog.opacity != 0;
 
         Behavior on opacity { PropertyAnimation { duration: 500} }
 
@@ -279,31 +277,31 @@ Item {
             spacing: 5
             anchors.centerIn: parent
 
-            PlasmaWidgets.IconWidget {
+            PlasmaComponents.Button {
                 text: i18n("Suspend")
-                icon: QIcon("system-suspend")
+                iconSource: "system-suspend"
                 enabled: power.canSuspend;
                 onClicked: {power.suspend();}
             }
             
-            PlasmaWidgets.IconWidget {
+            PlasmaComponents.Button {
                 text: i18n("Hibernate")
-                icon: QIcon("system-suspend-hibernate")
+                iconSource: "system-suspend-hibernate"
                 //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
                 visible: power.canHibernate;
                 onClicked: {power.hibernate();}
             }
 
-            PlasmaWidgets.IconWidget {
+            PlasmaComponents.Button {
                 text: i18n("Restart")
-                icon: QIcon("system-reboot")
+                iconSource: "system-reboot"
                 enabled: power.canRestart;
                 onClicked: {power.restart();}
             }
             
-            PlasmaWidgets.IconWidget {
+            PlasmaComponents.Button {
                 text: i18n("Shutdown")
-                icon: QIcon("system-shutdown")
+                iconSource: "system-shutdown"
                 enabled: power.canShutdown;
                 onClicked: {power.shutdown();}
             }     

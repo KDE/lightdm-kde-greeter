@@ -1,5 +1,6 @@
 /*
 *   Copyright (C) 2011 by Marco MArtin <mart@kde.org>
+*   Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -22,9 +23,8 @@ Inherits:
         Item
 
 Imports:
-        QtQuick 1.1
+        QtQuick 2.12
         org.kde.plasma.core
-        org.kde.qtextracomponents
 
 Description:
  TODO i need more info here
@@ -37,9 +37,8 @@ Properties:
         Returns the dir,in which the icon exists.
 **/
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.12
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: root
@@ -75,8 +74,8 @@ Item {
         valid = true
     }
 
-    implicitWidth: theme.smallIconSize
-    implicitHeight: theme.smallIconSize
+    implicitWidth: units.iconSizes.small
+    implicitHeight: units.iconSizes.small
 
     PlasmaCore.Svg {
         id: svgIcon
@@ -84,18 +83,18 @@ Item {
 
     function roundToStandardSize(size)
     {
-        if (size >= theme.enormousIconSize) {
-            return theme.enormousIconSize
-        } else if (size >= theme.hugeIconSize) {
-            return theme.hugeIconSize
-        } else if (size >= theme.largeIconSize) {
-            return theme.largeIconSize
-        } else if (size >= theme.mediumIconSize) {
-            return theme.mediumIconSize
-        } else if (size >= theme.smallMediumIconSize) {
-            return theme.smallMediumIconSize
+        if (size >= units.iconSizes.enormous) {
+            return units.iconSizes.enormous
+        } else if (size >= units.iconSizes.huge) {
+            return units.iconSizes.huge
+        } else if (size >= units.iconSizes.large) {
+            return units.iconSizes.large
+        } else if (size >= units.iconSizes.medium) {
+            return units.iconSizes.medium
+        } else if (size >= units.iconSizes.smallMedium) {
+            return units.iconSizes.smallMedium
         } else {
-            return theme.smallIconSize
+            return units.iconSizes.small
         }
     }
 
@@ -117,8 +116,8 @@ Item {
         Component {
             id: iconComponent
 
-            QIconItem {
-                icon: (typeof source == "string") ? QIcon(root.source) : root.source
+            PlasmaCore.IconItem {
+                source: root.source
                 smooth: true
                 anchors.fill: parent
             }

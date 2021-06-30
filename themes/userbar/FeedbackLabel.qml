@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
+Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,9 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-import QtQuick 1.0
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.12
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 
 PlasmaCore.FrameSvgItem {
@@ -63,7 +64,7 @@ PlasmaCore.FrameSvgItem {
         y: padding
         width: 22
         height: width
-        source: "image://icon/dialog-error.png"
+        source: "image://icon/dialog-error"
     }
 
     PlasmaComponents.Label {
