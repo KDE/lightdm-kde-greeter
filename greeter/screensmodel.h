@@ -39,7 +39,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-private slots:
+private Q_SLOTS:
     void onScreenResized(size_t screen, const QRect &geometry);
 
 private:

@@ -35,9 +35,9 @@ enum WhichConfig
 
 static QSharedPointer<KConfig> openConfig(WhichConfig which)
 {
-    QString name = QString("%1/%2")
-        .arg(LIGHTDM_CONFIG_DIR)
-        .arg(which == CoreConfig ? "lightdm.conf" : "lightdm-kde-greeter.conf")
+    QString name = QStringLiteral("%1/%2")
+        .arg(QStringLiteral(LIGHTDM_CONFIG_DIR))
+        .arg(which == CoreConfig ? QStringLiteral("lightdm.conf") : QStringLiteral("lightdm-kde-greeter.conf"))
         ;
 
     QFile file(name);
@@ -62,10 +62,10 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
     for (auto i = args.constBegin() ; i != args.constEnd() ; ++i)
     {
-        QStringList lst = i.key().split('/');
+        QStringList lst = i.key().split(QLatin1Char('/'));
         if (lst.size() != 3)
         {
-            errorReply.setErrorDescription(QString("Invalid key format: %1").arg(i.key()));
+            errorReply.setErrorDescription(QStringLiteral("Invalid key format: %1").arg(i.key()));
             return errorReply;
         }
 
@@ -74,17 +74,17 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         QString groupName = lst[1];
         QString keyName = lst[2];
 
-        if (fileName == "core")
+        if (fileName == QStringLiteral("core"))
         {
             config = coreConfig;
         }
-        else if (fileName == "greeter")
+        else if (fileName == QStringLiteral("greeter"))
         {
             config = greeterConfig;
         }
         else
         {
-            errorReply.setErrorDescription(QString("Unknown config file: %1").arg(fileName));
+            errorReply.setErrorDescription(QStringLiteral("Unknown config file: %1").arg(fileName));
             return errorReply;
         }
 
@@ -97,4 +97,6 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
     return KAuth::ActionReply::SuccessReply();
 }
 
-KAUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper);
+KAUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper)
+
+#include "moc_helper.cpp"

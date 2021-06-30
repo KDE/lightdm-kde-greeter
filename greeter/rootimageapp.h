@@ -30,7 +30,7 @@ class RootImageApp: public QApplication
 public:
     RootImageApp(int &argc, char **argv);
 
-private slots:
+private Q_SLOTS:
     void setBackground();
 };
 

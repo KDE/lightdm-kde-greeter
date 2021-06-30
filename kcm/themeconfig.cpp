@@ -41,7 +41,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 ThemeConfig::ThemeConfig(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::ThemeConfig)
-    , m_config(KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig))
+    , m_config(KSharedConfig::openConfig(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"), KConfig::SimpleConfig))
 {
     ui->setupUi(this);
     ui->options->setConfig(m_config);
@@ -59,7 +59,7 @@ ThemeConfig::ThemeConfig(QWidget *parent)
     if (!index.isValid())
     {
         qWarning() << "Could not find" << theme << "in theme list. Falling back to \"userbar\" theme.";
-        index = findIndexForTheme("userbar");
+        index = findIndexForTheme(QStringLiteral("userbar"));
         if (!index.isValid())
         {
             qWarning() << "Could not find \"userbar\" theme. Something is wrong with this installation. Falling back to first available theme.";
@@ -119,7 +119,7 @@ void ThemeConfig::onThemeSelected(const QModelIndex &index)
 
     ui->options->setTheme(themeDir());
 
-    emit changed(true);
+    Q_EMIT changed(true);
 }
 
 QDir ThemeConfig::themeDir() const
@@ -136,7 +136,7 @@ QVariantMap ThemeConfig::save()
     }
 
     QVariantMap args;
-    args["greeter/greeter/theme-name"] = currentIndex.data(ThemesModel::IdRole);
+    args[QStringLiteral("greeter/greeter/theme-name")] = currentIndex.data(ThemesModel::IdRole);
 
     args.insert(ui->options->save());
     return args;

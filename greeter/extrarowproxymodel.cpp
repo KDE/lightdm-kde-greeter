@@ -66,6 +66,7 @@ QHash<int, QByteArray> ExtraRowProxyModel::roleNames() const
 
 int ExtraRowProxyModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return sourceRowCount() + m_extraRowModel->rowCount();
 }
 

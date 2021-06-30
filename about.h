@@ -31,10 +31,10 @@ static void initAboutData(KAboutData *aboutData)
     aboutData->setShortDescription(ki18n("Login screen using the LightDM framework").toString());
     aboutData->setLicense(KAboutLicense::GPL, KAboutLicense::OrLaterVersions);
     aboutData->setCopyrightStatement(ki18n("(c) 2012 David Edmundson").toString());
-    aboutData->setHomepage("https://projects.kde.org/projects/playground/base/lightdm");
+    aboutData->setHomepage(QStringLiteral("https://projects.kde.org/projects/playground/base/lightdm"));
 
-    aboutData->addAuthor(ki18n("David Edmundson").toString(), ki18n("Author").toString(), "kde@davidedmundson.co.uk");
-    aboutData->addAuthor(ki18n("Aurélien Gâteau").toString(), ki18n("Developer").toString(), "aurelien.gateau@canonical.com");
+    aboutData->addAuthor(ki18n("David Edmundson").toString(), ki18n("Author").toString(), QStringLiteral("kde@davidedmundson.co.uk"));
+    aboutData->addAuthor(ki18n("Aurélien Gâteau").toString(), ki18n("Developer").toString(), QStringLiteral("aurelien.gateau@canonical.com"));
 }
 
 #endif /* ABOUT_H */

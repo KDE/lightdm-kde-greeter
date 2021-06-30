@@ -92,7 +92,7 @@ QVariant ThemesModel::data(const QModelIndex &index, int role) const
 void ThemesModel::load()
 {
     qDebug() << "loading themes";
-    QStringList themeDirPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "lightdm-kde-greeter/themes", QStandardPaths::LocateDirectory);
+    QStringList themeDirPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("lightdm-kde-greeter/themes"), QStandardPaths::LocateDirectory);
     qDebug() << themeDirPaths;
 
     //get a list of possible theme directories, loop through each of these finding themes.
@@ -103,8 +103,8 @@ void ThemesModel::load()
         QDir themeDir(themeDirPath);
         foreach (const QString &dirPath, themeDir.entryList(QDir::NoDotAndDotDot | QDir::Dirs))
         {
-            qDebug() << themeDir.filePath(dirPath + "/theme.desktop");
-            if (QFile::exists(themeDir.filePath(dirPath + "/theme.desktop")))
+            qDebug() << themeDir.filePath(dirPath + QStringLiteral("/theme.desktop"));
+            if (QFile::exists(themeDir.filePath(dirPath + QStringLiteral("/theme.desktop"))))
             {
                 loadTheme(QDir(themeDir.filePath(dirPath)));
             }
@@ -114,7 +114,7 @@ void ThemesModel::load()
 
 void ThemesModel::loadTheme(const QDir &themePath)
 {
-    KDesktopFile themeInfo(themePath.filePath("theme.desktop"));
+    KDesktopFile themeInfo(themePath.filePath(QStringLiteral("theme.desktop")));
 
     ThemeItem *theme = new ThemeItem;
     theme->id = themePath.dirName();
@@ -123,10 +123,10 @@ void ThemesModel::loadTheme(const QDir &themePath)
     theme->author = themeInfo.desktopGroup().readEntry("author");
     theme->version = themeInfo.desktopGroup().readEntry("version");
 
-    theme->preview = QPixmap(themePath.absoluteFilePath("preview.png"));
+    theme->preview = QPixmap(themePath.absoluteFilePath(QStringLiteral("preview.png")));
     theme->path = themePath.path();
 
-    qDebug() << QString("adding theme") << theme->name;
+    qDebug() << "adding theme" << theme->name;
 
     beginInsertRows(QModelIndex(), m_themes.size(), m_themes.size()+1);
     m_themes.append(theme);

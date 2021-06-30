@@ -31,7 +31,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLightDM/SessionsModel>
 #include <QLightDM/UsersModel>
 
-static const char *GUEST_NAME = "*guest";
+#define GUEST_NAME "*guest"
 
 inline static QVariant currentItemData(QComboBox *combo, int role)
 {
@@ -72,14 +72,14 @@ CoreConfig::CoreConfig(QWidget *parent)
 
     loadFromConfig();
 
-    connect(ui->allowGuest, &QCheckBox::toggled, this, &CoreConfig::changed);
+    connect(ui->allowGuest, &QCheckBox::toggled, this, [this] () { Q_EMIT changed(true); } );
     connect(ui->allowGuest, &QCheckBox::toggled, this, &CoreConfig::onAllowGuestChanged);
-    connect(ui->autoLogin, &QCheckBox::toggled, this, &CoreConfig::changed);
-    connect(ui->autoLoginUser, &QComboBox::currentIndexChanged, this, &CoreConfig::changed);
-    connect(ui->autoLoginSession, &QComboBox::currentIndexChanged, this, &CoreConfig::changed);
-    connect(ui->autoLoginTimeout, &QSpinBox::valueChanged, this, &CoreConfig::changed);
-    connect(ui->enableXdmcp, &QCheckBox::toggled, this, &CoreConfig::changed);
-    connect(ui->enableVnc, &QCheckBox::toggled, this, &CoreConfig::changed);
+    connect(ui->autoLogin, &QCheckBox::toggled, this, [this] () { Q_EMIT changed(true); } );
+    connect(ui->autoLoginUser, &QComboBox::currentIndexChanged, this, [this] () { Q_EMIT changed(true); } );
+    connect(ui->autoLoginSession, &QComboBox::currentIndexChanged, this, [this] () { Q_EMIT changed(true); } );
+    connect(ui->autoLoginTimeout, &QSpinBox::valueChanged, this, [this] () { Q_EMIT changed(true); } );
+    connect(ui->enableXdmcp, &QCheckBox::toggled, this, [this] () { Q_EMIT changed(true); } );
+    connect(ui->enableVnc, &QCheckBox::toggled, this, [this] () { Q_EMIT changed(true); } );
 }
 
 CoreConfig::~CoreConfig()
@@ -89,7 +89,7 @@ CoreConfig::~CoreConfig()
 
 void CoreConfig::loadFromConfig()
 {
-    KConfig config((LIGHTDM_CONFIG_DIR "/lightdm.conf"));
+    KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm.conf"));
 
     KConfigGroup seatDefaultsGroup = config.group("SeatDefaults");
     ui->allowGuest->setChecked(seatDefaultsGroup.readEntry("allow-guest", true));
@@ -100,7 +100,7 @@ void CoreConfig::loadFromConfig()
     if (user.isEmpty() && seatDefaultsGroup.readEntry("autologin-guest", false))
     {
         // from user (string), guest (bool) to combobox user
-        user = GUEST_NAME;
+        user = QStringLiteral(GUEST_NAME);
     }
 
     if (!user.isEmpty())
@@ -132,7 +132,7 @@ QVariantMap CoreConfig::save()
         QString user = currentItemData(ui->autoLoginUser, QLightDM::UsersModel::NameRole).toString();
         bool guest;
 
-        if (user == GUEST_NAME)
+        if (user == QStringLiteral(GUEST_NAME))
         {
             guest = true;
             user.clear();
@@ -142,21 +142,21 @@ QVariantMap CoreConfig::save()
             guest = false;
         }
 
-        args["core/SeatDefaults/autologin-user"] = user;
-        args["core/SeatDefaults/autologin-guest"] = guest;
+        args[QStringLiteral("core/SeatDefaults/autologin-user")] = user;
+        args[QStringLiteral("core/SeatDefaults/autologin-guest")] = guest;
         // If LightDM gains support for these settings before us, we should not overwrite them
         //args["core/SeatDefaults/autologin-session"] = currentItemData(ui->autoLoginSession, QLightDM::SessionsModel::IdRole);
         //args["core/SeatDefaults/autologin-user-timeout"] = ui->autoLoginTimeout->value() * 60;
     }
     else
     {
-        args["core/SeatDefaults/autologin-user"].clear();
-        args["core/SeatDefaults/autologin-guest"] = false;
+        args[QStringLiteral("core/SeatDefaults/autologin-user")].clear();
+        args[QStringLiteral("core/SeatDefaults/autologin-guest")] = false;
     }
 
-    args["core/SeatDefaults/allow-guest"] = ui->allowGuest->isChecked();
-    args["core/XDMCPServer/enabled"] = ui->enableXdmcp->isChecked();
-    args["core/VNCServer/enabled"] = ui->enableVnc->isChecked();
+    args[QStringLiteral("core/SeatDefaults/allow-guest")] = ui->allowGuest->isChecked();
+    args[QStringLiteral("core/XDMCPServer/enabled")] = ui->enableXdmcp->isChecked();
+    args[QStringLiteral("core/VNCServer/enabled")] = ui->enableVnc->isChecked();
 
     return args;
 }

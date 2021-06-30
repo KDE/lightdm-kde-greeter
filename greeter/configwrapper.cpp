@@ -24,12 +24,12 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <QFile>
 
-ConfigWrapper::ConfigWrapper(const QUrl &kcfgPath, QObject *parent)
+ConfigWrapper::ConfigWrapper(const QString &kcfgPath, QObject *parent)
     : QObject(parent)
 {
-    KSharedConfigPtr config = KSharedConfig::openConfig(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf", KConfig::SimpleConfig);
+    KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"), KConfig::SimpleConfig);
 
-    QFile xmlFile(kcfgPath.toLocalFile());
+    QFile xmlFile(kcfgPath);
     xmlFile.open(QFile::ReadOnly);
 
     m_config = new KConfigLoader(config, &xmlFile, this);

@@ -27,7 +27,7 @@ GreeterWrapper::GreeterWrapper(QObject *parent)
     : QLightDM::Greeter(parent)
 {
     connectSync();
-    m_config = KSharedConfig::openConfig("state-kde");
+    m_config = KSharedConfig::openConfig(QStringLiteral("state-kde"));
 }
 
 QString GreeterWrapper::lastLoggedInUser() const
@@ -35,7 +35,7 @@ QString GreeterWrapper::lastLoggedInUser() const
     //use suggested user from lightdm.conf if they exist, otherwise load from local config file of last logged in user.
     if (selectGuestHint())
     {
-        return "*guest";
+        return QStringLiteral("*guest");
     }
 
     if (!selectUserHint().isEmpty())
@@ -48,7 +48,7 @@ QString GreeterWrapper::lastLoggedInUser() const
 
 QString GreeterWrapper::guestLoginName() const
 {
-    return QLatin1String("*guest");
+    return QStringLiteral("*guest");
 }
 
 bool GreeterWrapper::startSessionSync(const QString &session)

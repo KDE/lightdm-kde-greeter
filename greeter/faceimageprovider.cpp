@@ -67,7 +67,7 @@ QPixmap FaceImageProvider::requestPixmap(const QString &id, QSize *size, const Q
     //if there is an image path, and the image actually exists
     if (!imagePath.isNull())
     {
-        pix.load(imagePath + QLatin1String(".icon"));
+        pix.load(imagePath + QStringLiteral(".icon"));
         if (pix.isNull())
         {
             pix.load(imagePath);
@@ -76,7 +76,7 @@ QPixmap FaceImageProvider::requestPixmap(const QString &id, QSize *size, const Q
 
     if (pix.isNull())
     {
-        pix = QIcon(new KIconEngine(QLatin1String("user-identity"), KIconLoader::global())).pixmap(extent);
+        pix = QIcon(new KIconEngine(QStringLiteral("user-identity"), KIconLoader::global())).pixmap(extent);
     }
 
     if (size)

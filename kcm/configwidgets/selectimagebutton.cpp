@@ -41,8 +41,8 @@ SelectImageButton::SelectImageButton(QWidget *parent)
 
     setIconSize(QSize(64,64));
 
-    menu->addAction(QIcon(new KIconEngine(QLatin1String("document-open-folder"), KIconLoader::global())), i18n("Load from file..."), this, SLOT(onLoadImageFromFile()));
-    menu->addAction(QIcon(new KIconEngine(QLatin1String("edit-clear"), KIconLoader::global())), i18n("Clear Image"), this, SLOT(onClearImage()));
+    menu->addAction(QIcon(new KIconEngine(QStringLiteral("document-open-folder"), KIconLoader::global())), i18n("Load from file..."), this, SLOT(onLoadImageFromFile()));
+    menu->addAction(QIcon(new KIconEngine(QStringLiteral("edit-clear"), KIconLoader::global())), i18n("Clear Image"), this, SLOT(onClearImage()));
     setMenu(menu);
 
     onClearImage();
@@ -66,7 +66,7 @@ void SelectImageButton::setImagePath(const QString &imagePath)
     }
     else
     {
-        setIcon(QIcon(new KIconEngine(QLatin1String("image-x-generic"), KIconLoader::global())));
+        setIcon(QIcon(new KIconEngine(QStringLiteral("image-x-generic"), KIconLoader::global())));
     }
 
     Q_EMIT imagePathChanged(m_imagePath);
@@ -80,7 +80,8 @@ QString SelectImageButton::imagePath() const
 
 void SelectImageButton::onLoadImageFromFile()
 {
-    QString fileUrl = QFileDialog::getOpenFileName(this, ki18n("Select image").toString(), QString(), QImageReader::supportedMimeTypes().join(" "), nullptr, QFileDialog::Options(QFileDialog::ReadOnly));
+    QString fileUrl = QFileDialog::getOpenFileName(this, ki18n("Select image").toString(), QString(),
+        QString::fromLocal8Bit(QImageReader::supportedMimeTypes().join(" ")), nullptr, QFileDialog::Options(QFileDialog::ReadOnly));
 
     if (!fileUrl.isEmpty())
     {

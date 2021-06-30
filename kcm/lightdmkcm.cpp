@@ -36,15 +36,13 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 K_PLUGIN_FACTORY_WITH_JSON(LightDMKcmFactory, "kcm_lightdm.json", registerPlugin<LightDMKcm>();)
 
-Q_IMPORT_PLUGIN(lightdm_config_widgets)
-
 LightDMKcm::LightDMKcm(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)
 {
     KAboutData* aboutData = new KAboutData(
-        "kcmlightdm",                // appName
+        QStringLiteral("kcmlightdm"),                // appName
         ki18n("LightDM KDE Config").toString(), // programName
-        "0",                        // version (set by initAboutData)
+        QStringLiteral("0"),                        // version (set by initAboutData)
         ki18n("Login screen using the LightDM framework").toString(),
         KAboutLicense::GPL);
 
@@ -75,8 +73,8 @@ void LightDMKcm::save()
     args = m_themeConfig->save();
     args.insert(m_coreConfig->save());
 
-    KAuth::Action saveAction("org.kde.kcontrol.kcmlightdm.save");
-    saveAction.setHelperId("org.kde.kcontrol.kcmlightdm");
+    KAuth::Action saveAction(QStringLiteral("org.kde.kcontrol.kcmlightdm.save"));
+    saveAction.setHelperId(QStringLiteral("org.kde.kcontrol.kcmlightdm"));
     saveAction.setArguments(args);
     KAuth::ExecuteJob *job = saveAction.execute();
     if (!job->exec())
@@ -94,3 +92,5 @@ void LightDMKcm::defaults()
 {
     m_themeConfig->defaults();
 }
+
+#include "lightdmkcm.moc"

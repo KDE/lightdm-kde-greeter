@@ -69,7 +69,7 @@ QVariant ScreensModel::data(const QModelIndex &index, int role) const
 
 void ScreensModel::onScreenResized(size_t screen, const QRect &geometry)
 {
-    if (screen < m_screens.size())
+    if (screen < size_t(m_screens.size()))
     {
         m_screens[screen].geometry = geometry;
     }

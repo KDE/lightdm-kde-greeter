@@ -43,10 +43,10 @@ public:
     QVariantMap save();
     void defaults();
 
-signals:
+Q_SIGNALS:
     void changed(bool);
 
-private slots:
+private Q_SLOTS:
     void onSettingsChanged();
 
 private:

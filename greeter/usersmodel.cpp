@@ -44,7 +44,7 @@ void UsersModel::setShowGuest(bool showGuest)
     if (m_showGuest)
     {
         QStandardItem *guest = new QStandardItem(i18n("Guest"));
-        guest->setData("*guest", QLightDM::UsersModel::NameRole);
+        guest->setData(QStringLiteral("*guest"), QLightDM::UsersModel::NameRole);
         extraRowModel()->appendRow(guest);
     }
     else

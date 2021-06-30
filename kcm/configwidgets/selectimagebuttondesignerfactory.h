@@ -24,6 +24,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 #include <QObject>
 
+#define QT_STATICPLUGIN
+
 class SelectImageButtonDesignerFactory : public QObject, public QDesignerCustomWidgetInterface
 {
     Q_OBJECT
@@ -40,7 +42,7 @@ public:
     QString name() const override;
     QString toolTip() const override;
     QString whatsThis() const override;
-    QWidget* createWidget(QWidget *parent);
+    QWidget* createWidget(QWidget *parent) override;
 };
 
 

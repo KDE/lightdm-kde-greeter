@@ -46,7 +46,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-private slots:
+private Q_SLOTS:
     void onSourceRowsInserted(const QModelIndex &parent, int start, int end);
     void onSourceRowsRemoved(const QModelIndex &parent, int start, int end);
     void onSourceDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);

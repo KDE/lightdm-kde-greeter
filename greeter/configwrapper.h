@@ -22,7 +22,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDir>
 #include <QObject>
-#include <QUrl>
+#include <QString>
 
 #include <KConfigLoader>
 
@@ -33,7 +33,7 @@ class ConfigWrapper: public QObject
     Q_OBJECT
 
 public:
-    explicit ConfigWrapper(const QUrl &kcfgPath, QObject *parent = nullptr);
+    explicit ConfigWrapper(const QString &kcfgPath, QObject *parent = nullptr);
 
     Q_INVOKABLE QVariant readEntry(const QString &key) const;
 

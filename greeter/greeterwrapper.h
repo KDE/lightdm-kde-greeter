@@ -38,10 +38,10 @@ public:
     QString lastLoggedInUser() const;
     QString guestLoginName() const;
 
-signals:
+Q_SIGNALS:
     void aboutToLogin();
 
-public slots:
+public Q_SLOTS:
     bool startSessionSync(const QString &session = QString());
 
 private:

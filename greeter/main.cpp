@@ -33,9 +33,9 @@ int main(int argc, char **argv)
     QCommandLineParser options;
 
     KAboutData aboutData(
-        "lightdm-kde-greeter",        // appName
-        ki18n("LightDM KDE Greeter").toString(), // programName
-        "0",                          // version (set by initAboutData)
+        QStringLiteral("lightdm-kde-greeter"),        // appName
+        ki18n("LightDM KDE Greeter").toString(),      // programName
+        QStringLiteral("0"),                          // version (set by initAboutData)
         ki18n("Login screen using the LightDM framework").toString(),
         KAboutLicense::GPL);
 

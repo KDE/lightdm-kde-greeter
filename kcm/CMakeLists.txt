@@ -39,12 +39,9 @@ set(LIGHTDM_KCM_UI
 
 qt5_wrap_ui(LIGHTDM_KCM_UI_SRCS ${LIGHTDM_KCM_UI})
 
-qt5_wrap_cpp(LIGHTDM_KCM_HDRS_MOCS ${LIGHTDM_KCM_HDRS})
-
 add_library(kcm_lightdm MODULE
                 ${LIGHTDM_KCM_SRCS}
                 ${LIGHTDM_KCM_HDRS}
-                ${LIGHTDM_KCM_HDRS_MOCS}
                 ${LIGHTDM_KCM_UI_SRCS})
 
 
@@ -75,9 +72,7 @@ set(KCMLIGHTDMHELPER_HDRS
     helper.h
 )
 
-qt5_wrap_cpp(KCMLIGHTDMHELPER_HDRS_MOCS ${KCMLIGHTDMHELPER_HDRS})
-
-add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS} ${KCMLIGHTDMHELPER_HDRS_MOCS})
+add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS})
 target_link_libraries(kcmlightdmhelper KF5::Auth KF5::ConfigCore)
 install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 

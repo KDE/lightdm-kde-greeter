@@ -43,7 +43,7 @@ void SessionsModel::setShowLastUsedSession(bool showLastUsedSession)
     if (m_showLastUsedSession)
     {
         QStandardItem *guest = new QStandardItem(i18n("Previously Used Session"));
-        guest->setData("", QLightDM::SessionsModel::KeyRole);
+        guest->setData(QStringLiteral(""), QLightDM::SessionsModel::KeyRole);
         extraRowModel()->appendRow(guest);
     }
     else

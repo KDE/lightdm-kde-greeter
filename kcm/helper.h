@@ -27,7 +27,7 @@ class Helper: public QObject
 {
     Q_OBJECT
 
-public slots:
+public Q_SLOTS:
     KAuth::ActionReply save(const QVariantMap &args);
 };
 

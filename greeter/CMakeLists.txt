@@ -29,10 +29,8 @@ set(GREETER_HDRS
     ../about.h
 )
 
-qt5_wrap_cpp(GREETER_HDRS_MOCS ${GREETER_HDRS})
-
 # Create the greeter
-add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS} ${GREETER_HDRS_MOCS})
+add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS})
 
 # Link against the needed libraries
 target_link_libraries(lightdm-kde-greeter
@@ -61,8 +59,6 @@ set(ROOTIMAGE_HDRS
     rootimageapp.h
     )
 
-qt5_wrap_cpp(ROOTIMAGE_HDRS_MOCS ${ROOTIMAGE_HDRS})
-
-add_executable(lightdm-kde-greeter-rootimage ${ROOTIMAGE_SRCS} ${ROOTIMAGE_HDRS} ${ROOTIMAGE_HDRS_MOCS})
+add_executable(lightdm-kde-greeter-rootimage ${ROOTIMAGE_SRCS} ${ROOTIMAGE_HDRS})
 target_link_libraries(lightdm-kde-greeter-rootimage Qt5::Widgets Qt5::X11Extras ${X11_X11_LIB})
 install(TARGETS lightdm-kde-greeter-rootimage DESTINATION ${LIBEXEC_INSTALL_DIR})

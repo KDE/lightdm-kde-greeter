@@ -55,7 +55,7 @@ bool AuthKitConfigLoader::usrSave()
 
     foreach (KConfigSkeletonItem* item, items())
     {
-        m_entryMap["greeter/greeter-settings/" + item->key()] = item->property();
+        m_entryMap[QStringLiteral("greeter/greeter-settings/") + item->key()] = item->property();
     }
 
     return true;
@@ -91,14 +91,14 @@ void ConfigOptions::setTheme(const QDir &themeDir)
     }
 
     //if contains a valid config
-    if (themeDir.exists(QLatin1String("main.xml")) && themeDir.exists(QLatin1String("config.ui")))
+    if (themeDir.exists(QStringLiteral("main.xml")) && themeDir.exists(QStringLiteral("config.ui")))
     {
-        QFile kcfgFile(themeDir.filePath(QLatin1String("main.xml")));
+        QFile kcfgFile(themeDir.filePath(QStringLiteral("main.xml")));
         kcfgFile.open(QFile::ReadOnly);
 
         QUiLoader loader;
         loader.setLanguageChangeEnabled(true);
-        QFile uiFile(themeDir.filePath(QLatin1String("config.ui")));
+        QFile uiFile(themeDir.filePath(QStringLiteral("config.ui")));
         m_wrapperWidget.reset(loader.load(&uiFile, this));
 
         //both the following get deleted when the wrapped widget is deleted.

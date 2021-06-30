@@ -68,19 +68,19 @@ GreeterWindow::GreeterWindow(QWindow *parent)
         usersModel->setShowGuest(true);
     }
 
-    engine()->addImageProvider("face", new FaceImageProvider(usersModel));
+    engine()->addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
 
-    KConfig config(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf");
+    KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
     KConfigGroup configGroup = config.group("greeter");
 
     QString theme = configGroup.readEntry("theme-name", "userbar");
-    QUrl source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/" + theme + "/main.qml");
+    QUrl source { QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.qml")) };
 
     if (source.isEmpty())
     {
         qCritical() << "Cannot find QML file for" << theme << "theme. Falling back to \"userbar\" theme.";
-        theme = "userbar";
-        source = QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/userbar/main.qml");
+        theme = QStringLiteral("userbar");
+        source = QUrl(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/userbar/main.qml")));
         if (source.isEmpty()) {
             qFatal("Cannot find QML file for \"userbar\" theme. Something is wrong with this installation. Aborting.");
         }
@@ -90,14 +90,15 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());
 
-    rootContext()->setContextProperty("config", new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, "themes/" + theme + "/main.xml"), this));
-    rootContext()->setContextProperty("screenSize", size());
-    rootContext()->setContextProperty("greeter", m_greeter);
-    rootContext()->setContextProperty("usersModel", usersModel);
-    rootContext()->setContextProperty("sessionsModel", new SessionsModel(this));
-    rootContext()->setContextProperty("screensModel", new ScreensModel(this));
-    rootContext()->setContextProperty("power", new QLightDM::PowerInterface(this));
-    rootContext()->setContextProperty("plasmaTheme", new Plasma::Theme(this));
+    rootContext()->setContextProperty(QStringLiteral("config"),
+        new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.xml")), this));
+    rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
+    rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
+    rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
+    rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
+    rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
+    rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
+    rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
 
     setSource(source);
 
@@ -111,14 +112,14 @@ GreeterWindow::~GreeterWindow()
 void GreeterWindow::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-    rootContext()->setContextProperty("screenSize", event->size());
+    rootContext()->setContextProperty(QStringLiteral("screenSize"), event->size());
 }
 
 void GreeterWindow::setRootImage()
 {
     QPixmap pix = screen()->grabWindow(winId());
     QProcess process;
-    process.start(QStandardPaths::findExecutable("lightdm-kde-greeter-rootimage"), QStringList(), QIODevice::WriteOnly);
+    process.start(QStandardPaths::findExecutable(QStringLiteral("lightdm-kde-greeter-rootimage")), QStringList(), QIODevice::WriteOnly);
     pix.save(&process, "xpm"); //write pixmap to rootimage
     process.closeWriteChannel();
     process.waitForFinished();

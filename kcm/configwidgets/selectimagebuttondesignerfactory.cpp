@@ -46,12 +46,12 @@ QString SelectImageButtonDesignerFactory::group() const
 
 QString SelectImageButtonDesignerFactory::includeFile() const
 {
-    return "selectimagebutton.h";
+    return QStringLiteral("selectimagebutton.h");
 }
 
 QString SelectImageButtonDesignerFactory::name() const
 {
-    return "SelectImageButton";
+    return QStringLiteral("SelectImageButton");
 }
 
 QString SelectImageButtonDesignerFactory::toolTip() const

@@ -15,15 +15,12 @@ set(LIGHTDM_CONFIG_WIDGET_HDRS
     selectimagebuttondesignerfactory.h
 )
 
-qt5_wrap_cpp(LIGHTDM_CONFIG_WIDGET_HDRS_MOCS ${LIGHTDM_CONFIG_WIDGET_HDRS})
-
 #not sure if this is a bad hack, CMake made me do it
 add_definitions(-fPIC)
 
 add_library(lightdm_config_widgets STATIC
                 ${LIGHTDM_CONFIG_WIDGET_SRCS}
-                ${LIGHTDM_CONFIG_WIDGET_HDRS}
-                ${LIGHTDM_CONFIG_WIDGET_HDRS_MOCS})
+                ${LIGHTDM_CONFIG_WIDGET_HDRS})
 
 # Link against the needed libraries
 target_link_libraries(lightdm_config_widgets
