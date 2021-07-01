@@ -43,3 +43,6 @@ configure_file(config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h @ONLY)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(themes)
+
+find_package(KF5I18n CONFIG REQUIRED)
+ki18n_install(po)
