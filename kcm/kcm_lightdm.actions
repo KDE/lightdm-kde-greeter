@@ -34,7 +34,7 @@ Name[uk]=LightDM
 Name[x-test]=xxLightDMxx
 Name[zh_CN]=LightDM
 Icon=kauth-example
-URL=https://projects.kde.org/projects/playground/base/lightdm
+URL=http://git.altlinux.org/gears/l/lightdm-kde-greeter.git
 
 [org.kde.kcontrol.kcmlightdm.savethemedetails]
 Name=Save Theme Details
