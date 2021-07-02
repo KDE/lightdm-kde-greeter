@@ -30,7 +30,6 @@ ConfigWrapper::ConfigWrapper(const QString &kcfgPath, QObject *parent)
     KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"), KConfig::SimpleConfig);
 
     QFile xmlFile(kcfgPath);
-    xmlFile.open(QFile::ReadOnly);
 
     m_config = new KConfigLoader(config, &xmlFile, this);
 }
