@@ -31,6 +31,7 @@ set(GREETER_HDRS
 
 # Create the greeter
 add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS})
+target_compile_definitions(lightdm-kde-greeter PRIVATE LIBEXEC_DIR="${LIBEXEC_INSTALL_DIR}")
 
 # Link against the needed libraries
 target_link_libraries(lightdm-kde-greeter

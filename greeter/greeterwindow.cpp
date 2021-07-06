@@ -119,7 +119,8 @@ void GreeterWindow::setRootImage()
 {
     QPixmap pix = screen()->grabWindow(winId());
     QProcess process;
-    process.start(QStandardPaths::findExecutable(QStringLiteral("lightdm-kde-greeter-rootimage")), QStringList(), QIODevice::WriteOnly);
+    process.start(QStandardPaths::findExecutable(QStringLiteral("lightdm-kde-greeter-rootimage"), QStringList { QStringLiteral(LIBEXEC_DIR) }),
+        QStringList(), QIODevice::WriteOnly);
     pix.save(&process, "xpm"); //write pixmap to rootimage
     process.closeWriteChannel();
     process.waitForFinished();
