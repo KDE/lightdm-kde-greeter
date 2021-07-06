@@ -72,7 +72,10 @@ Item {
 
     function doSessionSync() {
         var session = optionsMenu.currentSession;
-        greeter.startSessionSync(session);
+        var startresult = greeter.startSessionSync(session);
+        if (!startresult) {
+            startSessionFailureAnimation.start();
+        }
     }
 
     ParallelAnimation {
@@ -80,6 +83,11 @@ Item {
         NumberAnimation { target: dialog; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerDialog; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         onFinished: doSessionSync()
+    }
+
+    ParallelAnimation {
+        id: startSessionFailureAnimation
+        NumberAnimation { target: dialog; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
     }
 
     PlasmaCore.FrameSvgItem {

@@ -68,7 +68,10 @@ Item {
        if (session == "") {
            session = "default";
        }
-       greeter.startSessionSync(session);
+       var startresult = greeter.startSessionSync(session);
+        if (!startresult) {
+            startSessionFailureAnimation.start();
+        }
     }
 
     ParallelAnimation {
@@ -80,6 +83,16 @@ Item {
         NumberAnimation { target: sessionButton; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         onFinished: doSessionSync()
+    }
+
+    ParallelAnimation {
+        id: startSessionFailureAnimation
+        NumberAnimation { target: welcomeLabel; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: feedbackLabel; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: usersList; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: loginButtonItem; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: sessionButton; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: powerBar; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
     }
 
     Component.onCompleted: {
