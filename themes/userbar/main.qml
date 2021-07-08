@@ -26,6 +26,12 @@ Item {
     width: screenSize.width;
     height: screenSize.height;
 
+    VisibleScreenEnum {
+        id: visibleScreenEnum
+    }
+
+    property int visibleScreen: VisibleScreenEnum.VisibleScreen.LoginScreen
+
     ScreenManager {
         id: screenManager
         delegate: Image {
@@ -48,17 +54,37 @@ Item {
         target: greeter;
 
         onShowPrompt: {
-            greeter.respond(passwordInput.text);
+            if (type == 0) {
+                echoOnLabel.text = text;
+                echoOnInput.text = "";
+                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen;
+                echoOnInput.forceActiveFocus();
+            } else {
+                echoOffLabel.text = text;
+                echoOffInput.text = "";
+                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen;
+                echoOffInput.forceActiveFocus();
+            }
+        }
+
+        onShowMessage: {
+            if (type == 0) {
+                infoMsgLabel.text = text;
+                visibleScreen = VisibleScreenEnum.VisibleScreen.InfoMsgScreen;
+            } else {
+                errorMsgLabel.text = text;
+                visibleScreen = VisibleScreenEnum.VisibleScreen.ErrorMsgScreen;
+            }
         }
 
         onAuthenticationComplete: {
             if(greeter.authenticated) {
+                visibleScreen = VisibleScreenEnum.VisibleScreen.SuccessScreen;
                 loginAnimation.start();
             } else {
                 feedbackLabel.text = i18n("Sorry, incorrect password. Please try again.");
                 feedbackLabel.showFeedback();
-                passwordInput.selectAll()
-                passwordInput.forceActiveFocus()
+                visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
             }
         }
     }
@@ -70,6 +96,7 @@ Item {
        }
        var startresult = greeter.startSessionSync(session);
         if (!startresult) {
+            visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
             startSessionFailureAnimation.start();
         }
     }
@@ -238,6 +265,7 @@ Item {
     }
 
     function startLogin() {
+        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
         var username = usersList.currentItem.username;
         if (username == greeter.guestLoginName) {
             greeter.authenticateAsGuest();
@@ -267,6 +295,8 @@ Item {
         height: userItemHeight
         currentIndex: indexForUserName(greeter.lastLoggedInUser)
         model: usersModel
+        visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
+        enabled: visible
 
         cacheBuffer: count * 80
 
@@ -277,84 +307,140 @@ Item {
         highlightRangeMode: ListView.StrictlyEnforceRange
         preferredHighlightBegin: width / 2 - userItemWidth / 2
         preferredHighlightEnd: width / 2 + userItemWidth / 2
-
-        //if the user presses down or enter, focus password
-        //if user presses any normal key
-        //copy that character pressed to the pasword box and force focus
-
-        //can't use forwardTo as I want to switch focus. Also it doesn't work.
-        Keys.onPressed: {
-            if (event.key == Qt.Key_Down ||
-                event.key == Qt.Key_Enter ||
-                event.key == Qt.Key_Return) {
-                passwordInput.forceActiveFocus();
-            } else if (event.key & Qt.Key_Escape) {
-                //if special key, do nothing. Qt.Escape is 0x10000000 which happens to be a mask used for all special keys in Qt.
-            } else {
-                passwordInput.text += event.text;
-                passwordInput.forceActiveFocus();
-            }
-        }
-
     }
 
-    FocusScope {
+    Column {
         id: loginButtonItem
         anchors {
             horizontalCenter: activeScreen.horizontalCenter
             bottom: activeScreen.verticalCenter
         }
-        height: 30
+        spacing: 15
 
-        property bool isGuestLogin: usersList.currentItem.username == greeter.guestLoginName
+        PlasmaCore.FrameSvgItem {
+            id: dialog;
+            imagePath: "widgets/background"
 
-        PlasmaComponents.TextField {
-            id: passwordInput
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: 200
-            height: parent.height
-            focus: !loginButtonItem.isGuestLogin
-            enabled: !loginButtonItem.isGuestLogin
-            visible: !loginButtonItem.isGuestLogin
+            visible: (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.InfoMsgScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.ErrorMsgScreen)
 
-            echoMode: TextInput.Password
-            placeholderText: i18n("Password")
-            onAccepted: startLogin();
+            width: childrenRect.width + 55;
+            height: childrenRect.height + 55;
 
-            Keys.onEscapePressed: {
-                usersList.forceActiveFocus()
-            }
+            Row {
+                spacing: 10
+                anchors.centerIn: parent
+                height: childrenRect.height
 
-            PlasmaComponents.ToolButton {
-                id: loginButton
-                anchors {
-                    right: parent.right
-                    rightMargin: y
-                    verticalCenter: parent.verticalCenter
+                PlasmaComponents.Label {
+                    id: echoOnLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
+                    enabled: visible
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100 }
+                    }
                 }
-                width: implicitWidth
-                height: width
 
-                iconSource: "go-jump-locationbar"
-                onClicked: startLogin();
-            }
+                PlasmaComponents.TextField {
+                    id: echoOnInput
+                    width: 200
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
+                    enabled: visible
 
-            Behavior on opacity {
-                NumberAnimation { duration: 100 }
+                    onAccepted: {
+                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                        greeter.respond(echoOnInput.text);
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        id: echoOnInputButton
+                        anchors {
+                            right: parent.right
+                            rightMargin: y
+                            verticalCenter: parent.verticalCenter
+                        }
+                        width: implicitWidth
+                        height: width
+
+                        iconSource: "go-jump-locationbar"
+                        onClicked: {
+                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                            greeter.respond(echoOnInput.text);
+                        }
+                    }
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100 }
+                    }
+                }
+
+                PlasmaComponents.Label {
+                    id: echoOffLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
+                    enabled: visible
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100 }
+                    }
+                }
+
+                PlasmaComponents.TextField {
+                    id: echoOffInput
+                    width: 200
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
+                    enabled: visible
+
+                    echoMode: TextInput.Password
+                    onAccepted: {
+                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                        greeter.respond(echoOffInput.text);
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        id: echoOffInputButton
+                        anchors {
+                            right: parent.right
+                            rightMargin: y
+                            verticalCenter: parent.verticalCenter
+                        }
+                        width: implicitWidth
+                        height: width
+
+                        iconSource: "go-jump-locationbar"
+                        onClicked: {
+                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                            greeter.respond(echoOffInput.text);
+                        }
+                    }
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100 }
+                    }
+                }
+
+                PlasmaComponents.Label {
+                    id: infoMsgLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.InfoMsgScreen
+                    enabled: visible
+                }
+
+                PlasmaComponents.Label {
+                    id: errorMsgLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.ErrorMsgScreen
+                    enabled: visible
+                }
             }
         }
 
         PlasmaComponents.Button {
-            id: guestLoginButton
+            id: loginButton
             anchors.horizontalCenter: parent.horizontalCenter
             width: userFaceSize + 2 * padding
-            height: parent.height
-            focus: loginButtonItem.isGuestLogin
-            enabled: loginButtonItem.isGuestLogin
-            visible: loginButtonItem.isGuestLogin
+            visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
+            enabled: visible
 
-            iconSource: loginButton.iconSource
-            text: i18n("Login")
+            iconSource: "go-jump-locationbar"
+            text: i18n("Log in")
             onClicked: startLogin();
 
             Behavior on opacity {

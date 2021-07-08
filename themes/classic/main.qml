@@ -25,6 +25,12 @@ Item {
     width: screenSize.width;
     height: screenSize.height;
 
+    VisibleScreenEnum {
+        id: visibleScreenEnum
+    }
+
+    property int visibleScreen: VisibleScreenEnum.VisibleScreen.LoginScreen
+    
     ScreenManager {
         id: screenManager
         delegate: Image {
@@ -46,18 +52,39 @@ Item {
 
     Connections {
         target: greeter;
+
         onShowPrompt: {
-            greeter.respond(passwordInput.text);
+            if (type == 0) {
+                echoOnLabel.text = text;
+                echoOnInput.text = "";
+                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen;
+                echoOnInput.forceActiveFocus();
+            } else {
+                echoOffLabel.text = text;
+                echoOffInput.text = "";
+                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen;
+                echoOffInput.forceActiveFocus();
+            }
+        }
+
+        onShowMessage: {
+            if (type == 0) {
+                infoMsgLabel.text = text;
+                visibleScreen = VisibleScreenEnum.VisibleScreen.InfoMsgScreen;
+            } else {
+                errorMsgLabel.text = text;
+                visibleScreen = VisibleScreenEnum.VisibleScreen.ErrorMsgScreen;
+            }
         }
 
         onAuthenticationComplete: {
             if(greeter.authenticated) {
+                visibleScreen = VisibleScreenEnum.VisibleScreen.SuccessScreen;
                 loginAnimation.start();
             }
             else {
                 feedbackLabel.text = i18n("Sorry, incorrect password please try again.");
-                passwordInput.selectAll()
-                passwordInput.forceActiveFocus()
+                visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
             }
         }
     }
@@ -74,6 +101,7 @@ Item {
         var session = optionsMenu.currentSession;
         var startresult = greeter.startSessionSync(session);
         if (!startresult) {
+            visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
             startSessionFailureAnimation.start();
         }
     }
@@ -122,74 +150,115 @@ Item {
             //if guest checked, replace the normal "user/pass" textboxes with a big login button
             PlasmaComponents.Button {
                 visible: useGuestOption.checked
+                enabled: visible
                 text: i18n("Log in as guest");
                 onClicked: login()
             }
 
             Row {
                 visible: !useGuestOption.checked
+                enabled: visible
                 spacing: 10
                 width: childrenRect.width
                 height: childrenRect.height
-                
-                Grid {
-                    columns: 2
-                    spacing: 15
+
+                PlasmaCore.IconItem {
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
+                    enabled: visible
+                    source: "user"
+                    height: usernameInput.height;
+                    width: usernameInput.height;
+                }
+
+                PlasmaComponents.TextField {
+                    id: usernameInput;
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
+                    enabled: visible
+                    placeholderText: i18n("Username");
+                    text: greeter.lastLoggedInUser
+                    onAccepted: {
+                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                        login();
+                    }
+                    width: 160
                     
-                    PlasmaCore.IconItem {
-                        source: "user"
-                        height: usernameInput.height;
-                        width: usernameInput.height;
+                    Component.onCompleted: {
+                        usernameInput.focus = true;
                     }
+                    KeyNavigation.tab: inputButton
+                }
 
-                    PlasmaComponents.TextField {
-                        id: usernameInput;
-                        placeholderText: i18n("Username");
-                        text: greeter.lastLoggedInUser
-                        onAccepted: {
-                            passwordInput.focus = true;
-                        }
-                        width: 160
-                        
-                        Component.onCompleted: {
-                            //if the username field has text, focus the password, else focus the username
-                            if (usernameInput.text) {
-                                passwordInput.focus = true;
-                            } else {
-                                usernameInput.focus = true;
-                            }
-                        }
-                        KeyNavigation.tab: passwordInput
-                    }
+                PlasmaComponents.Label {
+                    id: echoOnLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
+                    enabled: visible
+                }
 
-                    PlasmaCore.IconItem {
-                        source: "object-locked"
-                        height: passwordInput.height;
-                        width: passwordInput.height;
+                PlasmaComponents.TextField {
+                    id: echoOnInput
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
+                    enabled: visible
+                    onAccepted: {
+                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                        greeter.respond(echoOnInput.text);
                     }
+                    width: 160
+                    KeyNavigation.tab: inputButton
+                }
 
-                    PlasmaComponents.TextField {
-                        id: passwordInput
-                        echoMode: TextInput.Password
-                        placeholderText: i18n("Password")
-                        onAccepted: {
-                            login();
-                        }
-                        width: 160
-                        KeyNavigation.backtab: usernameInput
-                        KeyNavigation.tab: loginButton
+                PlasmaComponents.Label {
+                    id: echoOffLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
+                    enabled: visible
+                }
+
+                PlasmaComponents.TextField {
+                    id: echoOffInput
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
+                    enabled: visible
+                    echoMode: TextInput.Password
+                    onAccepted: {
+                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                        greeter.respond(echoOffInput.text);
                     }
+                    width: 160
+                    KeyNavigation.tab: inputButton
+                }
+
+                PlasmaComponents.Label {
+                    id: infoMsgLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.InfoMsgScreen
+                    enabled: visible
+                }
+
+                PlasmaComponents.Label {
+                    id: errorMsgLabel
+                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.ErrorMsgScreen
+                    enabled: visible
                 }
                 
                 ToolButton {
-                    id: loginButton
+                    id: inputButton
+                    visible: (visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen)
+                    enabled: visible
                     anchors.verticalCenter: parent.verticalCenter
                     iconSource: "go-next"
                     onClicked: {
-                        login();
+                        if (visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen) {
+                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                            login();
+                        }
+
+                        if (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen) {
+                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                            greeter.respond(echoOnInput.text);
+                        }
+
+                        if (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen) {
+                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+                            greeter.respond(echoOffInput.text);
+                        }
                     }
-                    KeyNavigation.backtab: passwordInput
-                    KeyNavigation.tab: usernameInput
                 }
             }
 
