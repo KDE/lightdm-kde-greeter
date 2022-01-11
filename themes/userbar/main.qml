@@ -2,7 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
-Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2021, 2022 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -274,6 +274,11 @@ Item {
         }
     }
 
+    function startLoginWithoutUsername() {
+        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
+        greeter.authenticate();
+    }
+
     function indexForUserName(name) {
         var index;
         for (index = 0; index < usersList.count; ++index) {
@@ -488,6 +493,15 @@ Item {
             spacing: 5
             x: parent.margins.left
             y: parent.margins.top
+
+            ToolButton {
+                id: loginAsOtherButton
+                text: i18n("Log in as another user")
+                iconSource: "go-jump-locationbar"
+                visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
+                enabled: visible
+                onClicked: startLoginWithoutUsername();
+            }
 
             ToolButton {
                 id: suspendButton
