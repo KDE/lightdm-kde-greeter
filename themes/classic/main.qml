@@ -17,7 +17,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
-import QtQuick 2.12
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QC
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -41,14 +42,21 @@ Item {
         }
     }
 
-    Item { //recreate active screen at a sibling level which we can anchor in.
-        id: activeScreen
+    Item {
+        id: wholeScreen
         x: screenManager.activeScreen.x
         y: screenManager.activeScreen.y
         width: screenManager.activeScreen.width
         height: screenManager.activeScreen.height
     }
 
+    Item {
+        id: activeScreen
+        x: wholeScreen.x
+        y: wholeScreen.y
+        width: wholeScreen.width
+        height: inputPanel.item ? inputPanel.item.y : wholeScreen.height
+    }
 
     Connections {
         target: greeter;
@@ -332,6 +340,15 @@ Item {
                         optionsMenu.open();
                     }
                 }
+
+                PlasmaComponents.Button {
+                    QC.ToolTip.delay: 1000
+                    QC.ToolTip.visible: hovered
+                    QC.ToolTip.text: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                    iconSource: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                    onClicked: inputPanel.switchState()
+                    visible: inputPanel.item
+                }
             }
         }
     }
@@ -384,5 +401,20 @@ Item {
             }     
         }
 
+    }
+
+    Loader {
+        id: inputPanel
+        property bool keyboardEnabled: item && item.keyboardEnabled
+
+        function switchState() {
+            if (item) {
+                item.switchState()
+            }
+        }
+
+        Component.onCompleted: {
+            inputPanel.source = "../components/InputPanel.qml"
+        }
     }
 }

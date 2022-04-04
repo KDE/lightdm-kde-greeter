@@ -18,8 +18,10 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 import QtQuick 2.12
+import QtQuick.Layouts 1.1
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: screen
@@ -42,12 +44,35 @@ Item {
         }
     }
 
-    Item { //recreate active screen at a sibling level which we can anchor in.
-        id: activeScreen
+    Item {
+        id: wholeScreen
         x: screenManager.activeScreen.x
         y: screenManager.activeScreen.y
         width: screenManager.activeScreen.width
         height: screenManager.activeScreen.height
+    }
+
+    Item {
+        id: activeScreen
+        x: wholeScreen.x
+        y: wholeScreen.y
+        width: wholeScreen.width
+        height: inputPanel.item ? inputPanel.item.y : wholeScreen.height
+    }
+
+    Loader {
+        id: inputPanel
+        property bool keyboardEnabled: item && item.keyboardEnabled
+
+        function switchState() {
+            if (item) {
+                item.switchState()
+            }
+        }
+
+        Component.onCompleted: {
+            inputPanel.source = "../components/InputPanel.qml"
+        }
     }
 
     Connections {
@@ -109,6 +134,7 @@ Item {
         NumberAnimation { target: loginButtonItem; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: sessionButton; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: virtualKeyboardBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
         onFinished: doSessionSync()
     }
 
@@ -120,6 +146,7 @@ Item {
         NumberAnimation { target: loginButtonItem; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: sessionButton; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
         NumberAnimation { target: powerBar; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
+        NumberAnimation { target: virtualKeyboardBar; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
     }
 
     Component.onCompleted: {
@@ -478,11 +505,35 @@ Item {
         }
     }
 
+    PlasmaCore.FrameSvgItem {
+        id: virtualKeyboardBar
+        anchors.bottom: wholeScreen.bottom
+        anchors.left: wholeScreen.left
+        width: childrenRect.width + margins.right
+        height: childrenRect.height + margins.top
+        imagePath: "widgets/background"
+
+        enabledBorders: "RightBorder|TopBorder"
+
+        Row {
+            spacing: 5
+            x: parent.margins.left
+            y: parent.margins.top
+
+            PlasmaComponents3.ToolButton {
+                text: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                onClicked: inputPanel.switchState()
+                visible: inputPanel.item
+            }
+        }
+    }
+
     // Bottom "Power" bar
     PlasmaCore.FrameSvgItem {
         id: powerBar
-        anchors.bottom: activeScreen.bottom
-        anchors.right: activeScreen.right
+        anchors.bottom: wholeScreen.bottom
+        anchors.right: wholeScreen.right
         width: childrenRect.width + margins.left
         height: childrenRect.height + margins.top
         imagePath: "widgets/background"
@@ -494,44 +545,44 @@ Item {
             x: parent.margins.left
             y: parent.margins.top
 
-            ToolButton {
+            PlasmaComponents3.ToolButton {
                 id: loginAsOtherButton
                 text: i18n("Log in as another user")
-                iconSource: "go-jump-locationbar"
+                icon.name: "go-jump-locationbar"
                 visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
                 enabled: visible
                 onClicked: startLoginWithoutUsername();
             }
 
-            ToolButton {
+            PlasmaComponents3.ToolButton {
                 id: suspendButton
                 text: i18n("Suspend")
-                iconSource: "system-suspend"
+                icon.name: "system-suspend"
                 enabled: power.canSuspend;
                 onClicked: power.suspend();
             }
 
-            ToolButton {
+            PlasmaComponents3.ToolButton {
                 id: hibernateButton
                 text: i18n("Hibernate")
-                iconSource: "system-suspend-hibernate"
+                icon.name: "system-suspend-hibernate"
                 //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
                 visible: power.canHibernate
                 onClicked: power.hibernate();
             }
 
-            ToolButton {
+            PlasmaComponents3.ToolButton {
                 id: restartButton
                 text: i18n("Restart")
-                iconSource: "system-reboot"
+                icon.name: "system-reboot"
                 enabled: power.canRestart
                 onClicked: power.restart();
             }
 
-            ToolButton {
+            PlasmaComponents3.ToolButton {
                 id: shutdownButton
                 text: i18n("Shutdown")
-                iconSource: "system-shutdown"
+                icon.name: "system-shutdown"
                 enabled: power.canShutdown
                 onClicked: power.shutdown();
             }

@@ -23,12 +23,18 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KConfig>
+#include <KConfigGroup>
 
 #include "../about.h"
 #include "greeterwindow.h"
 
 int main(int argc, char **argv)
 {
+    KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
+    KConfigGroup configGroup = config.group("greeter");
+    qputenv("QT_IM_MODULE", configGroup.readEntry("input-method", "qtvirtualkeyboard").toUtf8());
+
     QApplication app(argc, argv);
     QCommandLineParser options;
 

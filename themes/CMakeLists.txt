@@ -6,6 +6,9 @@ install(DIRECTORY userbar
         DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes
         PATTERN Messages.sh EXCLUDE
 )
+install(DIRECTORY components
+        DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes
+)
 
 # custom targets just for displaying sources in IDE
 add_custom_target(classic_theme_sources
