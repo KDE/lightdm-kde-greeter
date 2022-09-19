@@ -36,6 +36,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <KQuickIconProvider>
 #include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
 #include <Plasma/Theme>
@@ -59,7 +60,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     QRect screen = QApplication::desktop()->rect();
     setGeometry(screen);
 
-    KDeclarative::KDeclarative::setupEngine(engine());
+    engine()->addImageProvider(QStringLiteral("icon"), new KQuickIconProvider);
 
     UsersModel *usersModel = new UsersModel(this);
 

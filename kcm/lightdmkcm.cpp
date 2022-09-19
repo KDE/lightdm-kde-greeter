@@ -24,8 +24,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTabWidget>
 
 #include <KAboutData>
-#include <KAuth/KAuthAction>
-#include <KAuth/KAuthExecuteJob>
+#include <KAuth/Action>
+#include <KAuth/ExecuteJob>
 #include <KConfigDialogManager>
 #include <KLocalizedString>
 #include <KPluginFactory>

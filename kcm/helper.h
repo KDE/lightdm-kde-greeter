@@ -20,8 +20,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef HELPER_H
 #define HELPER_H
 
-#include <KAuth/KAuthActionReply>
-#include <KAuth/KAuthHelperSupport>
+#include <KAuth/ActionReply>
+#include <KAuth/HelperSupport>
 
 class Helper: public QObject
 {

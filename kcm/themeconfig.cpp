@@ -29,7 +29,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPixmap>
 #include <QUiLoader>
 
-#include <KAuth/KAuthAction>
+#include <KAuth/Action>
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KConfigSkeleton>
