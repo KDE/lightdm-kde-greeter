@@ -28,6 +28,8 @@ target_link_libraries(lightdm-kde-greeter
   KF5::Plasma
   KF5::ConfigGui
   KF5::I18n
+  ${LIBXCB_LIBRARIES}
+  ${LIBXKB_LIBRARIES}
 )
 # PkgConfig::UPOWER
 

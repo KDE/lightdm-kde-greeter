@@ -18,6 +18,8 @@ set(LIGHTDM_CONFIG_DIR "/etc/lightdm"
     CACHE PATH "Directory where LightDM configuration files are kept")
 
 find_package(X11 REQUIRED)
+find_package(XCB REQUIRED)
+find_package(XKB REQUIRED)
 
 find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus X11Extras Qml Quick UiPlugin UiTools)
 

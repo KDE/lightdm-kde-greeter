@@ -50,6 +50,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "usersmodel.h"
 #include "screensmodel.h"
 #include "greeterwrapper.h"
+#include "keyboard/KeyboardModel.h"
 
 #include <config.h>
 
@@ -70,6 +71,8 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     }
 
     engine()->addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
+
+    auto keyboard = new KeyboardModel(this);
 
     KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
     KConfigGroup configGroup = config.group("greeter");
@@ -94,6 +97,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
     rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
     rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
+    rootContext()->setContextProperty(QStringLiteral("keyboard"), keyboard);
     rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
     rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
     rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
