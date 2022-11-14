@@ -89,8 +89,6 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     qDebug() << "Loading" << source;
 
-    KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());
-
     rootContext()->setContextProperty(QStringLiteral("config"),
         new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.xml")), this));
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());

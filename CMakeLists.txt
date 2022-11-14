@@ -1,4 +1,4 @@
-cmake_policy(SET CMP0012 NEW)
+cmake_minimum_required(VERSION 3.16.0)
 project(greeter-app)
 
 # Versions
@@ -8,7 +8,7 @@ set(LIGHTDM_KDE_VERSION_PATCH 1)
 set(LIGHTDM_KDE_VERSION ${LIGHTDM_KDE_VERSION_MAJOR}.${LIGHTDM_KDE_VERSION_MINOR}.${LIGHTDM_KDE_VERSION_PATCH})
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -47,3 +47,6 @@ add_subdirectory(themes)
 
 find_package(KF5I18n CONFIG REQUIRED)
 ki18n_install(po)
+
+# Display feature summary
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

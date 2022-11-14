@@ -50,5 +50,5 @@ find_library(QLIGHTDM_LIBRARIES
 )
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(QLIGHTDM_DEFAULT_MSG
+find_package_handle_standard_args(QLightDM
                                   QLIGHTDM_LIBRARIES QLIGHTDM_INCLUDE_DIR)

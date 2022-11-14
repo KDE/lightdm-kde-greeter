@@ -2,32 +2,15 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${QLIGHTDM_INCLUDE_DIR}
-)
+  ${LIBXCB_INCLUDE_DIR}
+  )
 
-# Insert your sources here
-set(GREETER_SRCS
-    extrarowproxymodel.cpp
-    faceimageprovider.cpp
-    greeterwindow.cpp
-    main.cpp
-    configwrapper.cpp
-    sessionsmodel.cpp
-    usersmodel.cpp
-    screensmodel.cpp
-    greeterwrapper.cpp
-)
+# All the sources and headers
+file(GLOB_RECURSE GREETER_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+list(REMOVE_ITEM GREETER_SRCS rootimageapp.cpp)
 
-set(GREETER_HDRS
-    extrarowproxymodel.h
-    faceimageprovider.h
-    greeterwindow.h
-    configwrapper.h
-    sessionsmodel.h
-    usersmodel.h
-    screensmodel.h
-    greeterwrapper.h
-    ../about.h
-)
+file(GLOB_RECURSE GREETER_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
+list(REMOVE_ITEM GREETER_HDRS rootimageapp.h)
 
 # Create the greeter
 add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS})

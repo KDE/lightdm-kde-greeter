@@ -37,6 +37,9 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
     QCommandLineParser options;
+    
+    QString theme = configGroup.readEntry("theme-name", "userbar");
+    KLocalizedString::setApplicationDomain((QStringLiteral("lightdm_theme_") + theme).toLocal8Bit().data());
 
     KAboutData aboutData(
         QStringLiteral("lightdm-kde-greeter"),        // appName
@@ -52,6 +55,11 @@ int main(int argc, char **argv)
 
     GreeterWindow *w = new GreeterWindow();
     w->show();
+
+    // receive focus
+    if (QGuiApplication::primaryScreen() == w->screen()) {
+        w->requestActivate();
+    }
 
     return app.exec();
 }
