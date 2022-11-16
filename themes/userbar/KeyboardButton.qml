@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
     SPDX-FileCopyrightText: 2022 Aleix Pol Gonzalez <aleixpol@kde.org>
+    SPDX-FileCopyrightText: 2022 Anton Golubev <golubevan@basealt.ru>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -30,7 +31,7 @@ PlasmaComponents.ToolButton {
         }
     }
 
-    signal keyboardLayoutChanged()
+    signal keyboardLayoutTriggered()
 
     PlasmaComponents.Menu {
         id: menu
@@ -46,7 +47,7 @@ PlasmaComponents.ToolButton {
                 text: i18nd("xkeyboard-config", modelData.longName)
                 onTriggered: {
                     keyboard.currentLayout = model.index
-                    root.keyboardLayoutChanged()
+                    root.keyboardLayoutTriggered()
                 }
             }
         }

@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 Aurélien Gâteau <agateau@kde.org>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,140 +18,74 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 import QtQuick 2.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-FocusScope {
-    id: root
-    property int currentIndex: 0
-    property string dataRole: ""
-    property alias model: repeater.model
+import QtQuick 2.15
 
-    function dataForIndex(index) {
-        var button = repeater.itemAt(index);
-        return button.data;
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
+
+PlasmaComponents.ToolButton {
+    id: root
+
+    property int currentIndex: 0
+    property string dataRole: "key"
+    property var model
+
+    signal itemTriggered()
+
+    text: {
+        var item = instantiator.objectAt(currentIndex)
+        return item ? item.text : ""
+    }
+
+    visible: menu.count > 1
+
+    checkable: true
+    checked: menu.opened
+    onToggled: {
+        if (checked) {
+            menu.popup(root, 0, 0)
+        } else {
+            menu.dismiss()
+        }
+    }
+
+    function currentData() {
+        var item = instantiator.objectAt(currentIndex)
+        return item ? item.data : ""
     }
 
     function indexForData(data) {
-        var index;
-        for (index = 0; index < repeater.count; ++index) {
-            if (repeater.itemAt(index).data == data) {
+        for (var index = 0; index < instantiator.count; ++index) {
+            if (instantiator.objectAt(index).data == data) {
                 return index;
             }
         }
-        return -1;
+        return null;
     }
 
-    function indexForItem(item) {
-        var index;
-        for (index = 0; index < repeater.count; ++index) {
-            if (repeater.itemAt(index) == item) {
-                return index;
-            }
-        }
-        return -1;
-    }
+    PlasmaComponents.Menu {
+        id: menu
+        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+        PlasmaCore.ColorScope.inherit: false
 
-    states: [
-        State {
-            name: "closed"
-        },
-        State {
-            name: "opened"
-        }
-    ]
-    state: "closed"
-
-    onActiveFocusChanged: {
-        root.state = activeFocus ? "opened" : "closed";
-    }
-
-    PlasmaCore.FrameSvgItem {
-        id: mainFrame
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: column.width + margins.left + margins.right
-        height: column.height + margins.top + margins.bottom
-        imagePath: "widgets/button"
-        prefix: "normal"
-        clip: true
-
-        PlasmaComponents.ButtonColumn {
-            id: column
-            spacing: 2 // Give some room
-
-            x: parent.margins.left
-            y: parent.margins.top
-            width: childrenRect.width
-
-            Repeater {
-                id: repeater
-                PlasmaComponents.Label {
-                    property string data: model[root.dataRole]
-                    property bool isCurrent: root.currentIndex == model.index
-
-                    text: model.display
-                    font.bold: isCurrent && root.state == "opened"
-                    visible: isCurrent || root.state == "opened"
+        Instantiator {
+            id: instantiator
+            model: root.model
+            onObjectAdded: menu.insertItem(index, object)
+            onObjectRemoved: menu.removeItem(object)
+            delegate: PlasmaComponents.MenuItem {
+                property string data: model[root.dataRole]
+                text: model.display
+                onTriggered: {
+                    root.currentIndex = model.index
+                    root.itemTriggered()
                 }
             }
         }
-
-        Behavior on width {
-            NumberAnimation { duration: 100 }
-        }
-        Behavior on height {
-            NumberAnimation { duration: 100 }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if (root.state == "opened") {
-                    var item = column.childAt(parent.margins.left, mouse.y);
-                    var index = indexForItem(item);
-                    if (index >= 0) {
-                        root.currentIndex = index;
-                        root.state = "closed";
-                    }
-                } else {
-                    root.forceActiveFocus();
-                    root.state = "opened";
-                }
-            }
-        }
-    }
-
-    PlasmaCore.FrameSvgItem {
-        id: focusFrame
-        anchors {
-            fill: mainFrame
-            leftMargin: -margins.left
-            topMargin: -margins.top
-            rightMargin: -margins.right
-            bottomMargin: -margins.bottom
-        }
-        width: parent.width
-        height: column.height + margins.top + margins.bottom
-        imagePath: "widgets/button"
-        prefix: "hover"
-        opacity: root.activeFocus ? 1 : 0
-        Behavior on opacity {
-            PropertyAnimation { duration: 100 }
-        }
-    }
-
-    Keys.onUpPressed: {
-        if (root.currentIndex > 0) {
-            root.currentIndex--;
-        }
-    }
-    Keys.onDownPressed: {
-        if (root.currentIndex < repeater.count - 1) {
-            root.currentIndex++;
-        }
-    }
-    Keys.onReturnPressed: {
-        root.state = root.state == "opened" ? "closed" : "opened";
     }
 }

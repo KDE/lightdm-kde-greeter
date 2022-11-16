@@ -35,6 +35,7 @@ public:
     /** Add a row to the sessions model titled "Last Used Session" */
     void setShowGuest(bool showGuest);
     bool showGuest() const;
+    Q_INVOKABLE int indexForUserName(QString name) const;
 
 private:
     bool m_showGuest;

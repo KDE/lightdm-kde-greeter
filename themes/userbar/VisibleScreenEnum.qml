@@ -2,6 +2,7 @@
 This file is part of LightDM-KDE.
 
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,12 +24,12 @@ Item {
     id: visibleScreenEnum
 
     enum VisibleScreen {
+        DefaultScreen,
         LoginScreen,
-        BlankScreen,
-        PromptEchoOnScreen,
-        PromptEchoOffScreen,
+        WaitScreen,
+        EnterUserNameScreen,
+        EnterPasswordScreen,
         InfoMsgScreen,
-        ErrorMsgScreen,
-        SuccessScreen /* Currently same as BlankScreen, i.e. empty */
+        ErrorMsgScreen
     }
 }

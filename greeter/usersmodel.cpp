@@ -57,3 +57,15 @@ bool UsersModel::showGuest() const
 {
     return m_showGuest;
 }
+
+int UsersModel::indexForUserName(QString name) const
+{
+    int i = 0;
+    while (hasIndex(i, 0)) {
+        if (data(index(i), QLightDM::UsersModel::UserModelRoles::NameRole) == name) {
+            return i;
+        }
+        ++i;
+    }
+    return 0;
+}

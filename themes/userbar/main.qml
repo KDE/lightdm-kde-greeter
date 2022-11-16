@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021, 2022 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,8 +18,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.0
+import QtQuick.Controls 2
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -28,11 +32,15 @@ Item {
     width: screenSize.width;
     height: screenSize.height;
 
-    VisibleScreenEnum {
-        id: visibleScreenEnum
-    }
+    property var screens: VisibleScreenEnum.VisibleScreen
+    property int visibleScreen: screens.DefaultScreen
 
-    property int visibleScreen: VisibleScreenEnum.VisibleScreen.LoginScreen
+    property real dpi96: 3.7820092576037516
+    property real dpiScale: Screen.pixelDensity / dpi96
+    property int padding: 6 * dpiScale
+    property int userItemWidth: 120 * dpiScale
+    property int userItemHeight: 80 * dpiScale
+    property int userFaceSize: userItemWidth - padding * 4
 
     ScreenManager {
         id: screenManager
@@ -57,7 +65,7 @@ Item {
         x: wholeScreen.x
         y: wholeScreen.y
         width: wholeScreen.width
-        height: inputPanel.item ? inputPanel.item.y : wholeScreen.height
+        height: Math.min(inputPanel.item.y, wholeScreen.height - menuBar.height)
     }
 
     Loader {
@@ -75,83 +83,51 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        startDefaultScreen()
+    }
+
+
     Connections {
         target: greeter;
 
-        onShowPrompt: {
-            if (type == 0) {
-                echoOnLabel.text = text;
-                echoOnInput.text = "";
-                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen;
-                echoOnInput.forceActiveFocus();
-            } else {
-                echoOffLabel.text = text;
-                echoOffInput.text = "";
-                visibleScreen = VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen;
-                echoOffInput.forceActiveFocus();
+        function onShowPrompt(text, type) {
+            if (type == 0) { // enter something that is not secret, such as a username
+                inputBoxLabel.text = text;
+                inputBox.text = "";
+                inputBox.echoMode = TextInput.Normal
+            } else { // enter secret word
+                inputBoxLabel.text = text;
+                inputBox.text = "";
+                inputBox.echoMode = TextInput.Password
             }
         }
 
-        onShowMessage: {
-            if (type == 0) {
-                infoMsgLabel.text = text;
-                visibleScreen = VisibleScreenEnum.VisibleScreen.InfoMsgScreen;
-            } else {
-                errorMsgLabel.text = text;
-                visibleScreen = VisibleScreenEnum.VisibleScreen.ErrorMsgScreen;
-            }
+        function onShowMessage(text, type) {
+            infoMsgLabel.text = text;
+            startMsgScreen(screens.InfoMsgScreen);
         }
 
-        onAuthenticationComplete: {
-            if(greeter.authenticated) {
-                visibleScreen = VisibleScreenEnum.VisibleScreen.SuccessScreen;
-                loginAnimation.start();
+        function onAuthenticationComplete() {
+            if(!greeter.authenticated) {
+                infoMsgLabel.text = i18n("Sorry, incorrect password. Please try again.");
+                startMsgScreen(screens.ErrorMsgScreen);
             } else {
-                feedbackLabel.text = i18n("Sorry, incorrect password. Please try again.");
-                feedbackLabel.showFeedback();
-                visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
+                doSessionSync()
             }
         }
     }
 
     function doSessionSync() {
-       var session = sessionButton.dataForIndex(sessionButton.currentIndex);
+       var session = sessionButton.currentData()
        if (session == "") {
            session = "default";
        }
+
        var startresult = greeter.startSessionSync(session);
         if (!startresult) {
-            visibleScreen = VisibleScreenEnum.VisibleScreen.LoginScreen;
-            startSessionFailureAnimation.start();
+            startDefaultScreen()
         }
-    }
-
-    ParallelAnimation {
-        id: loginAnimation
-        NumberAnimation { target: welcomeLabel; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: feedbackLabel; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: usersList; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: loginButtonItem; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: sessionButton; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: powerBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: virtualKeyboardBar; property: "opacity"; to: 0; duration: 400; easing.type: Easing.InOutQuad }
-        onFinished: doSessionSync()
-    }
-
-    ParallelAnimation {
-        id: startSessionFailureAnimation
-        NumberAnimation { target: welcomeLabel; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: feedbackLabel; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: usersList; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: loginButtonItem; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: sessionButton; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: powerBar; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-        NumberAnimation { target: virtualKeyboardBar; property: "opacity"; to: 1; duration: 400; easing.type: Easing.InOutQuad }
-    }
-
-    Component.onCompleted: {
-        setTabOrder([usersList, loginButtonItem, sessionButton, suspendButton, hibernateButton, restartButton, shutdownButton]);
-        usersList.forceActiveFocus();
     }
 
     function setTabOrder(lst) {
@@ -164,29 +140,265 @@ Item {
         }
     }
 
-    PlasmaComponents.Label {
-        visible: false
-        id: welcomeLabel
-        anchors.horizontalCenter: activeScreen.horizontalCenter
-        anchors.top: activeScreen.top
-        anchors.topMargin: 5
-        font.pointSize: 14
-        text: i18n("Welcome to %1", greeter.hostname);
+    // global state switching
+    function startLoginScreen() {
+        visibleScreen = screens.LoginScreen;
+        setTabOrder([inputBox, sessionButton, keyboardLayoutButton]);
+        inputBox.forceActiveFocus();
+        var username = usersList.currentItem.username;
+        if (username == greeter.guestLoginName) {
+            greeter.authenticateAsGuest();
+        } else {
+            greeter.authenticate(username);
+        }
     }
 
-    FeedbackLabel {
-        id: feedbackLabel
-        anchors.horizontalCenter: activeScreen.horizontalCenter
-        anchors.top: welcomeLabel.bottom
-        anchors.topMargin: 5
-        font.pointSize: 14
+    function startDefaultScreen() {
+        visibleScreen = screens.DefaultScreen;
+        setTabOrder([usersList, sessionButton, keyboardLayoutButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton]);
+        usersList.forceActiveFocus()
     }
 
-    property int userItemWidth: 120
-    property int userItemHeight: 80
-    property int userFaceSize: 64
+    function startEnterUsernameScreen() {
+        visibleScreen = screens.EnterUserNameScreen;
+        setTabOrder([inputBox, sessionButton, keyboardLayoutButton]);
+        inputBox.forceActiveFocus()
+        greeter.authenticate();
+    }
 
-    property int padding: 6
+    function startMsgScreen(msgScreen) {
+        visibleScreen = msgScreen
+        msgBox.forceActiveFocus()
+    }
+
+    function finishDialog() {
+        switch (visibleScreen) {
+            case screens.WaitScreen:
+                return
+            case screens.LoginScreen:
+            case screens.EnterPasswordScreen:
+                visibleScreen = screens.WaitScreen;
+            break;
+
+            case screens.EnterUserNameScreen:
+                visibleScreen = screens.EnterPasswordScreen;
+            break;
+            default:
+                startDefaultScreen()
+        }
+        greeter.respond(inputBox.text);
+    }
+
+    FocusScope {
+        id: centerPanelFocus
+
+        anchors.fill: activeScreen
+
+        Column {
+            id: centerPanel
+            spacing: screen.padding
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            // never hide the input dialog with the virtual keyboard
+            property bool fitsAsWhole: height < parent.height
+            states: [
+                State {
+                    name: "Centered"
+                    when: centerPanel.fitsAsWhole
+                    AnchorChanges {
+                        target: centerPanel
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.bottom: undefined
+                    }
+                },
+                State {
+                    name: "AlignedToBottom"
+                    when: !centerPanel.fitsAsWhole
+                    AnchorChanges {
+                        target: centerPanel
+                        anchors.verticalCenter: undefined
+                        anchors.bottom: parent.bottom
+                    }
+                }
+            ]
+
+            ListView {
+                id: usersList
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                visible: visibleScreen == screens.DefaultScreen || visibleScreen == screens.LoginScreen
+                enabled: visible
+                interactive: visibleScreen == screens.DefaultScreen
+
+                // dim the list of users when it loses focus
+                property bool itemHovered: false
+                opacity: activeFocus || itemHovered || visibleScreen != screens.DefaultScreen ? 1.0 : 0.7
+
+                spacing: padding
+                width: activeScreen.width
+                height: contentItem.childrenRect.height
+                model: usersModel
+                currentIndex: model.indexForUserName(greeter.lastLoggedInUser)
+                cacheBuffer: count * 80
+                delegate: userDelegate
+                orientation: ListView.Horizontal
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                preferredHighlightBegin: width / 2 - currentItem.width / 2
+                preferredHighlightEnd: width / 2 + currentItem.width / 2
+
+                Component.onCompleted: {
+                    sessionButton.onCurrentIndexChanged.connect(() => {
+                        currentItem.usersession = sessionButton.currentData()
+                    })
+                }
+            }
+
+
+            Item {
+                id: loginButtonItem
+
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                width: msgBox.visible ? msgBox.width : inputDialog.width
+                height: msgBox.visible ? msgBox.height : inputDialog.height
+
+                PlasmaCore.FrameSvgItem {
+                    id: inputDialog
+                    imagePath: "widgets/background"
+
+                    visible: (visibleScreen == screens.LoginScreen) || (visibleScreen == screens.EnterUserNameScreen) || (visibleScreen == screens.EnterPasswordScreen)
+                    enabled: visible
+
+                    width: rows.width + rows.height * 1.5
+                    height: rows.height * 2.5
+
+                    Keys.onEscapePressed: startDefaultScreen()
+
+                    Row {
+                        id: rows
+
+                        anchors.centerIn: parent
+
+                        spacing: screen.padding
+
+                        PlasmaComponents3.ToolButton {
+                            id: cancelButton
+                            icon.name: "undo"
+                            anchors.verticalCenter: parent.verticalCenter
+                            onClicked: startDefaultScreen()
+                        }
+
+                        PlasmaComponents.Label {
+                            id: inputBoxLabel
+                            height: inputBox.height
+                            anchors.verticalCenter: parent.verticalCenter
+                            Behavior on opacity {
+                                NumberAnimation { duration: 100 }
+                            }
+                        }
+
+                        PlasmaComponents.TextField {
+                            id: inputBox
+                            width: 150 * dpiScale
+                            onAccepted: finishDialog()
+
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            PlasmaComponents.ToolButton {
+                                id: enterButton
+                                anchors {
+                                    right: parent.right
+                                    rightMargin: y
+                                    verticalCenter: parent.verticalCenter
+                                }
+                                width: implicitWidth
+                                height: width
+
+                                iconSource: "go-jump-locationbar"
+                                onClicked: finishDialog()
+                            }
+
+                            Behavior on opacity {
+                                NumberAnimation { duration: 100 }
+                            }
+                        }
+
+                        TooltipButton {
+                            id: virtualKeyboardButton
+                            icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible: inputPanel.item
+                            caption: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                            expand: false
+
+                            onClicked: {
+                                inputPanel.switchState()
+                                inputBox.forceActiveFocus()
+                            }
+                        }
+                    }
+                }
+
+                PlasmaCore.FrameSvgItem {
+                    id: msgBox
+                    imagePath: "widgets/background"
+
+                    width: msgRows.childrenRect.width + msgRows.childrenRect.height * 1.5
+                    height: msgRows.childrenRect.height * 2.5
+
+                    visible: (visibleScreen == screens.InfoMsgScreen) || (visibleScreen == screens.ErrorMsgScreen)
+                    enabled: visible
+
+                    Keys.onReturnPressed: startDefaultScreen()
+                    Keys.onEscapePressed: startDefaultScreen()
+
+                    Row {
+                        id: msgRows
+
+                        anchors.centerIn: parent
+                        height: childrenRect.height
+                        spacing: screen.padding
+                        enabled: visible
+
+                        PlasmaComponents3.ToolButton {
+                            id: msgCancelButton
+                            icon.name: "undo"
+                            onClicked: startDefaultScreen()
+                        }
+
+                        PlasmaComponents.Label {
+                            id: infoMsgLabel
+                        }
+
+                        PlasmaCore.IconItem {
+                            height: msgCancelButton.height
+                            width: height
+                            source: visibleScreen == screens.ErrorMsgScreen ? "dialog-error" : "dialog-information"
+                        }
+                    }
+                }
+
+                PlasmaComponents.Button {
+                    id: loginButton
+
+                    anchors.centerIn: parent
+                    visible: visibleScreen == screens.DefaultScreen
+                    enabled: visible
+
+                    iconSource: "go-jump-locationbar"
+                    text: i18n("Log in")
+                    onClicked: startLoginScreen();
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100 }
+                    }
+                }
+            }
+        }
+    }
 
     Component {
         id: userDelegate
@@ -196,15 +408,15 @@ Item {
 
             property bool isCurrent: ListView.isCurrentItem
 
-            /* Expose current item info to the outer world. I can't find
-             * another way to access this from outside the list. */
+            // Expose current item info to the outer world. I can't find
+            // another way to access this from outside the list.
             property string username: model.name
             property string usersession: model.session
 
-            width: userItemWidth
-            height: userItemHeight
+            width: frame.width
+            height: frame.height
 
-            opacity: isCurrent ? 1.0 : 0.618
+            opacity: isCurrent ? 1.0 : visibleScreen == screens.DefaultScreen ? 0.618 : 0.0
 
             Behavior on opacity {
                 NumberAnimation {
@@ -213,37 +425,37 @@ Item {
             }
 
             PlasmaCore.FrameSvgItem {
-                id: frameFocus
-                anchors {
-                    fill: frame
-                    leftMargin: -margins.left
-                    topMargin: -margins.top
-                    bottomMargin: -margins.bottom
-                    rightMargin: -margins.right
-                }
-                imagePath: "widgets/button"
-                prefix: "hover"
-                visible: wrapper.isCurrent
-                opacity: wrapper.activeFocus ? 1 : 0
-                Behavior on opacity {
-                    NumberAnimation { duration: 100 }
-                }
-            }
-
-            PlasmaCore.FrameSvgItem {
                 id: frame
 
-                anchors {
-                    top: face.top
-                    bottom: loginText.bottom
-                    left: loginText.left
-                    right: loginText.right
-                    topMargin: -padding
-                }
+                width: Math.max(userItemWidth, loginText.width + padding * 2)
+                height: Math.max(userItemHeight, childrenRect.height)
 
                 imagePath: "widgets/lineedit"
                 prefix: "base"
                 enabledBorders: "NoBorder"
+
+                Face {
+                    id: face
+                    width: userFaceSize
+                    height: userFaceSize
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottomMargin: padding * 1.5
+                    sourceSize.width: userFaceSize
+                    sourceSize.height: userFaceSize
+                    source: "image://face/" + name
+                }
+
+                PlasmaComponents.Label {
+                    id: loginText
+
+                    anchors.top: face.bottom
+                    anchors.topMargin: padding
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                    text: display
+                }
             }
 
             PlasmaCore.FrameSvgItem {
@@ -251,341 +463,141 @@ Item {
                 anchors.fill: frame
                 imagePath: "widgets/lineedit"
                 prefix: "hover"
-                opacity: (mouseArea.containsMouse && !(wrapper.isCurrent && wrapper.activeFocus)) ? 1 : 0
+                opacity: mouseArea.containsMouse ? 1 : 0
                 Behavior on opacity {
                     NumberAnimation { duration: 100 }
                 }
             }
 
-            Face {
-                id: face
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottomMargin: padding * 1.5
-                sourceSize.width: userFaceSize
-                sourceSize.height: userFaceSize
-                source: "image://face/" + name
-            }
-
-            PlasmaComponents.Label {
-                id: loginText
-                anchors.top: face.bottom
-                anchors.topMargin: padding
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                elide: Text.ElideRight
-                horizontalAlignment: Text.AlignHCenter
-
-                width: parent.width - padding * 2
-                text: display
-            }
-
             MouseArea {
                 id: mouseArea
-                anchors.fill: parent
+                anchors.fill: frame
+                anchors.margins: -padding * 0.5
                 hoverEnabled: true
+                onEntered: usersList.itemHovered = true
+                onExited: usersList.itemHovered = false
                 onClicked: {
-                    wrapper.ListView.view.currentIndex = index;
-                    wrapper.ListView.view.forceActiveFocus();
+                    if (!usersList.interactive) return;
+                    usersList.currentIndex = index;
+                    usersList.forceActiveFocus();
                 }
             }
-        }
-    }
 
-    function startLogin() {
-        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-        var username = usersList.currentItem.username;
-        if (username == greeter.guestLoginName) {
-            greeter.authenticateAsGuest();
-        } else {
-            greeter.authenticate(username);
-        }
-    }
+            Keys.onReturnPressed: startLoginScreen()
 
-    function startLoginWithoutUsername() {
-        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-        greeter.authenticate();
-    }
-
-    function indexForUserName(name) {
-        var index;
-        for (index = 0; index < usersList.count; ++index) {
-            if (usersList.contentItem.children[index].username == name) {
-                return index;
-            }
-        }
-        return 0;
-    }
-
-    ListView {
-        id: usersList
-        anchors {
-            horizontalCenter: activeScreen.horizontalCenter
-            bottom: loginButtonItem.top
-            bottomMargin: 24
-        }
-        width: activeScreen.width
-        height: userItemHeight
-        currentIndex: indexForUserName(greeter.lastLoggedInUser)
-        model: usersModel
-        visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
-        enabled: visible
-
-        cacheBuffer: count * 80
-
-        delegate: userDelegate
-
-        orientation: ListView.Horizontal
-
-        highlightRangeMode: ListView.StrictlyEnforceRange
-        preferredHighlightBegin: width / 2 - userItemWidth / 2
-        preferredHighlightEnd: width / 2 + userItemWidth / 2
-    }
-
-    Column {
-        id: loginButtonItem
-        anchors {
-            horizontalCenter: activeScreen.horizontalCenter
-            bottom: activeScreen.verticalCenter
-        }
-        spacing: 15
-
-        PlasmaCore.FrameSvgItem {
-            id: dialog;
-            imagePath: "widgets/background"
-
-            visible: (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.InfoMsgScreen) || (visibleScreen == VisibleScreenEnum.VisibleScreen.ErrorMsgScreen)
-
-            width: childrenRect.width + 55;
-            height: childrenRect.height + 55;
-
-            Row {
-                spacing: 10
-                anchors.centerIn: parent
-                height: childrenRect.height
-
-                PlasmaComponents.Label {
-                    id: echoOnLabel
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
-                    enabled: visible
-
-                    Behavior on opacity {
-                        NumberAnimation { duration: 100 }
-                    }
-                }
-
-                PlasmaComponents.TextField {
-                    id: echoOnInput
-                    width: 200
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOnScreen
-                    enabled: visible
-
-                    onAccepted: {
-                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-                        greeter.respond(echoOnInput.text);
-                    }
-
-                    PlasmaComponents.ToolButton {
-                        id: echoOnInputButton
-                        anchors {
-                            right: parent.right
-                            rightMargin: y
-                            verticalCenter: parent.verticalCenter
-                        }
-                        width: implicitWidth
-                        height: width
-
-                        iconSource: "go-jump-locationbar"
-                        onClicked: {
-                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-                            greeter.respond(echoOnInput.text);
-                        }
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation { duration: 100 }
-                    }
-                }
-
-                PlasmaComponents.Label {
-                    id: echoOffLabel
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
-                    enabled: visible
-
-                    Behavior on opacity {
-                        NumberAnimation { duration: 100 }
-                    }
-                }
-
-                PlasmaComponents.TextField {
-                    id: echoOffInput
-                    width: 200
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.PromptEchoOffScreen
-                    enabled: visible
-
-                    echoMode: TextInput.Password
-                    onAccepted: {
-                        visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-                        greeter.respond(echoOffInput.text);
-                    }
-
-                    PlasmaComponents.ToolButton {
-                        id: echoOffInputButton
-                        anchors {
-                            right: parent.right
-                            rightMargin: y
-                            verticalCenter: parent.verticalCenter
-                        }
-                        width: implicitWidth
-                        height: width
-
-                        iconSource: "go-jump-locationbar"
-                        onClicked: {
-                            visibleScreen = VisibleScreenEnum.VisibleScreen.BlankScreen;
-                            greeter.respond(echoOffInput.text);
-                        }
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation { duration: 100 }
-                    }
-                }
-
-                PlasmaComponents.Label {
-                    id: infoMsgLabel
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.InfoMsgScreen
-                    enabled: visible
-                }
-
-                PlasmaComponents.Label {
-                    id: errorMsgLabel
-                    visible: visibleScreen == VisibleScreenEnum.VisibleScreen.ErrorMsgScreen
-                    enabled: visible
+            ListView.onAdd: {
+                if (visibleScreen == screens.DefaultScreen && username == greeter.lastLoggedInUser) {
+                    usersList.currentIndex = usersList.model.indexForUserName(username)
                 }
             }
-        }
-
-        PlasmaComponents.Button {
-            id: loginButton
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: userFaceSize + 2 * padding
-            visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
-            enabled: visible
-
-            iconSource: "go-jump-locationbar"
-            text: i18n("Log in")
-            onClicked: startLogin();
-
-            Behavior on opacity {
-                NumberAnimation { duration: 100 }
-            }
-        }
-    }
-
-    ListButton {
-        id: sessionButton
-        anchors {
-            top: loginButtonItem.bottom
-            topMargin: 24
-            bottom: powerBar.top
-            horizontalCenter: activeScreen.horizontalCenter
-        }
-
-        model: sessionsModel
-        dataRole: "key"
-        currentIndex: {
-            var index = indexForData(usersList.currentItem.usersession)
-            if (index >= 0) {
-                return index;
-            }
-            index = indexForData(greeter.defaultSession)
-            if (index >= 0) {
-                return index;
-            }
-            return 0;
         }
     }
 
     PlasmaCore.FrameSvgItem {
-        id: virtualKeyboardBar
-        anchors.bottom: wholeScreen.bottom
-        anchors.left: wholeScreen.left
-        width: childrenRect.width + margins.right
-        height: childrenRect.height + margins.top
-        imagePath: "widgets/background"
-
-        enabledBorders: "RightBorder|TopBorder"
-
-        Row {
-            spacing: 5
-            x: parent.margins.left
-            y: parent.margins.top
-
-            PlasmaComponents3.ToolButton {
-                text: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
-                icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                onClicked: inputPanel.switchState()
-                visible: inputPanel.item
-            }
-        }
-    }
-
-    // Bottom "Power" bar
-    PlasmaCore.FrameSvgItem {
-        id: powerBar
+        id: menuBar
         anchors.bottom: wholeScreen.bottom
         anchors.right: wholeScreen.right
         width: childrenRect.width + margins.left
         height: childrenRect.height + margins.top
         imagePath: "widgets/background"
-
         enabledBorders: "LeftBorder|TopBorder"
 
+        visible: visibleScreen != screens.WaitScreen
+        enabled: visible
+
+        // whether to show button captions
+        property bool expand: true
+
         Row {
-            spacing: 5
+            spacing: padding
             x: parent.margins.left
             y: parent.margins.top
 
-            PlasmaComponents3.ToolButton {
-                id: loginAsOtherButton
-                text: i18n("Log in as another user")
-                icon.name: "go-jump-locationbar"
-                visible: visibleScreen == VisibleScreenEnum.VisibleScreen.LoginScreen
-                enabled: visible
-                onClicked: startLoginWithoutUsername();
+            ListButton {
+                id: sessionButton
+                model: sessionsModel
+                dataRole: "key"
+                icon.name: "computer"
+
+                onItemTriggered: {
+                    centerPanelFocus.forceActiveFocus()
+                }
+
+                function updateCurrentSession() {
+                    var i =  indexForData(usersList.currentItem.usersession)
+                    i = i || indexForData(greeter.defaultSession)
+                    i = i || 0
+                    currentIndex = i
+                }
+
+                Component.onCompleted: {
+                    updateCurrentSession()
+                    usersList.onCurrentIndexChanged.connect(updateCurrentSession)
+                }
             }
 
-            PlasmaComponents3.ToolButton {
+            KeyboardButton {
+                id: keyboardLayoutButton
+                onKeyboardLayoutTriggered: {
+                    centerPanelFocus.forceActiveFocus()
+                }
+            }
+
+            TooltipButton {
+                id: loginAsOtherButton
+                caption: i18n("Log in as another user")
+                expand: menuBar.expand
+                icon.name: "auto-type"
+                onClicked: startEnterUsernameScreen();
+            }
+
+            TooltipButton {
                 id: suspendButton
-                text: i18n("Suspend")
+                caption: i18n("Suspend")
+                expand: menuBar.expand
                 icon.name: "system-suspend"
                 enabled: power.canSuspend;
                 onClicked: power.suspend();
+                Component.onCompleted: {
+                    // hide labels of menubar buttons if the screen is too narrow
+                    if (-menuBar.x - x > screen.width * 0.5) {
+                        menuBar.expand = false
+                    }
+                }
             }
 
-            PlasmaComponents3.ToolButton {
+            TooltipButton {
                 id: hibernateButton
-                text: i18n("Hibernate")
+                caption: i18n("Hibernate")
+                expand: menuBar.expand
                 icon.name: "system-suspend-hibernate"
                 //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
                 visible: power.canHibernate
                 onClicked: power.hibernate();
             }
 
-            PlasmaComponents3.ToolButton {
+            TooltipButton {
                 id: restartButton
-                text: i18n("Restart")
+                caption: i18n("Restart")
+                expand: menuBar.expand
                 icon.name: "system-reboot"
                 enabled: power.canRestart
                 onClicked: power.restart();
             }
 
-            PlasmaComponents3.ToolButton {
+            TooltipButton {
                 id: shutdownButton
-                text: i18n("Shutdown")
+                caption: i18n("Shutdown")
+                expand: menuBar.expand
                 icon.name: "system-shutdown"
                 enabled: power.canShutdown
                 onClicked: power.shutdown();
             }
         }
+    }
+
+    BusyIndicator {
+        anchors.centerIn: parent
+        visible: visibleScreen == screens.WaitScreen
     }
 }
