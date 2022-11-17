@@ -7,6 +7,7 @@
 #   QLIGHTDM_INCLUDE_DIR    Path needed for finding QLightDM include files
 #
 # Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
+# Copyright 2022 Anton Golubev <golubevan@basealt.ru>
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
 
