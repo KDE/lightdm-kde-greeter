@@ -32,18 +32,12 @@ add_custom_target(userbar_theme_sources
         SOURCES
         userbar/config.ui
         userbar/Face.qml
-        userbar/FeedbackLabel.qml
         userbar/ListButton.qml
         userbar/main.qml
         userbar/main.xml
         userbar/Messages.sh
         userbar/preview.png
-        userbar/private/ButtonShadow.qml
-        userbar/private/IconLoader.qml
-        userbar/private/TextFieldFocus.qml
         userbar/ScreenManager.qml
-        userbar/TextField.qml
         userbar/theme.desktop
-        userbar/ToolButton.qml
         userbar/VisibleScreenEnum.qml
 )
