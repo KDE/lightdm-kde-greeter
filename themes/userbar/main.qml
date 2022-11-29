@@ -29,8 +29,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
     id: screen
-    width: screenSize.width;
-    height: screenSize.height;
+    width: screenSize.width
+    height: screenSize.height
 
     property var screens: VisibleScreenEnum.VisibleScreen
     property int visibleScreen: screens.DefaultScreen
@@ -42,13 +42,18 @@ Item {
     property int userItemHeight: 80 * dpiScale
     property int userFaceSize: userItemWidth - padding * 4
 
+    property var msgQueue: {
+        consumeOnEvent: false
+        items: []
+    }
+
     ScreenManager {
         id: screenManager
         delegate: Image {
-             // default to keeping aspect ratio
-            fillMode: config.readEntry("BackgroundKeepAspectRatio") == false ? Image.Stretch : Image.PreserveAspectCrop;
+            // default to keeping aspect ratio
+            fillMode: config.readEntry("BackgroundKeepAspectRatio") == false ? Image.Stretch : Image.PreserveAspectCrop
             //read from config, if there's no entry use plasma theme
-            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath;
+            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath
         }
     }
 
@@ -87,106 +92,136 @@ Item {
         startDefaultScreen()
     }
 
-
     Connections {
-        target: greeter;
+        target: greeter
 
         function onShowPrompt(text, type) {
-            if (type == 0) { // enter something that is not secret, such as a username
-                inputBoxLabel.text = text;
-                inputBox.text = "";
-                inputBox.echoMode = TextInput.Normal
-            } else { // enter secret word
-                inputBoxLabel.text = text;
-                inputBox.text = "";
-                inputBox.echoMode = TextInput.Password
-            }
+            msgQueue.items.push({ func: putPrompt, text: text, type: type })
+            if (msgQueue.consumeOnEvent) processQueue()
         }
 
         function onShowMessage(text, type) {
-            infoMsgLabel.text = text;
-            startMsgScreen(screens.InfoMsgScreen);
+            msgQueue.items.push({ func: putMessage, text: text, type: type })
+            if (msgQueue.consumeOnEvent) processQueue()
         }
 
         function onAuthenticationComplete() {
             if(!greeter.authenticated) {
-                infoMsgLabel.text = i18n("Sorry, incorrect password. Please try again.");
-                startMsgScreen(screens.ErrorMsgScreen);
+                startMsgScreen(screens.ErrorMsgScreen, i18n("Sorry, incorrect password. Please try again."))
             } else {
                 doSessionSync()
             }
         }
     }
 
-    function doSessionSync() {
-       var session = sessionButton.currentData()
-       if (session == "") {
-           session = "default";
-       }
+    function processQueue() {
+        msgQueue.consumeOnEvent = false
+        var next = msgQueue.items.shift()
+        if (next) next.func(next.text, next.type)
+        return next
+    }
 
-       var startresult = greeter.startSessionSync(session);
+    function putPrompt(text, type) {
+        if (type == 0) { // enter something that is not secret, such as a username
+            inputBoxLabel.text = text
+            inputBox.text = ""
+            inputBox.echoMode = TextInput.Normal
+        } else { // enter secret word
+            inputBoxLabel.text = text
+            inputBox.text = ""
+            inputBox.echoMode = TextInput.Password
+        }
+        if (visibleScreen != screens.LoginScreen) startPromptScreen()
+    }
+
+    function putMessage(text, type) {
+        startMsgScreen(type == 0 ? screens.InfoMsgScreen : screens.ErrorMsgScreen, text)
+    }
+
+    function doSessionSync() {
+        var session = sessionButton.currentData()
+        if (session == "") {
+            session = "default"
+        }
+
+        var startresult = greeter.startSessionSync(session)
         if (!startresult) {
             startDefaultScreen()
         }
     }
 
     function setTabOrder(lst) {
-        var idx;
-        var lastIdx = lst.length - 1;
+        var idx
+        var lastIdx = lst.length - 1
         for (idx = 0; idx <= lastIdx; ++idx) {
-            var item = lst[idx];
-            item.KeyNavigation.backtab = lst[idx > 0 ? idx - 1 : lastIdx];
-            item.KeyNavigation.tab = lst[idx < lastIdx ? idx + 1 : 0];
+            var item = lst[idx]
+            item.KeyNavigation.backtab = lst[idx > 0 ? idx - 1 : lastIdx]
+            item.KeyNavigation.tab = lst[idx < lastIdx ? idx + 1 : 0]
         }
     }
 
     // global state switching
+
     function startLoginScreen() {
-        visibleScreen = screens.LoginScreen;
-        setTabOrder([inputBox, sessionButton, keyboardLayoutButton]);
-        inputBox.forceActiveFocus();
-        var username = usersList.currentItem.username;
+        visibleScreen = screens.LoginScreen
+        setTabOrder([ inputBox, sessionButton, keyboardLayoutButton ])
+        inputBox.forceActiveFocus()
+        var username = usersList.currentItem.username
+        msgQueue.consumeOnEvent = true
+        inputBox.text = ""
         if (username == greeter.guestLoginName) {
-            greeter.authenticateAsGuest();
+            greeter.authenticateAsGuest()
         } else {
-            greeter.authenticate(username);
+            greeter.authenticate(username)
         }
     }
 
+    function startPromptScreen() {
+        visibleScreen = screens.PromptScreen
+        setTabOrder([ inputBox, sessionButton, keyboardLayoutButton ])
+        inputBox.forceActiveFocus()
+    }
+
     function startDefaultScreen() {
-        visibleScreen = screens.DefaultScreen;
-        setTabOrder([usersList, sessionButton, keyboardLayoutButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton]);
+        msgQueue.items = []
+        visibleScreen = screens.DefaultScreen
+        setTabOrder([ usersList, sessionButton, keyboardLayoutButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
         usersList.forceActiveFocus()
     }
 
-    function startEnterUsernameScreen() {
-        visibleScreen = screens.EnterUserNameScreen;
-        setTabOrder([inputBox, sessionButton, keyboardLayoutButton]);
-        inputBox.forceActiveFocus()
-        greeter.authenticate();
-    }
-
-    function startMsgScreen(msgScreen) {
+    function startMsgScreen(msgScreen, text) {
+        infoMsgLabel.text = text.trim()
+        setTabOrder([ msgOkButton, msgCancelButton ])
         visibleScreen = msgScreen
         msgBox.forceActiveFocus()
     }
 
+    function loginAsOtherUser() {
+        msgQueue.consumeOnEvent = true
+        greeter.authenticate()
+        startPromptScreen()
+    }
+
     function finishDialog() {
         switch (visibleScreen) {
-            case screens.WaitScreen:
-                return
-            case screens.LoginScreen:
-            case screens.EnterPasswordScreen:
-                visibleScreen = screens.WaitScreen;
-            break;
-
-            case screens.EnterUserNameScreen:
-                visibleScreen = screens.EnterPasswordScreen;
-            break;
-            default:
-                startDefaultScreen()
+        case screens.WaitScreen:
+            return
+        case screens.InfoMsgScreen:
+        case screens.ErrorMsgScreen:
+            if (processQueue()) return
+            startDefaultScreen()
+        break
+        case screens.PromptScreen:
+            if (processQueue()) break
+            // deliberate fallthrough
+        case screens.LoginScreen:
+            visibleScreen = screens.WaitScreen
+            msgQueue.consumeOnEvent = true
+            greeter.respond(inputBox.text)
+        break
+        default:
+            startDefaultScreen()
         }
-        greeter.respond(inputBox.text);
     }
 
     FocusScope {
@@ -269,7 +304,7 @@ Item {
                     id: inputDialog
                     imagePath: "widgets/background"
 
-                    visible: (visibleScreen == screens.LoginScreen) || (visibleScreen == screens.EnterUserNameScreen) || (visibleScreen == screens.EnterPasswordScreen)
+                    visible: (visibleScreen == screens.LoginScreen) || (visibleScreen == screens.PromptScreen)
                     enabled: visible
 
                     width: rows.width + rows.height * 1.5
@@ -346,37 +381,86 @@ Item {
                     id: msgBox
                     imagePath: "widgets/background"
 
-                    width: msgRows.childrenRect.width + msgRows.childrenRect.height * 1.5
-                    height: msgRows.childrenRect.height * 2.5
+                    width: msgColumns.childrenRect.width + padding * 6
+                    height: msgColumns.childrenRect.height + padding * 6
 
                     visible: (visibleScreen == screens.InfoMsgScreen) || (visibleScreen == screens.ErrorMsgScreen)
                     enabled: visible
 
-                    Keys.onReturnPressed: startDefaultScreen()
+                    Keys.onReturnPressed: finishDialog()
                     Keys.onEscapePressed: startDefaultScreen()
 
-                    Row {
-                        id: msgRows
+                    Column {
+                        id: msgColumns
 
-                        anchors.centerIn: parent
                         height: childrenRect.height
-                        spacing: screen.padding
                         enabled: visible
+                        anchors.centerIn: parent
+                        spacing: screen.padding
 
-                        PlasmaComponents3.ToolButton {
-                            id: msgCancelButton
-                            icon.name: "undo"
-                            onClicked: startDefaultScreen()
+                        Row {
+                            spacing: screen.padding
+
+                            // a separate element for each icon, otherwise the icon is switched in the opened window
+                            PlasmaCore.IconItem {
+                                id: infoIcon
+                                visible: visibleScreen == screens.InfoMsgScreen
+                                source: "dialog-information"
+                                anchors.verticalCenter: parent.verticalCenter
+                                height: msgOkButton.height
+                                width: height
+                            }
+
+                            PlasmaCore.IconItem {
+                                id: errorIcon
+                                visible: visibleScreen == screens.ErrorMsgScreen
+                                source: "dialog-error"
+                                anchors.verticalCenter: parent.verticalCenter
+                                height: msgOkButton.height
+                                width: height
+                            }
+
+                            Item {
+                                id: infoMsgLabelPadding
+
+                                width: infoMsgLabelFormatted.width + screen.padding * 3
+                                height: infoMsgLabelFormatted.height + screen.padding * 2
+
+                                // raw message string, possibly too wide, having line breaks
+                                PlasmaComponents.Label {
+                                    id: infoMsgLabel
+                                    visible: false
+                                }
+
+                                PlasmaComponents.Label {
+                                    id: infoMsgLabelFormatted
+
+                                    anchors {
+                                        verticalCenter: parent.verticalCenter
+                                        centerIn: parent
+                                    }
+                                    property int maxWidth: screen.width - infoIcon.width - screen.padding * 10
+                                    width: Math.min(maxWidth, infoMsgLabel.width)
+                                    wrapMode: Text.WordWrap
+                                    // replace newlines with spaces, if had to narrow the text
+                                    text: infoMsgLabel.width > maxWidth ? infoMsgLabel.text.replace(/(\r\n|\n|\r)/gm, " ") : infoMsgLabel.text
+                                }
+                            }
                         }
 
-                        PlasmaComponents.Label {
-                            id: infoMsgLabel
-                        }
-
-                        PlasmaCore.IconItem {
-                            height: msgCancelButton.height
-                            width: height
-                            source: visibleScreen == screens.ErrorMsgScreen ? "dialog-error" : "dialog-information"
+                        Row {
+                            spacing: screen.padding * 2
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            PlasmaComponents3.ToolButton {
+                                id: msgCancelButton
+                                icon.name: "dialog-cancel"
+                                onClicked: startDefaultScreen()
+                            }
+                            PlasmaComponents3.ToolButton {
+                                id: msgOkButton
+                                icon.name: "dialog-ok"
+                                onClicked: finishDialog()
+                            }
                         }
                     }
                 }
@@ -390,7 +474,7 @@ Item {
 
                     iconSource: "go-jump-locationbar"
                     text: i18n("Log in")
-                    onClicked: startLoginScreen();
+                    onClicked: startLoginScreen()
 
                     Behavior on opacity {
                         NumberAnimation { duration: 100 }
@@ -477,9 +561,9 @@ Item {
                 onEntered: usersList.itemHovered = true
                 onExited: usersList.itemHovered = false
                 onClicked: {
-                    if (!usersList.interactive) return;
-                    usersList.currentIndex = index;
-                    usersList.forceActiveFocus();
+                    if (!usersList.interactive) return
+                    usersList.currentIndex = index
+                    usersList.forceActiveFocus()
                 }
             }
 
@@ -548,7 +632,7 @@ Item {
                 caption: i18n("Log in as another user")
                 expand: menuBar.expand
                 icon.name: "auto-type"
-                onClicked: startEnterUsernameScreen();
+                onClicked: loginAsOtherUser()
             }
 
             TooltipButton {
@@ -556,8 +640,8 @@ Item {
                 caption: i18n("Suspend")
                 expand: menuBar.expand
                 icon.name: "system-suspend"
-                enabled: power.canSuspend;
-                onClicked: power.suspend();
+                enabled: power.canSuspend
+                onClicked: power.suspend()
                 Component.onCompleted: {
                     // hide labels of menubar buttons if the screen is too narrow
                     if (-menuBar.x - x > screen.width * 0.5) {
@@ -573,7 +657,7 @@ Item {
                 icon.name: "system-suspend-hibernate"
                 //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
                 visible: power.canHibernate
-                onClicked: power.hibernate();
+                onClicked: power.hibernate()
             }
 
             TooltipButton {
@@ -582,7 +666,7 @@ Item {
                 expand: menuBar.expand
                 icon.name: "system-reboot"
                 enabled: power.canRestart
-                onClicked: power.restart();
+                onClicked: power.restart()
             }
 
             TooltipButton {
@@ -591,7 +675,7 @@ Item {
                 expand: menuBar.expand
                 icon.name: "system-shutdown"
                 enabled: power.canShutdown
-                onClicked: power.shutdown();
+                onClicked: power.shutdown()
             }
         }
     }

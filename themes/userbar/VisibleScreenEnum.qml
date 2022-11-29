@@ -27,8 +27,7 @@ Item {
         DefaultScreen,
         LoginScreen,
         WaitScreen,
-        EnterUserNameScreen,
-        EnterPasswordScreen,
+        PromptScreen,
         InfoMsgScreen,
         ErrorMsgScreen
     }
