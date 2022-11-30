@@ -1,3 +1,4 @@
+cmake_policy(SET CMP0012 NEW)
 project(greeter-app)
 
 # Versions
