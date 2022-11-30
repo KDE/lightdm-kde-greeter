@@ -19,10 +19,6 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.12
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
-
 import QtQuick 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore

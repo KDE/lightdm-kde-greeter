@@ -1,4 +1,4 @@
-import QtQuick.Controls 2
+import QtQuick.Controls 2.15
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 PlasmaComponents.ToolButton {

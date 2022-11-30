@@ -155,7 +155,7 @@ Methods:
      The x, y, and height properties correspond to the cursor that would describe that position.
 **/
 
-import QtQuick 2.12
+import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "private" as Private
 

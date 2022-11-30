@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.12
+import QtQuick 2.15
 
 Item {
     id: visibleScreenEnum

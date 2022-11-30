@@ -19,13 +19,11 @@ You should have received a copy of the GNU General Public License
 along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.0
-import QtQuick.Controls 2
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick 2.15
+import QtQuick.Window 2.15 // for Screen.pixelDensity
+import QtQuick.Controls 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
     id: screen
@@ -38,9 +36,7 @@ Item {
     property real dpi96: 3.7820092576037516
     property real dpiScale: Screen.pixelDensity / dpi96
     property int padding: 6 * dpiScale
-    property int userItemWidth: 120 * dpiScale
-    property int userItemHeight: 80 * dpiScale
-    property int userFaceSize: userItemWidth - padding * 4
+    property int userFaceSize: 100 * dpiScale
 
     property var msgQueue: {
         consumeOnEvent: false
@@ -319,7 +315,7 @@ Item {
 
                         spacing: screen.padding
 
-                        PlasmaComponents3.ToolButton {
+                        PlasmaComponents.ToolButton {
                             id: cancelButton
                             icon.name: "undo"
                             anchors.verticalCenter: parent.verticalCenter
@@ -352,7 +348,7 @@ Item {
                                 width: implicitWidth
                                 height: width
 
-                                iconSource: "go-jump-locationbar"
+                                icon.name: "go-jump-locationbar"
                                 onClicked: finishDialog()
                             }
 
@@ -451,12 +447,12 @@ Item {
                         Row {
                             spacing: screen.padding * 2
                             anchors.horizontalCenter: parent.horizontalCenter
-                            PlasmaComponents3.ToolButton {
+                            PlasmaComponents.ToolButton {
                                 id: msgCancelButton
                                 icon.name: "dialog-cancel"
                                 onClicked: startDefaultScreen()
                             }
-                            PlasmaComponents3.ToolButton {
+                            PlasmaComponents.ToolButton {
                                 id: msgOkButton
                                 icon.name: "dialog-ok"
                                 onClicked: finishDialog()
@@ -472,7 +468,7 @@ Item {
                     visible: visibleScreen == screens.DefaultScreen
                     enabled: visible
 
-                    iconSource: "go-jump-locationbar"
+                    icon.name: "go-jump-locationbar"
                     text: i18n("Log in")
                     onClicked: startLoginScreen()
 
@@ -508,22 +504,25 @@ Item {
                 }
             }
 
+
             PlasmaCore.FrameSvgItem {
                 id: frame
 
-                width: Math.max(userItemWidth, loginText.width + padding * 2)
-                height: Math.max(userItemHeight, childrenRect.height)
+                width: userFaceSize + screen.padding * 2
+                height: childrenRect.height + screen.padding * 2
 
                 imagePath: "widgets/lineedit"
                 prefix: "base"
                 enabledBorders: "NoBorder"
 
-                Face {
+
+                Image {
                     id: face
                     width: userFaceSize
                     height: userFaceSize
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottomMargin: padding * 1.5
+                    anchors.top: parent.top
+                    anchors.topMargin: screen.padding
                     sourceSize.width: userFaceSize
                     sourceSize.height: userFaceSize
                     source: "image://face/" + name
@@ -533,8 +532,8 @@ Item {
                     id: loginText
 
                     anchors.top: face.bottom
-                    anchors.topMargin: padding
                     anchors.horizontalCenter: parent.horizontalCenter
+                    width: userFaceSize
 
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignHCenter

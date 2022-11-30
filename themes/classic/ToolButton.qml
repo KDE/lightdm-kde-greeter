@@ -57,7 +57,7 @@ Signals:
         The signal is being emmited when the button is being clicked.
 **/
 
-import QtQuick 2.12
+import QtQuick 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "private" as Private
 
