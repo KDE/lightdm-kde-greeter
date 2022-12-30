@@ -37,6 +37,8 @@ add_custom_target(userbar_theme_sources
         userbar/Messages.sh
         userbar/preview.png
         userbar/ScreenManager.qml
+        userbar/PrimaryScreen.qml
+        userbar/OtherScreen.qml
         userbar/theme.desktop
         userbar/VisibleScreenEnum.qml
 )

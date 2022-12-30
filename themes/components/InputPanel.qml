@@ -1,12 +1,32 @@
-import QtQuick 2.12
+/*
+This file is part of LightDM-KDE.
+
+Copyright (C) 2022 Anton Golubev <golubevan@altlinux.org>
+
+LightDM-KDE is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+LightDM-KDE is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import QtQuick 2.15
 import QtQuick.VirtualKeyboard 2.1
 
 InputPanel {
     id: inputPanel
     y: yPositionWhenHidden
-    x: wholeScreen.x
+    x: 0
     width: wholeScreen.width
     active: keyboardEnabled && inputMethodVisible
+    desktopPanel: true
 
     keyboard.shadowInputControl.height: wholeScreen.height - keyboard.height
 
@@ -26,6 +46,7 @@ InputPanel {
             y: inputPanel.yPositionWhenHidden - inputPanel.height
         }
     }
+
     transitions: Transition {
         id: inputPanelTransition
         from: ""
