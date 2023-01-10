@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021, 2022 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -50,5 +50,10 @@ Item {
     PrimaryScreen {
         parent: screenManager.activeScreen
         anchors.fill: parent
+        Keys.onPressed: (event) => {
+            if (event.key == Qt.Key_F1 || event.key == Qt.Key_P && (event.modifiers & Qt.MetaModifier)) {
+                screenManager.nextActiveScreen()
+            }
+        }
     }
 }

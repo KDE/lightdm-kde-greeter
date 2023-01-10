@@ -51,6 +51,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "usersmodel.h"
 #include "screensmodel.h"
 #include "greeterwrapper.h"
+#include "cursor.h"
 #include "keyboard/KeyboardModel.h"
 
 #include <config.h>
@@ -80,6 +81,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     QString theme = configGroup.readEntry("theme-name", "userbar");
     QUrl source { QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.qml")) };
+    auto cursor = new Cursor(this);
 
     if (source.isEmpty())
     {
@@ -95,6 +97,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     rootContext()->setContextProperty(QStringLiteral("config"),
         new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.xml")), this));
+    rootContext()->setContextProperty(QStringLiteral("mouseCursor"), cursor);
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
     rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
     rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
