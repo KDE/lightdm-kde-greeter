@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2022 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -159,22 +159,22 @@ Item {
 
     function finishDialog() {
         switch (visibleScreen) {
-            case screens.WaitScreen:
+        case screens.WaitScreen:
             return
-            case screens.InfoMsgScreen:
-            case screens.ErrorMsgScreen:
+        case screens.InfoMsgScreen:
+        case screens.ErrorMsgScreen:
             if (processQueue()) return
             startDefaultScreen()
-            break
-            case screens.PromptScreen:
+        break
+        case screens.PromptScreen:
             if (processQueue()) break
             // deliberate fallthrough
-            case screens.LoginScreen:
+        case screens.LoginScreen:
             visibleScreen = screens.WaitScreen
             msgQueue.consumeOnEvent = true
             greeter.respond(inputBox.text)
             break
-            default:
+        default:
             startDefaultScreen()
         }
     }
@@ -188,9 +188,9 @@ Item {
     Item {
         id: activeScreen
         x: wholeScreen.x
-        y: wholeScreen.y
+        y: wholeScreen.y + menuBar.height
         width: wholeScreen.width
-        height: Math.min(inputPanel.item.y, wholeScreen.height - menuBar.height)
+        height: Math.min(inputPanel.item.y - menuBar.height, wholeScreen.height - menuBar.height)
     }
 
     FocusScope {
@@ -320,7 +320,7 @@ Item {
                                 width: implicitWidth
                                 height: width
 
-                                icon.name: "go-jump-locationbar"
+                                icon.name: "go-next"
                                 onClicked: finishDialog()
                             }
 
@@ -440,7 +440,7 @@ Item {
                     visible: visibleScreen == screens.DefaultScreen
                     enabled: visible
 
-                    icon.name: "go-jump-locationbar"
+                    icon.name: "go-next"
                     text: i18n("Log in")
                     onClicked: startLoginScreen()
 
@@ -531,6 +531,10 @@ Item {
                 onExited: usersList.itemHovered = false
                 onClicked: {
                     if (!usersList.interactive) return
+                    if (usersList.currentIndex == index) {
+                        startLoginScreen()
+                        return
+                    }
                     usersList.currentIndex = index
                     usersList.forceActiveFocus()
                 }
@@ -548,12 +552,12 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: menuBar
-        anchors.bottom: wholeScreen.bottom
+        anchors.top: wholeScreen.top
         anchors.right: wholeScreen.right
         width: childrenRect.width + margins.left
-        height: childrenRect.height + margins.top
+        height: childrenRect.height + margins.bottom
         imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|TopBorder"
+        enabledBorders: "LeftBorder|BottomBorder"
 
         visible: visibleScreen != screens.WaitScreen
         enabled: visible

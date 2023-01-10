@@ -1,7 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
     SPDX-FileCopyrightText: 2022 Aleix Pol Gonzalez <aleixpol@kde.org>
-    SPDX-FileCopyrightText: 2022 Anton Golubev <golubevan@basealt.ru>
+    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -21,13 +21,24 @@ PlasmaComponents.ToolButton {
 
     text: keyboard.layouts[currentIndex].shortName
 
-    checkable: true
-    checked: menu.opened
-    onToggled: {
-        if (checked) {
-            menu.popup(root, 0, 0)
-        } else {
-            menu.dismiss()
+    function nextLayout() {
+        keyboard.currentLayout = (keyboard.currentLayout + 1) % keyboard.layouts.length
+    }
+
+    onPressed: nextLayout()
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
+        onClicked: (mouse) => {
+            if (mouse.button & Qt.LeftButton) {
+                nextLayout()
+                root.keyboardLayoutTriggered()
+            } else if (mouse.button & Qt.RightButton) {
+                menu.popup(root, 0, 0)
+            } else {
+                menu.dismiss()
+            }
         }
     }
 
@@ -50,6 +61,9 @@ PlasmaComponents.ToolButton {
                     root.keyboardLayoutTriggered()
                 }
             }
+        }
+        onAboutToHide: {
+            root.keyboardLayoutTriggered()
         }
     }
 }

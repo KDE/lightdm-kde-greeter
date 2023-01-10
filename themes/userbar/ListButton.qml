@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 Aurélien Gâteau <agateau@kde.org>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -82,6 +82,10 @@ PlasmaComponents.ToolButton {
                     root.itemTriggered()
                 }
             }
+        }
+
+        onAboutToHide: {
+            root.itemTriggered()
         }
     }
 }
