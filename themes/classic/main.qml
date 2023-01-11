@@ -344,7 +344,7 @@ Item {
                 PlasmaComponents.Button {
                     QC.ToolTip.delay: 1000
                     QC.ToolTip.visible: hovered
-                    QC.ToolTip.text: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                    QC.ToolTip.text: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
                     iconSource: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
                     onClicked: inputPanel.switchState()
                     visible: inputPanel.item

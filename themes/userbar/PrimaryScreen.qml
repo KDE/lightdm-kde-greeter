@@ -334,7 +334,7 @@ Item {
                             icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
                             anchors.verticalCenter: parent.verticalCenter
                             visible: inputPanel.item
-                            caption: i18ndc("kcm_lightdm", "Button to show/hide virtual keyboard", "Virtual Keyboard")
+                            caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
                             expand: false
 
                             onClicked: {

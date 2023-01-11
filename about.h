@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,6 +37,7 @@ static void initAboutData(KAboutData *aboutData)
     aboutData->addAuthor(ki18n("David Edmundson").toString(), ki18n("Author").toString(), QStringLiteral("kde@davidedmundson.co.uk"));
     aboutData->addAuthor(ki18n("Aurélien Gâteau").toString(), ki18n("Developer").toString(), QStringLiteral("aurelien.gateau@canonical.com"));
     aboutData->addAuthor(ki18n("Aleksei Nikiforov").toString(), ki18n("Developer").toString(), QStringLiteral("darktemplar@basealt.ru"));
+    aboutData->addAuthor(ki18n("Anton Golubev").toString(), ki18n("Developer").toString(), QStringLiteral("golubevan@altlinux.org"));
 }
 
 #endif /* ABOUT_H */
