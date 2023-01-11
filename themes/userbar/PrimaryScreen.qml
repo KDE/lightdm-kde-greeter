@@ -310,18 +310,24 @@ Item {
 
                             anchors.verticalCenter: parent.verticalCenter
 
-                            PlasmaComponents.ToolButton {
-                                id: enterButton
+                            TooltipButton {
+                                id: virtualKeyboardButton
                                 anchors {
                                     right: parent.right
                                     rightMargin: y
                                     verticalCenter: parent.verticalCenter
                                 }
-                                width: implicitWidth
-                                height: width
+                                height: parent.height
+                                width: height
+                                icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                                visible: inputPanel.item
+                                caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
+                                expand: false
 
-                                icon.name: "go-next"
-                                onClicked: finishDialog()
+                                onClicked: {
+                                    inputPanel.switchState()
+                                    inputBox.forceActiveFocus()
+                                }
                             }
 
                             Behavior on opacity {
@@ -329,18 +335,14 @@ Item {
                             }
                         }
 
-                        TooltipButton {
-                            id: virtualKeyboardButton
-                            icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+                        PlasmaComponents.ToolButton {
+                            id: enterButton
                             anchors.verticalCenter: parent.verticalCenter
-                            visible: inputPanel.item
-                            caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
-                            expand: false
+                            width: implicitWidth
+                            height: width
 
-                            onClicked: {
-                                inputPanel.switchState()
-                                inputBox.forceActiveFocus()
-                            }
+                            icon.name: "go-next"
+                            onClicked: finishDialog()
                         }
                     }
                 }
