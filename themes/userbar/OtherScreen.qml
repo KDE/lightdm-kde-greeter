@@ -26,12 +26,13 @@ Item {
     PlasmaCore.FrameSvgItem {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        width: childrenRect.width + margins.left + margins.right
-        height: childrenRect.height + margins.bottom
+        width: label.width + margins.left + margins.right
+        height: label.height + margins.bottom
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|BottomBorder|RightBorder"
 
         TooltipButton {
+            id: label
             anchors.horizontalCenter: parent.horizontalCenter
             icon.name: "info"
             caption: i18n("Press %1 to change the primary screen", "F1")
