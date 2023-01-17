@@ -38,10 +38,6 @@ Item {
         startDefaultScreen()
     }
 
-    onParentChanged: {
-        menuBar.expand = true
-    }
-
     Connections {
         target: greeter
 
@@ -55,7 +51,11 @@ Item {
                 inputBox.text = ""
                 inputBox.echoMode = TextInput.Password
             }
-            if (visibleScreen != screens.LoginScreen) startPromptScreen()
+            if (visibleScreen != screens.LoginScreen) {
+                startPromptScreen()
+            } else {
+                inputDialog.visibleOnLoginScreen = true
+            }
         }
 
         function onShowMessage(text, type) {
@@ -63,10 +63,10 @@ Item {
         }
 
         function onAuthenticationComplete() {
-            if(!greeter.authenticated) {
+            if(!greeter.authenticated && visibleScreen != screens.DefaultScreen) {
                 putMessage(i18n("Sorry, incorrect password. Please try again."), 1)
-                startDefaultScreen()
                 dissolveMessages()
+                startDefaultScreen()
             } else {
                 doSessionSync()
             }
@@ -133,6 +133,8 @@ Item {
 
     function startDefaultScreen() {
         visibleScreen = screens.DefaultScreen
+        // don't show password prompt unless prompted by PAM
+        inputDialog.visibleOnLoginScreen = false
         setTabOrder([ usersList, sessionButton, keyboardLayoutButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
         usersList.forceActiveFocus()
     }
@@ -158,6 +160,12 @@ Item {
         }
     }
 
+    function cancelInput() {
+        clearMessages()
+        startDefaultScreen()
+        greeter.cancelAuthentication()
+    }
+
     Item {
         id: wholeScreen
         width: screen.width
@@ -170,6 +178,10 @@ Item {
         y: wholeScreen.y + menuBar.height
         width: wholeScreen.width
         height: Math.min(inputPanel.item.y - menuBar.height, wholeScreen.height - menuBar.height)
+
+        onWidthChanged: {
+            menuBar.expand = true
+        }
     }
 
     ListModel {
@@ -222,11 +234,11 @@ Item {
 
                 // dim the list of users when it loses focus
                 property bool itemHovered: false
-                opacity: activeFocus || itemHovered || visibleScreen != screens.DefaultScreen ? 1.0 : 0.7
+                opacity: centerPanelFocus.activeFocus || itemHovered || visibleScreen != screens.DefaultScreen ? 1.0 : 0.7
 
                 spacing: padding
                 width: activeScreen.width
-                height: contentItem.childrenRect.height
+                height: currentItem.height
                 model: usersModel
                 currentIndex: model.indexForUserName(greeter.lastLoggedInUser)
                 cacheBuffer: count * 80
@@ -244,7 +256,7 @@ Item {
             }
 
             Item {
-                id: loginButtonItem
+                id: loginItem
 
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -254,20 +266,14 @@ Item {
                 PlasmaCore.FrameSvgItem {
                     id: inputDialog
                     imagePath: "widgets/background"
-                    // imagePath: "opaque/dialogs/background"
 
-                    visible: (visibleScreen == screens.LoginScreen) || (visibleScreen == screens.PromptScreen)
+                    visible: (visibleScreen == screens.LoginScreen && visibleOnLoginScreen) || (visibleScreen == screens.PromptScreen)
                     enabled: visible
+
+                    property bool visibleOnLoginScreen: false
 
                     width: rows.width + rows.height * 1.5
                     height: rows.height * 2.5
-
-                    function cancelInput() {
-                        clearMessages()
-                        startDefaultScreen()
-                    }
-
-                    Keys.onEscapePressed: cancelInput()
 
                     Row {
                         id: rows
@@ -280,7 +286,7 @@ Item {
                             id: cancelButton
                             icon.name: "undo"
                             anchors.verticalCenter: parent.verticalCenter
-                            onClicked: inputDialog.cancelInput()
+                            onClicked: cancelInput()
                         }
 
                         PlasmaComponents.Label {
@@ -619,4 +625,6 @@ Item {
         anchors.centerIn: wholeScreen
         visible: visibleScreen == screens.WaitScreen
     }
+
+    Keys.onEscapePressed: cancelInput()
 }
