@@ -13,7 +13,6 @@ install(DIRECTORY components
 # custom targets just for displaying sources in IDE
 add_custom_target(classic_theme_sources
         SOURCES
-        classic/config.ui
         classic/main.qml
         classic/main.xml
         classic/Messages.sh
@@ -30,7 +29,6 @@ add_custom_target(classic_theme_sources
 
 add_custom_target(userbar_theme_sources
         SOURCES
-        userbar/config.ui
         userbar/ListButton.qml
         userbar/main.qml
         userbar/main.xml

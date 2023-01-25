@@ -132,3 +132,27 @@ void ThemesModel::loadTheme(const QDir &themePath)
     m_themes.append(theme);
     endInsertRows();
 }
+
+QHash<int,QByteArray> ThemesModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[Qt::DisplayRole] = "name";
+    roles[PreviewRole]     = "preview";
+    roles[IdRole]          = "id";
+    roles[DescriptionRole] = "description";
+    roles[VersionRole]     = "version";
+    roles[AuthorRole]      = "author";
+    roles[PathRole]        = "path";
+    return roles;
+}
+
+int ThemesModel::indexForId(QString id) const
+{
+    int i = 0;
+    while (hasIndex(i, 0)) {
+        if (data(index(i), IdRole) == id) {
+            return i;
+        }
+        ++i;
+    }
+    return i;
+}

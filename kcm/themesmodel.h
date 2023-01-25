@@ -41,8 +41,10 @@ public:
 
     explicit ThemesModel(QObject *parent = nullptr);
 
+    Q_INVOKABLE int indexForId(QString id) const;
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int,QByteArray> roleNames() const override;
 
 private:
     void load();

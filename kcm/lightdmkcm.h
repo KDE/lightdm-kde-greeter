@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -20,25 +21,32 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef LIGHTDMKCM_H
 #define LIGHTDMKCM_H
 
-#include <KCModule>
+#include <KQuickAddons/ManagedConfigModule>
 
-class CoreConfig;
-class ThemeConfig;
+class ThemesModel;
+class UsersModel;
 
-class LightDMKcm: public KCModule
+class LightDMKcm: public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
 
+    Q_PROPERTY(ThemesModel *themesModel READ themesModel CONSTANT)
+    Q_PROPERTY(UsersModel *usersModel READ usersModel CONSTANT)
+
 public:
-    explicit LightDMKcm(QWidget *parent, const QVariantList &args);
+    explicit LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 public Q_SLOTS:
+    void load() override;
     void save() override;
     void defaults() override;
 
+    ThemesModel *themesModel() const { return m_themesModel; }
+    UsersModel *usersModel() const { return m_usersModel; }
+
 private:
-    CoreConfig *m_coreConfig;
-    ThemeConfig *m_themeConfig;
+    ThemesModel *m_themesModel;
+    UsersModel *m_usersModel;
 };
 
 #endif // LIGHTDMKCM_H

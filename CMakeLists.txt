@@ -21,7 +21,7 @@ find_package(X11 REQUIRED)
 find_package(XCB REQUIRED)
 find_package(XKB REQUIRED)
 
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus X11Extras Qml Quick UiPlugin UiTools)
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus X11Extras Qml Quick QuickWidgets UiPlugin UiTools)
 
 set(QLIGHTDM_MIN_VERSION 1.4.0)
 find_package(QLightDM REQUIRED)
@@ -29,6 +29,7 @@ find_package(QLightDM REQUIRED)
 find_package(KF5 REQUIRED COMPONENTS
     Declarative
     IconThemes
+    KCMUtils
     Plasma
     Config
     ConfigWidgets
