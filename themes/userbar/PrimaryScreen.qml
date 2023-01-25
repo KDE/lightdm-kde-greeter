@@ -528,6 +528,13 @@ Item {
             x: parent.margins.left
             y: parent.margins.top
 
+            KeyboardButton {
+                id: keyboardLayoutButton
+                onKeyboardLayoutTriggered: {
+                    centerPanelFocus.forceActiveFocus()
+                }
+            }
+
             ListButton {
                 id: sessionButton
                 model: sessionsModel
@@ -551,12 +558,6 @@ Item {
                 }
             }
 
-            KeyboardButton {
-                id: keyboardLayoutButton
-                onKeyboardLayoutTriggered: {
-                    centerPanelFocus.forceActiveFocus()
-                }
-            }
 
             TooltipButton {
                 id: loginAsOtherButton
