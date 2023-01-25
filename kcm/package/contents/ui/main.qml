@@ -43,14 +43,12 @@ Item {
     function save() {
         var settings = {}
         settings["core/SeatDefaults/autologin-user"] = autoLogin.checked ? usersCombo.currentValue : ""
-        settings["core/SeatDefaults/allow-guest"] = guestLogin.checked
         settings["greeter/greeter/theme-name"] = themesList.currentItem.properties.id
         themeConfig.save(settings)
         return settings
     }
 
     function load(settings) {
-        guestLogin.checked = readEntry(settings, "core/SeatDefaults/allow-guest", "false") != "false"
         var autoUser = readEntry(settings, "core/SeatDefaults/autologin-user", "")
         if (autoUser != "") {
             var index = usersCombo.indexOfValue(autoUser)
@@ -256,13 +254,6 @@ Item {
                 Column {
                     spacing: gap
                     height: childrenRect.height
-                    CheckBox {
-                        id: guestLogin; text: i18n("Allow guest login")
-                        onCheckedChanged: {
-                            root.markNeedsSave()
-                            kcm.usersModel.showGuest = checked
-                        }
-                    }
 
                     CheckBox {
                         id: autoLogin
@@ -284,14 +275,6 @@ Item {
                             valueRole: 'name'
                             textRole: 'display'
                             onActivated: root.markNeedsSave()
-
-                            Component.onCompleted: {
-                                guestLogin.onCheckedChanged.connect(() => {
-                                    if (currentIndex >= count) {
-                                        currentIndex = count - 1
-                                    }
-                                })
-                            }
                         }
                     }
                 }
