@@ -95,8 +95,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     qDebug() << "Loading" << source;
 
-    rootContext()->setContextProperty(QStringLiteral("config"),
-        new ConfigWrapper(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.xml")), this));
+    rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
     rootContext()->setContextProperty(QStringLiteral("mouseCursor"), cursor);
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
     rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);

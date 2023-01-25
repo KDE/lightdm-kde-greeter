@@ -14,7 +14,6 @@ install(DIRECTORY components
 add_custom_target(classic_theme_sources
         SOURCES
         classic/main.qml
-        classic/main.xml
         classic/Messages.sh
         classic/preview.png
         classic/private/ButtonShadow.qml
@@ -31,7 +30,6 @@ add_custom_target(userbar_theme_sources
         SOURCES
         userbar/ListButton.qml
         userbar/main.qml
-        userbar/main.xml
         userbar/Messages.sh
         userbar/preview.png
         userbar/ScreenManager.qml

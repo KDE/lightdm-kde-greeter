@@ -31,14 +31,14 @@ Item {
     }
 
     property int visibleScreen: VisibleScreenEnum.VisibleScreen.LoginScreen
-    
+
     ScreenManager {
         id: screenManager
         delegate: Image {
             // default to keeping aspect ratio
-            fillMode: config.readEntry("BackgroundKeepAspectRatio") == false ? Image.Stretch : Image.PreserveAspectCrop;
+            fillMode: config.readEntry("BackgroundKeepAspectRatio") == 'false' ? Image.Stretch : Image.PreserveAspectCrop;
             //read from config, if there's no entry use plasma theme
-            source: config.readEntry("Background") ? config.readEntry("Background"): plasmaTheme.wallpaperPath;
+            source: config.readEntry("Background") ? config.readEntry("Background") : plasmaTheme.wallpaperPath;
         }
     }
 

@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
 
 LightDM-KDE is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,20 +24,16 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
 #include <QFile>
+#include <KSharedConfig>
 
-ConfigWrapper::ConfigWrapper(const QString &kcfgPath, QObject *parent)
+ConfigWrapper::ConfigWrapper(const QString &groupName, QObject *parent)
     : QObject(parent)
 {
     KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"), KConfig::SimpleConfig);
-
-    QFile xmlFile(kcfgPath);
-
-    m_config = new KConfigLoader(config, &xmlFile, this);
+    m_config = config->group(groupName);
 }
 
 QVariant ConfigWrapper::readEntry(const QString &key) const
 {
-    //FIXME I should use a KConfigSkeleton which loads the KCFG, then remove the "default" parameter
-
-    return m_config->property(key);
+    return m_config.readEntry(key);
 }
