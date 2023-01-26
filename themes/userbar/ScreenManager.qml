@@ -101,6 +101,14 @@ Item {
                         delegateWindow.requestActivate()
                         screenManager.activeScreen = parent
                     }
+                    onWidthChanged: {
+                        // the width is supposed to change only at startup
+                        if (parent != activeScreen) return
+                        // put the mouse cursor inside the primary window
+                        var newX = delegateWindow.x + mouseArea.width * 0.3
+                        var newY = delegateWindow.y + mouseArea.height * 0.3
+                        mouseCursor.move(newX, newY)
+                    }
                 }
 
                 Loader {
