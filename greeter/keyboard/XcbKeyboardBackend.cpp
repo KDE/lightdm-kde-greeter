@@ -306,7 +306,7 @@ void XcbKeyboardBackend::dispatchEvents() {
 void XcbKeyboardBackend::connectEventsDispatcher(KeyboardModel *model) {
     // Setup events filter
     xcb_void_cookie_t cookie;
-    xcb_xkb_select_events_details_t foo;
+    xcb_xkb_select_events_details_t foo{};
     xcb_generic_error_t *error = nullptr;
 
     cookie = xcb_xkb_select_events(m_conn, XCB_XKB_ID_USE_CORE_KBD,
