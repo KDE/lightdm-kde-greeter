@@ -42,6 +42,7 @@ find_package(KF5 REQUIRED COMPONENTS
     ConfigWidgets
     I18n
     Auth
+    NetworkManagerQt
 )
 
 find_package(Gettext REQUIRED)

@@ -132,7 +132,7 @@ PlasmaCore.ColorScope {
     function startLoginScreen() {
         clearMessages()
         visibleScreen = screens.LoginScreen
-        setTabOrder([ inputBox, sessionButton, keyboardLayoutButton ])
+        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
         inputBox.forceActiveFocus()
         var username = usersList.currentItem.name
         inputBox.text = ""
@@ -145,7 +145,7 @@ PlasmaCore.ColorScope {
 
     function startPromptScreen() {
         visibleScreen = screens.PromptScreen
-        setTabOrder([ inputBox, sessionButton, keyboardLayoutButton ])
+        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
         inputBox.forceActiveFocus()
     }
 
@@ -153,7 +153,7 @@ PlasmaCore.ColorScope {
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
-        setTabOrder([ usersList, sessionButton, keyboardLayoutButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
+        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
         usersList.forceActiveFocus()
     }
 
@@ -511,6 +511,13 @@ PlasmaCore.ColorScope {
                 updateCurrentSession()
                 usersList.onCurrentIndexChanged.connect(updateCurrentSession)
             }
+        }
+
+        NetworkWidget {
+            id: connectionsButton
+            expand: menuBar.expand
+            approximateFullWidth: height * 5
+            onPopupHide: centerPanelFocus.forceActiveFocus()
         }
 
         TooltipButton {

@@ -49,6 +49,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "configwrapper.h"
 #include "sessionsmodel.h"
 #include "usersmodel.h"
+#include "connectionsmodel.h"
 #include "screensmodel.h"
 #include "greeterwrapper.h"
 #include "cursor.h"
@@ -71,6 +72,9 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     {
         usersModel->setShowGuest(true);
     }
+
+    qmlRegisterUncreatableMetaObject(ConnectionEnum::staticMetaObject, "ConnectionEnum", 1, 0, "ConnectionEnum", QStringLiteral("Error: only enums"));
+    qRegisterMetaType<ConnectionEnum::Action>();
 
     engine()->addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
 
@@ -100,6 +104,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
     rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
     rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
+    rootContext()->setContextProperty(QStringLiteral("connectionsModel"), new ConnectionsModel(this));
     rootContext()->setContextProperty(QStringLiteral("keyboard"), keyboard);
     rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
     rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
