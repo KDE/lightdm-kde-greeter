@@ -19,7 +19,7 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import "../components" as Shared
+import "../components/kcm" as Shared
 
 Item {
     // the default i18n domain here is "kcm_lightdm"
@@ -49,32 +49,41 @@ Item {
         columns: 2
         rowSpacing: gap
         columnSpacing: gap
-        verticalItemAlignment: Text.AlignVCenter
 
         // for image selection dialog
         function markNeedsSave() {
             themeConfig.markNeedsSave()
         }
 
-        Label { text: i18nd(domain, "Background image:") }
+        Label {
+            height: implicitHeight + gap * 2
+            text: i18nd(domain, "Background image:")
+        }
         Shared.SelectImageButton {
             id: backgroundSelector
-            dialogTitle: i18nd(domain, "Background image:")
         }
 
-        Label { text: i18nd(domain, "Keep aspect ratio:") }
+        Label {
+            height: Math.max(implicitHeight, keepAspectRatio.height)
+            text: i18nd(domain, "Keep aspect ratio:")
+        }
         CheckBox {
             id: keepAspectRatio
             onReleased: themeConfig.markNeedsSave()
         }
 
-        Label { text: i18nd(domain, "Welcome image:") }
+        Label {
+            height: implicitHeight + gap * 2
+            text: i18nd(domain, "Welcome image:")
+        }
         Shared.SelectImageButton {
             id: welcomeImageSelector
-            dialogTitle: i18nd(domain, "Welcome image:")
         }
 
-        Label { text: i18nd(domain, "Welcome text:") }
+        Label {
+            height: welcomeText.height
+            text: i18nd(domain, "Welcome text:")
+        }
         TextField {
             id: welcomeText
             width: parent.width - x

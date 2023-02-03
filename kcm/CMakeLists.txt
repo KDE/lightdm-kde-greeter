@@ -47,6 +47,11 @@ add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS
 target_link_libraries(kcmlightdmhelper KF5::Auth KF5::ConfigCore)
 install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
+# common qml components for the configuration utility
+install(DIRECTORY components/
+        DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes/components/kcm
+)
+
 kauth_install_helper_files(kcmlightdmhelper org.kde.kcontrol.kcmlightdm root)
 kauth_install_actions(org.kde.kcontrol.kcmlightdm kcm_lightdm.actions)
 kcmutils_generate_desktop_file(kcm_lightdm)
