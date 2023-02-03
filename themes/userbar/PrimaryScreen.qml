@@ -524,7 +524,7 @@ Item {
         }
 
         Row {
-            spacing: padding
+            spacing: screen.padding
             x: parent.margins.left
             y: parent.margins.top
 
