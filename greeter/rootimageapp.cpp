@@ -31,6 +31,17 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "rootimageapp.h"
 
+/*
+Prevent a black flicker when logging in via LightDM-KDE before KSplash starts
+
+Add a new process that when passed an image on a socket will set it to the X background
+and set XSetCloseDownModel to retainTemporary.
+
+A QML object "xhandler" exposes a slot setRootImage which will set a current screenshot of the
+QML scene into the XRootWindow
+This image will then be shown when switching from the greeter to the splash.
+*/
+
 RootImageApp::RootImageApp(int &argc, char **argv)
     : QApplication(argc, argv)
 {
