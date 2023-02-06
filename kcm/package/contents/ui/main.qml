@@ -51,14 +51,12 @@ Item {
 
     function load(settings) {
         var autoUser = readEntry(settings, "core/SeatDefaults/autologin-user", "")
-        if (autoUser != "") {
-            var index = usersCombo.indexOfValue(autoUser)
-            if (index < 0) {
-                autoLogin.checked = false
-            } else {
-                autoLogin.checked = true
-                usersCombo.currentIndex = index
-            }
+        var index = usersCombo.indexOfValue(autoUser)
+        if (index < 0) {
+            autoLogin.checked = false
+        } else {
+            autoLogin.checked = true
+            usersCombo.currentIndex = index
         }
         var themeName = readEntry(settings, "greeter/greeter/theme-name", "userbar")
         var themeIndex = kcm.themesModel.indexForId(themeName)
