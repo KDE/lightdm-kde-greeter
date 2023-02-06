@@ -65,11 +65,8 @@ Item {
         themesList.currentIndex = themeIndex
 
         themeConfig.load(settings)
+        themeConfig.needsSave = false
         settingsLoaded = true
-    }
-
-    function markNeedsSave() {
-        kcm.needsSave = true
     }
 
     Row {
@@ -158,7 +155,7 @@ Item {
                 bottomMargin: gap * 3
                 function switchToIndex(index) {
                     themesList.currentIndex = index
-                    root.markNeedsSave()
+                    kcm.needsSave = true
                     themeConfig.needsSave = false
                 }
             }
@@ -240,15 +237,11 @@ Item {
                                     needsSave = false
                                 }
 
-                                function markNeedsSave() {
-                                    needsSave = true
-                                    root.markNeedsSave()
-                                }
-
                                 onItemChanged: {
                                     item.load(cachedSettings)
                                 }
 
+                                onNeedsSaveChanged: kcm.needsSave |= needsSave
                                 source: themesList.currentItem.properties.path + "/config.qml"
                             }
                         }
@@ -272,7 +265,7 @@ Item {
                     CheckBox {
                         id: autoLogin
                         text: i18n("Automatically log in:")
-                        onCheckedChanged: root.markNeedsSave()
+                        onCheckedChanged: kcm.needsSave = true
                     }
 
                     Row {
@@ -288,7 +281,7 @@ Item {
                             model: kcm.usersModel
                             valueRole: 'name'
                             textRole: 'display'
-                            onActivated: root.markNeedsSave()
+                            onActivated: kcm.needsSave = true
                         }
                     }
                 }

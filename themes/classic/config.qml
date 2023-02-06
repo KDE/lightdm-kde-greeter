@@ -52,11 +52,6 @@ Item {
         rowSpacing: gap
         columnSpacing: gap
 
-        // for image selection dialog
-        function markNeedsSave() {
-            themeConfig.markNeedsSave()
-        }
-
         Label {
             height: implicitHeight + gap * 2
             text: i18nd(domain, "Background image:")
@@ -71,7 +66,7 @@ Item {
         }
         CheckBox {
             id: keepAspectRatio
-            onReleased: themeConfig.markNeedsSave()
+            onReleased: themeConfig.needsSave = true
         }
 
         Label {
@@ -89,7 +84,7 @@ Item {
         TextField {
             id: welcomeText
             width: themeConfig.width - x
-            onTextEdited: themeConfig.markNeedsSave()
+            onTextEdited: themeConfig.needsSave = true
         }
     }
 }

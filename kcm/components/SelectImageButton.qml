@@ -86,7 +86,7 @@ Rectangle {
             icon.name: "delete"
             onClicked: {
                 filePath = ""
-                root.parent.markNeedsSave()
+                themeConfig.needsSave = true
             }
             ToolTip.visible: hovered
             ToolTip.delay: 500
@@ -111,7 +111,7 @@ Rectangle {
 
         onAccepted: {
             filePath = fileDialog.fileUrl.toString();
-            root.parent.markNeedsSave()
+            themeConfig.needsSave = true
         }
     }
 }
