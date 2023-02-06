@@ -19,8 +19,9 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Window 2.15 as Windows
 import QtQuick.Dialogs 1.3
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15 as Windows
 import org.kde.kquickcontrolsaddons 2.0 as Addons
 
 Item {
@@ -203,41 +204,54 @@ Item {
                         bottomPadding: gap
                     }
 
-                    Loader {
-                        id: themeConfig
-                        visible: settingsLoaded
+                    ScrollView {
+                        id: themeScrollView
 
-                        property var cachedSettings
-                        property bool needsSave: false
-
-                        function load(settings) {
-                            cachedSettings = settings
-                            item.load(settings)
-                        }
-
-                        function save(settings) {
-                            item.save(settings)
-                            // convert values to strings for consistency with load function
-                            // copy because the original VariantMap object goes to c++ for saving
-                            cachedSettings = {}
-                            for (var p in settings) {
-                                cachedSettings[p] = String(settings[p])
-                            }
-                            needsSave = false
-                        }
-
-                        function markNeedsSave() {
-                            needsSave = true
-                            root.markNeedsSave()
-                        }
-
-                        onItemChanged: {
-                            item.load(cachedSettings)
-                        }
-
-                        width: parent.width
                         height: parent.height - y
-                        source: themesList.currentItem.properties.path + "/config.qml"
+                        width: parent.width
+                        clip: true
+
+                        Flickable {
+                            contentHeight: themeConfig.item.height
+                            boundsBehavior: Flickable.StopAtBounds
+
+                            Loader {
+                                id: themeConfig
+
+                                visible: settingsLoaded
+                                width: themeScrollView.width
+
+                                property var cachedSettings
+                                property bool needsSave: false
+
+                                function load(settings) {
+                                    cachedSettings = settings
+                                    item.load(settings)
+                                }
+
+                                function save(settings) {
+                                    item.save(settings)
+                                    // convert values to strings for consistency with load function
+                                    // copy because the original VariantMap object goes to c++ for saving
+                                    cachedSettings = {}
+                                    for (var p in settings) {
+                                        cachedSettings[p] = String(settings[p])
+                                    }
+                                    needsSave = false
+                                }
+
+                                function markNeedsSave() {
+                                    needsSave = true
+                                    root.markNeedsSave()
+                                }
+
+                                onItemChanged: {
+                                    item.load(cachedSettings)
+                                }
+
+                                source: themesList.currentItem.properties.path + "/config.qml"
+                            }
+                        }
                     }
                 }
             }

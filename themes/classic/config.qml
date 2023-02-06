@@ -26,6 +26,8 @@ Item {
     // each theme has its own language file, common for main layout and setup utility
     property string domain: "lightdm_theme_classic"
 
+    height: childrenRect.height
+
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
@@ -86,7 +88,7 @@ Item {
         }
         TextField {
             id: welcomeText
-            width: parent.width - x
+            width: themeConfig.width - x
             onTextEdited: themeConfig.markNeedsSave()
         }
     }

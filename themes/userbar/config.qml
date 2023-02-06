@@ -26,6 +26,8 @@ Item {
     // each theme has its own language file, common for main layout and setup utility
     property string domain: "lightdm_theme_userbar"
 
+    height: childrenRect.height
+
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
