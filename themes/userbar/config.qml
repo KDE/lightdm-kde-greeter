@@ -42,27 +42,28 @@ Item {
         keepAspectRatio.checked = root.readEntry(settings, branch + "BackgroundKeepAspectRatio", "true") == "true"
     }
 
-    Grid {
+    Column {
         width: parent.width
-        columns: 2
-        rowSpacing: gap
-        columnSpacing: gap
+        spacing: gap
 
         Label {
-            height: implicitHeight + gap * 2
             text: i18nd(domain, "Background image:")
         }
         Shared.SelectImageButton {
+            anchors.horizontalCenter: parent.horizontalCenter
             id: backgroundSelector
         }
 
-        Label {
-            height: Math.max(implicitHeight, keepAspectRatio.height)
-            text: i18nd(domain, "Keep aspect ratio:")
-        }
-        CheckBox {
-            id: keepAspectRatio
-            onReleased: themeConfig.needsSave = true
+        Row {
+            spacing: gap
+            Label {
+                height: Math.max(implicitHeight, keepAspectRatio.height)
+                text: i18nd(domain, "Keep aspect ratio:")
+            }
+            CheckBox {
+                id: keepAspectRatio
+                onReleased: themeConfig.needsSave = true
+            }
         }
     }
 }

@@ -46,45 +46,49 @@ Item {
         welcomeText.text = root.readEntry(settings, branch + "GreetMessage", i18nd(domain, "Welcome to %1", "%hostname%"))
     }
 
-    Grid {
+    Column {
         width: parent.width
-        columns: 2
-        rowSpacing: gap
-        columnSpacing: gap
+        spacing: gap
 
         Label {
-            height: implicitHeight + gap * 2
             text: i18nd(domain, "Background image:")
         }
         Shared.SelectImageButton {
+            anchors.horizontalCenter: parent.horizontalCenter
             id: backgroundSelector
         }
 
-        Label {
-            height: Math.max(implicitHeight, keepAspectRatio.height)
-            text: i18nd(domain, "Keep aspect ratio:")
-        }
-        CheckBox {
-            id: keepAspectRatio
-            onReleased: themeConfig.needsSave = true
+        Row {
+            spacing: gap
+            Label {
+                height: Math.max(implicitHeight, keepAspectRatio.height)
+                text: i18nd(domain, "Keep aspect ratio:")
+            }
+            CheckBox {
+                id: keepAspectRatio
+                onReleased: themeConfig.needsSave = true
+            }
         }
 
         Label {
-            height: implicitHeight + gap * 2
             text: i18nd(domain, "Welcome image:")
         }
         Shared.SelectImageButton {
+            anchors.horizontalCenter: parent.horizontalCenter
             id: welcomeImageSelector
         }
 
-        Label {
-            height: welcomeText.height
-            text: i18nd(domain, "Welcome text:")
-        }
-        TextField {
-            id: welcomeText
-            width: themeConfig.width - x
-            onTextEdited: themeConfig.needsSave = true
+        Row {
+            spacing: gap
+            Label {
+                height: welcomeText.height
+                text: i18nd(domain, "Welcome text:")
+            }
+            TextField {
+                id: welcomeText
+                width: themeConfig.width - x - gap * 3
+                onTextEdited: themeConfig.needsSave = true
+            }
         }
     }
 }

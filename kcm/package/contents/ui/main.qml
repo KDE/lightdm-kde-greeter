@@ -28,7 +28,7 @@ Item {
     id: root
     property real dpi96: 3.7820092576037516
     property real dpiScale: Windows.Screen.pixelDensity / dpi96
-    property int iconWidth: 160 * dpiScale
+    property int iconWidth: 140 * dpiScale
     property int gap: 6 * dpiScale
     property bool settingsLoaded: false
 

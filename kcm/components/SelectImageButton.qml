@@ -29,8 +29,8 @@ Rectangle {
 
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }
 
-    width: iconWidth + gap * 2
-    height: width * 0.75 + gap * 2
+    width: 160 * dpiScale
+    height: width * 0.75
     border.color: paletteActive.mid
     border.width: 1
     radius: gap
