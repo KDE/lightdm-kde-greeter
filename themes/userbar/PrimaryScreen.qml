@@ -63,12 +63,12 @@ Item {
         }
 
         function onAuthenticationComplete() {
-            if(!greeter.authenticated && visibleScreen != screens.DefaultScreen) {
+            if (greeter.authenticated) {
+                doSessionSync()
+            } else if (visibleScreen != screens.DefaultScreen) {
                 putMessage(i18n("Sorry, incorrect password. Please try again."), 1)
                 dissolveMessages()
                 startDefaultScreen()
-            } else {
-                doSessionSync()
             }
         }
     }
