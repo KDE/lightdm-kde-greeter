@@ -31,6 +31,7 @@ find_package(KF5 REQUIRED COMPONENTS
     IconThemes
     KCMUtils
     Plasma
+    Package
     Config
     ConfigWidgets
     I18n

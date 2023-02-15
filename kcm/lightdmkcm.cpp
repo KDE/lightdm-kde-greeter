@@ -28,6 +28,8 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #define TRANSLATION_DOMAIN "kcm_lightdm"
 #include <KLocalizedString>
 #include <KPluginFactory>
+#include <KPackage/Package>
+#include <KPackage/PackageLoader>
 #include <KConfigGroup>
 #include <KConfig>
 
@@ -51,10 +53,13 @@ LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVari
         QStringLiteral("0"),                        // version (set by initAboutData)
         ki18n("Login screen using the LightDM framework").toString(),
         KAboutLicense::GPL);
-
     initAboutData(aboutData);
-
     setAboutData(aboutData);
+
+    // Our modules will be checking the Plasmoid attached object when running from Plasma, let it load the module
+    // taken from KDE/kscreenlocker source, kcm/kcm.cpp
+    const char *uri = "org.kde.plasma.plasmoid";
+    qmlRegisterUncreatableType<QObject>(uri, 2, 0, "PlasmoidPlaceholder", QStringLiteral("Do not create objects of type Plasmoid"));
 }
 
 void LightDMKcm::load()
@@ -77,6 +82,7 @@ void LightDMKcm::load()
             }
         }
     }
+
     QMetaObject::invokeMethod(mainUi(), "load", Q_ARG(QVariant, QVariant::fromValue(settings)));
     setNeedsSave(false);
 }
@@ -107,6 +113,17 @@ void LightDMKcm::defaults()
     // load empty config
     QMetaObject::invokeMethod(mainUi(), "load", Q_ARG(QVariant, QVariant()));
     setNeedsSave(true);
+}
+
+QUrl LightDMKcm::wallpaperConfigSource() const
+{
+    auto pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"), wallpaperPackageUrl());
+    if (pkg.isValid()) {
+        return pkg.fileUrl("ui", QStringLiteral("config.qml"));
+    } else {
+        qWarning() << "Wallpaper package " << wallpaperPackageUrl() << " is failed to load.";
+        return QUrl{};
+    }
 }
 
 #include "lightdmkcm.moc"

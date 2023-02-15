@@ -22,10 +22,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3 as StandardDialogs
 
 Rectangle {
-    id: root
+    id: button
 
     property string filePath
     property bool hovered: mouseArea.containsMouse || deleteImageButton.hovered || openFileButton.hovered
+    // maybe it's just a file selection dialog, or maybe a background selection dialog from Plasma
+    property var imageDialog: selectFileDialog
 
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }
 
@@ -43,7 +45,7 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: gap + 1
         fillMode: Image.PreserveAspectFit
-        source: root.filePath
+        source: button.filePath
     }
 
     Column {
@@ -73,7 +75,7 @@ Rectangle {
 
     Column {
         id: buttons
-        visible: root.hovered
+        visible: button.hovered
 
         anchors {
             top: parent.top
@@ -96,10 +98,7 @@ Rectangle {
         Button {
             id: openFileButton
             icon.name: "fileopen"
-            onClicked: {
-                fileDialog.folder = filePath.replace(/(.*?)[^/]*$/,'$1')
-                fileDialog.open()
-            }
+            onClicked: imageDialog.openForPath(filePath)
             ToolTip.visible: hovered
             ToolTip.delay: 500
             ToolTip.text: i18n("Select image")
@@ -107,10 +106,15 @@ Rectangle {
     }
 
     StandardDialogs.FileDialog {
-        id: fileDialog
+        id: selectFileDialog
+
+        function openForPath(path) {
+            folder = path.replace(/(.*?)[^/]*$/,'$1')
+            open()
+        }
 
         onAccepted: {
-            filePath = fileDialog.fileUrl.toString();
+            filePath = imageDialog.fileUrl.toString();
             themeConfig.needsSave = true
         }
     }

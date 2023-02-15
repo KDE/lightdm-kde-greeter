@@ -32,6 +32,7 @@ target_link_libraries(kcm_lightdm
   ${QLIGHTDM_LIBRARIES}
   KF5::ConfigWidgets
   KF5::I18n
+  KF5::Package
   KF5::QuickAddons
 )
 

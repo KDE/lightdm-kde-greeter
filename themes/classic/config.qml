@@ -22,6 +22,8 @@ import QtQuick.Controls 2.15
 import "../components/kcm" as Shared
 
 Item {
+    id: config
+
     // the default i18n domain here is "kcm_lightdm"
     // each theme has its own language file, common for main layout and setup utility
     property string domain: "lightdm_theme_classic"
@@ -32,7 +34,7 @@ Item {
         var branch = "greeter/" + domain + "/"
 
         settings[branch + "Background"] = backgroundSelector.filePath
-        settings[branch + "BackgroundKeepAspectRatio"] = keepAspectRatio.checked
+        settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
         settings[branch + "Logo"] = welcomeImageSelector.filePath
         settings[branch + "GreetMessage"] = welcomeText.text
     }
@@ -41,7 +43,7 @@ Item {
         var branch = "greeter/" + domain + "/"
 
         backgroundSelector.filePath = root.readEntry(settings, branch + "Background", "file:///usr/share/design/current/backgrounds/xdm.png")
-        keepAspectRatio.checked = root.readEntry(settings, branch + "BackgroundKeepAspectRatio", "true") == "true"
+        backgroundSelector.imageDialog.fillMode = Number(root.readEntry(settings, branch + "BackgroundFillMode", Image.PreserveAspectCrop))
         welcomeImageSelector.filePath = root.readEntry(settings, branch + "Logo", "")
         welcomeText.text = root.readEntry(settings, branch + "GreetMessage", i18nd(domain, "Welcome to %1", "%hostname%"))
     }
@@ -54,28 +56,17 @@ Item {
             text: i18nd(domain, "Background image:")
         }
         Shared.SelectImageButton {
-            anchors.horizontalCenter: parent.horizontalCenter
             id: backgroundSelector
-        }
-
-        Row {
-            spacing: gap
-            Label {
-                height: Math.max(implicitHeight, keepAspectRatio.height)
-                text: i18nd(domain, "Keep aspect ratio:")
-            }
-            CheckBox {
-                id: keepAspectRatio
-                onReleased: themeConfig.needsSave = true
-            }
+            anchors.horizontalCenter: parent.horizontalCenter
+            imageDialog: Shared.WallpapersDialog {}
         }
 
         Label {
             text: i18nd(domain, "Welcome image:")
         }
         Shared.SelectImageButton {
-            anchors.horizontalCenter: parent.horizontalCenter
             id: welcomeImageSelector
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Row {

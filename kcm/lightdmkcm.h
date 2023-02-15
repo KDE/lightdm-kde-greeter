@@ -32,6 +32,13 @@ class LightDMKcm: public KQuickAddons::ManagedConfigModule
 
     Q_PROPERTY(ThemesModel *themesModel READ themesModel CONSTANT)
     Q_PROPERTY(UsersModel *usersModel READ usersModel CONSTANT)
+    Q_PROPERTY(QUrl wallpaperConfigSource READ wallpaperConfigSource CONSTANT)
+    Q_PROPERTY(QString currentWallpaper READ wallpaperPackageUrl CONSTANT)
+
+    ThemesModel *themesModel() const { return m_themesModel; }
+    UsersModel *usersModel() const { return m_usersModel; }
+    QUrl wallpaperConfigSource() const;
+    const QString wallpaperPackageUrl() const { return QStringLiteral("org.kde.image"); }
 
 public:
     explicit LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
@@ -41,8 +48,6 @@ public Q_SLOTS:
     void save() override;
     void defaults() override;
 
-    ThemesModel *themesModel() const { return m_themesModel; }
-    UsersModel *usersModel() const { return m_usersModel; }
 
 private:
     ThemesModel *m_themesModel;
