@@ -33,18 +33,20 @@ Item {
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
-        settings[branch + "Background"] = backgroundSelector.filePath
+        settings[branch + "Background"] = kcm.preferredImage(backgroundSelector.filePath)
+        settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
         settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
-        settings[branch + "Logo"] = welcomeImageSelector.filePath
+        settings[branch + "Logo"] = kcm.preferredImage(welcomeImageSelector.filePath)
+        settings[branch + "LogoPreview"] = welcomeImageSelector.filePath
         settings[branch + "GreetMessage"] = welcomeText.text
     }
 
     function load(settings) {
         var branch = "greeter/" + domain + "/"
 
-        backgroundSelector.filePath = root.readEntry(settings, branch + "Background", "file:///usr/share/design/current/backgrounds/xdm.png")
+        backgroundSelector.filePath = root.readEntry(settings, branch + "BackgroundPreview", "file:///usr/share/design/current/backgrounds/xdm.png")
         backgroundSelector.imageDialog.fillMode = Number(root.readEntry(settings, branch + "BackgroundFillMode", Image.PreserveAspectCrop))
-        welcomeImageSelector.filePath = root.readEntry(settings, branch + "Logo", "")
+        welcomeImageSelector.filePath = root.readEntry(settings, branch + "LogoPreview", "")
         welcomeText.text = root.readEntry(settings, branch + "GreetMessage", i18nd(domain, "Welcome to %1", "%hostname%"))
     }
 

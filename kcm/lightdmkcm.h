@@ -43,6 +43,8 @@ class LightDMKcm: public KQuickAddons::ManagedConfigModule
 public:
     explicit LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
+    Q_INVOKABLE QString preferredImage(QString dir);
+
 public Q_SLOTS:
     void load() override;
     void save() override;

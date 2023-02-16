@@ -126,4 +126,99 @@ QUrl LightDMKcm::wallpaperConfigSource() const
     }
 }
 
+// functions to calculate the most appropriate aspect ratio for background image
+// See: KDE/plasma-workspace, PackageFinder::findPreferredImageInPackage
+
+static float distance(const QSize &size, const QSize &desired)
+{
+    const float desiredAspectRatio = (desired.height() > 0) ? desired.width() / static_cast<float>(desired.height()) : 0;
+    const float candidateAspectRatio = (size.height() > 0) ? size.width() / static_cast<float>(size.height()) : std::numeric_limits<float>::max();
+
+    float delta = size.width() - desired.width();
+    delta = delta >= 0.0 ? delta : -delta * 2; // Penalize for scaling up
+
+    return std::abs(candidateAspectRatio - desiredAspectRatio) * 25000 + delta;
+}
+
+static QSize res_size(const QString &str)
+{
+    const int index = str.indexOf(QLatin1Char('x'));
+
+    if (index != -1) {
+        return QSize(QStringView(str).left(index).toInt(), QStringView(str).mid(index + 1).toInt());
+    }
+
+    return QSize();
+}
+
+static void find_preferred_image_in_package(KPackage::Package &package, const QSize &targetSize)
+{
+    if (!package.isValid()) {
+        return;
+    }
+
+    QSize tSize = targetSize;
+
+    if (tSize.isEmpty()) {
+        tSize = QSize(1920, 1080);
+    }
+
+    // find preferred size
+    auto findBestMatch = [&package, &tSize](const QByteArray &folder) {
+        QString preferred;
+        const QStringList images = package.entryList(folder);
+
+        if (images.empty()) {
+            return preferred;
+        }
+
+        float best = std::numeric_limits<float>::max();
+
+        for (const QString &entry : images) {
+            QSize candidate = res_size(QFileInfo(entry).baseName());
+
+            if (candidate.isEmpty()) {
+                continue;
+            }
+
+            const float dist = distance(candidate, tSize);
+
+            if (preferred.isEmpty() || dist < best) {
+                preferred = entry;
+                best = dist;
+            }
+        }
+
+        return preferred;
+    };
+
+    const QString preferred = findBestMatch(QByteArrayLiteral("images"));
+    const QString preferredDark = findBestMatch(QByteArrayLiteral("images_dark"));
+
+    package.removeDefinition("preferred");
+    package.addFileDefinition("preferred", QStringLiteral("images/") + preferred, i18n("Recommended wallpaper file"));
+
+    if (!preferredDark.isEmpty()) {
+        package.removeDefinition("preferredDark");
+        package.addFileDefinition("preferredDark",
+                                  QStringLiteral("images_dark%1").arg(QDir::separator()) + preferredDark,
+                                  QStringLiteral("Recommended dark wallpaper file"));
+    }
+}
+
+
+QString LightDMKcm::preferredImage(QString path)
+{
+    if (path.isEmpty()) return QStringLiteral("");
+    // probably it's just the path to the image file
+    if (!QFileInfo(path).isDir()) return path;
+
+    auto package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Wallpaper/Images"));
+    package.setPath(path);
+    if (!package.isValid()) return QStringLiteral("");
+
+    find_preferred_image_in_package(package, QSize());
+    return package.filePath("preferred");
+}
+
 #include "lightdmkcm.moc"

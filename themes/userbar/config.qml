@@ -32,14 +32,15 @@ Item {
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
-        settings[branch + "Background"] = backgroundSelector.filePath
+        settings[branch + "Background"] = kcm.preferredImage(backgroundSelector.filePath)
+        settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
         settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
     }
 
     function load(settings) {
         var branch = "greeter/" + domain + "/"
 
-        backgroundSelector.filePath = root.readEntry(settings, branch + "Background", "file:///usr/share/design/current/backgrounds/xdm.png")
+        backgroundSelector.filePath = root.readEntry(settings, branch + "BackgroundPreview", "file:///usr/share/design/current/backgrounds/xdm.png")
         backgroundSelector.imageDialog.fillMode = Number(root.readEntry(settings, branch + "BackgroundFillMode", Image.PreserveAspectCrop))
     }
 

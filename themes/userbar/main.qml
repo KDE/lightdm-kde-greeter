@@ -36,7 +36,7 @@ Item {
             Image {
                 anchors.fill: parent
                 // default to keeping aspect ratio
-                fillMode: config.readEntry("BackgroundKeepAspectRatio") == 'false' ? Image.Stretch : Image.PreserveAspectCrop
+                fillMode: (x => x !== "" ? Number(x) : Image.PreserveAspectCrop)(config.readEntry("BackgroundFillMode"))
                 //read from config, if there's no entry use plasma theme
                 source: config.readEntry("Background") ? config.readEntry("Background") : plasmaTheme.wallpaperPath
             }

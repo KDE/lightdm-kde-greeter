@@ -20,6 +20,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3 as StandardDialogs
+import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 
 Rectangle {
     id: button
@@ -38,6 +39,10 @@ Rectangle {
     radius: gap
     color: paletteActive.base
 
+    property var mediaProxy: Wallpaper.MediaProxy {
+        source: button.filePath
+    }
+
     Image {
         id: preview
 
@@ -45,7 +50,8 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: gap + 1
         fillMode: Image.PreserveAspectFit
-        source: button.filePath
+        // mediaProxy for a strange reason returns some image for an empty string
+        source: button.filePath === "" ? "" : mediaProxy.modelImage
     }
 
     Column {
