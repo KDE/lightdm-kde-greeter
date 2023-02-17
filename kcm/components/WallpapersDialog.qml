@@ -41,6 +41,9 @@ Dialog {
         dialogLoader.source = kcm.wallpaperConfigSource
         dialogLoader.item.cfg_Image = path
         dialogLoader.item.cfg_FillMode = fillMode
+        if (!kcm.patchWallpaperPicker(dialogLoader.item)) {
+            console.warn("Failed to patch background picker widget");
+        }
         open()
     }
 
