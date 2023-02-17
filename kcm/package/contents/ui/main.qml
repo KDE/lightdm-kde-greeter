@@ -182,6 +182,7 @@ Item {
                         columns: 2
                         rowSpacing: gap * 2
                         columnSpacing: gap * 2
+                        verticalItemAlignment: Grid.AlignVCenter
 
                         Label { font.bold: true; text: i18n("Name:") }
                         Label { text: themesList.currentItem.properties.name }
@@ -228,9 +229,10 @@ Item {
                                     item.save(settings)
                                     // convert values to strings for consistency with load function
                                     // copy because the original VariantMap object goes to c++ for saving
-                                    cachedSettings = {}
                                     for (var p in settings) {
-                                        cachedSettings[p] = String(settings[p])
+                                        if (cachedSettings[p]) {
+                                            cachedSettings[p] = String(settings[p])
+                                        }
                                     }
                                     needsSave = false
                                 }

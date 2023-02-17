@@ -23,17 +23,13 @@ import QtQuick.Window 2.15
 Item {
     id: manager
 
-    property Item activeScreen
+    property Item activeScreen: manager.children[0].delegateWindow.contentItem
     property Component delegate
 
     Repeater {
         id: repeater
         model: screensModel
         delegate: delegateItem
-    }
-
-    Component.onCompleted: {
-        activeScreen = manager.children[0].delegateWindow.contentItem
     }
 
     function nextActiveScreen() {
@@ -90,6 +86,7 @@ Item {
                 width: geometry.width
                 height: geometry.height
                 visible: true
+                color: "black"
 
                 property var mouseArea: mouseArea
 

@@ -623,8 +623,15 @@ Item {
     }
 
     BusyIndicator {
+        id: busyIndicator
         anchors.centerIn: wholeScreen
         visible: visibleScreen == screens.WaitScreen
+        Behavior on visible {
+            SequentialAnimation {
+                PauseAnimation { duration: busyIndicator.visible ? 0 : 5000 }
+                NumberAnimation { duration: 0 }
+            }
+        }
     }
 
     Keys.onEscapePressed: cancelInput()
