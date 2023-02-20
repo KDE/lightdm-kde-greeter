@@ -29,6 +29,9 @@ class Helper: public QObject
 
 public Q_SLOTS:
     KAuth::ActionReply save(const QVariantMap &args);
+
+private:
+    QString copyImage(QString sourceFile, QString theme, QString name);
 };
 
 #endif

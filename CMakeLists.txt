@@ -7,6 +7,12 @@ set(LIGHTDM_KDE_VERSION_MINOR 4)
 set(LIGHTDM_KDE_VERSION_PATCH 5)
 set(LIGHTDM_KDE_VERSION ${LIGHTDM_KDE_VERSION_MAJOR}.${LIGHTDM_KDE_VERSION_MINOR}.${LIGHTDM_KDE_VERSION_PATCH})
 
+# directory where images will be saved so that the greeter has access to it,
+# since it runs without privileges
+if(NOT DEFINED GREETER_IMAGES_DIR)
+    message(FATAL_ERROR "GREETER_IMAGES_DIR must be provided!")
+endif()
+
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 include(ECMInstallIcons)

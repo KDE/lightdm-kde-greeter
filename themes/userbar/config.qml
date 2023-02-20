@@ -32,7 +32,8 @@ Item {
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
-        settings[branch + "Background"] = kcm.preferredImage(backgroundSelector.filePath)
+        settings[branch + "copytoid_Background"] = "background"
+        settings[branch + "copyfrom_Background"] = kcm.preferredImage(backgroundSelector.filePath)
         settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
         settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
     }

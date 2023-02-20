@@ -33,10 +33,12 @@ Item {
     function save(settings) {
         var branch = "greeter/" + domain + "/"
 
-        settings[branch + "Background"] = kcm.preferredImage(backgroundSelector.filePath)
+        settings[branch + "copytoid_Background"] = "background"
+        settings[branch + "copyfrom_Background"] = kcm.preferredImage(backgroundSelector.filePath)
         settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
         settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
-        settings[branch + "Logo"] = kcm.preferredImage(welcomeImageSelector.filePath)
+        settings[branch + "copytoid_Logo"] = "logo"
+        settings[branch + "copyfrom_Logo"] = kcm.preferredImage(welcomeImageSelector.filePath)
         settings[branch + "LogoPreview"] = welcomeImageSelector.filePath
         settings[branch + "GreetMessage"] = welcomeText.text
     }

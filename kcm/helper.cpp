@@ -23,7 +23,9 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfig>
 #include <KConfigGroup>
 
+#include <QDir>
 #include <QFile>
+#include <QUrl>
 
 #include "config.h"
 
@@ -88,6 +90,41 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
             return errorReply;
         }
 
+        // keys starting with "copyfrom_" and "copytoid_" are handled in a
+        // special way, in fact, this is an instruction to copy the file to the
+        // greeter's home directory, because the greeter will not be able to
+        // read the image from the user's home folder
+
+        QLatin1String prefixFrom{ "copyfrom_" };
+        QLatin1String prefixTo  { "copytoid_" };
+
+        if (keyName.startsWith(prefixFrom)) {
+            QString sourceFile = QUrl(i.value().toString()).path();
+            QString theme = groupName;
+            QString replacedKey = keyName.replace(0, prefixFrom.size(), prefixTo);
+
+            auto entry = args.find(QStringLiteral("%1/%2/%3").arg(fileName).arg(groupName).arg(replacedKey));
+            if (entry == args.end()) {
+                errorReply.setErrorDescription(QStringLiteral("Can't find param needed for copying: %1").arg(replacedKey));
+                return errorReply;
+            }
+
+            QString name = entry.value().toString();
+            QString ldmPath = copyImage(sourceFile, theme, name);
+            if (ldmPath.isEmpty()) {
+                errorReply.setErrorDescription(QStringLiteral("Can't copy. source: %1 theme: %2 id: %3")
+                        .arg(sourceFile)
+                        .arg(theme)
+                        .arg(name));
+                return errorReply;
+            }
+
+            QString cleanKey = keyName.mid(prefixFrom.size());
+            config->group(groupName).writeEntry(cleanKey, ldmPath);
+            continue;
+        }
+        if (keyName.startsWith(prefixTo)) continue;
+
         config->group(groupName).writeEntry(keyName, i.value());
     }
 
@@ -95,6 +132,46 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
     greeterConfig->sync();
 
     return KAuth::ActionReply::SuccessReply();
+}
+
+/**
+ * Copy the image to the home directory of the greeter.
+ *
+ * @param sourceFile filename with absolute path
+ * @param theme theme name, in which the image will be used
+ * @param name filename, must not contain subdirectories, they are ignored
+ * @return path to the resulting file, empty string means error
+ */
+QString Helper::copyImage(QString sourceFile, QString theme, QString name)
+{
+    // in case anyone put some path instead of name
+    theme = QFileInfo(theme).fileName();
+    name = QFileInfo(name).fileName();
+    if (sourceFile.isEmpty() || theme.isEmpty() || name.isEmpty()) return QString{};
+
+    QFile source{ sourceFile };
+    QFile dest{ QStringLiteral("%1/%2/%3").arg(QStringLiteral(GREETER_IMAGES_DIR)).arg(theme).arg(name) };
+
+    if (!source.exists()) {
+        qWarning() << "The source file does not exist: " << source.fileName();
+        return QString{};
+    }
+
+    if (dest.exists()) {
+        dest.remove();
+    } else {
+        QDir dir{ QFileInfo{ dest }.absolutePath() };
+        if (!dir.exists() && !dir.mkpath(QStringLiteral("."))) {
+            qWarning() << "Can't create target directory: " << dir.absolutePath();
+            return QString{};
+        }
+    }
+
+    if (!source.copy(dest.fileName())) {
+        qWarning() << "Can't copy file. Source: " << source.fileName() << " Destination: " << dest.fileName();
+        return QString{};
+    }
+    return dest.fileName();
 }
 
 KAUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper)
