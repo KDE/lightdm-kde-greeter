@@ -41,6 +41,7 @@ find_package(KF5 REQUIRED COMPONENTS
 find_package(Gettext REQUIRED)
 
 add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x060000 KF_NO_DEPRECATED)
+add_compile_options(-Werror=pedantic)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 configure_file(config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h @ONLY)
