@@ -40,6 +40,7 @@ protected:
 
 private:
     GreeterWrapper *m_greeter;
+    bool m_enableRootImageApp = false;
 };
 
 #endif // GREETER_WINDOW_H

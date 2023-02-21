@@ -78,7 +78,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
     KConfigGroup configGroup = config.group("greeter");
-
+    m_enableRootImageApp = configGroup.readEntry("enable-root-image-app", "false") == QStringLiteral("true");
     QString theme = configGroup.readEntry("theme-name", "userbar");
     QUrl source { QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/") + theme + QStringLiteral("/main.qml")) };
     auto cursor = new Cursor(this);
@@ -123,6 +123,7 @@ void GreeterWindow::resizeEvent(QResizeEvent *event)
 
 void GreeterWindow::setRootImage()
 {
+    if (!m_enableRootImageApp) return;
     QPixmap pix = screen()->grabWindow(winId());
     QProcess process;
     process.start(QStandardPaths::findExecutable(QStringLiteral("lightdm-kde-greeter-rootimage"), QStringList { QStringLiteral(LIBEXEC_DIR) }),
