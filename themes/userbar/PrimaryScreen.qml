@@ -350,7 +350,8 @@ Item {
                     enabled: visible
 
                     icon.name: "go-next"
-                    text: i18n("Log in") + " "
+                    rightPadding: screen.padding * 2
+                    text: i18n("Log in")
                     onClicked: startLoginScreen()
 
                     Behavior on opacity {
