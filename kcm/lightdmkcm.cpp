@@ -221,47 +221,4 @@ QString LightDMKcm::preferredImage(QString path)
     return package.filePath("preferred");
 }
 
-// cut out from there the choice of background color or fill method
-// See: KDE/plasma-workspace, wallpapers/image/imagepackage/contents/ui/config.qml
-bool LightDMKcm::patchWallpaperPicker(QObject *instance)
-{
-    QQuickItem *item = qobject_cast<QQuickItem*>(instance);
-    if (!item) return false;
-
-    auto itemChildren = item->childItems();
-    // FormLayout
-    QQuickItem *formLayout{};
-    for (const auto child: itemChildren)
-    {
-        QString name = QLatin1String(child->metaObject()->className());
-        if (name.contains(QStringLiteral("FormLayout_QMLTYPE_"))) {
-            formLayout = child;
-            break;
-        }
-    }
-    if (!formLayout) return false;
-
-    auto formChildren = formLayout->childItems();
-    // RadioButton
-    QQuickItem *radioButton{};
-    // RowLayout
-    QQuickItem *rowLayout{};
-    for (const auto child: formChildren)
-    {
-        QString name = QLatin1String(child->metaObject()->className());
-        if (name.contains(QStringLiteral("RadioButton_QMLTYPE_"))) {
-            radioButton = child;
-        } else if (name.contains(QStringLiteral("QQuickRowLayout"))) {
-            rowLayout = child;
-        }
-    }
-    if (!radioButton || !rowLayout) return false;
-
-    // patching (always hide)
-    radioButton->setProperty("visible", false);
-    rowLayout->setProperty("visible", false);
-
-    return true;
-}
-
 #include "lightdmkcm.moc"

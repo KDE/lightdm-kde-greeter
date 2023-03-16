@@ -44,7 +44,6 @@ public:
     explicit LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     Q_INVOKABLE QString preferredImage(QString dir);
-    Q_INVOKABLE bool patchWallpaperPicker(QObject *instance);
 
 public Q_SLOTS:
     void load() override;

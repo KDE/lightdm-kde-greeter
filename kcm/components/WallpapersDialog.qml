@@ -37,11 +37,40 @@ Dialog {
     rightInset: -gap
     bottomInset: -gap
 
+    // cut out from there the choice of background color or fill method
+    // See: KDE/plasma-workspace, wallpapers/image/imagepackage/contents/ui/config.qml
+    function patchWallpaperPicker(item) {
+
+        var formLayout
+        for (var p in item.children) {
+            var propertyName = item.children[p].toString()
+            if (propertyName.startsWith("FormLayout_QMLTYPE_")) {
+                formLayout = item.children[p]
+                break
+            }
+        }
+        if (!formLayout) return null
+
+        var radioButton, rowLayout
+        for (var p in formLayout.children) {
+            var propertyName = formLayout.children[p].toString()
+            if (propertyName.startsWith("RadioButton_QMLTYPE_")) {
+                radioButton = formLayout.children[p]
+            } else if (propertyName.startsWith("QQuickRowLayout")) {
+                rowLayout = formLayout.children[p]
+            }
+        }
+        if (!radioButton || !rowLayout) return null
+
+        radioButton.visible = false
+        rowLayout.visible = false
+    }
+
     function openForPath(path) {
         dialogLoader.source = kcm.wallpaperConfigSource
         dialogLoader.item.cfg_Image = path
         dialogLoader.item.cfg_FillMode = fillMode
-        if (!kcm.patchWallpaperPicker(dialogLoader.item)) {
+        if (!patchWallpaperPicker(dialogLoader.item)) {
             console.warn("Failed to patch background picker widget");
         }
         open()
