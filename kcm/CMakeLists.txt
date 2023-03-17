@@ -16,6 +16,7 @@ set(LIGHTDM_KCM_SRCS
     lightdmkcm.cpp
     ${GREETER_DIR}/extrarowproxymodel.cpp
     ${GREETER_DIR}/usersmodel.cpp
+    ${GREETER_DIR}/sessionsmodel.cpp
 )
 
 set(LIGHTDM_KCM_HDRS
@@ -23,6 +24,7 @@ set(LIGHTDM_KCM_HDRS
     lightdmkcm.h
     ${GREETER_DIR}/extrarowproxymodel.h
     ${GREETER_DIR}/usersmodel.h
+    ${GREETER_DIR}/sessionsmodel.h
 )
 
 kcoreaddons_add_plugin(kcm_lightdm INSTALL_NAMESPACE "plasma/kcms/systemsettings" SOURCES ${LIGHTDM_KCM_SRCS} ${LIGHTDM_KCM_HDRS})

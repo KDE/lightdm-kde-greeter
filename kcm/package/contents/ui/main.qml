@@ -44,6 +44,7 @@ Item {
     function save() {
         var settings = {}
         settings["core/SeatDefaults/autologin-user"] = autoLogin.checked ? usersCombo.currentValue : ""
+        settings["core/SeatDefaults/autologin-session"] = autoLogin.checked ? sessionsCombo.currentValue : ""
         settings["greeter/greeter/theme-name"] = themesList.currentItem.properties.id
         themeConfig.save(settings)
         return settings
@@ -261,6 +262,7 @@ Item {
                 Column {
                     spacing: gap
                     height: childrenRect.height
+                    width: parent.width
 
                     CheckBox {
                         id: autoLogin
@@ -268,20 +270,41 @@ Item {
                         onCheckedChanged: kcm.needsSave = true
                     }
 
-                    Row {
+                    Flow {
+                        width: parent.width
                         spacing: gap
                         enabled: autoLogin.checked
-                        Label {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: i18n("As user:")
+                        Row {
+                            spacing: gap
+                            Label {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: i18n("As user:")
+                            }
+                            ComboBox {
+                                id: usersCombo
+                                anchors.verticalCenter: parent.verticalCenter
+                                model: kcm.usersModel
+                                valueRole: 'name'
+                                textRole: 'display'
+                                onActivated: kcm.needsSave = true
+                            }
                         }
-                        ComboBox {
-                            id: usersCombo
-                            anchors.verticalCenter: parent.verticalCenter
-                            model: kcm.usersModel
-                            valueRole: 'name'
-                            textRole: 'display'
-                            onActivated: kcm.needsSave = true
+                        Row {
+                            spacing: gap
+                            Label {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: i18n("Using session:")
+                            }
+                            ComboBox {
+                                id: sessionsCombo
+                                anchors.verticalCenter: parent.verticalCenter
+                                model: kcm.sessionsModel
+                                valueRole: 'key'
+                                textRole: 'display'
+                                onActivated: {
+                                    kcm.needsSave = true
+                                }
+                            }
                         }
                     }
                 }

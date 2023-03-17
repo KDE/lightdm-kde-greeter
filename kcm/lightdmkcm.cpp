@@ -35,6 +35,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../about.h"
 #include "themesmodel.h"
+#include "sessionsmodel.h"
 #include "usersmodel.h"
 
 K_PLUGIN_CLASS_WITH_JSON(LightDMKcm, "kcm_lightdm.json")
@@ -44,8 +45,10 @@ LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVari
 {
     qmlRegisterAnonymousType<ThemesModel>("org.altlinux.lightdm.kcm", 1);
     qmlRegisterAnonymousType<UsersModel>("org.altlinux.lightdm.kcm", 1);
+    qmlRegisterAnonymousType<SessionsModel>("org.altlinux.lightdm.kcm", 1);
     m_themesModel = new ThemesModel(this);
     m_usersModel = new UsersModel(this);
+    m_sessionsModel = new SessionsModel(this);
 
     KAboutData* aboutData = new KAboutData(
         QStringLiteral("kcm_lightdm"),                // appName

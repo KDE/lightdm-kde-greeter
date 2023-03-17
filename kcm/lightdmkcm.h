@@ -25,6 +25,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 class ThemesModel;
 class UsersModel;
+class SessionsModel;
 
 class LightDMKcm: public KQuickAddons::ManagedConfigModule
 {
@@ -32,11 +33,13 @@ class LightDMKcm: public KQuickAddons::ManagedConfigModule
 
     Q_PROPERTY(ThemesModel *themesModel READ themesModel CONSTANT)
     Q_PROPERTY(UsersModel *usersModel READ usersModel CONSTANT)
+    Q_PROPERTY(SessionsModel *sessionsModel READ sessionsModel CONSTANT)
     Q_PROPERTY(QUrl wallpaperConfigSource READ wallpaperConfigSource CONSTANT)
     Q_PROPERTY(QString currentWallpaper READ wallpaperPackageUrl CONSTANT)
 
     ThemesModel *themesModel() const { return m_themesModel; }
     UsersModel *usersModel() const { return m_usersModel; }
+    SessionsModel *sessionsModel() const { return m_sessionsModel; }
     QUrl wallpaperConfigSource() const;
     const QString wallpaperPackageUrl() const { return QStringLiteral("org.kde.image"); }
 
@@ -54,6 +57,7 @@ public Q_SLOTS:
 private:
     ThemesModel *m_themesModel;
     UsersModel *m_usersModel;
+    SessionsModel *m_sessionsModel;
 };
 
 #endif // LIGHTDMKCM_H
