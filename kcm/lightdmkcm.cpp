@@ -33,7 +33,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <KConfigGroup>
 #include <KConfig>
 
-#include "../about.h"
+#include "config.h"
 #include "themesmodel.h"
 #include "sessionsmodel.h"
 #include "usersmodel.h"
@@ -49,15 +49,6 @@ LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVari
     m_themesModel = new ThemesModel(this);
     m_usersModel = new UsersModel(this);
     m_sessionsModel = new SessionsModel(this);
-
-    KAboutData* aboutData = new KAboutData(
-        QStringLiteral("kcm_lightdm"),                // appName
-        ki18n("LightDM KDE Config").toString(), // programName
-        QStringLiteral("0"),                        // version (set by initAboutData)
-        ki18n("Login screen using the LightDM framework").toString(),
-        KAboutLicense::GPL);
-    initAboutData(aboutData);
-    setAboutData(aboutData);
 
     // Our modules will be checking the Plasmoid attached object when running from Plasma, let it load the module
     // taken from KDE/kscreenlocker source, kcm/kcm.cpp
