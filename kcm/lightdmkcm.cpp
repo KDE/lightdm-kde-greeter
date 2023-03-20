@@ -196,7 +196,7 @@ static void find_preferred_image_in_package(KPackage::Package &package, const QS
         package.removeDefinition("preferredDark");
         package.addFileDefinition("preferredDark",
                                   QStringLiteral("images_dark%1").arg(QDir::separator()) + preferredDark,
-                                  QStringLiteral("Recommended dark wallpaper file"));
+                                  i18n("Recommended dark wallpaper file"));
     }
 }
 
