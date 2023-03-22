@@ -87,6 +87,22 @@ void LightDMKcm::save()
     QMetaObject::invokeMethod(mainUi(), "save", Q_RETURN_ARG(QVariant, ret));
     QVariantMap args = ret.value<QVariantMap>();
 
+    // any entry ending with 'Preview' is treated as an image
+    // it can be either a file or a kpackage
+    // need to identify a specific file and copy it to the home directory of
+    // the greeter
+
+    // "<path>/<id>Preview" -> "<path>/copy_<id>"
+    for (auto entry = args.begin(); entry != args.end(); ++entry) {
+        if(!entry.key().endsWith(QStringLiteral("Preview"))) continue;
+        QString key = entry.key();
+        int sep = key.lastIndexOf(QLatin1Char('/'));
+        QString path = key.left(sep);
+        QString id = key.mid(sep + 1).chopped(7);
+        QString entry_copy = QStringLiteral("%1/copy_%2").arg(path).arg(id);
+        args[entry_copy] = preferredImage(entry.value().toString());
+    }
+
     KAuth::Action saveAction(QStringLiteral("org.kde.kcontrol.kcmlightdm.save"));
     saveAction.setHelperId(QStringLiteral("org.kde.kcontrol.kcmlightdm"));
     saveAction.setArguments(args);

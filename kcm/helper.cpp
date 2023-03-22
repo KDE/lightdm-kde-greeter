@@ -90,26 +90,20 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
             return errorReply;
         }
 
-        // keys starting with "copyfrom_" and "copytoid_" are handled in a
-        // special way, in fact, this is an instruction to copy the file to the
-        // greeter's home directory, because the greeter will not be able to
-        // read the image from the user's home folder
+        // keys starting with "copy_" are handled in a special way, in fact,
+        // this is an instruction to copy the file to the greeter's home
+        // directory, because the greeter will not be able to read the image
+        // from the user's home folder
 
-        QLatin1String prefixFrom{ "copyfrom_" };
-        QLatin1String prefixTo  { "copytoid_" };
+        QLatin1String prefixFrom{ "copy_" };
 
         if (keyName.startsWith(prefixFrom)) {
             QString sourceFile = QUrl(i.value().toString()).path();
             QString theme = groupName;
-            QString replacedKey = keyName.replace(0, prefixFrom.size(), prefixTo);
+            QString name = keyName.mid(5);
 
-            auto entry = args.find(QStringLiteral("%1/%2/%3").arg(fileName).arg(groupName).arg(replacedKey));
-            if (entry == args.end()) {
-                errorReply.setErrorDescription(QStringLiteral("Can't find param needed for copying: %1").arg(replacedKey));
-                return errorReply;
-            }
+            auto entry = QStringLiteral("%1/%2/%3").arg(fileName).arg(groupName).arg(name);
 
-            QString name = entry.value().toString();
             QString ldmPath = copyImage(sourceFile, theme, name);
             if (ldmPath.isEmpty()) {
                 errorReply.setErrorDescription(QStringLiteral("Can't copy. source: %1 theme: %2 id: %3")
@@ -123,7 +117,6 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
             config->group(groupName).writeEntry(cleanKey, ldmPath);
             continue;
         }
-        if (keyName.startsWith(prefixTo)) continue;
 
         config->group(groupName).writeEntry(keyName, i.value());
     }
