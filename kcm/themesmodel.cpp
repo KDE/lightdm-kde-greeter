@@ -154,5 +154,5 @@ int ThemesModel::indexForId(QString id) const
         }
         ++i;
     }
-    return i;
+    return 0;
 }

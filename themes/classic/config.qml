@@ -24,28 +24,34 @@ import "../components/kcm" as Shared
 Item {
     id: config
 
-    // the default i18n domain here is "kcm_lightdm"
-    // each theme has its own language file, common for main layout and setup utility
-    property string domain: "lightdm_theme_classic"
+    property var domain: "lightdm_theme_classic"
 
     height: childrenRect.height
 
-    function save(settings) {
-        var branch = "greeter/" + domain + "/"
-
-        settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
-        settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
-        settings[branch + "LogoPreview"] = welcomeImageSelector.filePath
-        settings[branch + "GreetMessage"] = welcomeText.text
+    // config values
+    property var cfg_backgroundPath: Shared.ConfigValue {
+        name: "BackgroundPreview"
+        type: cfgString
+        defaultValue: "file:///usr/share/design/current/backgrounds/xdm.png"
+        listenValue: backgroundSelector.filePath
     }
-
-    function load(settings) {
-        var branch = "greeter/" + domain + "/"
-
-        backgroundSelector.filePath = root.readEntry(settings, branch + "BackgroundPreview", "file:///usr/share/design/current/backgrounds/xdm.png")
-        backgroundSelector.imageDialog.fillMode = Number(root.readEntry(settings, branch + "BackgroundFillMode", Image.PreserveAspectCrop))
-        welcomeImageSelector.filePath = root.readEntry(settings, branch + "LogoPreview", "")
-        welcomeText.text = root.readEntry(settings, branch + "GreetMessage", i18nd(domain, "Welcome to %1", "%hostname%"))
+    property var cfg_backgroundFill: Shared.ConfigValue {
+        name: "BackgroundFillMode"
+        type: cfgInteger
+        defaultValue: Image.PreserveAspectCrop
+        listenValue: backgroundSelector.imageDialog.fillMode
+    }
+    property var cfg_logoPath: Shared.ConfigValue {
+        name: "LogoPreview"
+        type: cfgString
+        defaultValue: ""
+        listenValue: welcomeImageSelector.filePath
+    }
+    property var cfg_welcomeText: Shared.ConfigValue {
+        name: "GreetMessage"
+        type: cfgString
+        defaultValue: i18nd(domain, "Welcome to %1", "%hostname%")
+        listenValue: welcomeText.text
     }
 
     Column {
@@ -57,8 +63,13 @@ Item {
         }
         Shared.SelectImageButton {
             id: backgroundSelector
+
+            configPath: cfg_backgroundPath
+            configFill: cfg_backgroundFill
             anchors.horizontalCenter: parent.horizontalCenter
-            imageDialog: Shared.WallpapersDialog {}
+            imageDialog: Shared.WallpapersDialog {
+                fillMode: cfg_backgroundFill.value
+            }
         }
 
         Label {
@@ -66,6 +77,8 @@ Item {
         }
         Shared.SelectImageButton {
             id: welcomeImageSelector
+
+            configPath: cfg_logoPath
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -78,7 +91,7 @@ Item {
             TextField {
                 id: welcomeText
                 width: themeConfig.width - x - gap * 3
-                onTextEdited: themeConfig.needsSave = true
+                text: cfg_welcomeText.value
             }
         }
     }

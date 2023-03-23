@@ -25,10 +25,12 @@ import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 Rectangle {
     id: button
 
-    property string filePath
     property bool hovered: mouseArea.containsMouse || deleteImageButton.hovered || openFileButton.hovered
     // maybe it's just a file selection dialog, or maybe a background selection dialog from Plasma
     property var imageDialog: selectFileDialog
+    property var configPath
+    property var configFill
+    property string filePath: configPath.value
 
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }
 
@@ -120,8 +122,7 @@ Rectangle {
         }
 
         onAccepted: {
-            filePath = imageDialog.fileUrl.toString();
-            themeConfig.needsSave = true
+            configPath.value = imageDialog.fileUrl.toString();
         }
     }
 }

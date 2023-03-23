@@ -24,23 +24,22 @@ import "../components/kcm" as Shared
 Item {
     id: config
 
-    // the default i18n domain here is "kcm_lightdm"
-    // each theme has its own language file, common for main layout and setup utility
-    property string domain: "lightdm_theme_userbar"
+    property var domain: "lightdm_theme_userbar"
+
     height: childrenRect.height
 
-    function save(settings) {
-        var branch = "greeter/" + domain + "/"
-
-        settings[branch + "BackgroundPreview"] = backgroundSelector.filePath
-        settings[branch + "BackgroundFillMode"] = backgroundSelector.imageDialog.fillMode
+    // config values
+    property var cfg_backgroundPath: Shared.ConfigValue {
+        name: "BackgroundPreview"
+        type: cfgString
+        defaultValue: "file:///usr/share/design/current/backgrounds/xdm.png"
+        listenValue: backgroundSelector.filePath
     }
-
-    function load(settings) {
-        var branch = "greeter/" + domain + "/"
-
-        backgroundSelector.filePath = root.readEntry(settings, branch + "BackgroundPreview", "file:///usr/share/design/current/backgrounds/xdm.png")
-        backgroundSelector.imageDialog.fillMode = Number(root.readEntry(settings, branch + "BackgroundFillMode", Image.PreserveAspectCrop))
+    property var cfg_backgroundFill: Shared.ConfigValue {
+        name: "BackgroundFillMode"
+        type: cfgInteger
+        defaultValue: Image.PreserveAspectCrop
+        listenValue: backgroundSelector.imageDialog.fillMode
     }
 
     Column {
@@ -50,11 +49,17 @@ Item {
         Label {
             text: i18nd(domain, "Background image:")
         }
+
         Shared.SelectImageButton {
             id: backgroundSelector
 
+            configPath: cfg_backgroundPath
+            configFill: cfg_backgroundFill
+
             anchors.horizontalCenter: parent.horizontalCenter
-            imageDialog: Shared.WallpapersDialog {}
+            imageDialog: Shared.WallpapersDialog {
+                fillMode: cfg_backgroundFill.value
+            }
         }
     }
 }

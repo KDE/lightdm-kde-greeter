@@ -56,3 +56,15 @@ bool SessionsModel::showLastUsedSession() const
 {
     return m_showLastUsedSession;
 }
+
+int SessionsModel::indexForSessionName(QString name) const
+{
+    int i = 0;
+    while (hasIndex(i, 0)) {
+        if (data(index(i), QLightDM::SessionsModel::SessionModelRoles::IdRole) == name) {
+            return i;
+        }
+        ++i;
+    }
+    return 0;
+}

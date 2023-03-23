@@ -49,7 +49,7 @@ Dialog {
                 break
             }
         }
-        if (!formLayout) return null
+        if (!formLayout) return false
 
         var radioButton, rowLayout
         for (var p in formLayout.children) {
@@ -60,10 +60,12 @@ Dialog {
                 rowLayout = formLayout.children[p]
             }
         }
-        if (!radioButton || !rowLayout) return null
+        if (!radioButton || !rowLayout) return false
 
         radioButton.visible = false
         rowLayout.visible = false
+
+        return true
     }
 
     function openForPath(path) {
@@ -91,8 +93,7 @@ Dialog {
 
     onAccepted: {
         // extract data from plugin fields
-        parent.filePath = dialogLoader.item.cfg_Image;
-        fillMode = dialogLoader.item.cfg_FillMode
-        themeConfig.needsSave = true
+        parent.configPath.value = dialogLoader.item.cfg_Image
+        parent.configFill.value = dialogLoader.item.cfg_FillMode
     }
 }

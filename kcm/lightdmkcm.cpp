@@ -58,12 +58,13 @@ LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVari
 
 void LightDMKcm::load()
 {
-    // collect everything that is in the configs and send it to qml
+    // collect everything that is in the configs
     QMap<QString, QString> configs{
         { QStringLiteral("core"),    QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm.conf") },
         { QStringLiteral("greeter"), QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf") }
     };
-    QVariantMap settings;
+    m_storedConfig.clear();
+    m_updatedConfig.clear();
     for (auto configFile = configs.begin(); configFile != configs.end(); ++configFile) {
         KConfig config(configFile.value(), KConfig::SimpleConfig);
         QStringList groups = config.groupList();
@@ -72,20 +73,24 @@ void LightDMKcm::load()
             QStringList entryKeys = group.keyList();
             for (auto &entryKey : entryKeys) {
                 QString entryPath = QStringLiteral("%1/%2/%3").arg(configFile.key()).arg(groupName).arg(entryKey);
-                settings[entryPath] = group.readEntry(entryKey);
+                m_storedConfig[entryPath] = group.readEntry(entryKey);
             }
         }
     }
-
-    QMetaObject::invokeMethod(mainUi(), "load", Q_ARG(QVariant, QVariant::fromValue(settings)));
+    QMetaObject::invokeMethod(mainUi(), "load");
     setNeedsSave(false);
 }
 
 void LightDMKcm::save()
 {
-    QVariant ret;
-    QMetaObject::invokeMethod(mainUi(), "save", Q_RETURN_ARG(QVariant, ret));
-    QVariantMap args = ret.value<QVariantMap>();
+    for (auto i = m_updatedConfig.begin(); i != m_updatedConfig.end(); ++i) {
+        m_storedConfig[i.key()] = i.value();
+    }
+
+    QVariantMap args;
+    for (auto i = m_storedConfig.begin(); i != m_storedConfig.end(); ++i) {
+        args[i.key()] = i.value();
+    }
 
     // any entry ending with 'Preview' is treated as an image
     // it can be either a file or a kpackage
@@ -99,8 +104,8 @@ void LightDMKcm::save()
         int sep = key.lastIndexOf(QLatin1Char('/'));
         QString path = key.left(sep);
         QString id = key.mid(sep + 1).chopped(7);
-        QString entry_copy = QStringLiteral("%1/copy_%2").arg(path).arg(id);
-        args[entry_copy] = preferredImage(entry.value().toString());
+        QString copyEntry = QStringLiteral("%1/copy_%2").arg(path).arg(id);
+        args[copyEntry] = preferredImage(entry.value().toString());
     }
 
     KAuth::Action saveAction(QStringLiteral("org.kde.kcontrol.kcmlightdm.save"));
@@ -115,13 +120,13 @@ void LightDMKcm::save()
     else
     {
         setNeedsSave(false);
+        QMetaObject::invokeMethod(mainUi(), "updateConfigValues");
     }
 }
 
 void LightDMKcm::defaults()
 {
-    // load empty config
-    QMetaObject::invokeMethod(mainUi(), "load", Q_ARG(QVariant, QVariant()));
+    QMetaObject::invokeMethod(mainUi(), "defaults");
     setNeedsSave(true);
 }
 
@@ -229,6 +234,39 @@ QString LightDMKcm::preferredImage(QString path)
 
     find_preferred_image_in_package(package, QSize());
     return package.filePath("preferred");
+}
+
+bool LightDMKcm::hasSomethingNew(ConfigMap &newCfg, ConfigMap &oldCfg)
+{
+    for (auto i = newCfg.begin(); i != newCfg.end(); ++i) {
+        if (!oldCfg.contains(i.key()) || oldCfg[i.key()] != i.value()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void LightDMKcm::updateConfigValue(QString url, QVariant value)
+{
+    m_updatedConfig[url] = value.toString();
+    bool needSave = hasSomethingNew(m_updatedConfig, m_storedConfig);
+    setNeedsSave(needSave);
+}
+
+void LightDMKcm::storeDefaultValue(QString url, QVariant value)
+{
+    if (!m_storedConfig.contains(url)) {
+        m_storedConfig[url] = value.toString();
+    }
+}
+
+QVariant LightDMKcm::getConfigValue(QString url)
+{
+    if (m_storedConfig.contains(url)) {
+        return m_storedConfig[url];
+    } else {
+        return {};
+    }
 }
 
 #include "lightdmkcm.moc"

@@ -47,17 +47,26 @@ public:
     explicit LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     Q_INVOKABLE QString preferredImage(QString dir);
+    Q_INVOKABLE void updateConfigValue(QString url, QVariant value);
+    Q_INVOKABLE void storeDefaultValue(QString url, QVariant value);
+    Q_INVOKABLE QVariant getConfigValue(QString url);
 
 public Q_SLOTS:
     void load() override;
     void save() override;
     void defaults() override;
 
-
 private:
+    using ConfigMap = QMap<QString, QString>;
+
+    bool hasSomethingNew(ConfigMap &newCfg, ConfigMap &oldCfg);
+
     ThemesModel *m_themesModel;
     UsersModel *m_usersModel;
     SessionsModel *m_sessionsModel;
+
+    ConfigMap m_storedConfig;
+    ConfigMap m_updatedConfig;
 };
 
 #endif // LIGHTDMKCM_H

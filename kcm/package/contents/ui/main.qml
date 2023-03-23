@@ -23,6 +23,7 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15 as Windows
 import org.kde.kquickcontrolsaddons 2.0 as Addons
+import "components" as Shared
 
 Item {
     id: root
@@ -31,41 +32,79 @@ Item {
     property int iconWidth: 140 * dpiScale
     property int gap: 6 * dpiScale
     property bool settingsLoaded: false
+    property var themeSettings: []
+    property var themeBranch
 
     SystemPalette { id: paletteActive;   colorGroup: SystemPalette.Active }
     SystemPalette { id: paletteInactive; colorGroup: SystemPalette.Inactive }
 
-    function readEntry(settings, key, defval) {
-        if (!settings) return defval
-        if (settings[key] == undefined) return defval
-        return settings[key]
+    // config values
+    property var cfg_autoLogin: Shared.ConfigValue {
+        branch: "core/SeatDefaults/"
+        name: "autologin-user"
+        type: cfgString
+        defaultValue: ""
+        listenValue: autoLogin.checked ? usersCombo.currentValue : ""
+    }
+    property var cfg_autoSession: Shared.ConfigValue {
+        branch: "core/SeatDefaults/"
+        name: "autologin-session"
+        type: cfgString
+        defaultValue: ""
+        listenValue: autoLogin.checked ? sessionsCombo.currentValue : ""
+    }
+    property var cfg_themeName: Shared.ConfigValue {
+        branch: "greeter/greeter/"
+        name: "theme-name"
+        type: cfgString
+        defaultValue: "userbar"
+        listenValue: themesList.currentItem.properties.id
     }
 
-    function save() {
-        var settings = {}
-        settings["core/SeatDefaults/autologin-user"] = autoLogin.checked ? usersCombo.currentValue : ""
-        settings["core/SeatDefaults/autologin-session"] = autoLogin.checked ? sessionsCombo.currentValue : ""
-        settings["greeter/greeter/theme-name"] = themesList.currentItem.properties.id
-        themeConfig.save(settings)
-        return settings
-    }
-
-    function load(settings) {
-        var autoUser = readEntry(settings, "core/SeatDefaults/autologin-user", "")
-        var index = usersCombo.indexOfValue(autoUser)
-        if (index < 0) {
-            autoLogin.checked = false
-        } else {
-            autoLogin.checked = true
-            usersCombo.currentIndex = index
+    function setupConfigValues(item, branch, setDefaults) {
+        let props = []
+        for (var p in item) {
+            if (p.startsWith("cfg_") && !p.endsWith("Changed")) {
+                if (branch) item[p].branch = branch
+                props.push(p)
+                if (setDefaults) {
+                    item[p].value = item[p].defaultValue
+                    continue
+                }
+                let configValue = kcm.getConfigValue(item[p].branch + item[p].name)
+                if (configValue) {
+                    item[p].valueFromString(configValue)
+                } else {
+                    item[p].value = item[p].defaultValue
+                    // to keep track of future changes
+                    kcm.storeDefaultValue(item[p].branch + item[p].name, item[p].defaultValue)
+                }
+                item[p].storedValue = item[p].value
+            }
         }
-        var themeName = readEntry(settings, "greeter/greeter/theme-name", "userbar")
-        var themeIndex = kcm.themesModel.indexForId(themeName)
-        themesList.currentIndex = themeIndex
+        return props
+    }
 
-        themeConfig.load(settings)
-        themeConfig.needsSave = false
+    function load() {
+        setupConfigValues(root)
+        var themeIndex = kcm.themesModel.indexForId(cfg_themeName.value)
+        themesList.switchToIndex(themeIndex)
         settingsLoaded = true
+    }
+
+    function defaults() {
+        // perhaps we don't want to set a default theme, we want to load the
+        // default settings for the selected theme
+        let currentThemeName = cfg_themeName.value
+        setupConfigValues(root, null, true)
+        cfg_themeName.value = currentThemeName
+        themeSettings = setupConfigValues(themeConfig.item, themeBranch, true)
+    }
+
+    // reread the main settings and settings of the active theme
+    function updateConfigValues() {
+        setupConfigValues(root)
+        themeSettings = setupConfigValues(themeConfig.item, themeBranch)
     }
 
     Row {
@@ -98,7 +137,7 @@ Item {
                             hoverEnabled: true
                             onClicked: {
                                 if (themesList.currentIndex != index) {
-                                    if (themeConfig.needsSave) {
+                                    if (themeConfig.needsSave()) {
                                         confirmSwitch.open()
                                     } else {
                                         themesList.switchToIndex(index)
@@ -112,6 +151,7 @@ Item {
                                 icon: StandardIcon.Warning
                                 standardButtons: Dialog.Ok | Dialog.Cancel
                                 onAccepted: {
+                                    setupConfigValues(themeConfig.item, themeBranch)
                                     themesList.switchToIndex(index)
                                 }
                             }
@@ -135,7 +175,9 @@ Item {
         }
 
         ScrollView {
-            Component.onCompleted: background.visible = true
+            Component.onCompleted: {
+                background.visible = true
+            }
             clip: true
             anchors {
                 top: parent.top
@@ -152,10 +194,11 @@ Item {
                 spacing: gap * 3
                 topMargin: gap * 3
                 bottomMargin: gap * 3
+
                 function switchToIndex(index) {
                     themesList.currentIndex = index
-                    kcm.needsSave = true
-                    themeConfig.needsSave = false
+                    themeBranch = "greeter/" + themeConfig.item.domain + "/"
+                    themeSettings = setupConfigValues(themeConfig.item, themeBranch)
                 }
             }
         }
@@ -218,31 +261,15 @@ Item {
                                 visible: settingsLoaded
                                 width: themeScrollView.width
 
-                                property var cachedSettings
-                                property bool needsSave: false
-
-                                function load(settings) {
-                                    cachedSettings = settings
-                                    item.load(settings)
-                                }
-
-                                function save(settings) {
-                                    item.save(settings)
-                                    // convert values to strings for consistency with load function
-                                    // copy because the original VariantMap object goes to c++ for saving
-                                    for (var p in settings) {
-                                        if (cachedSettings[p]) {
-                                            cachedSettings[p] = String(settings[p])
+                                function needsSave() {
+                                    for (let prop of themeSettings) {
+                                        if (item[prop].listenValue != item[prop].storedValue) {
+                                            return true
                                         }
                                     }
-                                    needsSave = false
+                                    return false;
                                 }
 
-                                onItemChanged: {
-                                    item.load(cachedSettings)
-                                }
-
-                                onNeedsSaveChanged: kcm.needsSave |= needsSave
                                 source: themesList.currentItem.properties.path + "/config.qml"
                             }
                         }
@@ -267,7 +294,7 @@ Item {
                     CheckBox {
                         id: autoLogin
                         text: i18n("Automatically log in:")
-                        onCheckedChanged: kcm.needsSave = true
+                        checked: cfg_autoLogin.value != ""
                     }
 
                     Flow {
@@ -282,11 +309,11 @@ Item {
                             }
                             ComboBox {
                                 id: usersCombo
+                                currentIndex: kcm.usersModel.indexForUserName(cfg_autoLogin.value)
                                 anchors.verticalCenter: parent.verticalCenter
                                 model: kcm.usersModel
                                 valueRole: 'name'
                                 textRole: 'display'
-                                onActivated: kcm.needsSave = true
                             }
                         }
                         Row {
@@ -297,13 +324,11 @@ Item {
                             }
                             ComboBox {
                                 id: sessionsCombo
+                                currentIndex: kcm.sessionsModel.indexForSessionName(cfg_autoSession.value)
                                 anchors.verticalCenter: parent.verticalCenter
                                 model: kcm.sessionsModel
                                 valueRole: 'key'
                                 textRole: 'display'
-                                onActivated: {
-                                    kcm.needsSave = true
-                                }
                             }
                         }
                     }
