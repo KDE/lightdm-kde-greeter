@@ -51,7 +51,8 @@ target_link_libraries(kcmlightdmhelper KF5::Auth KF5::ConfigCore)
 install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
 # common qml components for the configuration utility
-install(DIRECTORY components/
+# copied for use from the theme directories, and from the main config directory
+install(DIRECTORY package/contents/ui/components/
         DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes/components/kcm
 )
 
