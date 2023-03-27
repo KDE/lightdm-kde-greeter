@@ -42,12 +42,13 @@ Item {
             }
 
             OtherScreen {
-                visible: thisScreen != screenManager.activeScreen
+                visible: primary.parent && thisScreen != screenManager.activeScreen
             }
         }
     }
 
     PrimaryScreen {
+        id: primary
         parent: screenManager.activeScreen
         anchors.fill: parent
         Keys.onPressed: (event) => {
