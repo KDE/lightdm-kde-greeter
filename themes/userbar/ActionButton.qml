@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -29,7 +30,6 @@ Item {
     implicitWidth: Math.max(iconSize + PlasmaCore.Units.largeSpacing * 2, label.contentWidth)
     implicitHeight: iconSize + PlasmaCore.Units.smallSpacing + label.implicitHeight
 
-    opacity: activeFocus || containsMouse ? 1 : 0.85
     Behavior on opacity {
         PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
             duration: PlasmaCore.Units.longDuration
@@ -42,9 +42,9 @@ Item {
         anchors.centerIn: icon
         width: iconSize + PlasmaCore.Units.smallSpacing
         height: width
-        radius: width / 2
-        color: softwareRendering ?  PlasmaCore.ColorScope.backgroundColor : PlasmaCore.ColorScope.textColor
-        opacity: root.activeFocus || containsMouse ? (softwareRendering ? 0.8 : 0.15) : (softwareRendering ? 0.6 : 0)
+        radius: Math.floor(width / 2)
+        color: PlasmaCore.ColorScope.backgroundColor
+        opacity: 0.6
         Behavior on opacity {
             PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
                 duration: PlasmaCore.Units.longDuration
@@ -54,18 +54,15 @@ Item {
     }
 
     Rectangle {
-        anchors.centerIn: iconCircle
-        width: iconCircle.width
+        id: iconCircleBorder
+        anchors.centerIn: icon
+        width: iconSize + PlasmaCore.Units.smallSpacing
         height: width
-        radius: width / 2
-        scale: mouseArea.containsPress ? 1 : 0
-        color: PlasmaCore.ColorScope.textColor
-        opacity: 0.15
-        Behavior on scale {
-            PropertyAnimation {
-                duration: PlasmaCore.Units.shortDuration
-                easing.type: Easing.InOutQuart
-            }
+        radius: Math.floor(width / 2)
+        color: "transparent"
+        border {
+            color: containsMouse ? PlasmaCore.ColorScope.highlightColor : PlasmaCore.ColorScope.textColor
+            width: 2
         }
     }
 
@@ -87,7 +84,7 @@ Item {
         font.pointSize: root.fontSize
         anchors {
             top: icon.bottom
-            topMargin: (softwareRendering ? 1.5 : 1) * PlasmaCore.Units.smallSpacing
+            topMargin: (softwareRendering ? 1.5 : 1) * PlasmaCore.Units.mediumSpacing
             left: parent.left
             right: parent.right
         }
@@ -98,6 +95,8 @@ Item {
         wrapMode: Text.WordWrap
         font.underline: root.activeFocus
     }
+
+    Shadow { source: label }
 
     MouseArea {
         id: mouseArea

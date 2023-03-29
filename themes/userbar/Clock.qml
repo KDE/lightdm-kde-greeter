@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
+    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -13,18 +14,20 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 ColumnLayout {
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
 
+    property real ratio: 0.5
+
     PlasmaComponents3.Label {
         text: Qt.formatTime(timeSource.data["Local"]["DateTime"])
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? PlasmaCore.ColorScope.backgroundColor : "transparent" //no outline, doesn't matter
-        font.pointSize: 48
+        font.pointSize: 48 * ratio
         Layout.alignment: Qt.AlignHCenter
     }
     PlasmaComponents3.Label {
         text: Qt.formatDate(timeSource.data["Local"]["DateTime"], Qt.DefaultLocaleLongDate)
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? PlasmaCore.ColorScope.backgroundColor : "transparent" //no outline, doesn't matter
-        font.pointSize: 24
+        font.pointSize: 24 * ratio
         Layout.alignment: Qt.AlignHCenter
     }
     PlasmaCore.DataSource {

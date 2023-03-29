@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2014 David Edmundson <davidedmundson@kde.org>
     SPDX-FileCopyrightText: 2014 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -31,9 +32,9 @@ Item {
     property int fontSize: PlasmaCore.Theme.defaultFont.pointSize + 2
     signal clicked()
 
-    property real faceSize: PlasmaCore.Units.gridUnit * 7
+    property real faceSize: width
 
-    opacity: isCurrent ? 1.0 : 0.5
+    height: faceSize + usernameDelegate.height + PlasmaCore.Units.gridUnit * 2
 
     Behavior on opacity {
         OpacityAnimator {
@@ -46,7 +47,7 @@ Item {
         anchors.centerIn: imageSource
         width: imageSource.width - 2 // Subtract to prevent fringing
         height: width
-        radius: width / 2
+        radius: Math.floor(width / 2)
 
         color: PlasmaCore.ColorScope.backgroundColor
         opacity: 0.6
@@ -100,7 +101,7 @@ Item {
             live: true // otherwise the user in focus will show a blurred avatar
         }
 
-        readonly property color colorBorder: PlasmaCore.ColorScope.textColor
+        readonly property color colorBorder: mouseArea.containsMouse ? PlasmaCore.ColorScope.highlightColor : PlasmaCore.ColorScope.textColor
 
         //draw a circle with an antialiased border
         //innerRadius = size of the inner circle with contents
@@ -161,11 +162,12 @@ Item {
         maximumLineCount: wrapper.constrainText ? 3 : 1
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
-        //make an indication that this has active focus, this only happens when reached with keyboard navigation
-        font.underline: wrapper.activeFocus
     }
 
+    Shadow { source: usernameDelegate }
+
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
 

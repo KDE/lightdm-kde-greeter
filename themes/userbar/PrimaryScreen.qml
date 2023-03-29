@@ -23,8 +23,10 @@ import QtQuick.Window 2.15 // for Screen.pixelDensity
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
-Item {
+PlasmaCore.ColorScope {
     id: screen
+
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
     property var screens: VisibleScreenEnum.VisibleScreen
     property int visibleScreen: screens.DefaultScreen
@@ -32,7 +34,7 @@ Item {
     property real dpi96: 3.7820092576037516
     property real dpiScale: Screen.pixelDensity / dpi96
     property int padding: 6 * dpiScale
-    property int userFaceSize: 100 * dpiScale
+    property int userFaceSize: 120 * dpiScale
 
     Component.onCompleted: {
         startDefaultScreen()
@@ -116,7 +118,7 @@ Item {
         visibleScreen = screens.LoginScreen
         setTabOrder([ inputBox, sessionButton, keyboardLayoutButton ])
         inputBox.forceActiveFocus()
-        var username = usersList.currentItem.username
+        var username = usersList.currentItem.name
         inputBox.text = ""
         if (username == greeter.guestLoginName) {
             greeter.authenticateAsGuest()
@@ -242,7 +244,34 @@ Item {
                 model: usersModel
                 currentIndex: model.indexForUserName(greeter.lastLoggedInUser)
                 cacheBuffer: count * 80
-                delegate: userDelegate
+                delegate: UserDelegate {
+
+                    property var usersession: model.session
+
+                    avatarPath: "image://face/" + model.name
+
+                    opacity: isCurrent ? 1.0 : visibleScreen == screens.DefaultScreen ? 0.618 : 0.0
+                    name: model.name
+
+                    width: userFaceSize + screen.padding * 2
+
+                    //if we only have one delegate, we don't need to clip the text as it won't be overlapping with anything
+                    constrainText: usersList.model.rowCount() != 1
+
+                    isCurrent: ListView.isCurrentItem
+
+                    onClicked: {
+                        if (!usersList.interactive) return
+                        if (usersList.currentIndex == index) {
+                            startLoginScreen()
+                            return
+                        }
+                        usersList.currentIndex = index
+                        usersList.forceActiveFocus()
+                    }
+                    Keys.onReturnPressed: startLoginScreen()
+                }
+
                 orientation: ListView.Horizontal
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 preferredHighlightBegin: width / 2 - currentItem.width / 2
@@ -263,9 +292,33 @@ Item {
                 width: inputDialog.width
                 height: inputDialog.height
 
-                PlasmaCore.FrameSvgItem {
+                Item {
+
+                    anchors.centerIn: parent
+                    width: inputDialog.width
+                    height: inputDialog.height
+                    visible: inputDialog.visible
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: PlasmaCore.ColorScope.backgroundColor
+                        radius: screen.padding * 2
+                        opacity: 0.6
+                    }
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "transparent"
+                        border {
+                            color: PlasmaCore.ColorScope.textColor
+                            width: 2
+                        }
+                        radius: screen.padding * 2
+                    }
+                }
+
+                Item {
                     id: inputDialog
-                    imagePath: "widgets/background"
 
                     visible: (visibleScreen == screens.LoginScreen && visibleOnLoginScreen) || (visibleScreen == screens.PromptScreen)
                     enabled: visible
@@ -342,21 +395,14 @@ Item {
                     }
                 }
 
-                PlasmaComponents.Button {
+                ActionButton {
                     id: loginButton
-
                     anchors.centerIn: parent
-                    visible: visibleScreen == screens.DefaultScreen
-                    enabled: visible
-
-                    icon.name: "go-next"
-                    rightPadding: screen.padding * 2
+                    iconSource: "go-next"
                     text: i18n("Log in")
                     onClicked: startLoginScreen()
-
-                    Behavior on opacity {
-                        NumberAnimation { duration: 100 }
-                    }
+                    visible: visibleScreen == screens.DefaultScreen
+                    enabled: visible
                 }
             }
         }
@@ -407,114 +453,17 @@ Item {
         }
     }
 
-    Component {
-        id: userDelegate
+    Shadow { source: menuBar }
 
-        Item {
-            id: wrapper
-
-            property bool isCurrent: ListView.isCurrentItem
-
-            // Expose current item info to the outer world. I can't find
-            // another way to access this from outside the list.
-            property string username: model.name
-            property string usersession: model.session
-
-            width: frame.width
-            height: frame.height
-
-            opacity: isCurrent ? 1.0 : visibleScreen == screens.DefaultScreen ? 0.618 : 0.0
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                }
-            }
-
-            PlasmaCore.FrameSvgItem {
-                id: frame
-
-                width: userFaceSize + screen.padding * 2
-                height: childrenRect.height + screen.padding * 2
-
-                imagePath: "widgets/lineedit"
-                prefix: "base"
-                enabledBorders: "NoBorder"
-
-                Image {
-                    id: face
-                    width: userFaceSize
-                    height: userFaceSize
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: parent.top
-                    anchors.topMargin: screen.padding
-                    sourceSize.width: userFaceSize
-                    sourceSize.height: userFaceSize
-                    source: "image://face/" + name
-                }
-
-                PlasmaComponents.Label {
-                    id: loginText
-
-                    anchors.top: face.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: userFaceSize
-
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                    text: display
-                }
-            }
-
-            PlasmaCore.FrameSvgItem {
-                id: frameHover
-                anchors.fill: frame
-                imagePath: "widgets/lineedit"
-                prefix: "hover"
-                opacity: mouseArea.containsMouse ? 1 : 0
-                Behavior on opacity {
-                    NumberAnimation { duration: 100 }
-                }
-            }
-
-            MouseArea {
-                id: mouseArea
-                anchors.fill: frame
-                anchors.margins: -padding * 0.5
-                hoverEnabled: true
-                onEntered: usersList.itemHovered = true
-                onExited: usersList.itemHovered = false
-                onClicked: {
-                    if (!usersList.interactive) return
-                    if (usersList.currentIndex == index) {
-                        startLoginScreen()
-                        return
-                    }
-                    usersList.currentIndex = index
-                    usersList.forceActiveFocus()
-                }
-            }
-
-            Keys.onReturnPressed: startLoginScreen()
-
-            ListView.onAdd: {
-                if (visibleScreen == screens.DefaultScreen && username == greeter.lastLoggedInUser) {
-                    usersList.currentIndex = usersList.model.indexForUserName(username)
-                }
-            }
-        }
-    }
-
-    PlasmaCore.FrameSvgItem {
+    Row {
         id: menuBar
 
         anchors.top: wholeScreen.top
         anchors.right: wholeScreen.right
-        width: childrenRect.width + margins.left
-        height: childrenRect.height + margins.bottom
-        imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|BottomBorder"
-
+        anchors.margins: screen.padding
+        width: childrenRect.width
+        height: childrenRect.height
+        spacing: screen.padding
         visible: visibleScreen != screens.WaitScreen
         enabled: visible
 
@@ -524,88 +473,90 @@ Item {
             expand = expand && x + keyboardLayoutButton.x > activeScreen.width * 0.25
         }
 
-        Row {
-            spacing: screen.padding
-            x: parent.margins.left
-            y: parent.margins.top
-
-            KeyboardButton {
-                id: keyboardLayoutButton
-                onKeyboardLayoutTriggered: {
-                    centerPanelFocus.forceActiveFocus()
-                }
-            }
-
-            ListButton {
-                id: sessionButton
-                model: sessionsModel
-                dataRole: "key"
-                icon.name: "computer"
-
-                onItemTriggered: {
-                    centerPanelFocus.forceActiveFocus()
-                }
-
-                function updateCurrentSession() {
-                    var i =  indexForData(usersList.currentItem.usersession)
-                    i = i || indexForData(greeter.defaultSession)
-                    i = i || 0
-                    currentIndex = i
-                }
-
-                Component.onCompleted: {
-                    updateCurrentSession()
-                    usersList.onCurrentIndexChanged.connect(updateCurrentSession)
-                }
-            }
-
-
-            TooltipButton {
-                id: loginAsOtherButton
-                caption: i18n("Log in as another user")
-                expand: menuBar.expand
-                icon.name: "auto-type"
-                onClicked: loginAsOtherUser()
-            }
-
-            TooltipButton {
-                id: suspendButton
-                caption: i18n("Suspend")
-                expand: menuBar.expand
-                icon.name: "system-suspend"
-                enabled: power.canSuspend
-                onClicked: power.suspend()
-            }
-
-            TooltipButton {
-                id: hibernateButton
-                caption: i18n("Hibernate")
-                expand: menuBar.expand
-                icon.name: "system-suspend-hibernate"
-                //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
-                visible: power.canHibernate
-                onClicked: power.hibernate()
-            }
-
-            TooltipButton {
-                id: restartButton
-                caption: i18n("Restart")
-                expand: menuBar.expand
-                icon.name: "system-reboot"
-                enabled: power.canRestart
-                onClicked: power.restart()
-            }
-
-            TooltipButton {
-                id: shutdownButton
-                caption: i18n("Shutdown")
-                expand: menuBar.expand
-                icon.name: "system-shutdown"
-                enabled: power.canShutdown
-                onClicked: power.shutdown()
+        KeyboardButton {
+            id: keyboardLayoutButton
+            onKeyboardLayoutTriggered: {
+                centerPanelFocus.forceActiveFocus()
             }
         }
+
+        ListButton {
+            id: sessionButton
+            model: sessionsModel
+            dataRole: "key"
+            icon.name: "computer"
+
+            onItemTriggered: {
+                centerPanelFocus.forceActiveFocus()
+            }
+
+            function updateCurrentSession() {
+                var i =  indexForData(usersList.currentItem.usersession)
+                i = i || indexForData(greeter.defaultSession)
+                i = i || 0
+                currentIndex = i
+            }
+
+            Component.onCompleted: {
+                updateCurrentSession()
+                usersList.onCurrentIndexChanged.connect(updateCurrentSession)
+            }
+        }
+
+        TooltipButton {
+            id: loginAsOtherButton
+            caption: i18n("Log in as another user")
+            expand: menuBar.expand
+            icon.name: "auto-type"
+            onClicked: loginAsOtherUser()
+        }
+
+        TooltipButton {
+            id: suspendButton
+            caption: i18n("Suspend")
+            expand: menuBar.expand
+            icon.name: "system-suspend"
+            enabled: power.canSuspend
+            onClicked: power.suspend()
+        }
+
+        TooltipButton {
+            id: hibernateButton
+            caption: i18n("Hibernate")
+            expand: menuBar.expand
+            icon.name: "system-suspend-hibernate"
+            //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
+            visible: power.canHibernate
+            onClicked: power.hibernate()
+        }
+
+        TooltipButton {
+            id: restartButton
+            caption: i18n("Restart")
+            expand: menuBar.expand
+            icon.name: "system-reboot"
+            enabled: power.canRestart
+            onClicked: power.restart()
+        }
+
+        TooltipButton {
+            id: shutdownButton
+            caption: i18n("Shutdown")
+            expand: menuBar.expand
+            icon.name: "system-shutdown"
+            enabled: power.canShutdown
+            onClicked: power.shutdown()
+        }
     }
+
+    Clock {
+        id: clock
+        ratio: 0.5
+        anchors.bottom: wholeScreen.bottom
+        anchors.left: wholeScreen.left
+        anchors.margins: screen.padding * 2
+    }
+    Shadow { source: clock }
 
     Loader {
         id: inputPanel

@@ -23,7 +23,11 @@ import QtQuick.Window 2.15
 Item {
     id: manager
 
-    property Item activeScreen: manager.children[0].delegateWindow.contentItem
+    property Item activeScreen: {
+        let window = manager.children[0].delegateWindow
+        return window ? window.contentItem : null
+    }
+
     property Component delegate
 
     Repeater {
