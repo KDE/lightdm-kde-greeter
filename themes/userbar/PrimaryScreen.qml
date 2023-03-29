@@ -230,6 +230,9 @@ PlasmaCore.ColorScope {
                     horizontalCenter: parent.horizontalCenter
                 }
 
+                // so as not to animate if the dimensions change when the screen changes
+                property bool animateDelegate: false
+
                 visible: visibleScreen == screens.DefaultScreen || visibleScreen == screens.LoginScreen
                 enabled: visible
                 interactive: visibleScreen == screens.DefaultScreen
@@ -254,6 +257,7 @@ PlasmaCore.ColorScope {
                     name: model.name
 
                     width: userFaceSize + screen.padding * 2
+                    animate: usersList.animateDelegate
 
                     //if we only have one delegate, we don't need to clip the text as it won't be overlapping with anything
                     constrainText: usersList.model.rowCount() != 1
@@ -266,8 +270,10 @@ PlasmaCore.ColorScope {
                             startLoginScreen()
                             return
                         }
+                        usersList.animateDelegate = true
                         usersList.currentIndex = index
                         usersList.forceActiveFocus()
+                        usersList.animateDelegate = false
                     }
                     Keys.onReturnPressed: startLoginScreen()
                 }
