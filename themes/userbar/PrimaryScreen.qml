@@ -35,6 +35,20 @@ PlasmaCore.ColorScope {
     property real dpiScale: Screen.pixelDensity / dpi96
     property int padding: 6 * dpiScale
     property int userFaceSize: 120 * dpiScale
+    readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+
+    PlasmaComponents.Label {
+        id: debugInfo
+        visible: showDebugInfo
+        anchors {
+            bottom: wholeScreen.bottom
+            right: wholeScreen.right
+            margins: screen.padding
+        }
+        text: "PPI: " + (Screen.pixelDensity * 25.4).toFixed(2) + " PPM: " + Screen.pixelDensity.toFixed(3)
+        + "\n" + (softwareRendering ? "Software rendering" : "Hardware rendering")
+    }
+    Shadow { source: debugInfo }
 
     Component.onCompleted: {
         startDefaultScreen()

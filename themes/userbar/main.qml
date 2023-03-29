@@ -26,6 +26,7 @@ Item {
 
     width: screenSize.width
     height: screenSize.height
+    property bool showDebugInfo: false
 
     ScreenManager {
         id: screenManager
@@ -54,6 +55,9 @@ Item {
         Keys.onPressed: (event) => {
             if (event.key == Qt.Key_F1 || event.key == Qt.Key_P && (event.modifiers & Qt.MetaModifier)) {
                 screenManager.nextActiveScreen()
+            }
+            if (event.key == Qt.Key_F10) {
+                showDebugInfo = !showDebugInfo
             }
         }
     }
