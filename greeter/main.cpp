@@ -36,6 +36,14 @@ int main(int argc, char **argv)
     KConfigGroup configGroup = config.group("greeter");
     qputenv("QT_IM_MODULE", configGroup.readEntry("input-method", "qtvirtualkeyboard").toUtf8());
 
+    if (configGroup.readEntry("enable-high-dpi", "true") == QStringLiteral("true")) {
+        qDebug() << "Enable high DPI scaling and pixmaps.";
+        QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+        QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    } else {
+        qDebug() << "Don't enable high DPI scaling and pixmaps.";
+    }
+
     QApplication app(argc, argv);
     QCommandLineParser options;
 
