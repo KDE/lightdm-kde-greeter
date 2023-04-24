@@ -31,10 +31,9 @@ PlasmaCore.ColorScope {
     property var screens: VisibleScreenEnum.VisibleScreen
     property int visibleScreen: screens.DefaultScreen
 
-    property real dpi96: 3.7820092576037516
-    property real dpiScale: Screen.pixelDensity / dpi96
-    property int padding: 6 * dpiScale
-    property int userFaceSize: 120 * dpiScale
+    property real gridUnit: PlasmaCore.Units.gridUnit
+    property int padding: gridUnit / 3
+    property int userFaceSize: 7 * gridUnit
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
 
     PlasmaComponents.Label {
@@ -46,8 +45,11 @@ PlasmaCore.ColorScope {
             margins: screen.padding
         }
         text: "PPI: " + (Screen.pixelDensity * 25.4).toFixed(2) + " PPM: " + Screen.pixelDensity.toFixed(3)
+        + "\nDevice pixel ratio: " + (Screen.devicePixelRatio).toFixed(3)
         + "\n" + (softwareRendering ? "Software rendering" : "Hardware rendering")
+        + "\n" + "gridUnit: " + gridUnit + " padding: " + screen.padding
     }
+
     Shadow { source: debugInfo }
 
     Component.onCompleted: {
@@ -373,7 +375,7 @@ PlasmaCore.ColorScope {
 
                         PlasmaComponents.TextField {
                             id: inputBox
-                            width: 150 * dpiScale
+                            width: 8 * gridUnit
                             onAccepted: finishDialog()
 
                             anchors.verticalCenter: parent.verticalCenter

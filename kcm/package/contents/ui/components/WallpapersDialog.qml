@@ -31,8 +31,8 @@ Dialog {
     property var configDialog: kcm
 
     anchors.centerIn: Overlay.overlay
-    width: root.width - 100 * dpiScale
-    height: root.height - 100 * dpiScale
+    width: root.width - 5 * gridUnit
+    height: root.height - 5 * gridUnit
     leftInset: -gap
     rightInset: -gap
     bottomInset: -gap

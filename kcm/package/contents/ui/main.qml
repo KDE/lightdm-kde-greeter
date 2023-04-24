@@ -23,14 +23,14 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15 as Windows
 import org.kde.kquickcontrolsaddons 2.0 as Addons
+import org.kde.plasma.core 2.0 as PlasmaCore
 import "components" as Shared
 
 Item {
     id: root
-    property real dpi96: 3.7820092576037516
-    property real dpiScale: Windows.Screen.pixelDensity / dpi96
-    property int iconWidth: 140 * dpiScale
-    property int gap: 6 * dpiScale
+    property real gridUnit: PlasmaCore.Units.gridUnit
+    property int iconWidth: 7 * gridUnit
+    property int gap: gridUnit / 3
     property bool settingsLoaded: false
     property var themeSettings: []
     property var themeBranch

@@ -34,7 +34,7 @@ Rectangle {
 
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }
 
-    width: 160 * dpiScale
+    width: 8 * gridUnit
     height: width * 0.75
     border.color: paletteActive.mid
     border.width: 1
