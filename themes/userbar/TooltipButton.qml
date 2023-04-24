@@ -18,6 +18,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import QtQuick.Controls 2.15
+import QtQuick 2.15
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 PlasmaComponents.ToolButton {
@@ -25,6 +26,13 @@ PlasmaComponents.ToolButton {
     // caption will shown as a tooltip
     property bool expand: true
     property string caption
+    property int approximateFullWidth: captionSize.width + height + spacing
+
+    Label {
+        id: captionSize
+        visible: false
+        text: caption
+    }
 
     text: expand ? caption : null
     hoverEnabled: true

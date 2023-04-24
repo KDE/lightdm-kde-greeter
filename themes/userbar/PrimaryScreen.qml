@@ -196,10 +196,6 @@ PlasmaCore.ColorScope {
         y: wholeScreen.y + menuBar.height
         width: wholeScreen.width
         height: Math.min(inputPanel.item.y - menuBar.height, wholeScreen.height - menuBar.height)
-
-        onWidthChanged: {
-            menuBar.expand = true
-        }
     }
 
     ListModel {
@@ -489,14 +485,26 @@ PlasmaCore.ColorScope {
         visible: visibleScreen != screens.WaitScreen
         enabled: visible
 
-        // whether to show button captions
-        property bool expand: true
-        onXChanged: {
-            expand = expand && x + keyboardLayoutButton.x > activeScreen.width * 0.25
+        property int expandedWidth: {
+            var approximateFullWidth = 0
+            for(var i in children) {
+                var child = children[i]
+                if (child.approximateFullWidth == null) {
+                    console.warn("menuBar: child " + child + " does not have the required property (approximateFullWidth)")
+                    continue
+                }
+                approximateFullWidth += child.approximateFullWidth
+            }
+            approximateFullWidth += children.length * menuBar.spacing
+            return approximateFullWidth
         }
+
+        // whether to show button captions
+        property bool expand: expandedWidth < activeScreen.width * 0.9
 
         KeyboardButton {
             id: keyboardLayoutButton
+            property int approximateFullWidth: height * 2
             onKeyboardLayoutTriggered: {
                 centerPanelFocus.forceActiveFocus()
             }
@@ -507,6 +515,8 @@ PlasmaCore.ColorScope {
             model: sessionsModel
             dataRole: "key"
             icon.name: "computer"
+            // probably won't get wider
+            property int approximateFullWidth: height * 6
 
             onItemTriggered: {
                 centerPanelFocus.forceActiveFocus()
