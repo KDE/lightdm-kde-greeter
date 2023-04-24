@@ -28,6 +28,8 @@ target_link_libraries(lightdm-kde-greeter
   KF5::Plasma
   KF5::ConfigGui
   KF5::I18n
+  X11::X11
+  X11::Xrandr
   ${LIBXCB_LIBRARIES}
   ${LIBXKB_LIBRARIES}
 )
