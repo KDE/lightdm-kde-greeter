@@ -35,11 +35,12 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 
 struct MyScreen {
+    QString name;
     int width;
     int height;
     int mm_width;
     int mm_height;
-    operator QString() const { return QStringLiteral("width %1 height %2 mm_width %3 mm_height %4").arg(width).arg(height).arg(mm_width).arg(mm_height); }
+    operator QString() const { return QStringLiteral("output %1 width %2 height %3 mm_width %4 mm_height %5").arg(name).arg(width).arg(height).arg(mm_width).arg(mm_height); }
 };
 
 QList<MyScreen> getScreens(float &dpi) {
@@ -69,7 +70,6 @@ QList<MyScreen> getScreens(float &dpi) {
         }
 
         qDebug("%s: using RandR v%d.%d", __FUNCTION__, major, minor);
-
         if (!(major > 1 || (major == 1 && minor >= 5))) {
             qWarning("%s: need RandR > v1.5", __FUNCTION__);
             break;
@@ -84,9 +84,18 @@ QList<MyScreen> getScreens(float &dpi) {
             break;
         }
 
+        XRRScreenResources *res = XRRGetScreenResources(dpy, root);
         for (int i = 0; i < n; ++i) {
-            result.push_back({ m[i].width, m[i].height, m[i].mwidth, m[i].mheight });
+            if (m[i].noutput != 1) {
+                qWarning("%s: (monitor %d of %d) I don't know what to do if there is not exactly one output for the monitor", __FUNCTION__, i + 1, n);
+                continue;
+            }
+            XRROutputInfo *output = XRRGetOutputInfo(dpy, res, m[i].outputs[0]);
+            result.push_back({ QLatin1String(output->name), m[i].width, m[i].height, m[i].mwidth, m[i].mheight });
+            qDebug("%s: added screen %s", __FUNCTION__, qPrintable(result.back()));
+            XRRFreeOutputInfo(output);
         }
+        XRRFreeScreenResources(res);
 
     } while(false);
 
@@ -121,12 +130,13 @@ void applyScreenScales()
     auto screens = getScreens(dpi);
     if (screens.size() == 0) return;
 
-    QString sep, param, empty;
+    QString sep, param;
     for(auto &screen: screens) {
         float ppi = 25.4f * (float)screen.width / screen.mm_width;
         float scale = scaleForScreen(std::min(screen.height, screen.width), ppi, dpi);
         // do not write the value 1, this can cause scale inconsistencies in rare cases
-        param += sep + (scale == 1.f ? empty : QString::number(scale));
+        if (scale == 1.f) continue;
+        param += QStringLiteral("%1%2=%3").arg(sep).arg(screen.name).arg(scale);
         sep = QStringLiteral(";");
     }
 
