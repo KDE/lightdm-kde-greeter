@@ -60,13 +60,6 @@ Item {
         defaultValue: "userbar"
         listenValue: themesList.currentItem.properties.id
     }
-    property var cfg_enableHighDPI: Shared.ConfigValue {
-        branch: "greeter/greeter/"
-        name: "enable-high-dpi"
-        type: cfgBoolean
-        defaultValue: true
-        listenValue: enableHighDPI.checked
-    }
 
     function setupConfigValues(item, branch, setDefaults) {
         let props = []
@@ -297,12 +290,6 @@ Item {
                     spacing: gap
                     height: childrenRect.height
                     width: parent.width
-
-                    CheckBox {
-                        id: enableHighDPI
-                        text: "High DPI"
-                        checked: cfg_enableHighDPI.value
-                    }
 
                     CheckBox {
                         id: autoLogin
