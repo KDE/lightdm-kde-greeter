@@ -21,6 +21,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QCommandLineParser>
 #include <QApplication>
+#include <QQuickStyle>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -161,6 +162,8 @@ int main(int argc, char **argv)
     } else {
         qDebug() << "Don't enable high DPI scaling and pixmaps.";
     }
+
+    QQuickStyle::setStyle(QStringLiteral("Plasma"));
 
     QApplication app(argc, argv);
     QCommandLineParser options;

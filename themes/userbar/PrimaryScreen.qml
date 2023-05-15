@@ -428,6 +428,9 @@ PlasmaCore.ColorScope {
         ListView {
             id: msgList
 
+            PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+            PlasmaCore.ColorScope.inherit: false
+
             anchors.horizontalCenter: parent.horizontalCenter
             y: (centerPanel.y - height) / 2
             width: contentItem.childrenRect.width
@@ -438,22 +441,22 @@ PlasmaCore.ColorScope {
             delegate: PlasmaCore.FrameSvgItem {
                 imagePath: "widgets/lineedit"
                 prefix: "base"
-                width: msgBody.width + margins.left + margins.right + screen.padding * 2
-                height: msgBody.height + margins.bottom + margins.top
+                width: msgBody.width
+                height: msgBody.height
                 Row {
                     id: msgBody
                     anchors.centerIn: parent
+                    spacing: screen.padding
+                    padding: spacing * 2
                     PlasmaCore.IconItem {
                         width: units.iconSizes.medium
                         height: width
                         source: model.type == 0 ? "dialog-information" : "dialog-error"
                         anchors.verticalCenter: parent.verticalCenter
                     }
-                    TextArea {
+                    Label {
                         id: label
                         anchors.verticalCenter: parent.verticalCenter
-                        readOnly: true
-                        selectByMouse: true
                         text: model.text.trim()
                     }
                 }

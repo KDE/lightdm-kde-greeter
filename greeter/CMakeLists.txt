@@ -22,6 +22,7 @@ target_link_libraries(lightdm-kde-greeter
   Qt5::DBus
   Qt5::Qml
   Qt5::Quick
+  Qt5::QuickControls2
   ${QLIGHTDM_LIBRARIES}
   KF5::Declarative
   KF5::IconThemes
