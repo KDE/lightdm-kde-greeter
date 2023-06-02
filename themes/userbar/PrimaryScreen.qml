@@ -369,36 +369,11 @@ PlasmaCore.ColorScope {
                             }
                         }
 
-                        PlasmaComponents.TextField {
+                        TextFieldWithKeyboard {
                             id: inputBox
                             width: 8 * gridUnit
                             onAccepted: finishDialog()
-
                             anchors.verticalCenter: parent.verticalCenter
-
-                            TooltipButton {
-                                id: virtualKeyboardButton
-                                anchors {
-                                    right: parent.right
-                                    rightMargin: y
-                                    verticalCenter: parent.verticalCenter
-                                }
-                                height: parent.height
-                                width: height
-                                icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-                                visible: inputPanel.item
-                                caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
-                                expand: false
-
-                                onClicked: {
-                                    inputPanel.switchState()
-                                    inputBox.forceActiveFocus()
-                                }
-                            }
-
-                            Behavior on opacity {
-                                NumberAnimation { duration: 100 }
-                            }
                         }
 
                         PlasmaComponents.ToolButton {
