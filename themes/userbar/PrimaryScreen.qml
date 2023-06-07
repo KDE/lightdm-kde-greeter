@@ -62,11 +62,11 @@ PlasmaCore.ColorScope {
         function onShowPrompt(text, type) {
             if (type == 0) { // enter something that is not secret, such as a username
                 inputBoxLabel.text = text
-                inputBox.text = ""
+                inputBox.clear()
                 inputBox.echoMode = TextInput.Normal
             } else { // enter secret word
                 inputBoxLabel.text = text
-                inputBox.text = ""
+                inputBox.clear()
                 inputBox.echoMode = TextInput.Password
             }
             if (visibleScreen != screens.LoginScreen) {
@@ -135,7 +135,7 @@ PlasmaCore.ColorScope {
         setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
         inputBox.forceActiveFocus()
         var username = usersList.currentItem.name
-        inputBox.text = ""
+        inputBox.clear()
         if (username == greeter.guestLoginName) {
             greeter.authenticateAsGuest()
         } else {
@@ -160,6 +160,7 @@ PlasmaCore.ColorScope {
     function loginAsOtherUser() {
         clearMessages()
         greeter.authenticate()
+        inputBox.overrideText = greeter.lastLoggedInUser
         startPromptScreen()
     }
 
@@ -371,6 +372,18 @@ PlasmaCore.ColorScope {
 
                         TextFieldWithKeyboard {
                             id: inputBox
+
+                            // if set overrideText, the first clear will set this text
+                            // need for 'log in as another user'
+                            property string overrideText
+                            function clear() {
+                                if (overrideText.length != 0) {
+                                    text = overrideText
+                                    overrideText = ""
+                                } else {
+                                    text = ""
+                                }
+                            }
                             width: 8 * gridUnit
                             onAccepted: finishDialog()
                             anchors.verticalCenter: parent.verticalCenter
