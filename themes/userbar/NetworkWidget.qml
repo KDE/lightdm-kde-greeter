@@ -127,6 +127,8 @@ TooltipButton {
         // if the width is too small, the buttons also start to shrink and hide the content
         width: Math.max(implicitWidth, secretField.visible ? confirmFooter.minWidth + secretField.width : confirmFooter.minWidth + back.border * 2)
 
+        closePolicy: Popup.CloseOnEscape
+
         property alias text: label.text
         property bool inputSecret
 
@@ -187,6 +189,7 @@ TooltipButton {
 
         property bool onLine: connectionsModel.networkingEnabled
 
+        closePolicy: confirmAction.visible ? Popup.CloseOnEscape : Popup.CloseOnEscape | Popup.CloseOnPressOutside
         onAboutToHide: root.popupHide()
 
         background: PopupBackground {
