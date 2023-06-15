@@ -514,6 +514,7 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     auto wifiDev = Util::findDeviceForAccessPointPath(item.path);
     if (!wifiDev) {
         qWarning("%s: can't find device for access point path: %s", __FUNCTION__, qPrintable(item.path));
+        return;
     }
     auto ap = wifiDev->findAccessPoint(item.path);
     if (!ap) {
@@ -530,7 +531,7 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     }
     QString permissions = QStringLiteral("user:%1").arg(QLatin1String(pw->pw_name));
     map.insert(QStringLiteral("permissions"), QStringList(permissions));
-    map.insert(QStringLiteral("autoconnect"), true);
+    map.insert(QStringLiteral("interface-name"), wifiDev->interfaceName());
     connMap.insert(QStringLiteral("connection"), map);
     QVariantMap wirelessMap;
     wirelessMap.insert(QStringLiteral("ssid"), ap->rawSsid());
@@ -555,7 +556,10 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
 
     connMap.insert(QStringLiteral("802-11-wireless"), wirelessMap);
 
-    auto reply = NetworkManager::addConnectionUnsaved(connMap);
+    QVariantMap options;
+    options.insert(QStringLiteral("persist"), QStringLiteral("memory"));
+    // the connection will not be saved to disk and will disappear after a reboot
+    auto reply = NetworkManager::addAndActivateConnection2(connMap, wifiDev->uni(), {}, options);
     Util::handleDBusDeviceError(this, wifiDev.data(), reply, [this, item, reply] {
         if (!reply.isError()) {
             // the error occurred after the successful creation of the
