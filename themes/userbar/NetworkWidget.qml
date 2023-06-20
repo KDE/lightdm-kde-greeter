@@ -28,10 +28,15 @@ import ConnectionEnum 1.0
 TooltipButton {
     id: root
 
+    property bool needHint: connectionsModel.primary && (connectionsModel.primary.flags & ConnectionEnum.FLAG_PRIVATE)
+    property bool needCaption: !expand || width < implicitWidth
+    property string hint: i18n("The connection will be active only on the login screen.")
+
     caption: connectionsModel.primary.name
     width: Math.min(approximateFullWidth, implicitWidth)
     icon.name: connectionIcon(connectionsModel.primary)
-    ToolTip.visible: hovered && (!expand || width < implicitWidth)
+    ToolTip.visible: hovered && (needCaption || needHint)
+    ToolTip.text: (needCaption ? caption : "") + (needHint && needCaption ? "\n" : "" ) + (needHint ? hint : "")
 
     property int approximateFullWidth
     property int gap: screen.padding
@@ -296,7 +301,7 @@ TooltipButton {
                         PlasmaCore.IconItem {
                             colorGroup: screen.colorGroup
                             visible: model != null && model.item.type == ConnectionEnum.TYPE_WIRELESS
-                            source: model.item.locked ? "object-locked" : "object-unlocked"
+                            source: model.item.flags & ConnectionEnum.FLAG_LOCKED ? "object-locked" : "object-unlocked"
                         }
 
                         PlasmaComponents.Label {
@@ -341,10 +346,13 @@ TooltipButton {
 
                     Keys.onSpacePressed: itemClicked(item)
 
+                    property bool needHint: item && (item.flags & ConnectionEnum.FLAG_PRIVATE) && item.state == ConnectionEnum.STATE_ON
+                    property bool needCaption: connectionName.width < connectionName.implicitWidth
+
                     ToolTip.delay: 1000
                     ToolTip.timeout: 5000
-                    ToolTip.visible: mouseArea.containsMouse && connectionName.width < connectionName.implicitWidth
-                    ToolTip.text: connectionName.text
+                    ToolTip.visible: mouseArea.containsMouse && (needHint || needCaption)
+                    ToolTip.text: (needCaption ? connectionName.text : "") + (needCaption && needHint ? "\n" : "") + (needHint ? hint : "")
                 }
             }
         }

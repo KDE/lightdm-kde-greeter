@@ -41,6 +41,12 @@ namespace ConnectionEnum
     };
     Q_ENUM_NS(State)
 
+    enum FlagBits {
+        FLAG_PRIVATE = 0x01,
+        FLAG_LOCKED  = 0x02
+    };
+    Q_ENUM_NS(FlagBits)
+
     enum Action {
         ACTION_NONE,
         ACTION_DISCONNECT,

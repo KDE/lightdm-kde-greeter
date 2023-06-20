@@ -529,7 +529,7 @@ PlasmaCore.ColorScope {
         NetworkWidget {
             id: connectionsButton
             expand: menuBar.expand
-            approximateFullWidth: height * 5
+            approximateFullWidth: height * 6
             onPopupHide: centerPanelFocus.forceActiveFocus()
         }
 

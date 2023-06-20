@@ -92,6 +92,7 @@ private:
 
     QVector<ConnectionItem> m_connections;
     QScopedPointer<ConnectionItem> m_primary;
+    QString m_username;
 };
 
 #endif // CONNECTIONSMODEL_H

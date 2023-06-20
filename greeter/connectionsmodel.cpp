@@ -126,6 +126,13 @@ ConnectionsModel::ConnectionsModel(QObject *parent) :
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::primaryConnectionChanged, this, &ConnectionsModel::updatePrimaryConnection);
 
+    auto pw = getpwuid(getuid());
+    if (!pw || strlen(pw->pw_name) == 0) {
+        qWarning("%s: unable to get user data", __FUNCTION__);
+    } else {
+        m_username = QLatin1String(pw->pw_name);
+    }
+
     requestScanWifi();
     fillConnections();
 
@@ -199,11 +206,19 @@ void ConnectionsModel::fillConnections()
                 QString entryText = conn ? conn->name() : network->ssid();
                 QString path = accessPoint->uni();
 
-                bool entryLocked = accessPoint->wpaFlags() || accessPoint->rsnFlags();
+                int flags = 0;
+
+                if (accessPoint->wpaFlags() || accessPoint->rsnFlags()) {
+                    flags |= ConnectionEnum::FLAG_LOCKED;
+                }
 
                 ConnectionEnum::State entryState = ConnectionEnum::STATE_OFF;
                 if (conn) {
                     path = conn->path();
+                    auto permissions = conn->settings()->permissions();
+                    if (permissions.contains(m_username)) {
+                        flags |= ConnectionEnum::FLAG_PRIVATE;
+                    }
                     for (const auto &ac : NetworkManager::activeConnections()) {
                         if (ac->uuid() == conn->uuid()) {
                             entryState = ac->state() == ac->Activated ? ConnectionEnum::STATE_ON : ConnectionEnum::STATE_WAIT;
@@ -215,7 +230,7 @@ void ConnectionsModel::fillConnections()
 
                 checkItem(std::move(ConnectionItem{}
                                     .setType(ConnectionEnum::TYPE_WIRELESS)
-                                    .setLock(entryLocked)
+                                    .setFlags(flags)
                                     .setName(entryText)
                                     .setPath(path)
                                     .setSignalStrength(network->signalStrength())
@@ -234,8 +249,8 @@ void ConnectionsModel::fillConnections()
     // update signal level for menubar button
     for (auto &item : m_connections) {
         if (sameConnection(item, *m_primary)) {
-            if (m_primary->signalStrength == item.signalStrength) break;
-            m_primary->setSignalStrength(item.signalStrength);
+            if (m_primary->signalStrength == item.signalStrength && m_primary->flags == item.flags) break;
+            m_primary->setSignalStrength(item.signalStrength).setFlags(item.flags);
             emit primaryChanged();
             break;
         }
@@ -328,7 +343,9 @@ bool ConnectionsModel::precede(const ConnectionItem &i1, const ConnectionItem &i
 {
     if (i1.type != i2.type) return i1.type < i2.type;
     if (i1.state != i2.state) return i1.state > i2.state;
-    if (i1.locked != i2.locked) return i1.locked > i2.locked;
+    bool locked1 = i1.flags & ConnectionEnum::FLAG_LOCKED;
+    bool locked2 = i2.flags & ConnectionEnum::FLAG_LOCKED;
+    if (locked1 != locked2) return locked1 > locked2;
     return i1.name < i2.name;
 }
 
@@ -521,15 +538,14 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
         qWarning("%s: can't find access point object for path: %s", __FUNCTION__, qPrintable(item.path));
     }
 
+    if (m_username.length() == 0) {
+        qWarning("%s: greeter username is empty, can't create a private connection", __FUNCTION__);
+    }
+
     NMVariantMapMap connMap;
     QVariantMap map;
     map.insert(QStringLiteral("id"), ap->ssid());
-    auto pw = getpwuid(getuid());
-    if (!pw || strlen(pw->pw_name) == 0) {
-        qWarning("%s: unable to get user data", __FUNCTION__);
-        return;
-    }
-    QString permissions = QStringLiteral("user:%1").arg(QLatin1String(pw->pw_name));
+    QString permissions = QStringLiteral("user:%1").arg(m_username);
     map.insert(QStringLiteral("permissions"), QStringList(permissions));
     map.insert(QStringLiteral("interface-name"), wifiDev->interfaceName());
     connMap.insert(QStringLiteral("connection"), map);

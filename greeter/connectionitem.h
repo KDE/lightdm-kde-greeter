@@ -34,17 +34,17 @@ public:
     Q_PROPERTY(QString name MEMBER name CONSTANT)
     Q_PROPERTY(QString path MEMBER path CONSTANT)
     Q_PROPERTY(ConnectionEnum::Type type MEMBER type CONSTANT)
-    Q_PROPERTY(bool locked MEMBER locked CONSTANT)
     Q_PROPERTY(int signalStrength MEMBER signalStrength CONSTANT)
     Q_PROPERTY(ConnectionEnum::State state MEMBER state CONSTANT)
+    Q_PROPERTY(int flags MEMBER flags CONSTANT)
     Q_PROPERTY(int wpaFlags MEMBER wpaFlags CONSTANT)
 
     ConnectionItem &setName(const QString &x) { name = x; return *this; }
     ConnectionItem &setPath(const QString &x) { path = x; return *this; }
     ConnectionItem &setType(ConnectionEnum::Type x) { type = x; return *this; }
-    ConnectionItem &setLock(bool x) { locked = x; return *this; }
     ConnectionItem &setSignalStrength(int x) { signalStrength = x; return *this; }
     ConnectionItem &setState(ConnectionEnum::State x) { state = x; return *this; }
+    ConnectionItem &setFlags(int x) { flags = x; return *this; }
     ConnectionItem &setWpaFlags(NetworkManager::AccessPoint::WpaFlags x) { wpaFlags = x; return *this; }
 
     Q_INVOKABLE QString actionName(ConnectionEnum::Action action)
@@ -64,7 +64,8 @@ public:
         return name == rhs.name
             && path == rhs.path
             && type == rhs.type
-            && locked == rhs.locked
+            && flags == rhs.flags
+            && wpaFlags == rhs.wpaFlags
             && signalStrength == rhs.signalStrength
             && state == rhs.state;
     }
@@ -76,9 +77,9 @@ public:
     QString name;
     QString path;
     ConnectionEnum::Type type;
-    bool locked;
     int signalStrength;
     ConnectionEnum::State state;
+    int flags;
     NetworkManager::AccessPoint::WpaFlags wpaFlags;
 
     bool mark;
