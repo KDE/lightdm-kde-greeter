@@ -513,6 +513,7 @@ void ConnectionsModel::onActionDialogComplete(QVariantMap data)
         case ConnectionEnum::ACTION_DISCONNECT: disconnectItem(item); break;
         case ConnectionEnum::ACTION_ABORT_CONNECTING: deleteConnection(item); break;
         case ConnectionEnum::ACTION_CONNECT: connectItem(item); break;
+        case ConnectionEnum::ACTION_ERROR_RETYPE_PSK:  createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_FREE_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_WITH_PSK: createAndConnect(data); break;
         case ConnectionEnum::ACTION_UNSUPPORTED: break;
@@ -585,7 +586,7 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
             deleteConnection(ConnectionItem{ item }.setPath(newPath));
         }
         if (item.wpaFlags) {
-            emit showDialog(item, ConnectionEnum::ACTION_CONNECT_WITH_PSK);
+            emit showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
         } else {
             emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
         }

@@ -70,6 +70,10 @@ TooltipButton {
                 confirmAction.text = i18n("Enter the password to connect to %1", item.name)
                 confirmAction.inputSecret = true
             break
+            case ConnectionEnum.ACTION_ERROR_RETYPE_PSK:
+                confirmAction.text = i18n("%1: Connection error, try again.", item.name)
+                confirmAction.inputSecret = true
+            break
             case ConnectionEnum.ACTION_UNSUPPORTED:
                 confirmAction.text = i18n("The security protocol is not supported for %1", item.name)
             break
