@@ -89,6 +89,14 @@ PlasmaCore.ColorScope {
                 startDefaultScreen()
             }
         }
+
+        function onAutologinTimerExpired() {
+            if (!greeter.allowAutologin) return
+            var startresult = greeter.authenticateAutologin()
+            if (!startresult) {
+                startDefaultScreen()
+            }
+        }
     }
 
     function putMessage(text, type) {
@@ -106,7 +114,7 @@ PlasmaCore.ColorScope {
     }
 
     function doSessionSync() {
-        var session = sessionButton.currentData()
+        var session = greeter.allowAutologin ? greeter.autologinSession : sessionButton.currentData()
         if (session == "") {
             session = "default"
         }

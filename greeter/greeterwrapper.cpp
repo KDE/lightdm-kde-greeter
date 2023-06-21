@@ -20,6 +20,9 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "greeterwrapper.h"
 
+#include <QEvent>
+#include <QApplication>
+
 #include <KConfig>
 #include <KConfigGroup>
 
@@ -28,6 +31,7 @@ GreeterWrapper::GreeterWrapper(QObject *parent)
 {
     connectSync();
     m_config = KSharedConfig::openConfig(QStringLiteral("state-kde"));
+    QCoreApplication::instance()->installEventFilter(this);
 }
 
 QString GreeterWrapper::lastLoggedInUser() const
@@ -63,4 +67,14 @@ void GreeterWrapper::saveLastUser(const QString &user)
     m_config->group("lightdm").writeEntry("lastUser", user);
     //force a sync as our greeter gets killed
     m_config->sync();
+}
+
+bool GreeterWrapper::eventFilter(QObject*, QEvent *event)
+{
+    if (event->type() == QEvent::MouseMove || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress) {
+        qDebug("%s: autologin (if it was) canceled due to input event", Q_FUNC_INFO);
+        QCoreApplication::instance()->removeEventFilter(this);
+        m_allowAutologin = false;
+    }
+    return false;
 }
