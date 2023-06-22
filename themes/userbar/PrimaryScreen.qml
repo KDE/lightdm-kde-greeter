@@ -84,10 +84,12 @@ PlasmaCore.ColorScope {
             if (greeter.authenticated) {
                 doSessionSync()
             } else if (visibleScreen != screens.DefaultScreen) {
-                putMessage(i18n("Sorry, incorrect password. Please try again."), 1)
-                dissolveMessages()
+                if (messages.count == 0) {
+                    putMessage(i18n("Login failed"), 1)
+                }
                 startDefaultScreen()
             }
+            dissolveMessages()
         }
 
         function onAutologinTimerExpired() {
