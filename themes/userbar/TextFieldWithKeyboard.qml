@@ -23,6 +23,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 PlasmaComponents.TextField {
     id: root
 
+    rightPadding: height
+
     TooltipButton {
         id: virtualKeyboardButton
         anchors {
