@@ -144,7 +144,7 @@ PlasmaCore.ColorScope {
         visibleScreen = screens.LoginScreen
         setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
         inputBox.forceActiveFocus()
-        var username = usersList.currentItem.name
+        var username = usersList.currentItem.username
         inputBox.clear()
         if (username == greeter.guestLoginName) {
             greeter.authenticateAsGuest()
@@ -273,11 +273,12 @@ PlasmaCore.ColorScope {
                 delegate: UserDelegate {
 
                     property var usersession: model.session
+                    property var username: model.name
 
                     avatarPath: "image://face/" + model.name
 
                     opacity: isCurrent ? 1.0 : visibleScreen == screens.DefaultScreen ? 0.618 : 0.0
-                    name: model.name
+                    name: model.display
 
                     width: userFaceSize + screen.padding * 2
                     animate: usersList.animateDelegate
