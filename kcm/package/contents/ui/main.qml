@@ -40,14 +40,14 @@ Item {
 
     // config values
     property var cfg_autoLogin: Shared.ConfigValue {
-        branch: "core/SeatDefaults/"
+        branch: "core/Seat:seat0/"
         name: "autologin-user"
         type: cfgString
         defaultValue: ""
         listenValue: autoLogin.checked ? usersCombo.currentValue : ""
     }
     property var cfg_autoSession: Shared.ConfigValue {
-        branch: "core/SeatDefaults/"
+        branch: "core/Seat:seat0/"
         name: "autologin-session"
         type: cfgString
         defaultValue: ""

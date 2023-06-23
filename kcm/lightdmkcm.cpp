@@ -59,20 +59,21 @@ LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVari
 void LightDMKcm::load()
 {
     // collect everything that is in the configs
-    QMap<QString, QString> configs{
-        { QStringLiteral("core"),    QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm.conf") },
-        { QStringLiteral("greeter"), QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf") }
+    QMap<QString, QStringList> configs{
+        { QStringLiteral("core"),    { QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm.conf"), QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm.conf.d/autologin.conf") }},
+        { QStringLiteral("greeter"), { QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf") }}
     };
     m_storedConfig.clear();
     m_updatedConfig.clear();
-    for (auto configFile = configs.begin(); configFile != configs.end(); ++configFile) {
-        KConfig config(configFile.value(), KConfig::SimpleConfig);
+    for (auto configFileList = configs.begin(); configFileList != configs.end(); ++configFileList) {
+        KConfig config(configFileList.value()[0], KConfig::CascadeConfig);
+        config.addConfigSources(configFileList.value());
         QStringList groups = config.groupList();
         for (auto &groupName : groups) {
             KConfigGroup group = config.group(groupName);
             QStringList entryKeys = group.keyList();
             for (auto &entryKey : entryKeys) {
-                QString entryPath = QStringLiteral("%1/%2/%3").arg(configFile.key()).arg(groupName).arg(entryKey);
+                QString entryPath = QStringLiteral("%1/%2/%3").arg(configFileList.key()).arg(groupName).arg(entryKey);
                 m_storedConfig[entryPath] = group.readEntry(entryKey);
             }
         }
