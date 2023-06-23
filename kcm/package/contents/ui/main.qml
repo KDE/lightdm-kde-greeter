@@ -53,6 +53,13 @@ Item {
         defaultValue: ""
         listenValue: autoLogin.checked ? sessionsCombo.currentValue : ""
     }
+    property var cfg_autoTimeout: Shared.ConfigValue {
+        branch: "core/Seat:seat0/"
+        name: "autologin-user-timeout"
+        type: cfgString
+        defaultValue: ""
+        listenValue: timeout.text
+    }
     property var cfg_themeName: Shared.ConfigValue {
         branch: "greeter/greeter/"
         name: "theme-name"
@@ -291,10 +298,50 @@ Item {
                     height: childrenRect.height
                     width: parent.width
 
-                    CheckBox {
-                        id: autoLogin
-                        text: i18n("Automatically log in:")
-                        checked: cfg_autoLogin.value != ""
+                    Row {
+                        width: parent.width
+                        spacing: gap
+                        CheckBox {
+                            id: autoLogin
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: i18n("Automatically log in:")
+                            checked: cfg_autoLogin.value != ""
+                            onCheckedChanged: if (!checked) {
+                                cfg_autoTimeout.value = ""
+                                // force needTimeout checkbox update, since it is subscribed to this signal
+                                // if the field was empty already, the checkbox will remain active
+                                timeout.textChanged()
+                                needTimeout.keepOn = false
+                            }
+                        }
+                        Item { // dummy
+                            width: gap
+                            height: 1
+                        }
+                        CheckBox {
+                            id: needTimeout
+                            enabled: autoLogin.checked
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: i18n("Timeout")
+                            checked: timeout.text.length > 0 || keepOn
+                            property bool keepOn: false
+                            onCheckedChanged: if (!checked) { cfg_autoTimeout.value = ""; keepOn = false }
+                        }
+                        TextField {
+                            id: timeout
+                            anchors.verticalCenter: parent.verticalCenter
+                            validator: RegExpValidator { regExp: /[0-9]+/ }
+                            width: height * 2
+                            enabled: needTimeout.checked
+                            opacity: enabled ? 1.0 : 0.0
+                            text: cfg_autoTimeout.value
+                            onTextChanged: needTimeout.keepOn = true
+                        }
+                        Label {
+                            opacity: timeout.opacity
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: i18nc("Short for second", "s")
+                        }
                     }
 
                     Flow {
