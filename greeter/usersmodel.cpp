@@ -24,6 +24,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLightDM/UsersModel>
 #include <QDebug>
 
+#define TRANSLATION_DOMAIN "greeter"
 #include <KLocalizedString>
 
 UsersModel::UsersModel(QObject *parent)

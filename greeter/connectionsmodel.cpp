@@ -21,6 +21,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 
+#define TRANSLATION_DOMAIN "greeter"
 #include <KLocalizedString>
 
 #include <NetworkManagerQt/Connection>

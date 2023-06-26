@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT `find . -name "*.cpp"` -o $podir/lightdm_greeter.pot
+$XGETTEXT `find . -name \*.qml -o -name \*.cpp` -o $podir/greeter.pot
