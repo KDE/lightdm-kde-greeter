@@ -35,9 +35,10 @@ PlasmaComponents.TextField {
         height: parent.height
         width: height
         icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-        visible: inputPanel.item
+        visible: inputPanel.item && (activeFocus || root.activeFocus)
         caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
         expand: false
+        activeFocusOnTab: false
 
         onClicked: {
             inputPanel.switchState()

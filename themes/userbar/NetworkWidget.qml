@@ -49,8 +49,7 @@ TooltipButton {
 
             confirmAction.data = { "connection": item, "action": action }
             confirmAction.callback = connectionsModel.onActionDialogComplete
-            confirmAction.inputSecret = false
-            secretField.text = ""
+            confirmLayout.sourceComponent = labelLayout
 
             switch (action) {
             case ConnectionEnum.ACTION_NONE: return;
@@ -67,12 +66,16 @@ TooltipButton {
                 confirmAction.text = i18n("Connect to an insecure access point %1 ?", item.name)
             break
             case ConnectionEnum.ACTION_CONNECT_WITH_PSK:
+                confirmLayout.sourceComponent = pskLayout
                 confirmAction.text = i18n("Enter the password to connect to %1", item.name)
-                confirmAction.inputSecret = true
+            break
+            case ConnectionEnum.ACTION_CONNECT_8021X_WIFI:
+                confirmLayout.sourceComponent = eapLayout
+                confirmAction.text = i18n("Enter login and password to connect to %1", item.name)
             break
             case ConnectionEnum.ACTION_ERROR_RETYPE_PSK:
+                confirmLayout.sourceComponent = pskLayout
                 confirmAction.text = i18n("%1: Connection error, try again.", item.name)
-                confirmAction.inputSecret = true
             break
             case ConnectionEnum.ACTION_UNSUPPORTED:
                 confirmAction.text = i18n("The security protocol is not supported for %1", item.name)
@@ -87,11 +90,7 @@ TooltipButton {
             }
 
             confirmAction.open()
-            if (confirmAction.inputSecret) {
-                secretField.forceActiveFocus()
-            } else {
-                confirmAction.forceActiveFocus()
-            }
+            if (confirmLayout.item.focusTo) confirmLayout.item.focusTo.forceActiveFocus()
         }
     }
 
@@ -131,21 +130,21 @@ TooltipButton {
 
         parent: activeScreen
         anchors.centerIn: parent
-        // shrink the dialog vertically so that the input field is at the level of the buttons
-        height: contentHeight + topPadding + bottomPadding + (secretField.visible ? 0 : secretField.height + gap * 2)
+        // shrink the psk dialog vertically so that the input field is at the level of the buttons
+        height: contentHeight + topPadding + bottomPadding + (layoutType == pskLayout ? 0 : confirmFooter.contentHeight + bottomPadding)
         // if the width is too small, the buttons also start to shrink and hide the content
-        width: Math.max(implicitWidth, secretField.visible ? confirmFooter.minWidth + secretField.width : confirmFooter.minWidth + back.border * 2)
+        width: Math.max(implicitWidth, layoutType == pskLayout ? confirmFooter.minWidth + layout.focusTo.width : confirmFooter.minWidth + back.border * 2)
 
         closePolicy: Popup.CloseOnEscape
 
-        property alias text: label.text
-        property bool inputSecret
-
+        property var text: ""
         property var data
         property var callback
+        property var layoutType: confirmLayout.sourceComponent
+        property var layout: confirmLayout.item
 
         onAccepted: {
-            if (inputSecret) data.password = secretField.text
+            if (layout.grabData) layout.grabData(data)
             callback(data)
             popup.forceActiveFocus()
         }
@@ -158,25 +157,8 @@ TooltipButton {
             fillOpacity: 0.8
         }
 
-        Column {
-            spacing: gap * 2
-            PlasmaComponents.Label {
-                id: label
-                width: implicitWidth + gap * 2
-                height: implicitHeight + gap * 2
-                anchors.margins: 30
-                PlasmaCore.ColorScope.colorGroup: screen.colorGroup
-                text: ""
-            }
-            TextFieldWithKeyboard {
-                id: secretField
-                // manual right-aligned to be next to the buttons
-                x: confirmAction.width - confirmFooter.minWidth - width
-                width: 8 * gridUnit
-                visible: confirmAction.inputSecret
-                echoMode: TextInput.Password
-                Keys.onReturnPressed: confirmAction.accept()
-            }
+        Loader {
+            id: confirmLayout
         }
 
         footer: DialogButtonBox {
@@ -185,6 +167,109 @@ TooltipButton {
             standardButtons: Dialog.Ok | Dialog.Cancel
             buttonLayout: DialogButtonBox.KdeLayout
             alignment: Qt.AlignBottom | Qt.AlignRight
+        }
+    }
+
+    // switchable layouts for confirmAction dialog
+
+    Component {
+        id: labelLayout
+
+        PlasmaComponents.Label {
+            id: label
+            width: implicitWidth + gap * 2
+            height: implicitHeight + gap * 2
+            PlasmaCore.ColorScope.colorGroup: screen.colorGroup
+            text: confirmAction.text
+        }
+    }
+
+    Component {
+        id: pskLayout
+
+        Column {
+            function grabData(data) {
+                data.password = secretField.text
+            }
+
+            spacing: gap * 2
+            property var focusTo: secretField
+            PlasmaComponents.Label {
+                id: label
+                width: implicitWidth + gap * 2
+                height: implicitHeight + gap * 2
+                PlasmaCore.ColorScope.colorGroup: screen.colorGroup
+                text: confirmAction.text
+            }
+            TextFieldWithKeyboard {
+                id: secretField
+                // manual right-aligned to be next to the buttons
+                x: confirmAction.width - confirmFooter.minWidth - width
+                width: 8 * gridUnit
+                echoMode: TextInput.Password
+                Keys.onReturnPressed: confirmAction.accept()
+            }
+        }
+    }
+
+    Component {
+        id: eapLayout
+
+        Column {
+            function grabData(data) {
+                data.identity = identityField.text
+                data.password = secretField.text
+            }
+
+            property var focusTo: identityField
+
+            width: Math.max(label.width, loginRow.width, passwordRow.width)
+            spacing: gap * 2
+
+            PlasmaComponents.Label {
+                id: label
+                width: implicitWidth + gap * 2
+                height: implicitHeight + gap * 2
+                PlasmaCore.ColorScope.colorGroup: screen.colorGroup
+                text: confirmAction.text
+            }
+
+            Column {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: gap * 2
+                Row {
+                    id: loginRow
+                    spacing: gap
+                    anchors.right: parent.right
+                    width: childrenRect.width
+                    PlasmaComponents.Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        PlasmaCore.ColorScope.colorGroup: screen.colorGroup
+                        text: i18n("Login")
+                    }
+                    TextFieldWithKeyboard {
+                        id: identityField
+                        width: 8 * gridUnit
+                    }
+                }
+                Row {
+                    id: passwordRow
+                    spacing: gap
+                    anchors.right: parent.right
+                    width: childrenRect.width
+                    PlasmaComponents.Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        PlasmaCore.ColorScope.colorGroup: screen.colorGroup
+                        text: i18n("Password")
+                    }
+                    TextFieldWithKeyboard {
+                        id: secretField
+                        width: 8 * gridUnit
+                        echoMode: TextInput.Password
+                        Keys.onReturnPressed: confirmAction.accept()
+                    }
+                }
+            }
         }
     }
 

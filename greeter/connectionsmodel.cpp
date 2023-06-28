@@ -113,7 +113,10 @@ public:
                                    NetworkManager::Device::StateChangeReason reason) {
                         Q_UNUSED(oldstate)
                         Q_UNUSED(reason)
-                        if (newstate == NetworkManager::Device::Failed) onError();
+                        if (newstate == NetworkManager::Device::Failed) {
+                            qWarning() << "handleDBusDeviceError: new device state is failed, reason:" << reason;
+                            onError();
+                        }
                     });
         });
     }
@@ -497,6 +500,7 @@ ConnectionEnum::Action ConnectionsModel::selectActionForItem(const ConnectionIte
     if (!item.wpaFlags) return ConnectionEnum::ACTION_CONNECT_FREE_WIFI;
     if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmtPsk) return ConnectionEnum::ACTION_CONNECT_WITH_PSK;
     if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmtSAE) return ConnectionEnum::ACTION_CONNECT_WITH_PSK;
+    if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmt8021x) return ConnectionEnum::ACTION_CONNECT_8021X_WIFI;
 
     return ConnectionEnum::ACTION_UNSUPPORTED;
 }
@@ -517,6 +521,7 @@ void ConnectionsModel::onActionDialogComplete(QVariantMap data)
         case ConnectionEnum::ACTION_ERROR_RETYPE_PSK:  createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_FREE_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_WITH_PSK: createAndConnect(data); break;
+        case ConnectionEnum::ACTION_CONNECT_8021X_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_UNSUPPORTED: break;
         default: qWarning() << __FUNCTION__ << "unhandled action:" << action; break;
     }
@@ -550,7 +555,7 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     QString permissions = QStringLiteral("user:%1").arg(m_username);
     map.insert(QStringLiteral("permissions"), QStringList(permissions));
     map.insert(QStringLiteral("interface-name"), wifiDev->interfaceName());
-    connMap.insert(QStringLiteral("connection"), map);
+    map.insert(QStringLiteral("type"), QStringLiteral("802-11-wireless"));
     QVariantMap wirelessMap;
     wirelessMap.insert(QStringLiteral("ssid"), ap->rawSsid());
 
@@ -558,26 +563,36 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
         wirelessMap.insert(QStringLiteral("security"), QStringLiteral("802-11-wireless-security"));
 
         QVariantMap security;
+        QString password = data[QStringLiteral("password")].toString();
         if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmtPsk) {
             security.insert(QStringLiteral("key-mgmt"), QStringLiteral("wpa-psk"));
+            security.insert(QStringLiteral("psk"), password);
         } else if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmtSAE) {
             security.insert(QStringLiteral("key-mgmt"), QStringLiteral("sae"));
+            security.insert(QStringLiteral("psk"), password);
+        } else if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmt8021x) {
+            QVariantMap eap;
+            eap.insert(QStringLiteral("eap"), QStringList({ QStringLiteral("peap") }));
+            eap.insert(QStringLiteral("phase2-auth"), QStringLiteral("mschapv2"));
+            eap.insert(QStringLiteral("identity"), data[QStringLiteral("identity")]);
+            eap.insert(QStringLiteral("password"), data[QStringLiteral("password")]);
+            eap.insert(QStringLiteral("password-flags"), NMSettingSecretFlags::NM_SETTING_SECRET_FLAG_NONE);
+            security.insert(QStringLiteral("key-mgmt"), QStringLiteral("wpa-eap"));
+            connMap.insert(QStringLiteral("802-1x"), eap);
         } else {
-            // TODO: implement 802.1x
             qWarning() << __FUNCTION__ << "unsupported wpaFlags:" << item.wpaFlags;
             return;
         }
-        QString password = data[QStringLiteral("password")].toString();
-        security.insert(QStringLiteral("psk"), password);
         connMap.insert(QStringLiteral("802-11-wireless-security"), security);
     }
 
     connMap.insert(QStringLiteral("802-11-wireless"), wirelessMap);
+    connMap.insert(QStringLiteral("connection"), map);
 
     QVariantMap options;
     options.insert(QStringLiteral("persist"), QStringLiteral("memory"));
     // the connection will not be saved to disk and will disappear after a reboot
-    auto reply = NetworkManager::addAndActivateConnection2(connMap, wifiDev->uni(), {}, options);
+    auto reply = NetworkManager::addAndActivateConnection2(connMap, wifiDev->uni(), item.path, options);
     Util::handleDBusDeviceError(this, wifiDev.data(), reply, [this, item, reply] {
         if (!reply.isError()) {
             // the error occurred after the successful creation of the
