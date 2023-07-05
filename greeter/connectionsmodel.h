@@ -25,6 +25,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include "connectionenum.h"
 
 class ConnectionItem;
+class ConnectionActivator;
 
 class ConnectionsModel: public QAbstractListModel
 {
@@ -93,6 +94,7 @@ private:
     QVector<ConnectionItem> m_connections;
     QScopedPointer<ConnectionItem> m_primary;
     QString m_username;
+    ConnectionActivator *m_activator;
 };
 
 #endif // CONNECTIONSMODEL_H

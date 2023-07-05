@@ -35,6 +35,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "connectionsmodel.h"
 #include "connectionitem.h"
+#include "connectionactivator.h"
 
 class ConnectionsModel::Util
 {
@@ -102,29 +103,35 @@ public:
         handleDBusCall(cm, reply, [reply]{ qWarning() << "handleDBusCall error: " << reply.error(); }, []{});
     }
 
+    template <class OnErrorCb>
+    static void waitForDevice(ConnectionsModel *cm, NetworkManager::Device *dev, OnErrorCb onError)
+    {
+        disconnectAllDeviceEvents();
+        connect(dev, &NetworkManager::Device::stateChanged,
+                cm, [onError] (NetworkManager::Device::State newstate,
+                               NetworkManager::Device::State /* oldstate */,
+                               NetworkManager::Device::StateChangeReason reason) {
+                    if (newstate == NetworkManager::Device::Failed) {
+                        qInfo() << "waitForDevice: new device state is \"failed\", reason:" << reason;
+                        onError();
+                    } else if (newstate == NetworkManager::Device::Activated) {
+                        disconnectAllDeviceEvents();
+                    }
+                });
+    }
+
     template <class Reply, class OnErrorCb>
     static void handleDBusDeviceError(ConnectionsModel *cm, NetworkManager::Device *dev, Reply reply, OnErrorCb onError)
     {
-        handleDBusCall(cm, reply, onError, [cm, dev, onError] {
-            disconnectAllDeviceEvents();
-            connect(dev, &NetworkManager::Device::stateChanged,
-                    cm, [onError] (NetworkManager::Device::State newstate,
-                                   NetworkManager::Device::State oldstate,
-                                   NetworkManager::Device::StateChangeReason reason) {
-                        Q_UNUSED(oldstate)
-                        Q_UNUSED(reason)
-                        if (newstate == NetworkManager::Device::Failed) {
-                            qWarning() << "handleDBusDeviceError: new device state is failed, reason:" << reason;
-                            onError();
-                        }
-                    });
-        });
+        handleDBusCall(cm, reply, onError, [cm, dev, onError] { waitForDevice(cm, dev, onError); });
     }
+
 };
 
 ConnectionsModel::ConnectionsModel(QObject *parent) :
     QAbstractListModel(parent),
-    m_primary(new ConnectionItem())
+    m_primary(new ConnectionItem()),
+    m_activator(new ConnectionActivator(this))
 {
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::networkingEnabledChanged, this, &ConnectionsModel::networkingEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);
@@ -590,22 +597,18 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     connMap.insert(QStringLiteral("connection"), map);
 
     QVariantMap options;
-    options.insert(QStringLiteral("persist"), QStringLiteral("memory"));
-    // the connection will not be saved to disk and will disappear after a reboot
-    auto reply = NetworkManager::addAndActivateConnection2(connMap, wifiDev->uni(), item.path, options);
-    Util::handleDBusDeviceError(this, wifiDev.data(), reply, [this, item, reply] {
-        if (!reply.isError()) {
-            // the error occurred after the successful creation of the
-            // connection - something is wrong with the settings
-            // let's delete it that they didn't accumulate
-            auto newPath = reply.argumentAt(0).value<QDBusObjectPath>().path();
-            deleteConnection(ConnectionItem{ item }.setPath(newPath));
-        }
-        if (item.wpaFlags) {
-            emit showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
-        } else {
-            emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
-        }
+    // the connection will not be saved to disk and will disappear after a disconnect
+    options.insert(QStringLiteral("persist"), QStringLiteral("volatile"));
+    options.insert(QStringLiteral("bind-activation"), QStringLiteral("dbus-client"));
+    m_activator->addAndActivateConnection(connMap, QDBusObjectPath(wifiDev->uni()), QDBusObjectPath(item.path), options);
+    connect(m_activator, &ConnectionActivator::wifiKeeperNewConnection, this, [this, wifiDev, item] (QString newPath) {
+        Util::waitForDevice(this, wifiDev.data(), [this, item, newPath] {
+            if (item.wpaFlags) {
+                emit showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
+            } else {
+                emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
+            }
+        });
     });
 }
 

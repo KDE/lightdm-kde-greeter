@@ -22,6 +22,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <QCommandLineParser>
 #include <QApplication>
 #include <QQuickStyle>
+#include <QDBusInterface>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -184,6 +185,15 @@ int main(int argc, char **argv)
     options.process(app);
 
     app.setOverrideCursor(QCursor(Qt::ArrowCursor));
+
+    QDBusInterface qiface(QStringLiteral("org.freedesktop.systemd1"),
+                          QStringLiteral("/org/freedesktop/systemd1"),
+                          QStringLiteral("org.freedesktop.systemd1.Manager"),
+                          QDBusConnection::sessionBus());
+
+    qiface.asyncCall(QStringLiteral("RestartUnit"),
+                                   QStringLiteral("lightdm-kde-greeter-wifikeeper.service"),
+                                   QStringLiteral("replace"));
 
     GreeterWindow *w = new GreeterWindow();
     w->show();

@@ -1,0 +1,6 @@
+[Unit]
+Description=LightDM KDE Greeter, to create a wifi connection that will last a little longer than greeter
+
+[Service]
+Type=simple
+ExecStart=@LIBEXEC_INSTALL_DIR@/lightdm-kde-greeter-wifikeeper
