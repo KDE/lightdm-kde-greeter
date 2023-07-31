@@ -64,10 +64,12 @@ PlasmaCore.ColorScope {
                 inputBoxLabel.text = text
                 inputBox.clear()
                 inputBox.echoMode = TextInput.Normal
+                inputBox.revealPasswordButtonShown = false
             } else { // enter secret word
                 inputBoxLabel.text = text
                 inputBox.clear()
                 inputBox.echoMode = TextInput.Password
+                inputBox.revealPasswordButtonShown = true
             }
             if (visibleScreen != screens.LoginScreen) {
                 startPromptScreen()
@@ -160,7 +162,7 @@ PlasmaCore.ColorScope {
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
-        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
+        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, virtualKeyboardButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
         usersList.forceActiveFocus()
     }
 
@@ -381,7 +383,7 @@ PlasmaCore.ColorScope {
                             }
                         }
 
-                        TextFieldWithKeyboard {
+                        PlasmaComponents.TextField {
                             id: inputBox
 
                             // if set overrideText, the first clear will set this text
@@ -554,6 +556,17 @@ PlasmaCore.ColorScope {
             expand: menuBar.expand
             icon.name: "auto-type"
             onClicked: loginAsOtherUser()
+        }
+
+        TooltipButton {
+            id: virtualKeyboardButton
+            caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
+            expand: menuBar.expand
+            icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+            onClicked: {
+                inputPanel.switchState()
+                if (desktop.previousFocusItem) desktop.previousFocusItem.forceActiveFocus()
+            }
         }
 
         TooltipButton {

@@ -209,12 +209,13 @@ TooltipButton {
                 PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                 text: confirmAction.text
             }
-            TextFieldWithKeyboard {
+            PlasmaComponents.TextField {
                 id: secretField
                 // manual right-aligned to be next to the buttons
                 x: confirmAction.width - confirmFooter.minWidth - width
                 width: 8 * gridUnit
                 echoMode: TextInput.Password
+                revealPasswordButtonShown: true
                 Keys.onReturnPressed: confirmAction.accept()
             }
         }
@@ -258,7 +259,7 @@ TooltipButton {
                         PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                         text: i18n("Login")
                     }
-                    TextFieldWithKeyboard {
+                    PlasmaComponents.TextField {
                         id: identityField
                         width: 8 * gridUnit
                     }
@@ -273,10 +274,11 @@ TooltipButton {
                         PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                         text: i18n("Password")
                     }
-                    TextFieldWithKeyboard {
+                    PlasmaComponents.TextField {
                         id: secretField
                         width: 8 * gridUnit
                         echoMode: TextInput.Password
+                        revealPasswordButtonShown: true
                         Keys.onReturnPressed: confirmAction.accept()
                     }
                 }

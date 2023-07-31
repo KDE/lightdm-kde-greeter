@@ -27,6 +27,7 @@ Item {
     width: screenSize.width
     height: screenSize.height
     property bool showDebugInfo: false
+    property var previousFocusItem
 
     ScreenManager {
         id: screenManager

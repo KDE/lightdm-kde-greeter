@@ -93,6 +93,7 @@ Item {
                 color: "black"
 
                 property var mouseArea: mouseArea
+                property var storedFocusItem
 
                 MouseArea {
                     id: mouseArea
@@ -116,6 +117,11 @@ Item {
                     property var thisScreen: parent
                     sourceComponent: manager.delegate
                     anchors.fill: parent
+                }
+                // need to keep track of where the previous focus was, so that you can return the focus when you click somewhere else
+                onActiveFocusItemChanged: {
+                    if (storedFocusItem) desktop.previousFocusItem = storedFocusItem
+                    storedFocusItem = activeFocusItem
                 }
             }
         }
