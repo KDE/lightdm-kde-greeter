@@ -50,6 +50,11 @@ QString GreeterWrapper::lastLoggedInUser() const
     return m_config->group("lightdm").readEntry("lastUser");
 }
 
+QString GreeterWrapper::lastLoggedInSession() const
+{
+    return m_config->group("lightdm").readEntry("lastSession");
+}
+
 QString GreeterWrapper::guestLoginName() const
 {
     return QStringLiteral("*guest");
@@ -58,13 +63,14 @@ QString GreeterWrapper::guestLoginName() const
 bool GreeterWrapper::startSessionSync(const QString &session)
 {
     Q_EMIT aboutToLogin();
-    saveLastUser(authenticationUser());
+    saveLastUserAndSession(authenticationUser(), session);
     return QLightDM::Greeter::startSessionSync(session);
 }
 
-void GreeterWrapper::saveLastUser(const QString &user)
+void GreeterWrapper::saveLastUserAndSession(const QString &user, const QString &session)
 {
     m_config->group("lightdm").writeEntry("lastUser", user);
+    m_config->group("lightdm").writeEntry("lastSession", session);
     //force a sync as our greeter gets killed
     m_config->sync();
 }

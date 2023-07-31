@@ -117,9 +117,6 @@ PlasmaCore.ColorScope {
 
     function doSessionSync() {
         var session = greeter.allowAutologin ? greeter.autologinSession : sessionButton.currentData()
-        if (session == "") {
-            session = "default"
-        }
 
         var startresult = greeter.startSessionSync(session)
         if (!startresult) {
@@ -172,6 +169,7 @@ PlasmaCore.ColorScope {
         greeter.authenticate()
         inputBox.overrideText = greeter.lastLoggedInUser
         startPromptScreen()
+        sessionButton.setCurrentSession(greeter.lastLoggedInSession)
     }
 
     function finishDialog() {
@@ -193,6 +191,7 @@ PlasmaCore.ColorScope {
         clearMessages()
         startDefaultScreen()
         greeter.cancelAuthentication()
+        sessionButton.updateCurrentSession()
     }
 
     Item {
@@ -309,6 +308,7 @@ PlasmaCore.ColorScope {
 
                 Component.onCompleted: {
                     sessionButton.onCurrentIndexChanged.connect(() => {
+                        if (visibleScreen != screens.DefaultScreen) return;
                         currentItem.usersession = sessionButton.currentData()
                     })
                 }
@@ -525,7 +525,11 @@ PlasmaCore.ColorScope {
             }
 
             function updateCurrentSession() {
-                var i =  indexForData(usersList.currentItem.usersession)
+                setCurrentSession(usersList.currentItem.usersession)
+            }
+
+            function setCurrentSession(session) {
+                var i =  indexForData(session)
                 i = i || indexForData(greeter.defaultSession)
                 i = i || 0
                 currentIndex = i

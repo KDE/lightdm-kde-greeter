@@ -30,6 +30,7 @@ class GreeterWrapper: public QLightDM::Greeter
     Q_OBJECT
 
     Q_PROPERTY(QString lastLoggedInUser READ lastLoggedInUser CONSTANT)
+    Q_PROPERTY(QString lastLoggedInSession READ lastLoggedInSession CONSTANT)
     Q_PROPERTY(QString guestLoginName READ guestLoginName CONSTANT)
     Q_PROPERTY(bool allowAutologin MEMBER m_allowAutologin)
     Q_PROPERTY(QString autologinSession READ autologinSessionHint)
@@ -38,6 +39,7 @@ public:
     explicit GreeterWrapper(QObject *parent = nullptr);
 
     QString lastLoggedInUser() const;
+    QString lastLoggedInSession() const;
     QString guestLoginName() const;
 
 Q_SIGNALS:
@@ -50,7 +52,7 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
-    void saveLastUser(const QString &user);
+    void saveLastUserAndSession(const QString &user, const QString &session);
     KSharedConfig::Ptr m_config;
     bool m_allowAutologin = true;
 };
