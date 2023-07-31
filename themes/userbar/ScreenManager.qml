@@ -100,7 +100,7 @@ Item {
                     hoverEnabled: true
                     onEntered: {
                         delegateWindow.requestActivate()
-                        screenManager.activeScreen = parent
+                        activeScreen = parent
                     }
                     onWidthChanged: {
                         // the width is supposed to change only at startup
