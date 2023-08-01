@@ -73,6 +73,12 @@ TooltipButton {
                 confirmLayout.sourceComponent = eapLayout
                 confirmAction.text = i18n("Enter login and password to connect to %1", item.name)
             break
+            case ConnectionEnum.ACTION_ERROR_8021X_WIFI:
+                confirmLayout.sourceComponent = eapLayout
+                confirmAction.text = i18n("%1: Connection error, try again.", item.name)
+                confirmLayout.item.identityField.text = confirmLayout.lastUser
+                confirmLayout.item.focusTo = confirmLayout.item.secretField
+            break
             case ConnectionEnum.ACTION_ERROR_RETYPE_PSK:
                 confirmLayout.sourceComponent = pskLayout
                 confirmAction.text = i18n("%1: Connection error, try again.", item.name)
@@ -159,6 +165,8 @@ TooltipButton {
 
         Loader {
             id: confirmLayout
+            // to remember username for 802.1x, in case of re-entry
+            property string lastUser
         }
 
         footer: DialogButtonBox {
@@ -219,9 +227,12 @@ TooltipButton {
             function grabData(data) {
                 data.identity = identityField.text
                 data.password = secretField.text
+                confirmLayout.lastUser = identityField.text
             }
 
             property var focusTo: identityField
+            property alias identityField: identityField
+            property alias secretField: secretField
 
             width: Math.max(label.width, loginRow.width, passwordRow.width)
             spacing: gap * 2

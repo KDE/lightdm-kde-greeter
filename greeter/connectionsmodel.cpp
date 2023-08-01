@@ -529,6 +529,7 @@ void ConnectionsModel::onActionDialogComplete(QVariantMap data)
         case ConnectionEnum::ACTION_CONNECT_FREE_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_WITH_PSK: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_8021X_WIFI: createAndConnect(data); break;
+        case ConnectionEnum::ACTION_ERROR_8021X_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_UNSUPPORTED: break;
         default: qWarning() << __FUNCTION__ << "unhandled action:" << action; break;
     }
@@ -603,7 +604,9 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     m_activator->addAndActivateConnection(connMap, QDBusObjectPath(wifiDev->uni()), QDBusObjectPath(item.path), options);
     connect(m_activator, &ConnectionActivator::wifiKeeperNewConnection, this, [this, wifiDev, item] (QString newPath) {
         Util::waitForDevice(this, wifiDev.data(), [this, item, newPath] {
-            if (item.wpaFlags) {
+            if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmt8021x) {
+                emit showDialog(item, ConnectionEnum::ACTION_ERROR_8021X_WIFI);
+            } else if (item.wpaFlags) {
                 emit showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
             } else {
                 emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
