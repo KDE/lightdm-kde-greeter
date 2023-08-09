@@ -43,6 +43,7 @@ along with LightDM-KDE.  If not, see <http://www.gnu.org/licenses/>.
 #include <Plasma/Theme>
 
 #include <QLightDM/Power>
+#include <QLightDM/UsersModel>
 
 #include "extrarowproxymodel.h"
 #include "faceimageprovider.h"
@@ -71,6 +72,16 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     if (m_greeter->hasGuestAccountHint())
     {
         usersModel->setShowGuest(true);
+    }
+
+    // add the last logged in user to the model, if it is not present in the model (perhaps this is a domain user).
+    QString lastUserName = m_greeter->lastLoggedInUser();
+    if (lastUserName.length() > 0 && usersModel->indexForUserName(lastUserName) < 0) {
+        QStandardItem *lastUser = new QStandardItem(lastUserName);
+        lastUser->setData(lastUserName, QLightDM::UsersModel::NameRole);
+        lastUser->setData(m_greeter->lastLoggedInSession(), QLightDM::UsersModel::SessionRole);
+        lastUser->setData(QStringLiteral("/home/%1/.face").arg(lastUserName), QLightDM::UsersModel::ImagePathRole);
+        usersModel->extraRowModel()->appendRow(lastUser);
     }
 
     qmlRegisterUncreatableMetaObject(ConnectionEnum::staticMetaObject, "ConnectionEnum", 1, 0, "ConnectionEnum", QStringLiteral("Error: only enums"));
