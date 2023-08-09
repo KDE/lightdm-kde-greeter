@@ -356,7 +356,7 @@ Item {
                             }
                             ComboBox {
                                 id: usersCombo
-                                currentIndex: kcm.usersModel.indexForUserName(cfg_autoLogin.value)
+                                currentIndex: Math.max(kcm.usersModel.indexForUserName(cfg_autoLogin.value), 0)
                                 anchors.verticalCenter: parent.verticalCenter
                                 model: kcm.usersModel
                                 valueRole: 'name'

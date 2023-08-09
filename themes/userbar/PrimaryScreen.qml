@@ -269,7 +269,7 @@ PlasmaCore.ColorScope {
                 width: activeScreen.width
                 height: currentItem.height
                 model: usersModel
-                currentIndex: model.indexForUserName(greeter.lastLoggedInUser)
+                currentIndex: Math.max(model.indexForUserName(greeter.lastLoggedInUser), 0)
                 cacheBuffer: count * 80
                 delegate: UserDelegate {
 
