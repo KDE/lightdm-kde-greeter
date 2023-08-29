@@ -35,6 +35,7 @@ PlasmaCore.ColorScope {
     property int padding: gridUnit / 3
     property int userFaceSize: 7 * gridUnit
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+    property var pendingPrompts: []
 
     PlasmaComponents.Label {
         id: debugInfo
@@ -60,22 +61,8 @@ PlasmaCore.ColorScope {
         target: greeter
 
         function onShowPrompt(text, type) {
-            if (type == 0) { // enter something that is not secret, such as a username
-                inputBoxLabel.text = text
-                inputBox.clear()
-                inputBox.echoMode = TextInput.Normal
-                inputBox.revealPasswordButtonShown = false
-            } else { // enter secret word
-                inputBoxLabel.text = text
-                inputBox.clear()
-                inputBox.echoMode = TextInput.Password
-                inputBox.revealPasswordButtonShown = true
-            }
-            if (visibleScreen != screens.LoginScreen) {
-                startPromptScreen()
-            } else {
-                inputDialog.visibleOnLoginScreen = true
-            }
+            pendingPrompts.push({ "text": text, "type": type })
+            if (!inputDialog.visible) consumePrompt()
         }
 
         function onShowMessage(text, type) {
@@ -100,6 +87,28 @@ PlasmaCore.ColorScope {
             if (!startresult) {
                 startDefaultScreen()
             }
+        }
+    }
+
+    function consumePrompt() {
+        if (pendingPrompts.length == 0) return
+        var pr = pendingPrompts.shift()
+        if (pr["type"] == 0) { // enter something that is not secret, such as a username
+            inputBoxLabel.text = pr["text"]
+            inputBox.clear()
+            inputBox.echoMode = TextInput.Normal
+            inputBox.revealPasswordButtonShown = false
+        } else { // enter secret word
+            inputBoxLabel.text = pr["text"]
+            inputBox.clear()
+            inputBox.echoMode = TextInput.Password
+            inputBox.revealPasswordButtonShown = true
+        }
+
+        if (visibleScreen != screens.LoginScreen) {
+            startPromptScreen()
+        } else {
+            inputDialog.visibleOnLoginScreen = true
         }
     }
 
@@ -170,7 +179,6 @@ PlasmaCore.ColorScope {
         clearMessages()
         greeter.authenticate()
         inputBox.overrideText = greeter.lastLoggedInUser
-        startPromptScreen()
         sessionButton.setCurrentSession(greeter.lastLoggedInSession)
     }
 
@@ -183,6 +191,7 @@ PlasmaCore.ColorScope {
             clearMessages()
             visibleScreen = screens.WaitScreen
             greeter.respond(inputBox.text)
+            consumePrompt()
             break
         default:
             startDefaultScreen()
