@@ -105,16 +105,9 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
             auto entry = QStringLiteral("%1/%2/%3").arg(fileName).arg(groupName).arg(name);
 
             QString ldmPath = copyImage(sourceFile, theme, name);
-            if (ldmPath.isEmpty()) {
-                errorReply.setErrorDescription(QStringLiteral("Can't copy. source: %1 theme: %2 id: %3")
-                        .arg(sourceFile)
-                        .arg(theme)
-                        .arg(name));
-                return errorReply;
-            }
-
             QString cleanKey = keyName.mid(prefixFrom.size());
             config->group(groupName).writeEntry(cleanKey, ldmPath);
+
             continue;
         }
 

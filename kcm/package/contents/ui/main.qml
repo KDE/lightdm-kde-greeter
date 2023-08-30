@@ -79,7 +79,7 @@ Item {
                     continue
                 }
                 let configValue = kcm.getConfigValue(item[p].branch + item[p].name)
-                if (configValue) {
+                if (configValue != null) {
                     item[p].valueFromString(configValue)
                 } else {
                     item[p].value = item[p].defaultValue

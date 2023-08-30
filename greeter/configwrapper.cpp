@@ -35,5 +35,10 @@ ConfigWrapper::ConfigWrapper(const QString &groupName, QObject *parent)
 
 QVariant ConfigWrapper::readEntry(const QString &key) const
 {
-    return m_config.readEntry(key);
+    // to distinguish an empty string from the null string
+    if (m_config.hasKey(key)) {
+        return m_config.readEntry(key);
+    } else {
+        return {};
+    }
 }

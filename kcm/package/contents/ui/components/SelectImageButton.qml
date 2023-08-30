@@ -95,8 +95,7 @@ Rectangle {
             id: deleteImageButton
             icon.name: "delete"
             onClicked: {
-                filePath = ""
-                themeConfig.needsSave = true
+                configPath.value = ""
             }
             ToolTip.visible: hovered
             ToolTip.delay: 500

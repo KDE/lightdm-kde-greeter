@@ -40,7 +40,10 @@ Item {
                 // default to keeping aspect ratio
                 fillMode: (x => x !== "" ? Number(x) : Image.PreserveAspectCrop)(config.readEntry("BackgroundFillMode"))
                 //read from config, if there's no entry use plasma theme
-                source: config.readEntry("Background") ? config.readEntry("Background") : plasmaTheme.wallpaperPath
+                source: {
+                    var entry = config.readEntry("Background")
+                    return entry != null ? entry : plasmaTheme.wallpaperPath
+                }
             }
 
             OtherScreen {
