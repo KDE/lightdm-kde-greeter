@@ -24,9 +24,10 @@ import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15 as Windows
 import org.kde.kquickcontrolsaddons 2.0 as Addons
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kcm 1.4 as KCM
 import "components" as Shared
 
-Item {
+KCM.SimpleKCM {
     id: root
     property real gridUnit: PlasmaCore.Units.gridUnit
     property int iconWidth: 7 * gridUnit
