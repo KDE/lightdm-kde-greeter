@@ -51,6 +51,9 @@ public:
     Q_INVOKABLE void storeDefaultValue(QString url, QVariant value);
     Q_INVOKABLE QVariant getConfigValue(QString url);
 
+Q_SIGNALS:
+    void errorAction(QString message);
+
 public Q_SLOTS:
     void load() override;
     void save() override;

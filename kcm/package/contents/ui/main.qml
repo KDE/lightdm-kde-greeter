@@ -385,6 +385,22 @@ KCM.SimpleKCM {
         }
     }
 
+    MessageDialog {
+        id: errorMsg
+        text: ""
+        icon: StandardIcon.Critical
+        standardButtons: Dialog.Ok
+    }
+
+    Connections {
+        target: kcm
+
+        function onErrorAction(message) {
+            errorMsg.text = message
+            errorMsg.open()
+        }
+    }
+
     Component.onCompleted: {
         themesList.positionViewAtIndex(themesList.currentIndex, ListView.Contains)
     }

@@ -82,14 +82,19 @@ void LightDMKcm::load()
     setNeedsSave(false);
 }
 
+static QString deniedIfEmpty(QString errorString)
+{
+    return errorString.length() == 0 ? i18n("Access denied") : errorString;
+}
+
 void LightDMKcm::save()
 {
-    for (auto i = m_updatedConfig.begin(); i != m_updatedConfig.end(); ++i) {
-        m_storedConfig[i.key()] = i.value();
-    }
-
     QVariantMap args;
     for (auto i = m_storedConfig.begin(); i != m_storedConfig.end(); ++i) {
+        args[i.key()] = i.value();
+    }
+    // overwrite the changed values, if any
+    for (auto i = m_updatedConfig.begin(); i != m_updatedConfig.end(); ++i) {
         args[i.key()] = i.value();
     }
 
@@ -115,12 +120,15 @@ void LightDMKcm::save()
     KAuth::ExecuteJob *job = saveAction.execute();
     if (!job->exec())
     {
-        // FIXME: Show a message here
-        qWarning() << "save failed:" << job->errorText() << ", " << job->errorString();
+        qWarning() << "Save failed:" << job->errorText() << ", " << job->errorString();
+        Q_EMIT errorAction(QStringLiteral("%1\n%2").arg(i18n("Save settings failed:")).arg(deniedIfEmpty(job->errorString())));
+        setNeedsSave(true);
     }
     else
     {
-        setNeedsSave(false);
+        for (auto i = m_updatedConfig.begin(); i != m_updatedConfig.end(); ++i) {
+            m_storedConfig[i.key()] = i.value();
+        }
         QMetaObject::invokeMethod(mainUi(), "updateConfigValues");
     }
 }
