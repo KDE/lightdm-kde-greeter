@@ -30,9 +30,12 @@ Dialog {
     property var wallpaper: ({ configuration: {}})
     property var configDialog: kcm
 
-    anchors.centerIn: Overlay.overlay
-    width: root.width - 5 * gridUnit
-    height: root.height - 5 * gridUnit
+    parent: configArea
+
+    x: 2 * gridUnit
+    y: 2 * gridUnit
+    width: parent.width - 4 * gridUnit
+    height: parent.height - 4 * gridUnit
     leftInset: -gap
     rightInset: -gap
     bottomInset: -gap

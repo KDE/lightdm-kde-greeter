@@ -116,6 +116,7 @@ KCM.SimpleKCM {
     }
 
     Row {
+        id: configArea
         anchors.fill: parent
         anchors.margins: gap
         spacing: gap
