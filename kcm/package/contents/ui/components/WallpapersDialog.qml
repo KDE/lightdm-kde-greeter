@@ -29,6 +29,7 @@ Dialog {
     // required for the background picker plugin to work
     property var wallpaper: ({ configuration: {}})
     property var configDialog: kcm
+    property var configItem
 
     parent: configArea
 
@@ -96,7 +97,7 @@ Dialog {
 
     onAccepted: {
         // extract data from plugin fields
-        parent.configPath.value = dialogLoader.item.cfg_Image
-        parent.configFill.value = dialogLoader.item.cfg_FillMode
+        configItem.configPath.value = dialogLoader.item.cfg_Image
+        configItem.configFill.value = dialogLoader.item.cfg_FillMode
     }
 }

@@ -58,6 +58,7 @@ Item {
 
             anchors.horizontalCenter: parent.horizontalCenter
             imageDialog: Shared.WallpapersDialog {
+                configItem: backgroundSelector
                 fillMode: cfg_backgroundFill.value
             }
         }
