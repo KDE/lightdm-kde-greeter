@@ -176,7 +176,8 @@ PlasmaCore.ColorScope {
     }
 
     function loginAsOtherUser() {
-        clearMessages()
+        cancelInput()
+        visibleScreen = screens.WaitScreen
         greeter.authenticate()
         inputBox.overrideText = greeter.lastLoggedInUser
         sessionButton.setCurrentSession(greeter.lastLoggedInSession)
@@ -200,6 +201,7 @@ PlasmaCore.ColorScope {
 
     function cancelInput() {
         clearMessages()
+        pendingPrompts.length = 0
         startDefaultScreen()
         greeter.cancelAuthentication()
         sessionButton.updateCurrentSession()
@@ -495,7 +497,7 @@ PlasmaCore.ColorScope {
         width: childrenRect.width
         height: childrenRect.height
         spacing: screen.padding
-        visible: visibleScreen != screens.WaitScreen
+        visible: true
         enabled: visible
 
         property int expandedWidth: {
