@@ -29,6 +29,12 @@ Item {
     property bool showDebugInfo: false
     property var previousFocusItem
 
+    QtObject {
+        id: params
+        property int toolTipDelay: 1000
+        property int toolTipTimeout: 5000
+    }
+
     ScreenManager {
         id: screenManager
 

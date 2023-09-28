@@ -523,6 +523,10 @@ PlasmaCore.ColorScope {
             onKeyboardLayoutTriggered: {
                 centerPanelFocus.forceActiveFocus()
             }
+            ToolTip.delay: params.toolTipDelay
+            ToolTip.timeout: params.toolTipTimeout
+            ToolTip.visible: hovered
+            ToolTip.text: i18n("Keyboard layout")
         }
 
         ListButton {
@@ -552,6 +556,10 @@ PlasmaCore.ColorScope {
                 updateCurrentSession()
                 usersList.onCurrentIndexChanged.connect(updateCurrentSession)
             }
+            ToolTip.delay: params.toolTipDelay
+            ToolTip.timeout: params.toolTipTimeout
+            ToolTip.visible: hovered
+            ToolTip.text: i18n("Desktop session")
         }
 
         NetworkWidget {

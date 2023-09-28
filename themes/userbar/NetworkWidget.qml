@@ -451,8 +451,8 @@ TooltipButton {
                     property bool needHint: item && (item.flags & ConnectionEnum.FLAG_PRIVATE) && item.state == ConnectionEnum.STATE_ON
                     property bool needCaption: connectionName.width < connectionName.implicitWidth
 
-                    ToolTip.delay: 1000
-                    ToolTip.timeout: 5000
+                    ToolTip.delay: params.toolTipDelay
+                    ToolTip.timeout: params.toolTipTimeout
                     ToolTip.visible: mouseArea.containsMouse && (needHint || needCaption)
                     ToolTip.text: (needCaption ? connectionName.text : "") + (needCaption && needHint ? "\n" : "") + (needHint ? hint : "")
                 }

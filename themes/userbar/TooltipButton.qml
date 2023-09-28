@@ -36,8 +36,8 @@ PlasmaComponents.ToolButton {
 
     text: expand ? caption : null
     hoverEnabled: true
-    ToolTip.delay: 1000
-    ToolTip.timeout: 5000
+    ToolTip.delay: params.toolTipDelay
+    ToolTip.timeout: params.toolTipTimeout
     ToolTip.visible: !expand && hovered
     ToolTip.text: caption
 }
