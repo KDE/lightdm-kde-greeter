@@ -4,7 +4,7 @@ project(greeter-app)
 # Versions
 set(LIGHTDM_KDE_VERSION_MAJOR 0)
 set(LIGHTDM_KDE_VERSION_MINOR 4)
-set(LIGHTDM_KDE_VERSION_PATCH 9)
+set(LIGHTDM_KDE_VERSION_PATCH 10)
 set(LIGHTDM_KDE_VERSION ${LIGHTDM_KDE_VERSION_MAJOR}.${LIGHTDM_KDE_VERSION_MINOR}.${LIGHTDM_KDE_VERSION_PATCH})
 
 # directory where images will be saved so that the greeter has access to it,
