@@ -36,6 +36,7 @@ PlasmaCore.ColorScope {
     property int userFaceSize: 7 * gridUnit
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
     property var pendingPrompts: []
+    property int authStep: 0
 
     PlasmaComponents.Label {
         id: debugInfo
@@ -61,6 +62,7 @@ PlasmaCore.ColorScope {
         target: greeter
 
         function onShowPrompt(text, type) {
+            authStep++;
             pendingPrompts.push({ "text": text, "type": type })
             if (!inputDialog.visible) consumePrompt()
         }
@@ -168,6 +170,11 @@ PlasmaCore.ColorScope {
     }
 
     function startDefaultScreen() {
+        authStep = 0
+        if (greeter.hideUsers) {
+            loginAsOtherUser()
+            return
+        }
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
@@ -176,7 +183,6 @@ PlasmaCore.ColorScope {
     }
 
     function loginAsOtherUser() {
-        cancelInput()
         visibleScreen = screens.WaitScreen
         greeter.authenticate()
         inputBox.overrideText = greeter.lastLoggedInUser
@@ -202,8 +208,8 @@ PlasmaCore.ColorScope {
     function cancelInput() {
         clearMessages()
         pendingPrompts.length = 0
-        startDefaultScreen()
         greeter.cancelAuthentication()
+        startDefaultScreen()
         sessionButton.updateCurrentSession()
     }
 
@@ -381,6 +387,7 @@ PlasmaCore.ColorScope {
                         PlasmaComponents.ToolButton {
                             id: cancelButton
                             icon.name: "undo"
+                            visible: authStep > 1 || !greeter.hideUsers
                             anchors.verticalCenter: parent.verticalCenter
                             onClicked: cancelInput()
                         }
@@ -572,9 +579,11 @@ PlasmaCore.ColorScope {
         TooltipButton {
             id: loginAsOtherButton
             caption: i18n("Log in as another user")
+            // XXX: show-manual-login is false by default yet, this is undesirable
+            visible: !greeter.hideUsers /* && greeter.showManualLogin */
             expand: menuBar.expand
             icon.name: "auto-type"
-            onClicked: loginAsOtherUser()
+            onClicked: { cancelInput(); loginAsOtherUser() }
         }
 
         TooltipButton {

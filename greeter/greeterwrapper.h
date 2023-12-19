@@ -34,6 +34,8 @@ class GreeterWrapper: public QLightDM::Greeter
     Q_PROPERTY(QString guestLoginName READ guestLoginName CONSTANT)
     Q_PROPERTY(bool allowAutologin MEMBER m_allowAutologin)
     Q_PROPERTY(QString autologinSession READ autologinSessionHint)
+    Q_PROPERTY(bool hideUsers READ hideUsersHint CONSTANT)
+    Q_PROPERTY(bool showManualLogin READ showManualLoginHint CONSTANT)
 
 public:
     explicit GreeterWrapper(QObject *parent = nullptr);

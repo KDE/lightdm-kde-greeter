@@ -26,7 +26,7 @@ PlasmaComponents.ToolButton {
     // caption will shown as a tooltip
     property bool expand: true
     property string caption
-    property int approximateFullWidth: captionSize.width + height + spacing
+    property int approximateFullWidth: visible ? captionSize.width + height + spacing : 0
 
     Label {
         id: captionSize
