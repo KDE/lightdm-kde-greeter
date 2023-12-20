@@ -444,6 +444,22 @@ PlasmaCore.ColorScope {
             }
         }
 
+        Shadow { source: loginAsOtherButton }
+        TooltipButton {
+            id: loginAsOtherButton
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: centerPanel.bottom
+                topMargin: gridUnit * 2
+            }
+            caption: i18n("Log in as another user")
+            // XXX: show-manual-login is false by default yet, this is undesirable
+            visible: !greeter.hideUsers /* && greeter.showManualLogin */ && visibleScreen == screens.DefaultScreen
+            expand: true
+            icon.name: "auto-type"
+            onClicked: { cancelInput(); loginAsOtherUser() }
+        }
+
         ListView {
             id: msgList
 
@@ -574,16 +590,6 @@ PlasmaCore.ColorScope {
             expand: menuBar.expand
             approximateFullWidth: height * 6
             onPopupHide: centerPanelFocus.forceActiveFocus()
-        }
-
-        TooltipButton {
-            id: loginAsOtherButton
-            caption: i18n("Log in as another user")
-            // XXX: show-manual-login is false by default yet, this is undesirable
-            visible: !greeter.hideUsers /* && greeter.showManualLogin */
-            expand: menuBar.expand
-            icon.name: "auto-type"
-            onClicked: { cancelInput(); loginAsOtherUser() }
         }
 
         TooltipButton {
