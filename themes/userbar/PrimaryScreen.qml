@@ -22,6 +22,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.15 // for Screen.pixelDensity
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import "../components" as Shared
 
 PlasmaCore.ColorScope {
     id: screen
@@ -42,7 +43,7 @@ PlasmaCore.ColorScope {
         id: debugInfo
         visible: showDebugInfo
         anchors {
-            bottom: wholeScreen.bottom
+            bottom: bottomBar.top
             right: wholeScreen.right
             margins: screen.padding
         }
@@ -178,7 +179,7 @@ PlasmaCore.ColorScope {
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
-        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, virtualKeyboardButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
+        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
         usersList.forceActiveFocus()
     }
 
@@ -593,17 +594,6 @@ PlasmaCore.ColorScope {
         }
 
         TooltipButton {
-            id: virtualKeyboardButton
-            caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
-            expand: menuBar.expand
-            icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
-            onClicked: {
-                inputPanel.switchState()
-                if (desktop.previousFocusItem) desktop.previousFocusItem.forceActiveFocus()
-            }
-        }
-
-        TooltipButton {
             id: suspendButton
             caption: i18n("Suspend")
             expand: menuBar.expand
@@ -649,6 +639,32 @@ PlasmaCore.ColorScope {
         anchors.margins: screen.padding * 2
     }
     Shadow { source: clock }
+
+    Row {
+        id: bottomBar
+        anchors {
+            right: activeScreen.right
+            bottom: activeScreen.bottom
+            margins: screen.padding
+        }
+        spacing: screen.padding
+
+        TooltipButton {
+            id: virtualKeyboardButton
+            caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
+            expand: menuBar.expand
+            icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
+            onClicked: {
+                inputPanel.switchState()
+                if (desktop.previousFocusItem) desktop.previousFocusItem.forceActiveFocus()
+            }
+        }
+
+        Shared.Battery {
+            id: myBattery
+        }
+    }
+    Shadow { source: bottomBar }
 
     Loader {
         id: inputPanel

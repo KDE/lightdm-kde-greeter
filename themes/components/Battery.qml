@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
+    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -21,10 +22,12 @@ RowLayout {
             ? source[prop] : fallback;
     }
 
-    readonly property var acAdapter: pmSource.data["AC Adapter"]
     readonly property var battery: pmSource.data["Battery"]
 
-    readonly property bool pluggedIn: getOrDefault(acAdapter, "Plugged in", false)
+    // State: Unknown NoCharge Charging Discharging FullyCharged
+    // See plasma-workspace/dataengines/powermanagement/powermanagementengine.cpp, batteryStateToString
+    readonly property string batteryState: getOrDefault(battery, "State", "Unknown")
+    readonly property bool pluggedIn: batteryState !== "Discharging"
     readonly property bool hasBattery: getOrDefault(battery, "Has Battery", false)
     readonly property int percent: getOrDefault(battery, "Percent", 0)
 
@@ -34,7 +37,7 @@ RowLayout {
     PlasmaCore.DataSource {
         id: pmSource
         engine: "powermanagement"
-        connectedSources: ["Battery", "AC Adapter"]
+        connectedSources: ["Battery"]
     }
 
     PW.BatteryIcon {
@@ -50,8 +53,8 @@ RowLayout {
     PlasmaComponents3.Label {
         id: batteryLabel
         font.pointSize: root.fontSize
-        text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "%1%", root.percent)
-        Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Battery at %1%", root.percent)
+        text: i18nd("lightdm_kde_greeter", "%1%", root.percent)
+        Accessible.name: i18nd("lightdm_kde_greeter", "Battery at %1%", root.percent)
         Layout.alignment: Qt.AlignVCenter
     }
 }
