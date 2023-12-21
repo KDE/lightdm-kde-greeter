@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+
+- 'on': ['Linux']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/kauth': '@latest'
+    'frameworks/kcmutils': '@latest'
+    'frameworks/kconfig': '@latest'
+    'frameworks/kconfigwidgets': '@latest'
+    'frameworks/kcoreaddons': '@latest'
+    'frameworks/kdeclarative': '@latest'
+    'frameworks/ki18n': '@latest'
+    'frameworks/kiconthemes': '@latest'
+    'frameworks/kpackage': '@latest'
+    'frameworks/kservice': '@latest'
+    'frameworks/networkmanager-qt': '@latest'
+    'plasma/libplasma': '@latest'
+
+Options:
+  cmake-options: '-DGREETER_IMAGES_DIR=/var/lib/$CI_PROJECT_NAME/images'
+  require-passing-tests-on: [ 'Linux' ]
