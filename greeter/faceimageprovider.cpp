@@ -74,11 +74,6 @@ QPixmap FaceImageProvider::requestPixmap(const QString &id, QSize *size, const Q
         }
     }
 
-    if (pix.isNull())
-    {
-        pix = QIcon(new KIconEngine(QStringLiteral("user-identity"), KIconLoader::global())).pixmap(extent);
-    }
-
     if (size)
     {
         *size = pix.size();

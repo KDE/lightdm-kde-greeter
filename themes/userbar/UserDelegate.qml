@@ -8,7 +8,6 @@
 
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import QtGraphicalEffects 1.15 as FX
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -25,7 +24,7 @@ Item {
     property string name
     property string userName
     property string avatarPath
-    property string iconSource
+    property string iconSource: "user-identity"
     property bool needsPassword
     property var vtNumber
     property bool constrainText: true
@@ -71,7 +70,6 @@ Item {
             sourceSize: Qt.size(faceSize * Screen.devicePixelRatio, faceSize * Screen.devicePixelRatio)
             fillMode: Image.PreserveAspectCrop
             anchors.fill: parent
-            visible: false
         }
 
         PlasmaCore.IconItem {
@@ -81,33 +79,71 @@ Item {
             anchors.fill: parent
             colorGroup: PlasmaCore.ColorScope.colorGroup
         }
-
-        Rectangle {
-            id: mask
-            anchors.fill: imageSource
-            radius: Math.floor(width / 2)
-            visible: false
-        }
-
-        FX.OpacityMask {
-            anchors.fill: mask
-            source: face
-            maskSource: mask
-            visible: !faceIcon.visible
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            radius: Math.floor(width / 2)
-
-            border {
-                color: mouseArea.containsMouse ? PlasmaCore.ColorScope.highlightColor : PlasmaCore.ColorScope.textColor
-                width: 2
-            }
-            color: "transparent"
-        }
     }
 
+    ShaderEffectSource {
+        id: imageProxy
+        sourceItem: imageSource
+        // software rendering is just a fallback so we can accept not having a rounded avatar here
+        hideSource: wrapper.GraphicsInfo.api !== GraphicsInfo.Software
+        live: true // otherwise the user in focus will show a blurred avatar
+        visible: false
+    }
+
+    ShaderEffect {
+        id: shaderItem
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        width: imageSource.width
+        height: imageSource.height
+
+        supportsAtlasTextures: true
+
+        readonly property Item source: imageProxy
+
+        readonly property color colorBorder: PlasmaCore.ColorScope.textColor
+
+        //draw a circle with an antialiased border
+        //innerRadius = size of the inner circle with contents
+        //outerRadius = size of the border
+        //blend = area to blend between two colours
+        //all sizes are normalised so 0.5 == half the width of the texture
+
+        //if copying into another project don't forget to connect themeChanged to update()
+        //but in SDDM that's a bit pointless
+        fragmentShader: `
+        varying highp vec2 qt_TexCoord0;
+        uniform highp float qt_Opacity;
+        uniform lowp sampler2D source;
+        uniform lowp vec4 colorBorder;
+
+        const highp float blend = 0.01;
+        const highp float innerRadius = 0.47;
+        const highp float outerRadius = 0.49;
+        const lowp vec4 colorEmpty = vec4(0.0, 0.0, 0.0, 0.0);
+
+        void main() {
+            lowp vec4 colorSource = texture2D(source, qt_TexCoord0.st);
+
+            highp vec2 m = qt_TexCoord0 - vec2(0.5, 0.5);
+            highp float dist = sqrt(m.x * m.x + m.y * m.y);
+
+            if (dist < innerRadius)
+            gl_FragColor = colorSource;
+            else if (dist < innerRadius + blend)
+            gl_FragColor = mix(colorSource, colorBorder, ((dist - innerRadius) / blend));
+            else if (dist < outerRadius)
+            gl_FragColor = colorBorder;
+            else if (dist < outerRadius + blend)
+            gl_FragColor = mix(colorBorder, colorEmpty, ((dist - outerRadius) / blend));
+            else
+            gl_FragColor = colorEmpty;
+
+            gl_FragColor = gl_FragColor * qt_Opacity;
+        }
+        `
+    }
 
     PlasmaComponents3.Label {
         id: usernameDelegate

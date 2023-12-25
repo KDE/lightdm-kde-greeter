@@ -299,7 +299,7 @@ PlasmaCore.ColorScope {
                     opacity: isCurrent ? 1.0 : visibleScreen == screens.DefaultScreen ? 0.618 : 0.0
                     name: model.display
 
-                    width: userFaceSize + screen.padding * 2
+                    width: userFaceSize
                     animate: usersList.animateDelegate
 
                     //if we only have one delegate, we don't need to clip the text as it won't be overlapping with anything
