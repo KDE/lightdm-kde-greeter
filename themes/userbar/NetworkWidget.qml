@@ -137,7 +137,7 @@ TooltipButton {
         parent: activeScreen
         anchors.centerIn: parent
         // shrink the psk dialog vertically so that the input field is at the level of the buttons
-        height: contentHeight + topPadding + bottomPadding + (layoutType == pskLayout ? 0 : confirmFooter.contentHeight + bottomPadding)
+        height: contentHeight + topPadding + bottomPadding + confirmFooter.contentHeight + bottomPadding
         // if the width is too small, the buttons also start to shrink and hide the content
         width: Math.max(implicitWidth, layoutType == pskLayout ? confirmFooter.minWidth + layout.focusTo.width : confirmFooter.minWidth + back.border * 2)
 
@@ -174,7 +174,7 @@ TooltipButton {
             property int minWidth: contentWidth + leftPadding + rightPadding + spacing * 2
             standardButtons: Dialog.Ok | Dialog.Cancel
             buttonLayout: DialogButtonBox.KdeLayout
-            alignment: Qt.AlignBottom | Qt.AlignRight
+            alignment: Qt.AlignBottom | Qt.AlignCenter
         }
     }
 
@@ -211,8 +211,7 @@ TooltipButton {
             }
             PlasmaComponents.TextField {
                 id: secretField
-                // manual right-aligned to be next to the buttons
-                x: confirmAction.width - confirmFooter.minWidth - width
+                anchors.horizontalCenter: parent.horizontalCenter
                 width: 8 * gridUnit
                 echoMode: TextInput.Password
                 revealPasswordButtonShown: true
