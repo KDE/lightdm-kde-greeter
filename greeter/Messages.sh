@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT `find . -name \*.qml -o -name \*.cpp` -o $podir/greeter.pot
+$XGETTEXT `find . ../themes/components -name \*.qml -o -name \*.cpp` -o $podir/lightdm_kde_greeter.pot
