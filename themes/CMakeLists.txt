@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
 install(DIRECTORY userbar
         DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes
         PATTERN Messages.sh EXCLUDE

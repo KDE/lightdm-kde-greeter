@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
 [Unit]
 Description=LightDM KDE Greeter, to create a wifi connection that will last a little longer than greeter
 

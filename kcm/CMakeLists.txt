@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
 # Makes it easy to reuse code from the greeter. A bit ugly but I don't feel
 # like setting up a static library for one class.
 set(GREETER_DIR ${CMAKE_SOURCE_DIR}/greeter)

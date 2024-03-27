@@ -1,0 +1,5 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: .gitignore greeter/README kcm/kcm_lightdm.json themes/README themes/userbar/preview.png
+Copyright: None
+License: CC0-1.0

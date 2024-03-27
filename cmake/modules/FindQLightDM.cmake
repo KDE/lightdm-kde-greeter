@@ -9,7 +9,7 @@
 # Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 # Copyright 2022 Anton Golubev <golubevan@basealt.ru>
 #
-# Redistribution and use is allowed according to the terms of the BSD license.
+# SPDX-License-Identifier: BSD-3-Clause
 
 set(QLIGHTDM_LIBRARIES_FIND_REQUIRED ${QLightDM_FIND_REQUIRED})
 # if(QLIGHTDM_INCLUDE_DIR AND QLIGHTDM_LIBRARIES)
