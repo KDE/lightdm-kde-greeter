@@ -27,6 +27,7 @@ PlasmaCore.ColorScope {
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
     property var pendingPrompts: []
     property int authStep: 0
+    property bool hideUsersList: greeter.hideUsers || usersList.model.rowCount() == 0
 
     PlasmaComponents.Label {
         id: debugInfo
@@ -161,7 +162,7 @@ PlasmaCore.ColorScope {
 
     function startDefaultScreen() {
         authStep = 0
-        if (greeter.hideUsers) {
+        if (hideUsersList) {
             loginAsOtherUser()
             return
         }
@@ -264,6 +265,8 @@ PlasmaCore.ColorScope {
                 // so as not to animate if the dimensions change when the screen changes
                 property bool animateDelegate: false
 
+                property var currentItemSafe: currentItem ? currentItem : {}
+
                 visible: visibleScreen == screens.DefaultScreen || visibleScreen == screens.LoginScreen
                 enabled: visible
                 interactive: visibleScreen == screens.DefaultScreen
@@ -274,7 +277,7 @@ PlasmaCore.ColorScope {
 
                 spacing: padding
                 width: activeScreen.width
-                height: currentItem.height
+                height: currentItemSafe.height
                 model: usersModel
                 currentIndex: Math.max(model.indexForUserName(greeter.lastLoggedInUser), 0)
                 cacheBuffer: count * 80
@@ -312,8 +315,8 @@ PlasmaCore.ColorScope {
 
                 orientation: ListView.Horizontal
                 highlightRangeMode: ListView.StrictlyEnforceRange
-                preferredHighlightBegin: width / 2 - currentItem.width / 2
-                preferredHighlightEnd: width / 2 + currentItem.width / 2
+                preferredHighlightBegin: width / 2 - currentItemSafe.width / 2
+                preferredHighlightEnd: width / 2 + currentItemSafe.width / 2
 
                 Component.onCompleted: {
                     sessionButton.onCurrentIndexChanged.connect(() => {
@@ -377,7 +380,7 @@ PlasmaCore.ColorScope {
                         PlasmaComponents.ToolButton {
                             id: cancelButton
                             icon.name: "undo"
-                            visible: authStep > 1 || !greeter.hideUsers
+                            visible: authStep > 1 || !hideUsersList
                             anchors.verticalCenter: parent.verticalCenter
                             onClicked: cancelInput()
                         }
@@ -444,7 +447,7 @@ PlasmaCore.ColorScope {
             }
             caption: i18n("Log in as another user")
             // XXX: show-manual-login is false by default yet, this is undesirable
-            visible: !greeter.hideUsers /* && greeter.showManualLogin */ && visibleScreen == screens.DefaultScreen
+            visible: !hideUsersList /* && greeter.showManualLogin */ && visibleScreen == screens.DefaultScreen
             expand: true
             icon.name: "auto-type"
             onClicked: { cancelInput(); loginAsOtherUser() }
@@ -555,7 +558,7 @@ PlasmaCore.ColorScope {
             }
 
             function updateCurrentSession() {
-                setCurrentSession(usersList.currentItem.usersession)
+                setCurrentSession(usersList.currentItemSafe.usersession)
             }
 
             function setCurrentSession(session) {
@@ -567,7 +570,7 @@ PlasmaCore.ColorScope {
 
             Component.onCompleted: {
                 updateCurrentSession()
-                usersList.onCurrentIndexChanged.connect(updateCurrentSession)
+                usersList.onCurrentItemSafeChanged.connect(updateCurrentSession)
             }
             ToolTip.delay: params.toolTipDelay
             ToolTip.timeout: params.toolTipTimeout
