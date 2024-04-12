@@ -26,6 +26,8 @@ PlasmaComponents.ToolButton {
     }
 
     onPressed: nextLayout()
+    Keys.onReturnPressed: nextLayout()
+    Keys.onEnterPressed: nextLayout()
 
     MouseArea {
         anchors.fill: parent

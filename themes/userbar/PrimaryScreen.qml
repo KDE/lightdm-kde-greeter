@@ -143,7 +143,7 @@ PlasmaCore.ColorScope {
     function startLoginScreen() {
         clearMessages()
         visibleScreen = screens.LoginScreen
-        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
+        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
         inputBox.forceActiveFocus()
         var username = usersList.currentItem.username
         inputBox.clear()
@@ -156,7 +156,7 @@ PlasmaCore.ColorScope {
 
     function startPromptScreen() {
         visibleScreen = screens.PromptScreen
-        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton ])
+        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
         inputBox.forceActiveFocus()
     }
 
@@ -169,7 +169,7 @@ PlasmaCore.ColorScope {
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
-        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, loginAsOtherButton, suspendButton, hibernateButton, restartButton, shutdownButton ])
+        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
         usersList.forceActiveFocus()
     }
 
@@ -225,6 +225,8 @@ PlasmaCore.ColorScope {
     FocusScope {
         id: centerPanelFocus
 
+        KeyNavigation.up: keyboardLayoutButton
+
         anchors.fill: activeScreen
 
         Column {
@@ -258,6 +260,8 @@ PlasmaCore.ColorScope {
             ListView {
                 id: usersList
 
+                KeyNavigation.down: loginAsOtherButton
+
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -273,7 +277,7 @@ PlasmaCore.ColorScope {
 
                 // dim the list of users when it loses focus
                 property bool itemHovered: false
-                opacity: centerPanelFocus.activeFocus || itemHovered || visibleScreen != screens.DefaultScreen ? 1.0 : 0.7
+                opacity: usersList.activeFocus || itemHovered || visibleScreen != screens.DefaultScreen ? 1.0 : 0.7
 
                 spacing: padding
                 width: activeScreen.width
@@ -397,6 +401,8 @@ PlasmaCore.ColorScope {
                         PlasmaComponents.TextField {
                             id: inputBox
 
+                            focus: true
+
                             // if set overrideText, the first clear will set this text
                             // need for 'log in as another user'
                             property string overrideText
@@ -440,6 +446,9 @@ PlasmaCore.ColorScope {
         Shadow { source: loginAsOtherButton }
         TooltipButton {
             id: loginAsOtherButton
+
+            KeyNavigation.up: usersList
+
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: centerPanel.bottom
@@ -530,6 +539,8 @@ PlasmaCore.ColorScope {
             return approximateFullWidth
         }
 
+        KeyNavigation.down: centerPanelFocus
+
         // whether to show button captions
         property bool expand: expandedWidth < activeScreen.width * 0.9
 
@@ -543,6 +554,7 @@ PlasmaCore.ColorScope {
             ToolTip.timeout: params.toolTipTimeout
             ToolTip.visible: hovered
             ToolTip.text: i18n("Keyboard layout")
+            KeyNavigation.right: sessionButton
         }
 
         ListButton {
@@ -576,6 +588,8 @@ PlasmaCore.ColorScope {
             ToolTip.timeout: params.toolTipTimeout
             ToolTip.visible: hovered
             ToolTip.text: i18n("Desktop session")
+            KeyNavigation.left: keyboardLayoutButton
+            KeyNavigation.right: connectionsButton
         }
 
         NetworkWidget {
@@ -583,6 +597,8 @@ PlasmaCore.ColorScope {
             expand: menuBar.expand
             approximateFullWidth: height * 6
             onPopupHide: centerPanelFocus.forceActiveFocus()
+            KeyNavigation.left: sessionButton
+            KeyNavigation.right: suspendButton
         }
 
         TooltipButton {
@@ -592,6 +608,8 @@ PlasmaCore.ColorScope {
             icon.name: "system-suspend"
             enabled: power.canSuspend
             onClicked: power.suspend()
+            KeyNavigation.left: connectionsButton
+            KeyNavigation.right: hibernateButton
         }
 
         TooltipButton {
@@ -602,6 +620,8 @@ PlasmaCore.ColorScope {
             //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
             visible: power.canHibernate
             onClicked: power.hibernate()
+            KeyNavigation.left: suspendButton
+            KeyNavigation.right: restartButton
         }
 
         TooltipButton {
@@ -611,6 +631,8 @@ PlasmaCore.ColorScope {
             icon.name: "system-reboot"
             enabled: power.canRestart
             onClicked: power.restart()
+            KeyNavigation.left: hibernateButton
+            KeyNavigation.right: shutdownButton
         }
 
         TooltipButton {
@@ -620,6 +642,7 @@ PlasmaCore.ColorScope {
             icon.name: "system-shutdown"
             enabled: power.canShutdown
             onClicked: power.shutdown()
+            KeyNavigation.left: restartButton
         }
     }
 

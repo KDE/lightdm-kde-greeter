@@ -29,4 +29,7 @@ PlasmaComponents.ToolButton {
     ToolTip.timeout: params.toolTipTimeout
     ToolTip.visible: !expand && hovered
     ToolTip.text: caption
+
+    Keys.onReturnPressed: clicked()
+    Keys.onEnterPressed: clicked()
 }

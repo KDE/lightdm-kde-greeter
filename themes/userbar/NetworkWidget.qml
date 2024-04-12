@@ -85,7 +85,12 @@ TooltipButton {
             }
 
             confirmAction.open()
-            if (confirmLayout.item.focusTo) confirmLayout.item.focusTo.forceActiveFocus()
+            if (confirmLayout.item.focusTo) {
+                confirmLayout.item.focusTo.forceActiveFocus()
+                confirmFooter.linkArrowNavigation(confirmLayout.item)
+            }
+            // focus on the buttons then
+            else confirmFooter.forceActiveFocus()
         }
     }
 
@@ -113,11 +118,10 @@ TooltipButton {
     }
 
     onClicked: {
-        screen.startDefaultScreen()
         connectionsModel.requestScanWifi()
         setTabOrder([ switchWireless, switchNetworking, networkList ])
         popup.open()
-        popup.forceActiveFocus()
+        interfaceButtons.forceActiveFocus()
     }
 
     Dialog {
@@ -164,6 +168,56 @@ TooltipButton {
             standardButtons: Dialog.Ok | Dialog.Cancel
             buttonLayout: DialogButtonBox.KdeLayout
             alignment: Qt.AlignBottom | Qt.AlignCenter
+
+            Component.onCompleted: {
+
+                // buttons navigation with arrows
+
+                if (contentChildren.length <= 0) return
+
+                var first = contentChildren[0]
+                var last = contentChildren[contentChildren.length - 1]
+
+                // initial button highlight
+                confirmFooter.KeyNavigation.right = first
+                confirmFooter.KeyNavigation.left = last
+
+                // loop
+                first.KeyNavigation.left = last
+                last.KeyNavigation.right = first
+
+                // horizontal links
+                for (var i in contentChildren) {
+                    if (i > 0) {
+                        contentChildren[i - 1].KeyNavigation.right = contentChildren[i]
+                        contentChildren[i].KeyNavigation.left = contentChildren[i - 1]
+                    }
+                }
+            }
+
+            // button activation on enter
+            Keys.onReturnPressed: pushButton()
+            Keys.onEnterPressed: pushButton()
+            function pushButton() {
+                for (var i in contentChildren) {
+                    var button = contentChildren[i]
+                    if (button.visualFocus) {
+                        button.clicked()
+                        return
+                    }
+                }
+            }
+
+            function linkArrowNavigation(item) {
+                if (contentChildren.length <= 0) return
+
+                item.bottomItem.KeyNavigation.down = contentChildren[0]
+
+                for (var i in contentChildren) {
+                    contentChildren[i].KeyNavigation.up = item.bottomItem
+                }
+
+            }
         }
     }
 
@@ -191,6 +245,8 @@ TooltipButton {
 
             spacing: gap * 2
             property var focusTo: secretField
+            property var bottomItem: secretField
+
             PlasmaComponents.Label {
                 id: label
                 width: implicitWidth + gap * 2
@@ -219,6 +275,7 @@ TooltipButton {
                 confirmLayout.lastUser = identityField.text
             }
 
+            property var bottomItem: secretField
             property var focusTo: identityField
             property alias identityField: identityField
             property alias secretField: secretField
@@ -250,6 +307,7 @@ TooltipButton {
                     PlasmaComponents.TextField {
                         id: identityField
                         width: 8 * gridUnit
+                        KeyNavigation.down: secretField
                     }
                 }
                 Row {
@@ -295,8 +353,13 @@ TooltipButton {
             id: interfaceButtons
             anchors.right: parent.right
 
+            KeyNavigation.down: switchNetworking
+
             TooltipButton {
                 id: switchWireless
+
+                KeyNavigation.up: interfaceButtons
+                KeyNavigation.down: networkList
 
                 visible: popup.onLine
                 width: iconSize + gap * 2
@@ -318,6 +381,10 @@ TooltipButton {
 
             TooltipButton {
                 id: switchNetworking
+
+                KeyNavigation.up: interfaceButtons
+                KeyNavigation.left: switchWireless
+                KeyNavigation.down: networkList
 
                 width: iconSize + gap * 2
                 height: width
@@ -435,6 +502,8 @@ TooltipButton {
                     }
 
                     Keys.onSpacePressed: itemClicked(item)
+                    Keys.onEnterPressed: itemClicked(item)
+                    Keys.onReturnPressed: itemClicked(item)
 
                     property bool needHint: item && (item.flags & ConnectionEnum.FLAG_PRIVATE) && item.state == ConnectionEnum.STATE_ON
                     property bool needCaption: connectionName.width < connectionName.implicitWidth

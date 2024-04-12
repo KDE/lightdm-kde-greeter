@@ -77,4 +77,11 @@ PlasmaComponents.ToolButton {
             root.itemTriggered()
         }
     }
+
+    Keys.onPressed: if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+        toggle()
+        // the method above does not generate event
+        toggled()
+    }
+
 }
