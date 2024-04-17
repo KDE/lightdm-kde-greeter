@@ -18,6 +18,27 @@ SessionsModel::SessionsModel(QObject *parent)
     , m_showLastUsedSession(false)
 {
     setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::SessionsModel(this)));
+    remapIndicesWaylandFirst();
+
+    connect(this, &ExtraRowProxyModel::rowsInserted, this, &SessionsModel::remapIndicesWaylandFirst);
+    connect(this, &ExtraRowProxyModel::rowsRemoved, this, &SessionsModel::remapIndicesWaylandFirst);
+    connect(this, &ExtraRowProxyModel::dataChanged, this, &SessionsModel::remapIndicesWaylandFirst);
+}
+
+void SessionsModel::remapIndicesWaylandFirst()
+{
+    int lastWayland = 0;
+    m_indicesWaylandFirst.clear();
+
+    for (int i = 0; i < ExtraRowProxyModel::rowCount(); ++i) {
+        QModelIndex cell = ExtraRowProxyModel::index(i, 0);
+        auto sessionType = ExtraRowProxyModel::data(cell, QLightDM::SessionsModel::TypeRole).toString();
+        if (sessionType == QStringLiteral("wayland")) {
+            m_indicesWaylandFirst.insert(lastWayland++, i);
+        } else {
+            m_indicesWaylandFirst.push_back(i);
+        }
+    }
 }
 
 void SessionsModel::setShowLastUsedSession(bool showLastUsedSession)

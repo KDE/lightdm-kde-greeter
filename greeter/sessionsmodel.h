@@ -11,6 +11,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #define SESSIONSMODEL_H
 
 #include "extrarowproxymodel.h"
+#include "config.h"
 
 class SessionsModel: public ExtraRowProxyModel
 {
@@ -21,13 +22,26 @@ class SessionsModel: public ExtraRowProxyModel
 public:
     explicit SessionsModel(QObject *parent = nullptr);
 
+#ifdef GREETER_WAYLAND_SESSIONS_FIRST
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override
+    {
+        int mappedRow = m_indicesWaylandFirst.at(index.row());
+        QModelIndex mappedIndex = index.model()->index(mappedRow, index.column());
+
+        return ExtraRowProxyModel::data(mappedIndex, role);
+    }
+#endif
+
     /** Add a row to the sessions model titled "Last Used Session" */
     void setShowLastUsedSession(bool showLastUsedSession);
     bool showLastUsedSession() const;
     Q_INVOKABLE int indexForSessionName(QString name) const;
 
 private:
+    void remapIndicesWaylandFirst();
+
     bool m_showLastUsedSession;
+    QList<int> m_indicesWaylandFirst;
 };
 
 #endif // SESSIONSMODEL_H
