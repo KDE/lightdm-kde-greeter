@@ -19,6 +19,7 @@ TooltipButton {
 
     property bool needHint: connectionsModel.primary && (connectionsModel.primary.flags & ConnectionEnum.FLAG_PRIVATE)
     property bool needCaption: !expand || width < implicitWidth
+    property bool deactivatedViaKeyboard: false
     property string hint: i18n("The connection will be active only on the login screen.")
 
     caption: connectionsModel.primary.name
@@ -30,6 +31,12 @@ TooltipButton {
     property int approximateFullWidth
     property int gap: screen.padding
     property int iconSize: PlasmaCore.Units.iconSizes.smallMedium
+
+    function keyEvent(event) {
+        if (event.key === Qt.Key_Escape) {
+            deactivatedViaKeyboard = true
+        }
+    }
 
     Connections {
         target: connectionsModel
@@ -216,7 +223,6 @@ TooltipButton {
                 for (var i in contentChildren) {
                     contentChildren[i].KeyNavigation.up = item.bottomItem
                 }
-
             }
         }
     }
@@ -354,12 +360,14 @@ TooltipButton {
             anchors.right: parent.right
 
             KeyNavigation.down: switchNetworking
+            Keys.onShortcutOverride: root.keyEvent(event)
 
             TooltipButton {
                 id: switchWireless
 
                 KeyNavigation.up: interfaceButtons
                 KeyNavigation.down: networkList
+                Keys.onShortcutOverride: root.keyEvent(event)
 
                 visible: popup.onLine
                 width: iconSize + gap * 2
@@ -385,6 +393,7 @@ TooltipButton {
                 KeyNavigation.up: interfaceButtons
                 KeyNavigation.left: switchWireless
                 KeyNavigation.down: networkList
+                Keys.onShortcutOverride: root.keyEvent(event)
 
                 width: iconSize + gap * 2
                 height: width
@@ -424,6 +433,8 @@ TooltipButton {
                     width: ListView.view.width
                     height: connectionEntry.height + gap
                     property bool highlighted: mouseArea.containsMouse || (ListView.view.currentIndex == index && ListView.view.activeFocus)
+
+                    Keys.onShortcutOverride: root.keyEvent(event)
 
                     Row {
                         id: connectionEntry

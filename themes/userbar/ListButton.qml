@@ -19,6 +19,7 @@ PlasmaComponents.ToolButton {
     property int currentIndex: 0
     property string dataRole: "key"
     property var model
+    property bool itemActivatedViaKeyboard: false
 
     signal itemTriggered()
 
@@ -68,8 +69,8 @@ PlasmaComponents.ToolButton {
                 text: model.display
                 onTriggered: {
                     root.currentIndex = model.index
-                    root.itemTriggered()
                 }
+                Keys.onPressed: itemActivatedViaKeyboard = true
             }
         }
 

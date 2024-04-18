@@ -566,7 +566,12 @@ PlasmaCore.ColorScope {
             property int approximateFullWidth: height * 6
 
             onItemTriggered: {
-                centerPanelFocus.forceActiveFocus()
+                if (itemActivatedViaKeyboard) {
+                    sessionButton.forceActiveFocus(Qt.TabFocus)
+                    itemActivatedViaKeyboard = false
+                } else {
+                    centerPanelFocus.forceActiveFocus()
+                }
             }
 
             function updateCurrentSession() {
@@ -596,7 +601,14 @@ PlasmaCore.ColorScope {
             id: connectionsButton
             expand: menuBar.expand
             approximateFullWidth: height * 6
-            onPopupHide: centerPanelFocus.forceActiveFocus()
+            onPopupHide: {
+                if (deactivatedViaKeyboard) {
+                    connectionsButton.forceActiveFocus(Qt.TabFocus)
+                    deactivatedViaKeyboard = false
+                } else {
+                    centerPanelFocus.forceActiveFocus()
+                }
+            }
             KeyNavigation.left: sessionButton
             KeyNavigation.right: suspendButton
         }
