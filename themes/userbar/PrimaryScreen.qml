@@ -565,10 +565,10 @@ PlasmaCore.ColorScope {
             // probably won't get wider
             property int approximateFullWidth: height * 6
 
-            onItemTriggered: {
-                if (itemActivatedViaKeyboard) {
+            onPopupEnded: {
+                if (deactivatedViaKeyboard) {
                     sessionButton.forceActiveFocus(Qt.TabFocus)
-                    itemActivatedViaKeyboard = false
+                    deactivatedViaKeyboard = false
                 } else {
                     centerPanelFocus.forceActiveFocus()
                 }

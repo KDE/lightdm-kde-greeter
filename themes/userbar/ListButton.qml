@@ -19,9 +19,25 @@ PlasmaComponents.ToolButton {
     property int currentIndex: 0
     property string dataRole: "key"
     property var model
-    property bool itemActivatedViaKeyboard: false
+    property bool deactivatedViaKeyboard: false
 
-    signal itemTriggered()
+    function keyEvent(event) {
+        if (event.key == Qt.Key_Escape || event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+            deactivatedViaKeyboard = true
+        } else if (event.key == Qt.Key_Left) {
+            if (root.KeyNavigation.left) {
+                deactivatedViaKeyboard = true
+                menu.dismiss()
+            }
+        } else if (event.key == Qt.Key_Right) {
+            if (root.KeyNavigation.right) {
+                deactivatedViaKeyboard = true
+                menu.dismiss()
+            }
+        }
+    }
+
+    signal popupEnded()
 
     text: {
         var item = instantiator.objectAt(currentIndex)
@@ -35,6 +51,7 @@ PlasmaComponents.ToolButton {
     onToggled: {
         if (checked) {
             menu.popup(root, 0, 0)
+            menu.currentIndex = root.currentIndex
         } else {
             menu.dismiss()
         }
@@ -70,12 +87,12 @@ PlasmaComponents.ToolButton {
                 onTriggered: {
                     root.currentIndex = model.index
                 }
-                Keys.onPressed: itemActivatedViaKeyboard = true
+                Keys.onShortcutOverride: root.keyEvent(event)
             }
         }
 
         onAboutToHide: {
-            root.itemTriggered()
+            root.popupEnded()
         }
     }
 
@@ -84,5 +101,4 @@ PlasmaComponents.ToolButton {
         // the method above does not generate event
         toggled()
     }
-
 }
