@@ -44,6 +44,8 @@ target_link_libraries(lightdm-kde-greeter
 
 install(TARGETS lightdm-kde-greeter RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/sbin/)
 install(FILES lightdm-kde-greeter.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/xgreeters)
+configure_file(lightdm-kde-greeter.conf.in lightdm-kde-greeter.conf @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lightdm-kde-greeter.conf DESTINATION ${LIGHTDM_CONFIG_DIR})
 
 # Create the background hack
 set(ROOTIMAGE_SRCS rootimageapp.cpp)

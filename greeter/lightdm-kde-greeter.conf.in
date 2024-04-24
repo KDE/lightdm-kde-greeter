@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+#
+# LightDM KDE Configuration
+# Available configuration options listed below.
+#
+# General greeter settings:
+#  theme-name = greeter theme to use
+#  enable-high-dpi = false|true ("false" by default)  Enable high DPI scaling and pixmaps. (Qt::AA_EnableHighDpiScaling and Qt::AA_UseHighDpiPixmaps are enabled)
+#
+# Theme "userbar" settings:
+#  Background = Background file to use, should be readable by all users
+#  BackgroundFillMode = number, [0-6], The following modes are supported:
+#    0: Stretch
+#    1: PreserveAspectFit
+#    2: PreserveAspectCrop
+#    3: Tile
+#    4: TileVertically
+#    5: TileHorizontally
+#    6: Pad (the image is not transformed)
+
+[greeter]
+#enable-high-dpi=
+theme-name=userbar
+
+[lightdm_theme_userbar]
+#Background=@GREETER_DEFAULT_WALLPAPER@
+#BackgroundFillMode=
