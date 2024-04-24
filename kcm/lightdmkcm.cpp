@@ -27,6 +27,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include "sessionsmodel.h"
 #include "usersmodel.h"
 
+QString LightDMKcm::s_defaultWallpaper = QStringLiteral(GREETER_DEFAULT_WALLPAPER);
+
 K_PLUGIN_CLASS_WITH_JSON(LightDMKcm, "kcm_lightdm.json")
 
 LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args)

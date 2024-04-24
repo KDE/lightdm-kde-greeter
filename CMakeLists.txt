@@ -25,6 +25,8 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 set(LIGHTDM_CONFIG_DIR "/etc/lightdm"
     CACHE PATH "Directory where LightDM configuration files are kept")
+set(GREETER_DEFAULT_WALLPAPER "${CMAKE_INSTALL_PREFIX}/share/design/current/backgrounds/xdm.png"
+    CACHE PATH "Path to image file")
 
 find_package(X11 REQUIRED)
 find_package(XCB REQUIRED)

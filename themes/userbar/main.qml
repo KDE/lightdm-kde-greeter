@@ -37,7 +37,7 @@ Item {
                 //read from config, if there's no entry use plasma theme
                 source: {
                     var entry = config.readEntry("Background")
-                    return entry != null ? entry : plasmaTheme.wallpaperPath
+                    return entry != null ? entry : defaultWallpaper
                 }
             }
 

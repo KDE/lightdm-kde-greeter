@@ -25,6 +25,7 @@ class LightDMKcm: public KQuickAddons::ManagedConfigModule
     Q_PROPERTY(SessionsModel *sessionsModel READ sessionsModel CONSTANT)
     Q_PROPERTY(QUrl wallpaperConfigSource READ wallpaperConfigSource CONSTANT)
     Q_PROPERTY(QString currentWallpaper READ wallpaperPackageUrl CONSTANT)
+    Q_PROPERTY(QString defaultWallpaper MEMBER s_defaultWallpaper CONSTANT)
 
     ThemesModel *themesModel() const { return m_themesModel; }
     UsersModel *usersModel() const { return m_usersModel; }
@@ -59,6 +60,7 @@ private:
 
     ConfigMap m_storedConfig;
     ConfigMap m_updatedConfig;
+    static QString s_defaultWallpaper;
 };
 
 #endif // LIGHTDMKCM_H

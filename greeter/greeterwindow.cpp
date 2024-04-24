@@ -110,6 +110,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
     rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
     rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
+    rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));
 
     setSource(source);
 
