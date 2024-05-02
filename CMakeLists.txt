@@ -16,12 +16,16 @@ if(NOT DEFINED GREETER_IMAGES_DIR)
     message(FATAL_ERROR "GREETER_IMAGES_DIR must be provided!")
 endif()
 
+set(KF5_MIN_VERSION 5.97)
+# TODO cleanup code so that this isn't needed
+set(KDE_COMPILERSETTINGS_LEVEL "5.84")
+
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 set(LIGHTDM_CONFIG_DIR "/etc/lightdm"
     CACHE PATH "Directory where LightDM configuration files are kept")
@@ -37,7 +41,7 @@ find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus X11Extras Qml 
 set(QLIGHTDM_MIN_VERSION 1.4.0)
 find_package(QLightDM REQUIRED)
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Declarative
     IconThemes
     KCMUtils
