@@ -10,7 +10,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 
-#define TRANSLATION_DOMAIN "greeter"
+#define TRANSLATION_DOMAIN "lightdm_kde_greeter"
 #include <KLocalizedString>
 
 #include <NetworkManagerQt/Connection>

@@ -13,7 +13,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QLightDM/UsersModel>
 #include <QDebug>
 
-#define TRANSLATION_DOMAIN "greeter"
+#define TRANSLATION_DOMAIN "lightdm_kde_greeter"
 #include <KLocalizedString>
 
 UsersModel::UsersModel(QObject *parent)
