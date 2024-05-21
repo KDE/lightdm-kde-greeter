@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -42,6 +42,11 @@ public:
 
     Q_PROPERTY(bool networkingEnabled READ isNetworkingEnabled WRITE setNetworkingEnabled NOTIFY networkingEnabledChanged)
     Q_PROPERTY(bool wirelessEnabled READ isWirelessEnabled WRITE setWirelessEnabled NOTIFY wirelessEnabledChanged)
+
+    Q_PROPERTY(bool allowSwitchWifi MEMBER m_allowSwitchWifi CONSTANT)
+    Q_PROPERTY(bool allowSwitchNetworking MEMBER m_allowSwitchNetworking CONSTANT)
+    Q_PROPERTY(bool allowNetworkControl MEMBER m_allowNetworkControl CONSTANT)
+    Q_PROPERTY(bool allowModifyOwnSettings MEMBER m_allowModifyOwnSettings CONSTANT)
 
 Q_SIGNALS:
     void primaryChanged();
@@ -85,6 +90,11 @@ private:
     QScopedPointer<ConnectionItem> m_primary;
     QString m_username;
     ConnectionActivator *m_activator;
+
+    bool m_allowSwitchWifi;
+    bool m_allowSwitchNetworking;
+    bool m_allowNetworkControl;
+    bool m_allowModifyOwnSettings;
 };
 
 #endif // CONNECTIONSMODEL_H

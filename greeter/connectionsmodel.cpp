@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -121,6 +121,13 @@ ConnectionsModel::ConnectionsModel(QObject *parent) :
     m_primary(new ConnectionItem()),
     m_activator(new ConnectionActivator(this))
 {
+    auto p = NetworkManager::permissions();
+
+    m_allowSwitchWifi =        p[QStringLiteral("org.freedesktop.NetworkManager.enable-disable-wifi")] == QStringLiteral("yes");
+    m_allowSwitchNetworking =  p[QStringLiteral("org.freedesktop.NetworkManager.enable-disable-network")] == QStringLiteral("yes");
+    m_allowNetworkControl =    p[QStringLiteral("org.freedesktop.NetworkManager.network-control")] == QStringLiteral("yes");
+    m_allowModifyOwnSettings = p[QStringLiteral("org.freedesktop.NetworkManager.settings.modify.own")] == QStringLiteral("yes");
+
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::networkingEnabledChanged, this, &ConnectionsModel::networkingEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessHardwareEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);

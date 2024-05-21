@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -50,22 +50,27 @@ TooltipButton {
             switch (action) {
             case ConnectionEnum.ACTION_NONE: return;
             case ConnectionEnum.ACTION_DISCONNECT:
+                if (!connectionsModel.allowNetworkControl) return
                 confirmAction.text = i18n("Disconnect from %1 ?", item.name)
             break
             case ConnectionEnum.ACTION_ABORT_CONNECTING:
                 confirmAction.text = i18n("Abort connecting to %1 ?", item.name)
             break
             case ConnectionEnum.ACTION_CONNECT:
+                if (!connectionsModel.allowNetworkControl) return
                 confirmAction.text = i18n("Connect to %1 ?", item.name)
             break
             case ConnectionEnum.ACTION_CONNECT_FREE_WIFI:
+                if (!connectionsModel.allowModifyOwnSettings) return
                 confirmAction.text = i18n("Connect to an insecure access point %1 ?", item.name)
             break
             case ConnectionEnum.ACTION_CONNECT_WITH_PSK:
+                if (!connectionsModel.allowModifyOwnSettings) return
                 confirmLayout.sourceComponent = pskLayout
                 confirmAction.text = i18n("Enter the password to connect to %1", item.name)
             break
             case ConnectionEnum.ACTION_CONNECT_8021X_WIFI:
+                if (!connectionsModel.allowModifyOwnSettings) return
                 confirmLayout.sourceComponent = eapLayout
                 confirmAction.text = i18n("Enter login and password to connect to %1", item.name)
             break
@@ -373,9 +378,13 @@ TooltipButton {
                 width: iconSize + gap * 2
                 height: width
                 expand: false
-                caption: connectionsModel.wirelessEnabled ? i18n("Disable wireless") : i18n("Enable wireless");
+                caption: {
+                    (connectionsModel.wirelessEnabled ? i18n("Disable wireless") : i18n("Enable wireless"))
+                    + (connectionsModel.allowSwitchWifi ? "" : " (" + i18n("Action prohibited") + ")" )
+                }
 
                 PlasmaCore.IconItem {
+                    id: switchWirelessIcon
                     x: gap
                     y: gap
                     width: iconSize
@@ -384,6 +393,18 @@ TooltipButton {
                     source: "network-wireless"
                     opacity: connectionsModel.wirelessEnabled ? 1.0 : 0.5
                 }
+
+                PlasmaCore.IconItem {
+                    x: Math.round(parent.width * 0.5)
+                    y: Math.round(parent.height * 0.5)
+                    width: parent.width - x
+                    height: parent.height - y
+                    colorGroup: screen.colorGroup
+                    source: "object-locked"
+                    opacity: switchWirelessIcon.opacity
+                    visible: !connectionsModel.allowSwitchWifi
+                }
+
                 onClicked: if (connectionsModel.hasManagedWifiDevices()) {
                     connectionsModel.wirelessEnabled = !connectionsModel.wirelessEnabled
                 }
@@ -400,9 +421,13 @@ TooltipButton {
                 width: iconSize + gap * 2
                 height: width
                 expand: false
-                caption: connectionsModel.networkingEnabled ? i18n("Disable networking") : i18n("Enable networking");
+                caption: {
+                    (connectionsModel.networkingEnabled ? i18n("Disable networking") : i18n("Enable networking"))
+                    + (connectionsModel.allowSwitchNetworking ? "" : " (" + i18n("Action prohibited") + ")" )
+                }
 
                 PlasmaCore.IconItem {
+                    id: switchNetworkingIcon
                     x: gap
                     y: gap
                     width: iconSize
@@ -411,6 +436,18 @@ TooltipButton {
                     source: "system-shutdown"
                     opacity: connectionsModel.networkingEnabled ? 1.0 : 0.5
                 }
+
+                PlasmaCore.IconItem {
+                    x: Math.round(parent.width * 0.5)
+                    y: Math.round(parent.height * 0.5)
+                    width: parent.width - x
+                    height: parent.height - y
+                    colorGroup: screen.colorGroup
+                    source: "object-locked"
+                    opacity: switchNetworkingIcon.opacity
+                    visible: !connectionsModel.allowSwitchNetworking
+                }
+
                 onClicked: connectionsModel.networkingEnabled = !connectionsModel.networkingEnabled
             }
         }
