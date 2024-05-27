@@ -384,7 +384,9 @@ TooltipButton {
                     source: "network-wireless"
                     opacity: connectionsModel.wirelessEnabled ? 1.0 : 0.5
                 }
-                onClicked: connectionsModel.wirelessEnabled = !connectionsModel.wirelessEnabled
+                onClicked: if (connectionsModel.hasManagedWifiDevices()) {
+                    connectionsModel.wirelessEnabled = !connectionsModel.wirelessEnabled
+                }
             }
 
             TooltipButton {

@@ -35,6 +35,7 @@ public:
         emit showDialog(item, selectActionForItem(item));
     }
     Q_INVOKABLE void onActionDialogComplete(QVariantMap data);
+    Q_INVOKABLE bool hasManagedWifiDevices();
 
     // for the button in the menubar
     Q_PROPERTY(QVariant primary READ getPrimary NOTIFY primaryChanged)

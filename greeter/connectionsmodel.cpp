@@ -114,7 +114,6 @@ public:
     {
         handleDBusCall(cm, reply, onError, [cm, dev, onError] { waitForDevice(cm, dev, onError); });
     }
-
 };
 
 ConnectionsModel::ConnectionsModel(QObject *parent) :
@@ -124,7 +123,10 @@ ConnectionsModel::ConnectionsModel(QObject *parent) :
 {
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::networkingEnabledChanged, this, &ConnectionsModel::networkingEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::wirelessHardwareEnabledChanged, this, &ConnectionsModel::wirelessEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::primaryConnectionChanged, this, &ConnectionsModel::updatePrimaryConnection);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceAdded, this, &ConnectionsModel::wirelessEnabledChanged);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceRemoved, this, &ConnectionsModel::wirelessEnabledChanged);
 
     auto pw = getpwuid(getuid());
     if (!pw || strlen(pw->pw_name) == 0) {
@@ -389,7 +391,9 @@ bool ConnectionsModel::isNetworkingEnabled()
 
 bool ConnectionsModel::isWirelessEnabled()
 {
-    return NetworkManager::isWirelessEnabled();
+    return NetworkManager::isWirelessEnabled()
+        && NetworkManager::isWirelessHardwareEnabled()
+        && hasManagedWifiDevices();
 }
 
 void ConnectionsModel::setNetworkingEnabled(bool value)
@@ -622,4 +626,13 @@ void ConnectionsModel::deleteConnection(const ConnectionItem &item)
         return;
     }
     qWarning("%s: could not delete connection: %s", __FUNCTION__, qPrintable(item.path));
+}
+
+bool ConnectionsModel::hasManagedWifiDevices() {
+    for (const auto &device : NetworkManager::networkInterfaces()) {
+        if (device->type() == NetworkManager::Device::Wifi
+            && device->state() != NetworkManager::Device::Unmanaged)
+            return true;
+    }
+    return false;
 }
