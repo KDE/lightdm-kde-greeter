@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -599,7 +599,7 @@ PlasmaCore.ColorScope {
 
         NetworkWidget {
             id: connectionsButton
-            visible: connectionsModel.networkManagerAvailable
+            visible: connectionsModel.networkManagerAvailable && generalConfig.readEntry("hide-network-widget") !== "true"
             expand: menuBar.expand
             approximateFullWidth: height * 6
             onPopupHide: {

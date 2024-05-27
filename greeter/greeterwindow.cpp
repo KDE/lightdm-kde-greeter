@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
+Copyright (C) 2022-2024 Anton Golubev <golubevan@basealt.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -100,6 +100,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     qDebug() << "Loading" << source;
 
     rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
+    rootContext()->setContextProperty(QStringLiteral("generalConfig"), new ConfigWrapper(QStringLiteral("greeter"), this));
     rootContext()->setContextProperty(QStringLiteral("mouseCursor"), cursor);
     rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
     rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
