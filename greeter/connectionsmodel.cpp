@@ -122,6 +122,8 @@ ConnectionsModel::ConnectionsModel(QObject *parent) :
     m_activator(new ConnectionActivator(this))
 {
     auto p = NetworkManager::permissions();
+    m_networkManagerAvailable = !p.isEmpty();
+    if (!m_networkManagerAvailable) return;
 
     m_allowSwitchWifi =        p[QStringLiteral("org.freedesktop.NetworkManager.enable-disable-wifi")] == QStringLiteral("yes");
     m_allowSwitchNetworking =  p[QStringLiteral("org.freedesktop.NetworkManager.enable-disable-network")] == QStringLiteral("yes");

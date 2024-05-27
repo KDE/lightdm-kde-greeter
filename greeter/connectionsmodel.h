@@ -48,6 +48,8 @@ public:
     Q_PROPERTY(bool allowNetworkControl MEMBER m_allowNetworkControl CONSTANT)
     Q_PROPERTY(bool allowModifyOwnSettings MEMBER m_allowModifyOwnSettings CONSTANT)
 
+    Q_PROPERTY(bool networkManagerAvailable MEMBER m_networkManagerAvailable CONSTANT)
+
 Q_SIGNALS:
     void primaryChanged();
     void networkingEnabledChanged();
@@ -95,6 +97,7 @@ private:
     bool m_allowSwitchNetworking;
     bool m_allowNetworkControl;
     bool m_allowModifyOwnSettings;
+    bool m_networkManagerAvailable;
 };
 
 #endif // CONNECTIONSMODEL_H

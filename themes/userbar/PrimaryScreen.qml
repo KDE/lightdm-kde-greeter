@@ -599,6 +599,7 @@ PlasmaCore.ColorScope {
 
         NetworkWidget {
             id: connectionsButton
+            visible: connectionsModel.networkManagerAvailable
             expand: menuBar.expand
             approximateFullWidth: height * 6
             onPopupHide: {
