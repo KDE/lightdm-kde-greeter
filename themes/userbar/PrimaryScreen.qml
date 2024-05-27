@@ -511,6 +511,38 @@ PlasmaCore.ColorScope {
         }
     }
 
+    Shadow { source: hostName }
+
+    PlasmaComponents.Label {
+        id: hostName
+
+        anchors {
+            top: wholeScreen.top
+            left: wholeScreen.left
+            margins: screen.padding
+            leftMargin: screen.padding * 2
+        }
+        height: menuBar.height
+
+        property real maxWidth: activeScreen.width * 0.3
+        width: Math.min(implicitWidth, maxWidth)
+
+        elide: Text.ElideRight
+
+        ToolTip.delay: params.toolTipDelay
+        ToolTip.timeout: params.toolTipTimeout
+        ToolTip.visible: hostNameArea.containsMouse && implicitWidth > maxWidth
+        ToolTip.text: text
+
+        MouseArea {
+            id: hostNameArea
+            anchors.fill: parent
+            hoverEnabled: true
+        }
+
+        text: localHostName
+    }
+
     Shadow { source: menuBar }
 
     Row {
@@ -542,7 +574,7 @@ PlasmaCore.ColorScope {
         KeyNavigation.down: centerPanelFocus
 
         // whether to show button captions
-        property bool expand: expandedWidth < activeScreen.width * 0.9
+        property bool expand: expandedWidth < (activeScreen.width - hostName.width) * 0.9
 
         KeyboardButton {
             id: keyboardLayoutButton

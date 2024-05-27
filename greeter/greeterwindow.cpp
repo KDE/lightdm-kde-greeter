@@ -13,6 +13,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QDir>
+#include <QHostInfo>
 #include <QPainter>
 #include <QPixmap>
 #include <QProcess>
@@ -112,6 +113,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
     rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
     rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));
+    rootContext()->setContextProperty(QStringLiteral("localHostName"), QHostInfo::localHostName());
 
     setSource(source);
 
