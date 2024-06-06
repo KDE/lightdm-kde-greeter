@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-06-05 02:06+0000\n"
+"PO-Revision-Date: 2024-06-05 07:45+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Slika ozadja:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "Povezava bo aktivna samo na prijavnem zaslonu."
+
+#: NetworkWidget.qml:54
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "Naj se odklopim od %1?"
+
+#: NetworkWidget.qml:57
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "Naj prekinem povezovanje z %1 ?"
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "Naj se povežem z %1 ?"
+
+#: NetworkWidget.qml:65
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "Naj se povežem z nevarno dostopno točko %1 ?"
+
+#: NetworkWidget.qml:70
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Vnesite geslo za povezavo z %1"
+
+#: NetworkWidget.qml:75
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Vnesite prijavo in geslo za povezavo z %1"
+
+#: NetworkWidget.qml:79 NetworkWidget.qml:85
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: Napaka pri povezavi, poskusite ponovno."
+
+#: NetworkWidget.qml:88
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "Varnostni protokol ni podprt za %1"
+
+#: NetworkWidget.qml:91
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "Povezava z %1 ni uspela"
+
+#: NetworkWidget.qml:94
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Napaka: ni mogoče najti dostopne točke %1"
+
+#: NetworkWidget.qml:316
+#, kde-format
+msgid "Login"
+msgstr "Prijava"
+
+#: NetworkWidget.qml:332
+#, kde-format
+msgid "Password"
+msgstr "Geslo"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr "Onemogoči brezžično povezavo"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Omogoči brezžično povezavo"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:426
+#, kde-format
+msgid "Action prohibited"
+msgstr "Dejanje prepovedano"
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Disable networking"
+msgstr "Onemogoči mreženje"
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Enable networking"
+msgstr "Omogoči mreženje"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "Pritisnite %1, da spremenite primarni zaslon"
+
+#: PrimaryScreen.qml:70
+#, kde-format
+msgid "Login failed"
+msgstr "Prijava neuspela"
+
+#: PrimaryScreen.qml:438
+#, kde-format
+msgid "Log in"
+msgstr "Prijavite se"
+
+#: PrimaryScreen.qml:457
+#, kde-format
+msgid "Log in as another user"
+msgstr "Prijavite se kot drug uporabnik"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Razporeditev tipkovnice"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Namizna seja"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Prekini"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "V mirovanje"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Ponovni zagon"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Zaustavi"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Navidezna tipkovnica"

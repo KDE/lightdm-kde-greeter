@@ -1,0 +1,169 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+#
+# SPDX-FileCopyrightText: 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-06-05 02:06+0000\n"
+"PO-Revision-Date: 2024-06-05 10:41+0200\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.05.0\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Achtergrondafbeelding:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "De verbinding zal alleen actief zijn op het aanmeldscherm."
+
+#: NetworkWidget.qml:54
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "Verbinding vanaf %1 verbreken?"
+
+#: NetworkWidget.qml:57
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "Verbinding maken met %1 annuleren?"
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "Verbinden met %1 ?"
+
+#: NetworkWidget.qml:65
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "Verbinden met een onveilig access-point %1 ?"
+
+#: NetworkWidget.qml:70
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Voer het wachtwoord in om te verbinden met %1"
+
+#: NetworkWidget.qml:75
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Voer aanmelding en wachtwoord in om te verbinden met %1"
+
+#: NetworkWidget.qml:79 NetworkWidget.qml:85
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: verbindingsfout, probeer opnieuw."
+
+#: NetworkWidget.qml:88
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "Het beveiligingsprotocol wordt niet ondersteund voor %1"
+
+#: NetworkWidget.qml:91
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "Kon niet verbinden met %1"
+
+#: NetworkWidget.qml:94
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Fout: kan access-point %1 niet vinden"
+
+#: NetworkWidget.qml:316
+#, kde-format
+msgid "Login"
+msgstr "Aanmelden"
+
+#: NetworkWidget.qml:332
+#, kde-format
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr "Draadloos uitschakelen"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Draadloos inschakelen"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:426
+#, kde-format
+msgid "Action prohibited"
+msgstr "Actie verboden"
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Disable networking"
+msgstr "Netwerken uitschakelen"
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Enable networking"
+msgstr "Netwerken inschakelen"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "Druk op %1 om het primaire scherm te wijzigen"
+
+#: PrimaryScreen.qml:70
+#, kde-format
+msgid "Login failed"
+msgstr "Aanmelden mislukt"
+
+#: PrimaryScreen.qml:438
+#, kde-format
+msgid "Log in"
+msgstr "Aanmelden"
+
+#: PrimaryScreen.qml:457
+#, kde-format
+msgid "Log in as another user"
+msgstr "Als een andere gebruiker aanmelden"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Toetsenbordindeling"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Bureaubladsessie"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Onderbreken"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Slaapstand naar schijf"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Herstarten"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Afsluiten"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Virtueel toetsenbord"

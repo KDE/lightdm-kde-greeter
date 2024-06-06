@@ -1,0 +1,170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-06-05 02:06+0000\n"
+"PO-Revision-Date: 2024-06-05 19:23\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/lightdm-kde-greeter/"
+"lightdm_theme_userbar.pot\n"
+"X-Crowdin-File-ID: 53768\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr ""
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr ""
+
+#: NetworkWidget.qml:54
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:57
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:65
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:70
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:75
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:79 NetworkWidget.qml:85
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr ""
+
+#: NetworkWidget.qml:88
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr ""
+
+#: NetworkWidget.qml:91
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:94
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr ""
+
+#: NetworkWidget.qml:316
+#, kde-format
+msgid "Login"
+msgstr ""
+
+#: NetworkWidget.qml:332
+#, kde-format
+msgid "Password"
+msgstr ""
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr ""
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr ""
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:426
+#, kde-format
+msgid "Action prohibited"
+msgstr ""
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Disable networking"
+msgstr ""
+
+#: NetworkWidget.qml:425
+#, kde-format
+msgid "Enable networking"
+msgstr ""
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr ""
+
+#: PrimaryScreen.qml:70
+#, kde-format
+msgid "Login failed"
+msgstr ""
+
+#: PrimaryScreen.qml:438
+#, kde-format
+msgid "Log in"
+msgstr ""
+
+#: PrimaryScreen.qml:457
+#, kde-format
+msgid "Log in as another user"
+msgstr ""
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr ""
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr ""
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr ""
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr ""
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr ""
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr ""
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr ""
