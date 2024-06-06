@@ -3,17 +3,57 @@
 
 [Domain]
 Name=LightDM
+Name[ca]=LightDM
+Name[ca@valencia]=LightDM
+Name[es]=LightDM
+Name[nl]=LightDM
+Name[sl]=LightDM
+Name[tr]=LightDM
+Name[uk]=LightDM
+Name[x-test]=xxLightDMxx
 Icon=kauth-example
 URL=http://git.altlinux.org/gears/l/lightdm-kde-greeter.git
 
 [org.kde.kcontrol.kcmlightdm.savethemedetails]
 Name=Save Theme Details
+Name[ca]=Desa els detalls del tema
+Name[ca@valencia]=Guarda els detalls del tema
+Name[es]=Guardar detalles del tema
+Name[nl]=Details van thema opslaan
+Name[sl]=Shrani podrobnosti teme
+Name[tr]=Tema Ayrıntılarını Kaydet
+Name[uk]=Зберегти подробиці щодо теми
+Name[x-test]=xxSave Theme Detailsxx
 Description=Save Theme Details in LightDM
+Description[ca]=Desa els detalls del tema en el LightDM
+Description[ca@valencia]=Guarda els detalls del tema en LightDM
+Description[es]=Guardar detalles del tema en LightDM
+Description[nl]=Details van thema opslaan in LightDM
+Description[sl]=Shrani podrobnosti teme v LightDM
+Description[tr]=LightDM’de Tema Ayrıntılarını Kaydet
+Description[uk]=Зберегти подробиці щодо теми у LightDM
+Description[x-test]=xxSave Theme Details in LightDMxx
 Policy=auth_admin
 Persistence=session
 
 [org.kde.kcontrol.kcmlightdm.save]
 Name=Save Settings
+Name[ca]=Desa la configuració
+Name[ca@valencia]=Guarda la configuració
+Name[es]=Guardar preferencias
+Name[nl]=Instellingen opslaan
+Name[sl]=Shrani nastavitve
+Name[tr]=Ayarları Kaydet
+Name[uk]=Зберегти параметри
+Name[x-test]=xxSave Settingsxx
 Description=Save Settings in LightDM
+Description[ca]=Desa la configuració en el LightDM
+Description[ca@valencia]=Guarda la configuració en LightDM
+Description[es]=Guardar preferencias en LightDM
+Description[nl]=Instellingen opslaan in LightDM
+Description[sl]=Shrani nastavitve v LightDM
+Description[tr]=LightDM’de Ayarları Kaydet
+Description[uk]=Зберегти параметри у LightDM
+Description[x-test]=xxSave Settings in LightDMxx
 Policy=auth_admin
 Persistence=session

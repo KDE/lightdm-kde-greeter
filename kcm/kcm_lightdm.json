@@ -2,8 +2,24 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Configure Login Manager",
+        "Description[ca@valencia]": "Configura el gestor d'inici de sessió",
+        "Description[ca]": "Configura el gestor d'inici de sessió",
+        "Description[es]": "Configurar el gestor de inicio de sesión",
+        "Description[nl]": "Aanmeldbeheerder configureren",
+        "Description[sl]": "Konfiguriraj uporavljalnika prijav",
+        "Description[tr]": "Oturum Açma Yöneticisini Yapılandır",
+        "Description[uk]": "Налаштування керування входом до системи",
+        "Description[x-test]": "xxConfigure Login Managerxx",
         "Icon": "preferences-system-login",
         "Name": "Login Screen (LightDM)",
+        "Name[ca@valencia]": "Pantalla d'inici de sessió (LightDM)",
+        "Name[ca]": "Pantalla d'inici de sessió (LightDM)",
+        "Name[es]": "Pantalla de inicio de sesión (LightDM)",
+        "Name[nl]": "Aanmeldscherm (LightDM)",
+        "Name[sl]": "Prijavni zaslon (LightDM)",
+        "Name[tr]": "Oturum Açma Ekranı (LightDM)",
+        "Name[uk]": "Вікно входу (LightDM)",
+        "Name[x-test]": "xxLogin Screen (LightDM)xx",
         "ServiceTypes": [
             "KCModule"
         ]
