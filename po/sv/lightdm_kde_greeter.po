@@ -1,65 +1,63 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# SPDX-FileCopyrightText: 2024 Stefan Asserhäll <stefan.asserhall@bredband.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-06-05 07:29+0200\n"
-"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
-"Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
-"Language: sl\n"
+"PO-Revision-Date: 2024-06-06 08:44+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Matjaž Jeran"
+msgstr "Stefan Asserhäll"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "matjaz.jeran@amis.net"
+msgstr "stefan.asserhall@gmail.com"
 
 #: ../themes/components/Battery.qml:56
 #, kde-format
 msgid "%1%"
-msgstr "%1%"
+msgstr "%1 %"
 
 #: ../themes/components/Battery.qml:57
 #, kde-format
 msgid "Battery at %1%"
-msgstr "Baterija na %1%"
+msgstr "Batteri %1 %"
 
 #: connectionsmodel.cpp:448
 #, kde-format
 msgid "No connection"
-msgstr "Ni povezave"
+msgstr "Ingen anslutning"
 
 #: main.cpp:166
 #, kde-format
 msgid "LightDM KDE Greeter"
-msgstr "LightDM KDE Greeter"
+msgstr "LightDM KDE-hälsningsprogram"
 
 #: main.cpp:168
 #, kde-format
 msgid "Login screen using the LightDM framework"
-msgstr "Prijavni zaslon z uporabo omrežja LightDM"
+msgstr "Inloggningsskärm som använder ramverket LightDM"
 
 #: sessionsmodel.cpp:55
 #, kde-format
 msgid "Previously Used Session"
-msgstr "Prej uporabljena seja"
+msgstr "Tidigare använd session"
 
 #: usersmodel.cpp:37
 #, kde-format
 msgid "Guest"
-msgstr "Gost"
+msgstr "Gäst"
