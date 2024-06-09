@@ -5,6 +5,7 @@
 Name=LightDM KDE Greeter
 Name[ca]=Pantalla de benvinguda de KDE del LightDM
 Name[ca@valencia]=Pantalla de benvinguda de KDE de LightDM
+Name[en_GB]=LightDM KDE Greeter
 Name[es]=Bienvenida LightDM de KDE
 Name[fr]=Écran d'accueil de LightDM
 Name[nl]=LightDM KDE begroeting
@@ -17,6 +18,7 @@ Name[zh_CN]=LightDM KDE 欢迎屏幕
 Comment=This runs the KDE greeter, it should only be run from LightDM
 Comment[ca]=Això executa la pantalla de benvinguda de KDE, només s'ha d'executar des del LightDM
 Comment[ca@valencia]=Açò executa la pantalla de benvinguda de KDE, només s'ha d'executar des de LightDM
+Comment[en_GB]=This runs the KDE greeter, it should only be run from LightDM
 Comment[es]=Esto ejecuta el saludador de KDE, que solo se debe ejecutar desde LightDM
 Comment[fr]=Ceci lance l'écran d'accueil de KDE. Celui-ci ne doit être exécuté qu'à partir de LightDM
 Comment[nl]=Dit activeert de KDE begroeting, het zou alleen actief moeten zijn vanuit LightDM
