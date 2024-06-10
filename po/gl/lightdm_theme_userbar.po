@@ -1,169 +1,169 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024 Steve Allewell <steve.allewell@gmail.com>
+# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-06-08 12:28+0100\n"
-"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English\n"
-"Language: en_GB\n"
+"PO-Revision-Date: 2024-06-09 11:21+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #: config.qml:37
 #, kde-format
 msgid "Background image:"
-msgstr "Background image:"
+msgstr "Imaxe de fondo:"
 
 #: NetworkWidget.qml:23
 #, kde-format
 msgid "The connection will be active only on the login screen."
-msgstr "The connection will be active only on the login screen."
+msgstr "A conexión estará activa só na pantalla de identificación."
 
 #: NetworkWidget.qml:54
 #, kde-format
 msgid "Disconnect from %1 ?"
-msgstr "Disconnect from %1 ?"
+msgstr "Quere desconectar de %1?"
 
 #: NetworkWidget.qml:57
 #, kde-format
 msgid "Abort connecting to %1 ?"
-msgstr "Abort connecting to %1 ?"
+msgstr "Quere interromper a conexión a %1?"
 
 #: NetworkWidget.qml:61
 #, kde-format
 msgid "Connect to %1 ?"
-msgstr "Connect to %1 ?"
+msgstr "Quere conectar a %1?"
 
 #: NetworkWidget.qml:65
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
-msgstr "Connect to an insecure access point %1 ?"
+msgstr "Quere conectar ao punto de acceso inseguro %1?"
 
 #: NetworkWidget.qml:70
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr "Enter the password to connect to %1"
+msgstr "Escriba o contrasinal para conectar a %1"
 
 #: NetworkWidget.qml:75
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr "Enter login and password to connect to %1"
+msgstr "Escriba o nome de persoa usuaria e o contrasinal para conectar a %1"
 
 #: NetworkWidget.qml:79 NetworkWidget.qml:85
 #, kde-format
 msgid "%1: Connection error, try again."
-msgstr "%1: Connection error, try again."
+msgstr "%1: Erro de conexión, inténteo de novo."
 
 #: NetworkWidget.qml:88
 #, kde-format
 msgid "The security protocol is not supported for %1"
-msgstr "The security protocol is not supported for %1"
+msgstr "%1 non permite o protocolo de seguridade."
 
 #: NetworkWidget.qml:91
 #, kde-format
 msgid "Failed to connect to %1"
-msgstr "Failed to connect to %1"
+msgstr "Non foi posíbel conectar con %1"
 
 #: NetworkWidget.qml:94
 #, kde-format
 msgid "Error: Can't find access point %1"
-msgstr "Error: Cannot find access point %1"
+msgstr "Erro: Non é posíbel atopar o punto de acceso %1."
 
 #: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
-msgstr "Login"
+msgstr "Nome de persoa usuaria"
 
 #: NetworkWidget.qml:332
 #, kde-format
 msgid "Password"
-msgstr "Password"
+msgstr "Contrasinal"
 
 #: NetworkWidget.qml:382
 #, kde-format
 msgid "Disable wireless"
-msgstr "Disable wireless"
+msgstr "Desactivar a conexión sen fíos"
 
 #: NetworkWidget.qml:382
 #, kde-format
 msgid "Enable wireless"
-msgstr "Enable wireless"
+msgstr "Activar a rede sen fíos"
 
 #: NetworkWidget.qml:383 NetworkWidget.qml:426
 #, kde-format
 msgid "Action prohibited"
-msgstr "Action prohibited"
+msgstr "A acción está prohibida"
 
 #: NetworkWidget.qml:425
 #, kde-format
 msgid "Disable networking"
-msgstr "Disable networking"
+msgstr "Desactivar as redes"
 
 #: NetworkWidget.qml:425
 #, kde-format
 msgid "Enable networking"
-msgstr "Enable networking"
+msgstr "Activar as redes"
 
 #: OtherScreen.qml:27
 #, kde-format
 msgid "Press %1 to change the primary screen"
-msgstr "Press %1 to change the primary screen"
+msgstr "Prema %1 para cambiar a pantalla principal"
 
 #: PrimaryScreen.qml:70
 #, kde-format
 msgid "Login failed"
-msgstr "Login failed"
+msgstr "A identificación fallou"
 
 #: PrimaryScreen.qml:438
 #, kde-format
 msgid "Log in"
-msgstr "Log in"
+msgstr "Identificarse"
 
 #: PrimaryScreen.qml:457
 #, kde-format
 msgid "Log in as another user"
-msgstr "Log in as another user"
+msgstr "Identificarse como outra persoa"
 
 #: PrimaryScreen.qml:588
 #, kde-format
 msgid "Keyboard layout"
-msgstr "Keyboard layout"
+msgstr "Disposición do teclado"
 
 #: PrimaryScreen.qml:627
 #, kde-format
 msgid "Desktop session"
-msgstr "Desktop session"
+msgstr "Sesión de escritorio"
 
 #: PrimaryScreen.qml:651
 #, kde-format
 msgid "Suspend"
-msgstr "Suspend"
+msgstr "Suspender"
 
 #: PrimaryScreen.qml:662
 #, kde-format
 msgid "Hibernate"
-msgstr "Hibernate"
+msgstr "Hibernar"
 
 #: PrimaryScreen.qml:674
 #, kde-format
 msgid "Restart"
-msgstr "Restart"
+msgstr "Reiniciar"
 
 #: PrimaryScreen.qml:685
 #, kde-format
 msgid "Shutdown"
-msgstr "Shutdown"
+msgstr "Apagar"
 
 #: PrimaryScreen.qml:714
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
-msgstr "Virtual Keyboard"
+msgstr "Teclado virtual"

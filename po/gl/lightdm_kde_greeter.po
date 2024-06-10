@@ -1,31 +1,31 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024 Steve Allewell <steve.allewell@gmail.com>
+# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-06-08 12:30+0100\n"
-"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English\n"
-"Language: en_GB\n"
+"PO-Revision-Date: 2024-06-09 11:01+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Steve Allewell"
+msgstr "Adrián Chaves (Gallaecio)"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "steve.allewell@gmail.com"
+msgstr "adrian@chaves.io"
 
 #: ../themes/components/Battery.qml:56
 #, kde-format
@@ -35,29 +35,29 @@ msgstr "%1%"
 #: ../themes/components/Battery.qml:57
 #, kde-format
 msgid "Battery at %1%"
-msgstr "Battery at %1%"
+msgstr "Batería ao %1%"
 
 #: connectionsmodel.cpp:448
 #, kde-format
 msgid "No connection"
-msgstr "No connection"
+msgstr "Sen conexión"
 
 #: main.cpp:166
 #, kde-format
 msgid "LightDM KDE Greeter"
-msgstr "LightDM KDE Greeter"
+msgstr "Benvida de KDE de LightDM"
 
 #: main.cpp:168
 #, kde-format
 msgid "Login screen using the LightDM framework"
-msgstr "Login screen using the LightDM framework"
+msgstr "Pantalla de identificación que usa a infraestrutura LightDM."
 
 #: sessionsmodel.cpp:55
 #, kde-format
 msgid "Previously Used Session"
-msgstr "Previously Used Session"
+msgstr "Sesión anterior"
 
 #: usersmodel.cpp:37
 #, kde-format
 msgid "Guest"
-msgstr "Guest"
+msgstr "Persoa invitada"
