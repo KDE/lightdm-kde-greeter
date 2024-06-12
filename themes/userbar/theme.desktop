@@ -4,6 +4,7 @@
 Name=User Bar
 Name[ca]=Barra d'usuaris
 Name[ca@valencia]=Barra d'usuaris
+Name[cs]=Pruh uživatelů
 Name[en_GB]=User Bar
 Name[es]=Barra de usuarios
 Name[fr]=Barre utilisateur
@@ -17,6 +18,7 @@ Name[zh_CN]=用户栏
 Comment=Pick your user from the user bar.
 Comment[ca]=Trieu el vostre usuari de la barra d'usuaris.
 Comment[ca@valencia]=Seleccioneu el vostre usuari de la barra d'usuaris.
+Comment[cs]=Vyberte si svůj účet z pruhu uživatelů.
 Comment[en_GB]=Pick your user from the user bar.
 Comment[es]=Seleccione un usuario de la barra de usuarios.
 Comment[fr]=Sélectionnez votre utilisateur dans la barre utilisateur.
