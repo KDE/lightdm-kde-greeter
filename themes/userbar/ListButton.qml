@@ -15,7 +15,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 PlasmaComponents.ToolButton {
     id: root
 
-    property int currentIndex: 0
+    property int currentIndex: -1
     property string dataRole: "key"
     property var model
     property bool deactivatedViaKeyboard: false
