@@ -9,7 +9,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import ConnectionEnum 1.0
@@ -30,7 +30,7 @@ TooltipButton {
 
     property int approximateFullWidth
     property int gap: screen.padding
-    property int iconSize: PlasmaCore.Units.iconSizes.smallMedium
+    property int iconSize: Kirigami.Units.iconSizes.smallMedium
 
     function keyEvent(event) {
         if (event.key === Qt.Key_Escape) {
@@ -241,7 +241,6 @@ TooltipButton {
             id: label
             width: implicitWidth + gap * 2
             height: implicitHeight + gap * 2
-            PlasmaCore.ColorScope.colorGroup: screen.colorGroup
             text: confirmAction.text
         }
     }
@@ -262,7 +261,6 @@ TooltipButton {
                 id: label
                 width: implicitWidth + gap * 2
                 height: implicitHeight + gap * 2
-                PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                 text: confirmAction.text
             }
             PlasmaComponents.TextField {
@@ -270,7 +268,7 @@ TooltipButton {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: 8 * gridUnit
                 echoMode: TextInput.Password
-                revealPasswordButtonShown: true
+                // revealPasswordButtonShown: true
                 Keys.onReturnPressed: confirmAction.accept()
             }
         }
@@ -298,7 +296,6 @@ TooltipButton {
                 id: label
                 width: implicitWidth + gap * 2
                 height: implicitHeight + gap * 2
-                PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                 text: confirmAction.text
             }
 
@@ -312,7 +309,6 @@ TooltipButton {
                     width: childrenRect.width
                     PlasmaComponents.Label {
                         anchors.verticalCenter: parent.verticalCenter
-                        PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                         text: i18n("Login")
                     }
                     PlasmaComponents.TextField {
@@ -328,14 +324,13 @@ TooltipButton {
                     width: childrenRect.width
                     PlasmaComponents.Label {
                         anchors.verticalCenter: parent.verticalCenter
-                        PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                         text: i18n("Password")
                     }
                     PlasmaComponents.TextField {
                         id: secretField
                         width: 8 * gridUnit
                         echoMode: TextInput.Password
-                        revealPasswordButtonShown: true
+                        // revealPasswordButtonShown: true
                         Keys.onReturnPressed: confirmAction.accept()
                     }
                 }
@@ -383,23 +378,21 @@ TooltipButton {
                     + (connectionsModel.allowSwitchWifi ? "" : " (" + i18n("Action prohibited") + ")" )
                 }
 
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     id: switchWirelessIcon
                     x: gap
                     y: gap
                     width: iconSize
                     height: width
-                    colorGroup: screen.colorGroup
                     source: "network-wireless"
                     opacity: connectionsModel.wirelessEnabled ? 1.0 : 0.5
                 }
 
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     x: Math.round(parent.width * 0.5)
                     y: Math.round(parent.height * 0.5)
                     width: parent.width - x
                     height: parent.height - y
-                    colorGroup: screen.colorGroup
                     source: "object-locked"
                     opacity: switchWirelessIcon.opacity
                     visible: !connectionsModel.allowSwitchWifi
@@ -426,23 +419,21 @@ TooltipButton {
                     + (connectionsModel.allowSwitchNetworking ? "" : " (" + i18n("Action prohibited") + ")" )
                 }
 
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     id: switchNetworkingIcon
                     x: gap
                     y: gap
                     width: iconSize
                     height: width
-                    colorGroup: screen.colorGroup
                     source: "system-shutdown"
                     opacity: connectionsModel.networkingEnabled ? 1.0 : 0.5
                 }
 
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     x: Math.round(parent.width * 0.5)
                     y: Math.round(parent.height * 0.5)
                     width: parent.width - x
                     height: parent.height - y
-                    colorGroup: screen.colorGroup
                     source: "object-locked"
                     opacity: switchNetworkingIcon.opacity
                     visible: !connectionsModel.allowSwitchNetworking
@@ -483,8 +474,7 @@ TooltipButton {
                         height: childrenRect.height
                         width: parent.width - gap
 
-                        PlasmaCore.IconItem {
-                            colorGroup: screen.colorGroup
+                        Kirigami.Icon {
                             opacity: {
                                 if (model == null) return 1.0
                                 switch (model.item.state) {
@@ -498,22 +488,19 @@ TooltipButton {
                             source: "link"
                         }
 
-                        PlasmaCore.IconItem {
+                        Kirigami.Icon {
                             id: connectionType
-                            colorGroup: screen.colorGroup
                             source: connectionIcon(model.item)
                             animated: false
                         }
 
-                        PlasmaCore.IconItem {
-                            colorGroup: screen.colorGroup
+                        Kirigami.Icon {
                             visible: model != null && model.item.type == ConnectionEnum.TYPE_WIRELESS
                             source: model.item.flags & ConnectionEnum.FLAG_LOCKED ? "object-locked" : "object-unlocked"
                         }
 
                         PlasmaComponents.Label {
                             id: connectionName
-                            PlasmaCore.ColorScope.colorGroup: screen.colorGroup
                             text: model.item.name
                             width: parent.width - x
                             elide: Text.ElideRight
@@ -524,7 +511,7 @@ TooltipButton {
                     Rectangle {
                         anchors.fill: parent
                         visible: highlighted
-                        color: PlasmaCore.ColorScope.highlightColor
+                        color: Kirigami.Theme.highlightColor
                         opacity: mouseArea.pressed ? 0.3 : 0.0
                         radius: gap / 2
                         Behavior on opacity {
@@ -538,7 +525,7 @@ TooltipButton {
                         color: "transparent"
                         radius: gap / 2
                         border {
-                            color: PlasmaCore.ColorScope.highlightColor
+                            color: Kirigami.Theme.highlightColor
                             width: 1
                         }
                     }

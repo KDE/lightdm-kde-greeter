@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
-    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
+    SPDX-FileCopyrightText: 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -8,14 +8,15 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.workspace.components 2.0 as PW
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as Plasma5Support
 
 RowLayout {
     id: root
 
-    property int fontSize: PlasmaCore.Theme.defaultFont.pointSize
+    property int fontSize: Kirigami.Theme.defaultFont.pointSize
 
     function getOrDefault(source /*object?*/, prop /*string*/, fallback /*T*/) /*-> T*/ {
         return (source !== null && source !== undefined && source.hasOwnProperty(prop))
@@ -31,10 +32,10 @@ RowLayout {
     readonly property bool hasBattery: getOrDefault(battery, "Has Battery", false)
     readonly property int percent: getOrDefault(battery, "Percent", 0)
 
-    spacing: PlasmaCore.Units.smallSpacing
+    spacing: Kirigami.Units.smallSpacing
     visible: getOrDefault(battery, "Has Cumulative", false)
 
-    PlasmaCore.DataSource {
+    Plasma5Support.DataSource {
         id: pmSource
         engine: "powermanagement"
         connectedSources: ["Battery"]
@@ -45,7 +46,7 @@ RowLayout {
         hasBattery: root.hasBattery
         percent: root.percent
 
-        Layout.preferredHeight: Math.max(PlasmaCore.Units.iconSizes.medium, batteryLabel.implicitHeight)
+        Layout.preferredHeight: Math.max(Kirigami.Units.iconSizes.medium, batteryLabel.implicitHeight)
         Layout.preferredWidth: Layout.preferredHeight
         Layout.alignment: Qt.AlignVCenter
     }

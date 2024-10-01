@@ -3,14 +3,13 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 Aurélien Gâteau <agateau@kde.org>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 import QtQuick 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 PlasmaComponents.ToolButton {
@@ -73,8 +72,6 @@ PlasmaComponents.ToolButton {
 
     PlasmaComponents.Menu {
         id: menu
-        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-        PlasmaCore.ColorScope.inherit: false
 
         Instantiator {
             id: instantiator

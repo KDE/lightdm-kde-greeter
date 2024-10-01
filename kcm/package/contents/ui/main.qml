@@ -10,13 +10,13 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15 as Windows
 import org.kde.kquickcontrolsaddons 2.0 as Addons
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami as Kirigami
 import org.kde.kcm 1.4 as KCM
 import "components" as Shared
 
 KCM.SimpleKCM {
     id: root
-    property real gridUnit: PlasmaCore.Units.gridUnit
+    property real gridUnit: Kirigami.Units.gridUnit
     property int iconWidth: 7 * gridUnit
     property int gap: gridUnit / 3
     property bool settingsLoaded: false

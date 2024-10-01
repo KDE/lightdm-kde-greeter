@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -138,22 +138,14 @@ void applyScreenScales()
 int main(int argc, char **argv)
 {
     KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
-    KConfigGroup configGroup = config.group("greeter");
+    KConfigGroup configGroup = config.group(QStringLiteral("greeter"));
 
     qputenv("QT_IM_MODULE", configGroup.readEntry("input-method", "qtvirtualkeyboard").toUtf8());
 
     // need to do this before declaring the Qt application
     applyScreenScales();
 
-    if (configGroup.readEntry("enable-high-dpi", "true") == QStringLiteral("true")) {
-        qDebug() << "Enable high DPI scaling and pixmaps.";
-        QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-        QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    } else {
-        qDebug() << "Don't enable high DPI scaling and pixmaps.";
-    }
-
-    QQuickStyle::setStyle(QStringLiteral("Plasma"));
+    QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
 
     QApplication app(argc, argv);
     QCommandLineParser options;

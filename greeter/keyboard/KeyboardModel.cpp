@@ -41,7 +41,7 @@ void KeyboardModel::setNumLockState(bool state) {
         d->numlock.enabled = state;
         m_backend->sendChanges();
 
-        emit numLockStateChanged();
+        Q_EMIT numLockStateChanged();
     }
 }
 
@@ -54,7 +54,7 @@ void KeyboardModel::setCapsLockState(bool state) {
         d->capslock.enabled = state;
         m_backend->sendChanges();
 
-        emit capsLockStateChanged();
+        Q_EMIT capsLockStateChanged();
     }
 }
 
@@ -71,7 +71,7 @@ void KeyboardModel::setCurrentLayout(int id) {
         d->layout_id = id;
         m_backend->sendChanges();
 
-        emit currentLayoutChanged();
+        Q_EMIT currentLayoutChanged();
     }
 }
 
@@ -90,16 +90,16 @@ void KeyboardModel::dispatchEvents() {
 
     // Send updates
     if (caps_old != d->capslock.enabled)
-        emit capsLockStateChanged();
+        Q_EMIT capsLockStateChanged();
 
     if (num_old != d->numlock.enabled)
-        emit numLockStateChanged();
+        Q_EMIT numLockStateChanged();
 
     if (layout_old != d->layout_id)
-        emit currentLayoutChanged();
+        Q_EMIT currentLayoutChanged();
 
     if (layouts_old != d->layouts)
-        emit layoutsChanged();
+        Q_EMIT layoutsChanged();
 }
 
 #include "moc_KeyboardModel.cpp"

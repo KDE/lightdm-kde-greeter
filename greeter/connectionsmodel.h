@@ -32,7 +32,7 @@ public:
     // processing a click on a connection element it two stages
     Q_INVOKABLE void onItemClick(const ConnectionItem &item)
     {
-        emit showDialog(item, selectActionForItem(item));
+        Q_EMIT showDialog(item, selectActionForItem(item));
     }
     Q_INVOKABLE void onActionDialogComplete(QVariantMap data);
     Q_INVOKABLE bool hasManagedWifiDevices();

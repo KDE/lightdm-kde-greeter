@@ -3,13 +3,15 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 #include "lightdmkcm.h"
 
 #include <QQuickItem>
+#include <QFileInfo>
+#include <QDir>
 
 #include <KAboutData>
 #include <KAuth/Action>
@@ -31,8 +33,8 @@ QString LightDMKcm::s_defaultWallpaper = QStringLiteral(GREETER_DEFAULT_WALLPAPE
 
 K_PLUGIN_CLASS_WITH_JSON(LightDMKcm, "kcm_lightdm.json")
 
-LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KQuickAddons::ManagedConfigModule(parent, data, args)
+LightDMKcm::LightDMKcm(QObject *parent, const KPluginMetaData &data, const QVariantList &/*args*/)
+    : KQuickManagedConfigModule(parent, data)
 {
     qmlRegisterAnonymousType<ThemesModel>("org.altlinux.lightdm.kcm", 1);
     qmlRegisterAnonymousType<UsersModel>("org.altlinux.lightdm.kcm", 1);
@@ -211,13 +213,12 @@ static void find_preferred_image_in_package(KPackage::Package &package, const QS
     const QString preferredDark = findBestMatch(QByteArrayLiteral("images_dark"));
 
     package.removeDefinition("preferred");
-    package.addFileDefinition("preferred", QStringLiteral("images/") + preferred, i18n("Recommended wallpaper file"));
+    package.addFileDefinition("preferred", QStringLiteral("images/") + preferred);
 
     if (!preferredDark.isEmpty()) {
         package.removeDefinition("preferredDark");
         package.addFileDefinition("preferredDark",
-                                  QStringLiteral("images_dark%1").arg(QDir::separator()) + preferredDark,
-                                  i18n("Recommended dark wallpaper file"));
+                                  QStringLiteral("images_dark%1").arg(QDir::separator()) + preferredDark);
     }
 }
 

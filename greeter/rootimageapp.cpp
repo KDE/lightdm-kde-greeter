@@ -3,17 +3,18 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 #include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFile>
+#include <QPalette>
 #include <QPixmap>
 #include <QTimer>
-#include <QX11Info>
+#include <QGuiApplication>
 
 #include <X11/Xlib.h>
 #include <X11/cursorfont.h>
@@ -34,8 +35,9 @@ This image will then be shown when switching from the greeter to the splash.
 RootImageApp::RootImageApp(int &argc, char **argv)
     : QApplication(argc, argv)
 {
-    Cursor arrow_cursor = XCreateFontCursor(QX11Info::display(), XC_left_ptr);
-    XDefineCursor(QX11Info::display(), QX11Info::appRootWindow(), arrow_cursor);
+    auto x11app = nativeInterface<QNativeInterface::QX11Application>();
+    Cursor arrow_cursor = XCreateFontCursor(x11app->display(), XC_left_ptr);
+    XDefineCursor(x11app->display(), DefaultRootWindow(x11app->display()), arrow_cursor);
 
     QTimer::singleShot(0, this, SLOT(setBackground()));
 }
@@ -49,9 +51,10 @@ void RootImageApp::setBackground()
     image.load(&stdIn, "xpm");
 
     QPalette palette;
-    palette.setBrush(desktop()->backgroundRole(), QBrush(image));
-    desktop()->setPalette(palette);
-    XClearWindow(QX11Info::display(), desktop()->winId());
+    palette.setBrush(QPalette::Window, QBrush(image));
+    setPalette(palette);
+    auto x11app = nativeInterface<QNativeInterface::QX11Application>();
+    XClearWindow(x11app->display(), DefaultRootWindow(x11app->display()));
 
     quit();
 }
@@ -59,7 +62,8 @@ void RootImageApp::setBackground()
 int main(int argc, char **argv)
 {
     RootImageApp app(argc, argv);
-    XSetCloseDownMode(QX11Info::display(), RetainTemporary);
+    auto x11app = app.nativeInterface<QNativeInterface::QX11Application>();
+    XSetCloseDownMode(x11app->display(), RetainTemporary);
 
     app.exec();
 

@@ -3,20 +3,21 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 #ifndef LIGHTDMKCM_H
 #define LIGHTDMKCM_H
 
-#include <KQuickAddons/ManagedConfigModule>
+#include <KQuickManagedConfigModule>
 
-class ThemesModel;
+#include "themesmodel.h"
+
 class UsersModel;
 class SessionsModel;
 
-class LightDMKcm: public KQuickAddons::ManagedConfigModule
+class LightDMKcm: public KQuickManagedConfigModule
 {
     Q_OBJECT
 

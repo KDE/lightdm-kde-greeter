@@ -13,6 +13,7 @@
 #include "XcbKeyboardBackend.h"
 
 #include <QSocketNotifier>
+#include <QRegExp>
 
 XcbKeyboardBackend::XcbKeyboardBackend(KeyboardModelPrivate *kmp) : KeyboardBackend(kmp) {
 }

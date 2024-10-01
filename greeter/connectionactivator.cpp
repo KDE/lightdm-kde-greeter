@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.ru>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -18,13 +18,13 @@ ConnectionActivator::ConnectionActivator(QObject *parent) : QObject(parent)
 void ConnectionActivator::wifiKeeperDBusCallResult(QDBusPendingCallWatcher *w)
 {
     w->deleteLater();
-    QDBusPendingReply<> reply = *w;
+    QDBusPendingReply<QString> reply = *w;
     if (reply.isError()) {
         qWarning("%s: Failed to call WifiKeeper on DBus: %s", __FUNCTION__, qPrintable(reply.error().message()));
     } else {
-        QString result = reply.argumentAt(0).toString();
+        QString result = reply.argumentAt<0>();
         if (result.length() == 0) qWarning("%s: WifiKeeper failed to call NetworkManager on DBus.", __FUNCTION__);
-        else emit wifiKeeperNewConnection(result);
+        else Q_EMIT wifiKeeperNewConnection(result);
     }
 }
 

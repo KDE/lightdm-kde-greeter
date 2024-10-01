@@ -9,19 +9,20 @@ SPDX-License-Identifier: GPL-3.0-or-later
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15 // for Screen.pixelDensity
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import "../components" as Shared
 
-PlasmaCore.ColorScope {
+Item {
     id: screen
 
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
     property var screens: VisibleScreenEnum.VisibleScreen
     property int visibleScreen: screens.DefaultScreen
 
-    property real gridUnit: PlasmaCore.Units.gridUnit
+    property real gridUnit: Kirigami.Units.gridUnit
     property int padding: gridUnit / 3
     property int userFaceSize: 7 * gridUnit
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
@@ -37,8 +38,9 @@ PlasmaCore.ColorScope {
             right: wholeScreen.right
             margins: screen.padding
         }
-        text: "PPI: " + (Screen.pixelDensity * 25.4).toFixed(2) + " PPM: " + Screen.pixelDensity.toFixed(3)
-        + "\nDevice pixel ratio: " + (Screen.devicePixelRatio).toFixed(3)
+        text: "Physical DPI: " + (Screen.pixelDensity * 25.4).toFixed(2)
+        + "\n" + "Logical DPI: " + (Screen.logicalPixelDensity * 25.4).toFixed(2)
+        + "\n" + "Device pixel ratio: " + (Screen.devicePixelRatio).toFixed(3)
         + "\n" + (softwareRendering ? "Software rendering" : "Hardware rendering")
         + "\n" + "gridUnit: " + gridUnit + " padding: " + screen.padding
     }
@@ -90,12 +92,12 @@ PlasmaCore.ColorScope {
             inputBoxLabel.text = pr["text"]
             inputBox.clear()
             inputBox.echoMode = TextInput.Normal
-            inputBox.revealPasswordButtonShown = false
+            // inputBox.revealPasswordButtonShown = false
         } else { // enter secret word
             inputBoxLabel.text = pr["text"]
             inputBox.clear()
             inputBox.echoMode = TextInput.Password
-            inputBox.revealPasswordButtonShown = true
+            // inputBox.revealPasswordButtonShown = true
         }
 
         if (visibleScreen != screens.LoginScreen) {
@@ -215,7 +217,7 @@ PlasmaCore.ColorScope {
         x: wholeScreen.x
         y: wholeScreen.y + menuBar.height
         width: wholeScreen.width
-        height: Math.min(inputPanel.item.y - menuBar.height, wholeScreen.height - menuBar.height)
+        height: Math.min(inputPanel.item ? inputPanel.item.y : 0 - menuBar.height, wholeScreen.height - menuBar.height)
     }
 
     ListModel {
@@ -347,7 +349,7 @@ PlasmaCore.ColorScope {
 
                     Rectangle {
                         anchors.fill: parent
-                        color: PlasmaCore.ColorScope.backgroundColor
+                        color: Kirigami.Theme.backgroundColor
                         radius: screen.padding * 2
                         opacity: 0.6
                     }
@@ -356,7 +358,7 @@ PlasmaCore.ColorScope {
                         anchors.fill: parent
                         color: "transparent"
                         border {
-                            color: PlasmaCore.ColorScope.textColor
+                            color: Kirigami.Theme.textColor
                             width: 2
                         }
                         radius: screen.padding * 2
@@ -392,7 +394,7 @@ PlasmaCore.ColorScope {
                         PlasmaComponents.Label {
                             id: inputBoxLabel
                             height: inputBox.height
-                            anchors.verticalCenter: parent.verticalCenter
+                            verticalAlignment: Text.AlignVCenter
                             Behavior on opacity {
                                 NumberAnimation { duration: 100 }
                             }
@@ -434,7 +436,7 @@ PlasmaCore.ColorScope {
                 ActionButton {
                     id: loginButton
                     anchors.centerIn: parent
-                    iconSource: "go-next"
+                    iconSource: "go-next-view"
                     text: i18n("Log in")
                     onClicked: startLoginScreen()
                     visible: visibleScreen == screens.DefaultScreen
@@ -465,9 +467,6 @@ PlasmaCore.ColorScope {
         ListView {
             id: msgList
 
-            PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-            PlasmaCore.ColorScope.inherit: false
-
             anchors.horizontalCenter: parent.horizontalCenter
             y: (centerPanel.y - height) / 2
             width: contentItem.childrenRect.width
@@ -475,18 +474,19 @@ PlasmaCore.ColorScope {
             clip: true
 
             model: messages
-            delegate: PlasmaCore.FrameSvgItem {
+            delegate: KSvg.FrameSvgItem {
                 imagePath: "widgets/lineedit"
                 prefix: "base"
                 width: msgBody.width
                 height: msgBody.height
+                Kirigami.Theme.inherit: false
                 Row {
                     id: msgBody
                     anchors.centerIn: parent
                     spacing: screen.padding
                     padding: spacing * 2
-                    PlasmaCore.IconItem {
-                        width: units.iconSizes.medium
+                    Kirigami.Icon {
+                        width: Kirigami.Units.iconSizes.medium
                         height: width
                         source: model.type == 0 ? "dialog-information" : "dialog-error"
                         anchors.verticalCenter: parent.verticalCenter

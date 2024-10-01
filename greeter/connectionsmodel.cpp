@@ -262,7 +262,7 @@ void ConnectionsModel::fillConnections()
         if (sameConnection(item, *m_primary)) {
             if (m_primary->signalStrength == item.signalStrength && m_primary->flags == item.flags) break;
             m_primary->setSignalStrength(item.signalStrength).setFlags(item.flags);
-            emit primaryChanged();
+            Q_EMIT primaryChanged();
             break;
         }
     }
@@ -289,7 +289,7 @@ void ConnectionsModel::updateItem(int index, ConnectionItem &&item)
     assert(index < m_connections.size() && index >= 0);
     m_connections[index] = std::move(item);
     QModelIndex qIndex = createIndex(index, 0);
-    emit dataChanged(qIndex, qIndex);
+    Q_EMIT dataChanged(qIndex, qIndex);
 }
 
 void ConnectionsModel::moveItem(int indexFrom, int indexTo)
@@ -431,7 +431,7 @@ void ConnectionsModel::connectItem(const ConnectionItem &item)
     }
     Util::handleDBusDeviceError(this, dev.data(), NetworkManager::activateConnection(item.path, dev->uni(), {}),
                                 [this, item] {
-                                    emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
+                                    Q_EMIT showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
                                 });
 }
 
@@ -463,7 +463,7 @@ void ConnectionsModel::updatePrimaryConnection()
             }
         }
     }
-    emit primaryChanged();
+    Q_EMIT primaryChanged();
 }
 
 QVariant ConnectionsModel::getPrimary()
@@ -607,11 +607,11 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     connect(m_activator, &ConnectionActivator::wifiKeeperNewConnection, this, [this, wifiDev, item] (QString newPath) {
         Util::waitForDevice(this, wifiDev.data(), [this, item, newPath] {
             if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmt8021x) {
-                emit showDialog(item, ConnectionEnum::ACTION_ERROR_8021X_WIFI);
+                Q_EMIT showDialog(item, ConnectionEnum::ACTION_ERROR_8021X_WIFI);
             } else if (item.wpaFlags) {
-                emit showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
+                Q_EMIT showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
             } else {
-                emit showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
+                Q_EMIT showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
             }
         });
     });

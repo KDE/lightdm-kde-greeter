@@ -1,9 +1,9 @@
 /*
-    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
+    SPDX-FileCopyrightText: 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
-import QtGraphicalEffects 1.15
+import Qt5Compat.GraphicalEffects
 
 DropShadow {
     source: loginButton

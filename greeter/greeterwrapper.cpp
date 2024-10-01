@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -36,12 +37,12 @@ QString GreeterWrapper::lastLoggedInUser() const
         return selectUserHint();
     }
 
-    return m_config->group("lightdm").readEntry("lastUser");
+    return m_config->group(QStringLiteral("lightdm")).readEntry("lastUser");
 }
 
 QString GreeterWrapper::lastLoggedInSession() const
 {
-    return m_config->group("lightdm").readEntry("lastSession");
+    return m_config->group(QStringLiteral("lightdm")).readEntry("lastSession");
 }
 
 QString GreeterWrapper::guestLoginName() const
@@ -58,8 +59,8 @@ bool GreeterWrapper::startSessionSync(const QString &session)
 
 void GreeterWrapper::saveLastUserAndSession(const QString &user, const QString &session)
 {
-    m_config->group("lightdm").writeEntry("lastUser", user);
-    m_config->group("lightdm").writeEntry("lastSession", session);
+    m_config->group(QStringLiteral("lightdm")).writeEntry("lastUser", user);
+    m_config->group(QStringLiteral("lightdm")).writeEntry("lastSession", session);
     //force a sync as our greeter gets killed
     m_config->sync();
 }

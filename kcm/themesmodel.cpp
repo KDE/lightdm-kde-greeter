@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -90,7 +91,8 @@ void ThemesModel::load()
     for (const auto &themeDirPath: themeDirPaths)
     {
         QDir themeDir(themeDirPath);
-        foreach (const QString &dirPath, themeDir.entryList(QDir::NoDotAndDotDot | QDir::Dirs))
+        QStringList entryList = themeDir.entryList(QDir::NoDotAndDotDot | QDir::Dirs);
+        for (const QString &dirPath : entryList)
         {
             qDebug() << themeDir.filePath(dirPath + QStringLiteral("/theme.desktop"));
             if (QFile::exists(themeDir.filePath(dirPath + QStringLiteral("/theme.desktop"))))

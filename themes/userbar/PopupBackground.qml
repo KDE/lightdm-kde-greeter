@@ -1,13 +1,13 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 import QtQuick 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root
@@ -19,7 +19,7 @@ Item {
     Rectangle {
         id: fill
         anchors.fill: parent
-        color: PlasmaCore.ColorScope.backgroundColor
+        color: Kirigami.Theme.backgroundColor
         radius: root.border
         opacity: 0.6
     }
@@ -29,7 +29,7 @@ Item {
         anchors.fill: parent
         color: "transparent"
         border {
-            color: PlasmaCore.ColorScope.textColor
+            color: Kirigami.Theme.textColor
             width: 2
         }
         radius: root.border

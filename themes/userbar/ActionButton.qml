@@ -1,13 +1,13 @@
 /*
     SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
-    SPDX-FileCopyrightText: 2023 Anton Golubev <golubevan@altlinux.org>
+    SPDX-FileCopyrightText: 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 import QtQuick 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 Item {
@@ -19,20 +19,20 @@ Item {
     property alias labelRendering: label.renderType
     property alias circleOpacity: iconCircle.opacity
     property alias circleVisiblity: iconCircle.visible
-    property int fontSize: PlasmaCore.Theme.defaultFont.pointSize + 1
+    property int fontSize: Kirigami.Theme.defaultFont.pointSize + 1
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
     signal clicked
 
     activeFocusOnTab: true
 
-    property int iconSize: PlasmaCore.Units.gridUnit * 3
+    property int iconSize: Kirigami.Units.gridUnit * 3
 
-    implicitWidth: Math.max(iconSize + PlasmaCore.Units.largeSpacing * 2, label.contentWidth)
-    implicitHeight: iconSize + PlasmaCore.Units.smallSpacing + label.implicitHeight
+    implicitWidth: Math.max(iconSize + Kirigami.Units.largeSpacing * 2, label.contentWidth)
+    implicitHeight: iconSize + Kirigami.Units.smallSpacing + label.implicitHeight
 
     Behavior on opacity {
         PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
@@ -40,14 +40,14 @@ Item {
     Rectangle {
         id: iconCircle
         anchors.centerIn: icon
-        width: iconSize + PlasmaCore.Units.smallSpacing
+        width: iconSize + Kirigami.Units.smallSpacing
         height: width
         radius: Math.floor(width / 2)
-        color: PlasmaCore.ColorScope.backgroundColor
+        color: Kirigami.Theme.backgroundColor
         opacity: 0.6
         Behavior on opacity {
             PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
-                duration: PlasmaCore.Units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -56,17 +56,17 @@ Item {
     Rectangle {
         id: iconCircleBorder
         anchors.centerIn: icon
-        width: iconSize + PlasmaCore.Units.smallSpacing
+        width: iconSize + Kirigami.Units.smallSpacing
         height: width
         radius: Math.floor(width / 2)
         color: "transparent"
         border {
-            color: containsMouse ? PlasmaCore.ColorScope.highlightColor : PlasmaCore.ColorScope.textColor
+            color: containsMouse ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
             width: 2
         }
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: icon
         anchors {
             top: parent.top
@@ -75,7 +75,6 @@ Item {
         width: iconSize
         height: iconSize
 
-        colorGroup: PlasmaCore.ColorScope.colorGroup
         active: mouseArea.containsMouse || root.activeFocus
     }
 
@@ -84,12 +83,12 @@ Item {
         font.pointSize: root.fontSize
         anchors {
             top: icon.bottom
-            topMargin: (softwareRendering ? 1.5 : 1) * PlasmaCore.Units.mediumSpacing
+            topMargin: (softwareRendering ? 1.5 : 1) * Kirigami.Units.mediumSpacing
             left: parent.left
             right: parent.right
         }
         style: softwareRendering ? Text.Outline : Text.Normal
-        styleColor: softwareRendering ? PlasmaCore.ColorScope.backgroundColor : "transparent" //no outline, doesn't matter
+        styleColor: softwareRendering ? Kirigami.Theme.backgroundColor : "transparent" //no outline, doesn't matter
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap

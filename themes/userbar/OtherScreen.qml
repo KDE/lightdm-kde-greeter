@@ -1,18 +1,18 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 import QtQuick 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg as KSvg
 
 Item {
     id: screen
     anchors.fill: parent
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         width: label.width + margins.left + margins.right
