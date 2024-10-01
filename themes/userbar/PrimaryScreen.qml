@@ -321,8 +321,8 @@ Item {
 
                 orientation: ListView.Horizontal
                 highlightRangeMode: ListView.StrictlyEnforceRange
-                preferredHighlightBegin: width / 2 - currentItemSafe.width / 2
-                preferredHighlightEnd: width / 2 + currentItemSafe.width / 2
+                preferredHighlightBegin: Math.round((width - userFaceSize) / 2)
+                preferredHighlightEnd: preferredHighlightBegin + userFaceSize
 
                 Component.onCompleted: {
                     sessionButton.onCurrentIndexChanged.connect(() => {
