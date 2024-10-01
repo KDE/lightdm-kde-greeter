@@ -5,19 +5,19 @@ Dependencies:
 
 - 'on': ['Linux']
   'require':
-    'frameworks/extra-cmake-modules': '@latest'
-    'frameworks/kauth': '@latest'
-    'frameworks/kcmutils': '@latest'
-    'frameworks/kconfig': '@latest'
-    'frameworks/kconfigwidgets': '@latest'
-    'frameworks/kcoreaddons': '@latest'
-    'frameworks/kdeclarative': '@latest'
-    'frameworks/ki18n': '@latest'
-    'frameworks/kiconthemes': '@latest'
-    'frameworks/kpackage': '@latest'
-    'frameworks/kservice': '@latest'
-    'frameworks/networkmanager-qt': '@latest'
-    'plasma/libplasma': '@latest'
+    'frameworks/extra-cmake-modules': '@latest-kf6'
+    'frameworks/kauth': '@latest-kf6'
+    'frameworks/kcmutils': '@latest-kf6'
+    'frameworks/kconfig': '@latest-kf6'
+    'frameworks/kconfigwidgets': '@latest-kf6'
+    'frameworks/kcoreaddons': '@latest-kf6'
+    'frameworks/kdeclarative': '@latest-kf6'
+    'frameworks/ki18n': '@latest-kf6'
+    'frameworks/kiconthemes': '@latest-kf6'
+    'frameworks/kpackage': '@latest-kf6'
+    'frameworks/kservice': '@latest-kf6'
+    'frameworks/networkmanager-qt': '@latest-kf6'
+    'plasma/libplasma': '@latest-kf6'
 
 Options:
   cmake-options: '-DGREETER_IMAGES_DIR=/var/lib/$CI_PROJECT_NAME/images'
