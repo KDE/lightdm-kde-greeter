@@ -39,7 +39,7 @@ target_link_libraries(kcm_lightdm
     KF6::Package
     KF6::KCMUtilsQuick
     KF6::AuthCore
-    PkgConfig::liblightdm-qt
+    liblightdm-qt-my
 )
 
 set(KCMLIGHTDMHELPER_SRCS

@@ -52,7 +52,8 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS
 )
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(liblightdm-qt REQUIRED IMPORTED_TARGET liblightdm-qt6-3)
+pkg_check_modules(liblightdm REQUIRED IMPORTED_TARGET liblightdm-gobject-1)
+pkg_check_modules(gtk2 REQUIRED IMPORTED_TARGET gtk+-2.0)
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
@@ -75,6 +76,7 @@ add_compile_options(-Werror=pedantic)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 configure_file(config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h @ONLY)
 
+add_subdirectory(liblightdm-qt)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(themes)

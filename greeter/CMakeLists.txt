@@ -38,7 +38,7 @@ target_link_libraries(lightdm-kde-greeter
   X11::Xrandr
   ${LIBXCB_LIBRARIES}
   ${LIBXKB_LIBRARIES}
-  PkgConfig::liblightdm-qt
+  liblightdm-qt-my
 )
 # PkgConfig::UPOWER
 
