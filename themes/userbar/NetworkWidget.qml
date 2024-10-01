@@ -21,6 +21,7 @@ TooltipButton {
     property bool needCaption: !expand || width < implicitWidth
     property bool deactivatedViaKeyboard: false
     property string hint: i18n("The connection will be active only on the login screen.")
+    property var colorSet: screen.Kirigami.Theme.colorSet
 
     caption: connectionsModel.primary.name
     width: Math.min(approximateFullWidth, implicitWidth)
@@ -142,7 +143,7 @@ TooltipButton {
         parent: activeScreen
         anchors.centerIn: parent
         // shrink the psk dialog vertically so that the input field is at the level of the buttons
-        height: contentHeight + topPadding + bottomPadding + confirmFooter.contentHeight + bottomPadding
+        height: contentHeight + topPadding + confirmFooter.height
         // if the width is too small, the buttons also start to shrink and hide the content
         width: Math.max(implicitWidth, layoutType == pskLayout ? confirmFooter.minWidth + layout.focusTo.width : confirmFooter.minWidth + back.border * 2)
 
@@ -166,12 +167,14 @@ TooltipButton {
             id: back
             border: gap * 2
             fillOpacity: 0.8
+            Kirigami.Theme.colorSet: root.colorSet
         }
 
-        Loader {
+        contentItem: Loader {
             id: confirmLayout
             // to remember username for 802.1x, in case of re-entry
             property string lastUser
+            Kirigami.Theme.colorSet: root.colorSet
         }
 
         footer: DialogButtonBox {
@@ -180,6 +183,8 @@ TooltipButton {
             standardButtons: Dialog.Ok | Dialog.Cancel
             buttonLayout: DialogButtonBox.KdeLayout
             alignment: Qt.AlignBottom | Qt.AlignCenter
+            bottomPadding: confirmAction.bottomPadding
+            topPadding: confirmAction.topPadding
 
             Component.onCompleted: {
 
@@ -240,7 +245,6 @@ TooltipButton {
         PlasmaComponents.Label {
             id: label
             width: implicitWidth + gap * 2
-            height: implicitHeight + gap * 2
             text: confirmAction.text
         }
     }
@@ -260,7 +264,6 @@ TooltipButton {
             PlasmaComponents.Label {
                 id: label
                 width: implicitWidth + gap * 2
-                height: implicitHeight + gap * 2
                 text: confirmAction.text
             }
             PlasmaComponents.TextField {
@@ -352,6 +355,7 @@ TooltipButton {
         onAboutToHide: root.popupHide()
 
         background: PopupBackground {
+            Kirigami.Theme.colorSet: root.colorSet
             border: gap * 2
         }
 
@@ -361,6 +365,7 @@ TooltipButton {
 
             KeyNavigation.down: switchNetworking
             Keys.onShortcutOverride: root.keyEvent(event)
+            Kirigami.Theme.colorSet: root.colorSet
 
             TooltipButton {
                 id: switchWireless
@@ -454,6 +459,8 @@ TooltipButton {
             }
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
+            Kirigami.Theme.colorSet: root.colorSet
+
             ListView {
                 id: networkList
                 model: connectionsModel
@@ -485,6 +492,8 @@ TooltipButton {
                                 console.warn("NetworkWidget: unknown ConnectionEnum state: " + model.item.state)
                                 return 1.0
                             }
+                            height: iconSize
+                            width: height
                             source: "link"
                         }
 
@@ -492,11 +501,15 @@ TooltipButton {
                             id: connectionType
                             source: connectionIcon(model.item)
                             animated: false
+                            height: iconSize
+                            width: height
                         }
 
                         Kirigami.Icon {
                             visible: model != null && model.item.type == ConnectionEnum.TYPE_WIRELESS
                             source: model.item.flags & ConnectionEnum.FLAG_LOCKED ? "object-locked" : "object-unlocked"
+                            height: iconSize
+                            width: height
                         }
 
                         PlasmaComponents.Label {
