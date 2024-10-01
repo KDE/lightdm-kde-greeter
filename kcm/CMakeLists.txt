@@ -9,7 +9,6 @@ set(GREETER_DIR ${CMAKE_SOURCE_DIR}/greeter)
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
-  ${QLIGHTDM_INCLUDE_DIR}
   ${GREETER_DIR}
 )
 
@@ -34,11 +33,13 @@ kcoreaddons_add_plugin(kcm_lightdm INSTALL_NAMESPACE "plasma/kcms/systemsettings
 
 # Link against the needed libraries
 target_link_libraries(kcm_lightdm
-  ${QLIGHTDM_LIBRARIES}
-  KF5::ConfigWidgets
-  KF5::I18n
-  KF5::Package
-  KF5::QuickAddons
+    Qt6::Quick
+    KF6::ConfigWidgets
+    KF6::I18n
+    KF6::Package
+    KF6::KCMUtilsQuick
+    KF6::AuthCore
+    PkgConfig::liblightdm-qt
 )
 
 set(KCMLIGHTDMHELPER_SRCS
@@ -50,7 +51,7 @@ set(KCMLIGHTDMHELPER_HDRS
 )
 
 add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS})
-target_link_libraries(kcmlightdmhelper KF5::Auth KF5::ConfigCore)
+target_link_libraries(kcmlightdmhelper KF6::AuthCore KF6::ConfigCore)
 install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
 # common qml components for the configuration utility

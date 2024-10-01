@@ -16,11 +16,11 @@ if(NOT DEFINED GREETER_IMAGES_DIR)
     message(FATAL_ERROR "GREETER_IMAGES_DIR must be provided!")
 endif()
 
-set(KF5_MIN_VERSION 5.97)
-# TODO cleanup code so that this isn't needed
-set(KDE_COMPILERSETTINGS_LEVEL "5.84")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+set(KF6_MIN_VERSION 6.3.0)
+
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
 include(KDEInstallDirs)
@@ -36,16 +36,27 @@ find_package(X11 REQUIRED)
 find_package(XCB REQUIRED)
 find_package(XKB REQUIRED)
 
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus X11Extras Qml Quick QuickWidgets UiPlugin UiTools QuickControls2)
+find_package(Qt6 CONFIG REQUIRED COMPONENTS
+    Core
+    Gui
+    Widgets
+    DBus
+    Qml
+    Quick
+    QuickWidgets
+    UiPlugin
+    UiTools
+    QuickControls2
+    Core5Compat
+    ShaderTools
+)
 
-set(QLIGHTDM_MIN_VERSION 1.4.0)
-find_package(QLightDM REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(liblightdm-qt REQUIRED IMPORTED_TARGET liblightdm-qt6-3)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-    Declarative
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
     KCMUtils
-    Plasma
     Package
     Config
     ConfigWidgets
@@ -53,6 +64,8 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Auth
     NetworkManagerQt
 )
+
+find_package(Plasma REQUIRED)
 
 find_package(Gettext REQUIRED)
 
@@ -66,7 +79,7 @@ add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(themes)
 
-find_package(KF5I18n CONFIG REQUIRED)
+find_package(KF6I18n CONFIG REQUIRED)
 ki18n_install(po)
 
 # Display feature summary
