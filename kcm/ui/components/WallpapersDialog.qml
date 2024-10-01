@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+ *   Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -60,9 +60,8 @@ Dialog {
     }
 
     function openForPath(path) {
-        dialogLoader.source = kcm.wallpaperConfigSource
-        dialogLoader.item.cfg_Image = path
-        dialogLoader.item.cfg_FillMode = fillMode
+        const props = { "configDialog": kcm, "cfg_Image": path, "cfg_FillMode": fillMode }
+        dialogLoader.setSource(kcm.wallpaperConfigSource, props)
         if (!patchWallpaperPicker(dialogLoader.item)) {
             console.warn("Failed to patch background picker widget");
         }

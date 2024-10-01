@@ -1,13 +1,14 @@
 /*
- *   Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+ *   Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Dialogs 1.3 as StandardDialogs
-import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs as StandardDialogs
+import org.kde.plasma.wallpapers.image as Wallpaper
+import org.kde.kirigami as Kirigami
 
 Rectangle {
     id: button
@@ -48,10 +49,10 @@ Rectangle {
         visible: preview.status == Image.Null || preview.status == Image.Error
         anchors.centerIn: parent
 
-        Image {
+        Kirigami.Icon {
             id: noImageIcon
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "image://icon/image-missing"
+            source: "image-missing"
         }
 
         Label {

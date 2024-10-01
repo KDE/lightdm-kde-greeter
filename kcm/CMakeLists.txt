@@ -29,7 +29,7 @@ set(LIGHTDM_KCM_HDRS
     ${GREETER_DIR}/sessionsmodel.h
 )
 
-kcoreaddons_add_plugin(kcm_lightdm INSTALL_NAMESPACE "plasma/kcms/systemsettings" SOURCES ${LIGHTDM_KCM_SRCS} ${LIGHTDM_KCM_HDRS})
+kcmutils_add_qml_kcm(kcm_lightdm SOURCES ${LIGHTDM_KCM_SRCS} ${LIGHTDM_KCM_HDRS})
 
 # Link against the needed libraries
 target_link_libraries(kcm_lightdm
@@ -56,11 +56,9 @@ install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
 # common qml components for the configuration utility
 # copied for use from the theme directories, and from the main config directory
-install(DIRECTORY package/contents/ui/components/
+install(DIRECTORY ui/components/
         DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes/components/kcm
 )
 
 kauth_install_helper_files(kcmlightdmhelper org.kde.kcontrol.kcmlightdm root)
 kauth_install_actions(org.kde.kcontrol.kcmlightdm kcm_lightdm.actions)
-kcmutils_generate_desktop_file(kcm_lightdm)
-kpackage_install_package(package kcm_lightdm kcms)

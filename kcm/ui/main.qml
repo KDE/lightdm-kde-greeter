@@ -1,24 +1,23 @@
 /*
- *   Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+ *   Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Dialogs 1.3
-import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15 as Windows
-import org.kde.kquickcontrolsaddons 2.0 as Addons
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window as Windows
+import org.kde.kquickcontrolsaddons as Addons
 import org.kde.kirigami as Kirigami
-import org.kde.kcm 1.4 as KCM
+import org.kde.kcmutils as KCM
 import "components" as Shared
 
 KCM.SimpleKCM {
     id: root
     property real gridUnit: Kirigami.Units.gridUnit
     property int iconWidth: 7 * gridUnit
-    property int gap: gridUnit / 3
+    property int gap: Math.round(gridUnit / 3)
     property bool settingsLoaded: false
     property var themeSettings: []
     property var themeBranch
@@ -141,11 +140,12 @@ KCM.SimpleKCM {
                                 }
                             }
 
-                            MessageDialog {
+                            Shared.MsgBox {
                                 id: confirmSwitch
-                                text: i18n("Theme changes will be lost")
-                                icon: StandardIcon.Warning
-                                standardButtons: Dialog.Ok | Dialog.Cancel
+                                parent: root
+                                message: i18n("Theme changes will be lost")
+                                icon: iconWarning
+                                buttons: Dialog.Ok | Dialog.Cancel
                                 onAccepted: {
                                     setupConfigValues(themeConfig.item, themeBranch)
                                     themesList.switchToIndex(index)
@@ -266,7 +266,7 @@ KCM.SimpleKCM {
                                     return false;
                                 }
 
-                                source: themesList.currentItem.properties.path + "/config.qml"
+                                source: "file://" + themesList.currentItem.properties.path + "/config.qml"
                             }
                         }
                     }
@@ -319,7 +319,7 @@ KCM.SimpleKCM {
                         TextField {
                             id: timeout
                             anchors.verticalCenter: parent.verticalCenter
-                            validator: RegExpValidator { regExp: /[0-9]+/ }
+                            validator: RegularExpressionValidator { regularExpression: /[0-9]+/ }
                             width: height * 2
                             enabled: needTimeout.checked
                             opacity: enabled ? 1.0 : 0.0
@@ -373,19 +373,15 @@ KCM.SimpleKCM {
         }
     }
 
-    MessageDialog {
+    Shared.MsgBox {
         id: errorMsg
-        text: ""
-        icon: StandardIcon.Critical
-        standardButtons: Dialog.Ok
     }
 
     Connections {
         target: kcm
 
         function onErrorAction(message) {
-            errorMsg.text = message
-            errorMsg.open()
+            errorMsg.show(message, errorMsg.iconError)
         }
     }
 
