@@ -7,6 +7,8 @@
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation; either version 2 or version 3 of the License.
  * See http://www.gnu.org/copyleft/lgpl.html the full text of the license.
+ *
+ * SPDX-License-Identifier: LGPL-2.0-only OR LGPL-3.0-only
  */
 
 
