@@ -11,6 +11,7 @@ import QtQuick.Controls 2.15
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import "../components" as Shared
 
 import ConnectionEnum 1.0
 
@@ -266,12 +267,12 @@ TooltipButton {
                 width: implicitWidth + gap * 2
                 text: confirmAction.text
             }
-            PlasmaComponents.TextField {
+            Shared.TextField {
                 id: secretField
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 8 * gridUnit
+                width: 9 * gridUnit
                 echoMode: TextInput.Password
-                // revealPasswordButtonShown: true
+                revealPasswordButtonShown: true
                 Keys.onReturnPressed: confirmAction.accept()
             }
         }
@@ -316,7 +317,7 @@ TooltipButton {
                     }
                     PlasmaComponents.TextField {
                         id: identityField
-                        width: 8 * gridUnit
+                        width: 9 * gridUnit
                         KeyNavigation.down: secretField
                     }
                 }
@@ -329,11 +330,11 @@ TooltipButton {
                         anchors.verticalCenter: parent.verticalCenter
                         text: i18n("Password")
                     }
-                    PlasmaComponents.TextField {
+                    Shared.TextField {
                         id: secretField
-                        width: 8 * gridUnit
+                        width: 9 * gridUnit
                         echoMode: TextInput.Password
-                        // revealPasswordButtonShown: true
+                        revealPasswordButtonShown: true
                         Keys.onReturnPressed: confirmAction.accept()
                     }
                 }

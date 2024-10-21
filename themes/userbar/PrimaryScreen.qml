@@ -92,12 +92,12 @@ Item {
             inputBoxLabel.text = pr["text"]
             inputBox.clear()
             inputBox.echoMode = TextInput.Normal
-            // inputBox.revealPasswordButtonShown = false
+            inputBox.revealPasswordButtonShown = false
         } else { // enter secret word
             inputBoxLabel.text = pr["text"]
             inputBox.clear()
             inputBox.echoMode = TextInput.Password
-            // inputBox.revealPasswordButtonShown = true
+            inputBox.revealPasswordButtonShown = true
         }
 
         if (visibleScreen != screens.LoginScreen) {
@@ -400,7 +400,7 @@ Item {
                             }
                         }
 
-                        PlasmaComponents.TextField {
+                        Shared.TextField {
                             id: inputBox
 
                             focus: true
@@ -416,7 +416,7 @@ Item {
                                     text = ""
                                 }
                             }
-                            width: 8 * gridUnit
+                            width: 9 * gridUnit
                             onAccepted: finishDialog()
                             anchors.verticalCenter: parent.verticalCenter
                         }
