@@ -30,6 +30,8 @@ Item {
     property int authStep: 0
     property bool hideUsersList: greeter.hideUsers || usersList.model.rowCount() == 0
 
+    readonly property int userReadTime: 48 // ms
+
     PlasmaComponents.Label {
         id: debugInfo
         visible: showDebugInfo
@@ -51,6 +53,13 @@ Item {
         startDefaultScreen()
     }
 
+    Timer {
+        id: lastMessageTimer
+        onTriggered: {
+            doSessionSync()
+        }
+    }
+
     Connections {
         target: greeter
 
@@ -66,6 +75,15 @@ Item {
 
         function onAuthenticationComplete() {
             if (greeter.authenticated) {
+                if (messages.count > 0) {
+                    var now = Date.now()
+                    var hideLastMessage = messages.get(messages.count - 1).hideTime
+                    if (hideLastMessage > now) {
+                        lastMessageTimer.interval = hideLastMessage - now
+                        lastMessageTimer.start()
+                        return
+                    }
+                }
                 doSessionSync()
             } else if (visibleScreen != screens.DefaultScreen) {
                 if (messages.count == 0) {
@@ -108,7 +126,22 @@ Item {
     }
 
     function putMessage(text, type) {
-        messages.append({ text: text, type: type })
+        // provide some time to view the message
+        var readStart = Date.now()
+        if (messages.count > 0) {
+            readStart = Math.max(readStart, messages.get(messages.count - 1).hideTime)
+        }
+        var hideTime = readStart + text.length * userReadTime
+
+        // but we don’t count if the message is repeated
+        for (var i = 0; i < messages.count; ++i) {
+            var message = messages.get(i)
+            if (text === message.text) {
+                hideTime = messages.get(messages.count - 1).hideTime
+                break
+            }
+        }
+        messages.append({ text: text, type: type, hideTime: hideTime })
         msgList.positionViewAtEnd()
     }
 
