@@ -466,6 +466,35 @@ Item {
                     }
                 }
 
+                Shadow { source: keyboardStatus }
+                Label {
+                    id: keyboardStatus
+
+                    anchors {
+                        top: inputDialog.bottom
+                        topMargin: screen.padding
+                        horizontalCenter: inputDialog.horizontalCenter
+                    }
+
+                    visible: inputDialog.visible && !value.length !== 0
+
+                    property string value: {
+                        if (keyboard.capsLock && !keyboard.numLock) {
+                            return i18n("Caps Lock is on")
+                        }
+                        if (!keyboard.capsLock && keyboard.numLock) {
+                            return i18n("Num Lock is on")
+                        }
+                        if (keyboard.capsLock && keyboard.numLock) {
+                            return i18n("Caps Lock and Num Lock is on")
+                        }
+                        return ""
+                    }
+
+                    text: value
+                    font.italic: true
+                }
+
                 ActionButton {
                     id: loginButton
                     anchors.centerIn: parent
