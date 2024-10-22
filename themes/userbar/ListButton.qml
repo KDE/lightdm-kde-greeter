@@ -38,10 +38,7 @@ PlasmaComponents.ToolButton {
 
     signal popupEnded()
 
-    text: {
-        var item = instantiator.objectAt(currentIndex)
-        return item ? item.text : ""
-    }
+    text: currentText()
 
     visible: menu.count > 1
 
@@ -59,6 +56,11 @@ PlasmaComponents.ToolButton {
     function currentData() {
         var item = instantiator.objectAt(currentIndex)
         return item ? item.data : ""
+    }
+
+    function currentText() {
+        var item = instantiator.objectAt(currentIndex)
+        return item ? item.text : ""
     }
 
     function indexForData(data) {

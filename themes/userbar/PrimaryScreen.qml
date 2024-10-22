@@ -619,24 +619,54 @@ Item {
         visible: true
         enabled: visible
 
-        property int expandedWidth: {
+        KeyNavigation.down: centerPanelFocus
+
+        function widthForOrder(order) {
             var approximateFullWidth = 0
+            var maxOrder = 0
+            var minWidth = height
+            var gap = 0
             for(var i in children) {
                 var child = children[i]
                 if (child.approximateFullWidth == null) {
                     console.warn("menuBar: child " + child + " does not have the required property (approximateFullWidth)")
                     continue
                 }
-                approximateFullWidth += child.approximateFullWidth
+                if (!child.expandOrder || child.expandOrder > order) {
+                    approximateFullWidth += child.approximateFullWidth
+                } else {
+                    approximateFullWidth += minWidth + gap
+                    gap = spacing
+                }
+                if (child.expandOrder) {
+                    maxOrder = Math.max(maxOrder, child.expandOrder)
+                }
             }
-            approximateFullWidth += children.length * menuBar.spacing
-            return approximateFullWidth
+            return [approximateFullWidth, maxOrder]
         }
 
-        KeyNavigation.down: centerPanelFocus
-
-        // whether to show button captions
-        property bool expand: expandedWidth < (activeScreen.width - hostName.width) * 0.9
+        // You can set an expandOrder for an item, and collapse it if its
+        // expandOrder does not exceed this value. This will ensure gradual
+        // collapse of menu items as free space decreases. Thus, the larger the
+        // expandOrder an item has, the later it will collapse.
+        property int expandOrder: {
+            const allWidth = (activeScreen.width - hostName.width) * 0.9
+            if (allWidth === 0) return 0
+            var order = 0
+            while (true) {
+                const [width, maxOrder] = widthForOrder(order)
+                if (maxOrder === 0) {
+                    console.warn("menuBar: children do not use expand order")
+                    return 0
+                }
+                if (width <= allWidth) return order
+                if (order > maxOrder) {
+                    console.warn("menuBar: no more children to shrink, but still not enough space")
+                    return order
+                }
+                ++order;
+            }
+        }
 
         KeyboardButton {
             id: keyboardLayoutButton
@@ -656,8 +686,14 @@ Item {
             model: sessionsModel
             dataRole: "key"
             icon.name: "computer"
+
             // probably won't get wider
             property int approximateFullWidth: height * 6
+            property int expandOrder: 3
+            property bool expand: expandOrder > menuBar.expandOrder
+
+            text: expand ? currentText() : ""
+            property string extraTooltip: expand || currentText().length === 0 ? "" : " - " + currentText()
 
             onPopupEnded: {
                 if (deactivatedViaKeyboard) {
@@ -686,7 +722,7 @@ Item {
             ToolTip.delay: params.toolTipDelay
             ToolTip.timeout: params.toolTipTimeout
             ToolTip.visible: hovered
-            ToolTip.text: i18n("Desktop session")
+            ToolTip.text: i18n("Desktop session") + extraTooltip
             KeyNavigation.left: keyboardLayoutButton
             KeyNavigation.right: connectionsButton
         }
@@ -694,8 +730,11 @@ Item {
         NetworkWidget {
             id: connectionsButton
             visible: connectionsModel.networkManagerAvailable && generalConfig.readEntry("hide-network-widget") !== "true"
-            expand: menuBar.expand
+
             approximateFullWidth: height * 6
+            property int expandOrder: 2
+            expand: expandOrder > menuBar.expandOrder
+
             onPopupHide: {
                 if (deactivatedViaKeyboard) {
                     connectionsButton.forceActiveFocus(Qt.TabFocus)
@@ -711,7 +750,8 @@ Item {
         TooltipButton {
             id: suspendButton
             caption: i18n("Suspend")
-            expand: menuBar.expand
+            property int expandOrder: 1
+            expand: expandOrder > menuBar.expandOrder
             icon.name: "system-suspend"
             enabled: power.canSuspend
             onClicked: power.suspend()
@@ -722,7 +762,8 @@ Item {
         TooltipButton {
             id: hibernateButton
             caption: i18n("Hibernate")
-            expand: menuBar.expand
+            property int expandOrder: 1
+            expand: expandOrder > menuBar.expandOrder
             icon.name: "system-suspend-hibernate"
             //Hibernate is a special case, lots of distros disable it, so if it's not enabled don't show it
             visible: power.canHibernate
@@ -734,7 +775,8 @@ Item {
         TooltipButton {
             id: restartButton
             caption: i18n("Restart")
-            expand: menuBar.expand
+            property int expandOrder: 1
+            expand: expandOrder > menuBar.expandOrder
             icon.name: "system-reboot"
             enabled: power.canRestart
             onClicked: power.restart()
@@ -745,7 +787,8 @@ Item {
         TooltipButton {
             id: shutdownButton
             caption: i18n("Shutdown")
-            expand: menuBar.expand
+            property int expandOrder: 1
+            expand: expandOrder > menuBar.expandOrder
             icon.name: "system-shutdown"
             enabled: power.canShutdown
             onClicked: power.shutdown()
@@ -774,7 +817,7 @@ Item {
         TooltipButton {
             id: virtualKeyboardButton
             caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
-            expand: menuBar.expand
+            expand: true
             icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
             onClicked: {
                 inputPanel.switchState()
