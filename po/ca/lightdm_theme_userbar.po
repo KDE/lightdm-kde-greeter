@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2024.
+# SPDX-FileCopyrightText: 2024 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-05 02:06+0000\n"
-"PO-Revision-Date: 2024-06-05 10:53+0200\n"
+"PO-Revision-Date: 2024-10-23 20:50+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: config.qml:37
 #, kde-format
@@ -52,12 +52,12 @@ msgstr "Connecto a un punt d'accés insegur %1?"
 #: NetworkWidget.qml:70
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr "Introduïu la contrasenya per connectar a %1"
+msgstr "Introduïu la contrasenya per a connectar a %1"
 
 #: NetworkWidget.qml:75
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr "Introduïu un usuari i contrasenya per connectar a %1"
+msgstr "Introduïu un usuari i contrasenya per a connectar a %1"
 
 #: NetworkWidget.qml:79 NetworkWidget.qml:85
 #, kde-format
