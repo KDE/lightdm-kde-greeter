@@ -1,0 +1,171 @@
+# Spanish translations for lightdm_theme_userbar.po package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# Automatically generated, 2024.
+#
+# SPDX-FileCopyrightText: 2024 Eloy Cuadra <ecuadra@eloihr.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm_theme_userbar\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-06-05 17:47+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.05.0\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Imagen de fondo:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "La conexión se activará solo en la pantalla de inicio de sesión."
+
+#: NetworkWidget.qml:55
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "¿Desconectarse de %1?"
+
+#: NetworkWidget.qml:58
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "¿Interrumpir la conexión con %1?"
+
+#: NetworkWidget.qml:62
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "¿Conectarse a %1?"
+
+#: NetworkWidget.qml:66
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "¿Conectarse a un punto de acceso inseguro %1?"
+
+#: NetworkWidget.qml:71
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Introduzca la contraseña para conectarse a %1"
+
+#: NetworkWidget.qml:76
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Introduzca el usuario y la contraseña para conectarse a %1"
+
+#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: Error de conexión. Vuelva a intentarlo."
+
+#: NetworkWidget.qml:89
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "El protocolo de seguridad no se admite para %1"
+
+#: NetworkWidget.qml:92
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "No se ha podido conectar con %1"
+
+#: NetworkWidget.qml:95
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Error: No se puede encontrar el punto de acceso %1"
+
+#: NetworkWidget.qml:315
+#, kde-format
+msgid "Login"
+msgstr "Inicio de sesión"
+
+#: NetworkWidget.qml:330
+#, kde-format
+msgid "Password"
+msgstr "Contraseña"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr "Desactivar red inalámbrica"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Activar red inalámbrica"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#, kde-format
+msgid "Action prohibited"
+msgstr "Acción prohibida"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Disable networking"
+msgstr "Desactivar la red"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Enable networking"
+msgstr "Activar la red"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "Pulse %1 para cambiar la pantalla principal"
+
+#: PrimaryScreen.qml:72
+#, kde-format
+msgid "Login failed"
+msgstr "El inicio de sesión ha fallado"
+
+#: PrimaryScreen.qml:440
+#, kde-format
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+#: PrimaryScreen.qml:459
+#, kde-format
+msgid "Log in as another user"
+msgstr "Iniciar sesión como otro usuario"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Distribución de teclado"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Sesión de escritorio"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Suspender"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Apagar"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Teclado virtual"

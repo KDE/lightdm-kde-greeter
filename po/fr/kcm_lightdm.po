@@ -1,0 +1,102 @@
+#
+# SPDX-FileCopyrightText: 2024 Xavier Besnard <xavier.besnard@kde.org>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-06-06 20:49+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Xavier Besnard"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "xavier.besnard@kde.org"
+
+#: lightdmkcm.cpp:80
+#, kde-format
+msgid "Access denied"
+msgstr "Accès refusé"
+
+#: lightdmkcm.cpp:117
+#, kde-format
+msgid "Save settings failed:"
+msgstr "Échec de l'enregistrement des réglages :"
+
+#: ui/components/SelectImageButton.qml:60
+#, kde-format
+msgid "No image"
+msgstr "Aucune image"
+
+#: ui/components/SelectImageButton.qml:90
+#, kde-format
+msgid "Clear Image"
+msgstr "Effacer une image"
+
+#: ui/components/SelectImageButton.qml:99
+#, kde-format
+msgid "Select image"
+msgstr "Sélectionner une image"
+
+#: ui/main.qml:146
+#, kde-format
+msgid "Theme changes will be lost"
+msgstr "Les modifications de thème seront perdues."
+
+#: ui/main.qml:209
+#, kde-format
+msgid "Theme"
+msgstr "Thème"
+
+#: ui/main.qml:227
+#, kde-format
+msgid "Name:"
+msgstr "Nom :"
+
+#: ui/main.qml:229
+#, kde-format
+msgid "Description:"
+msgstr "Description :"
+
+#: ui/main.qml:279
+#, kde-format
+msgid "General"
+msgstr "Général"
+
+#: ui/main.qml:296
+#, kde-format
+msgid "Automatically log in:"
+msgstr "Se connecter automatiquement :"
+
+#: ui/main.qml:314
+#, kde-format
+msgid "Timeout"
+msgstr "Délai maximal"
+
+#: ui/main.qml:332
+#, kde-format
+msgctxt "Short for second"
+msgid "s"
+msgstr "s"
+
+#: ui/main.qml:344
+#, kde-format
+msgid "As user:"
+msgstr "En tant qu'utilisateur :"
+
+#: ui/main.qml:359
+#, kde-format
+msgid "Using session:"
+msgstr "Utilisation de la session :"

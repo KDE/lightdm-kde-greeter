@@ -1,0 +1,171 @@
+# Translation of lightdm_theme_userbar.po to Catalan
+# Copyright (C) 2024 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# SPDX-FileCopyrightText: 2024 Josep M. Ferrer <txemaq@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-10-23 20:50+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Imatge de fons:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "La connexió només serà activa en la pantalla d'inici de sessió."
+
+#: NetworkWidget.qml:55
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "Desconnecto de %1?"
+
+#: NetworkWidget.qml:58
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "Interrompo la connexió a %1?"
+
+#: NetworkWidget.qml:62
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "Connecto a %1?"
+
+#: NetworkWidget.qml:66
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "Connecto a un punt d'accés insegur %1?"
+
+#: NetworkWidget.qml:71
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Introduïu la contrasenya per a connectar a %1"
+
+#: NetworkWidget.qml:76
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Introduïu un usuari i contrasenya per a connectar a %1"
+
+#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: Error de connexió, torneu a intentar-ho."
+
+#: NetworkWidget.qml:89
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "El protocol de seguretat no està admès per a %1"
+
+#: NetworkWidget.qml:92
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "Ha fallat en connectar amb %1"
+
+#: NetworkWidget.qml:95
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Error: No s'ha pogut trobar el punt d'accés %1"
+
+#: NetworkWidget.qml:315
+#, kde-format
+msgid "Login"
+msgstr "Usuari"
+
+#: NetworkWidget.qml:330
+#, kde-format
+msgid "Password"
+msgstr "Contrasenya"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr "Desactiva la xarxa sense fil"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Activa la xarxa sense fil"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#, kde-format
+msgid "Action prohibited"
+msgstr "Acció prohibida"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Disable networking"
+msgstr "Desactiva la xarxa"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Enable networking"
+msgstr "Activa la xarxa"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "Premeu %1 per a canviar la pantalla primària"
+
+#: PrimaryScreen.qml:72
+#, kde-format
+msgid "Login failed"
+msgstr "Ha fallat l'inici de la sessió"
+
+#: PrimaryScreen.qml:440
+#, kde-format
+msgid "Log in"
+msgstr "Inicia la sessió"
+
+#: PrimaryScreen.qml:459
+#, kde-format
+msgid "Log in as another user"
+msgstr "Inicia la sessió com un altre usuari"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Disposició de teclat"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Sessió d'escriptori"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Suspèn"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Hiberna"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Reinicia"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Atura"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Teclat virtual"

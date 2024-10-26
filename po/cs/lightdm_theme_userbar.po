@@ -1,0 +1,169 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# SPDX-FileCopyrightText: 2024 Vit Pelcak <vit@pelcak.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-08-20 15:23+0200\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 24.05.2\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Obrázek na pozadí:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr ""
+
+#: NetworkWidget.qml:55
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:58
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:62
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:66
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:71
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:76
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr ""
+
+#: NetworkWidget.qml:89
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr ""
+
+#: NetworkWidget.qml:92
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "Nelze se připojit k %1"
+
+#: NetworkWidget.qml:95
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr ""
+
+#: NetworkWidget.qml:315
+#, kde-format
+msgid "Login"
+msgstr "Přihlašovací jméno"
+
+#: NetworkWidget.qml:330
+#, kde-format
+msgid "Password"
+msgstr "Heslo"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr ""
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Zapnout bezdrátové sítě"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#, kde-format
+msgid "Action prohibited"
+msgstr ""
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Disable networking"
+msgstr "Zakázat síť"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Enable networking"
+msgstr "Povolit síťování"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr ""
+
+#: PrimaryScreen.qml:72
+#, kde-format
+msgid "Login failed"
+msgstr "Přihlášení selhalo"
+
+#: PrimaryScreen.qml:440
+#, kde-format
+msgid "Log in"
+msgstr "Přihlásit"
+
+#: PrimaryScreen.qml:459
+#, kde-format
+msgid "Log in as another user"
+msgstr ""
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Rozvržení kláves"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Sezení plochy"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Uspat"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Hibernovat"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Restartovat"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Vypnout"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Virtuální klávesnice"

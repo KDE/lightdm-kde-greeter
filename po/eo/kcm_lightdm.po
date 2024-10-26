@@ -1,0 +1,111 @@
+# translation of kcm_lightdm.pot to Esperanto
+# Copyright (C) 2024 Free Software Foundation, Inc.
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-06-30 21:25+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
+"Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Oliver Kellogg"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "olivermkellogg@gmail.com"
+
+#: lightdmkcm.cpp:80
+#, kde-format
+msgid "Access denied"
+msgstr "Aliro malakceptita"
+
+#: lightdmkcm.cpp:117
+#, kde-format
+msgid "Save settings failed:"
+msgstr "Konservado de agordo malsukcesis:"
+
+#: ui/components/SelectImageButton.qml:60
+#, kde-format
+msgid "No image"
+msgstr "Neniu bildo"
+
+#: ui/components/SelectImageButton.qml:90
+#, kde-format
+msgid "Clear Image"
+msgstr "Viŝi Bildon"
+
+#: ui/components/SelectImageButton.qml:99
+#, kde-format
+msgid "Select image"
+msgstr "Elekti bildon"
+
+#: ui/main.qml:146
+#, kde-format
+msgid "Theme changes will be lost"
+msgstr "Ŝanĝoj de etoso perdiĝos"
+
+#: ui/main.qml:209
+#, kde-format
+msgid "Theme"
+msgstr "Etoso"
+
+#: ui/main.qml:227
+#, kde-format
+msgid "Name:"
+msgstr "Nomo:"
+
+#: ui/main.qml:229
+#, kde-format
+msgid "Description:"
+msgstr "Priskribo:"
+
+#: ui/main.qml:279
+#, kde-format
+msgid "General"
+msgstr "Ĝenerala"
+
+#: ui/main.qml:296
+#, kde-format
+msgid "Automatically log in:"
+msgstr "Aŭtomate ensaluti:"
+
+#: ui/main.qml:314
+#, kde-format
+msgid "Timeout"
+msgstr "Timeout"
+
+#: ui/main.qml:332
+#, kde-format
+msgctxt "Short for second"
+msgid "s"
+msgstr "s"
+
+#: ui/main.qml:344
+#, kde-format
+msgid "As user:"
+msgstr "Kiel uzanto:"
+
+#: ui/main.qml:359
+#, kde-format
+msgid "Using session:"
+msgstr "Uzante seancon:"
+
+#~ msgid "Recommended wallpaper file"
+#~ msgstr "Rekomendita ekranfona dosiero"
+
+#~ msgid "Recommended dark wallpaper file"
+#~ msgstr "Rekomendita malhel-ekranfona dosiero"

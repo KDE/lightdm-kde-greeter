@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-06-05 19:23\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/lightdm-kde-greeter/kcm_lightdm.pot\n"
+"X-Crowdin-File-ID: 53766\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Tyson Tan"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "tds00@qq.com"
+
+#: lightdmkcm.cpp:80
+#, kde-format
+msgid "Access denied"
+msgstr "拒绝访问"
+
+#: lightdmkcm.cpp:117
+#, kde-format
+msgid "Save settings failed:"
+msgstr "保存设置失败："
+
+#: ui/components/SelectImageButton.qml:60
+#, kde-format
+msgid "No image"
+msgstr "没有图像"
+
+#: ui/components/SelectImageButton.qml:90
+#, kde-format
+msgid "Clear Image"
+msgstr "清除图像"
+
+#: ui/components/SelectImageButton.qml:99
+#, kde-format
+msgid "Select image"
+msgstr "选择图像"
+
+#: ui/main.qml:146
+#, kde-format
+msgid "Theme changes will be lost"
+msgstr "主题更改将会丢失"
+
+#: ui/main.qml:209
+#, kde-format
+msgid "Theme"
+msgstr "主题"
+
+#: ui/main.qml:227
+#, kde-format
+msgid "Name:"
+msgstr "名称："
+
+#: ui/main.qml:229
+#, kde-format
+msgid "Description:"
+msgstr "描述："
+
+#: ui/main.qml:279
+#, kde-format
+msgid "General"
+msgstr "常规"
+
+#: ui/main.qml:296
+#, kde-format
+msgid "Automatically log in:"
+msgstr "自动登录："
+
+#: ui/main.qml:314
+#, kde-format
+msgid "Timeout"
+msgstr "超时"
+
+#: ui/main.qml:332
+#, kde-format
+msgctxt "Short for second"
+msgid "s"
+msgstr "秒"
+
+#: ui/main.qml:344
+#, kde-format
+msgid "As user:"
+msgstr "作为用户："
+
+#: ui/main.qml:359
+#, kde-format
+msgid "Using session:"
+msgstr "使用会话："
+
+#~ msgid "Recommended wallpaper file"
+#~ msgstr "推荐的壁纸文件"
+
+#~ msgid "Recommended dark wallpaper file"
+#~ msgstr "推荐的深色壁纸文件"
