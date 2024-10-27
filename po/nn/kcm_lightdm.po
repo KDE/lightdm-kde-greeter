@@ -103,9 +103,3 @@ msgstr "Som brukar:"
 #, kde-format
 msgid "Using session:"
 msgstr "Brukar økt:"
-
-#~ msgid "Recommended wallpaper file"
-#~ msgstr "Tilrådd bakgrunnsbilete"
-
-#~ msgid "Recommended dark wallpaper file"
-#~ msgstr "Tilrådd mørkt bakgrunnsbilete"

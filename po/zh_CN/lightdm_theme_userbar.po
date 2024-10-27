@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/lightdm-kde-greeter/"
+"X-Crowdin-File: /kf6-trunk/messages/lightdm-kde-greeter/"
 "lightdm_theme_userbar.pot\n"
-"X-Crowdin-File-ID: 53768\n"
+"X-Crowdin-File-ID: 56294\n"
 
 #: config.qml:37
 #, kde-format

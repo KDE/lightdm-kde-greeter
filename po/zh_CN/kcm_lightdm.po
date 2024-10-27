@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/lightdm-kde-greeter/kcm_lightdm.pot\n"
-"X-Crowdin-File-ID: 53766\n"
+"X-Crowdin-File: /kf6-trunk/messages/lightdm-kde-greeter/kcm_lightdm.pot\n"
+"X-Crowdin-File-ID: 56290\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -102,9 +102,3 @@ msgstr "作为用户："
 #, kde-format
 msgid "Using session:"
 msgstr "使用会话："
-
-#~ msgid "Recommended wallpaper file"
-#~ msgstr "推荐的壁纸文件"
-
-#~ msgid "Recommended dark wallpaper file"
-#~ msgstr "推荐的深色壁纸文件"

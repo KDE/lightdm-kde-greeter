@@ -100,3 +100,9 @@ msgstr "En tant qu'utilisateur :"
 #, kde-format
 msgid "Using session:"
 msgstr "Utilisation de la session :"
+
+#~ msgid "Recommended wallpaper file"
+#~ msgstr "Fichier de fond d'écran recommandé"
+
+#~ msgid "Recommended dark wallpaper file"
+#~ msgstr "Fichier de fond d'écran sombre recommandé"
