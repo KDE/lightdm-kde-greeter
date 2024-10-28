@@ -1,0 +1,66 @@
+# Translation for lightdm_kde_greeter.po to Euskara/Basque (eu).
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
+#
+# Translators:
+# SPDX-FileCopyrightText: 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-10-27 18:23+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Iñigo Salvador Azurmendi"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "xalba@ni.eus"
+
+#: ../themes/components/Battery.qml:57
+#, kde-format
+msgid "%1%"
+msgstr "%%1"
+
+#: ../themes/components/Battery.qml:58
+#, kde-format
+msgid "Battery at %1%"
+msgstr "Bateria %%1(e)an"
+
+#: connectionsmodel.cpp:448
+#, kde-format
+msgid "No connection"
+msgstr "Ez dago sare konexiorik"
+
+#: main.cpp:158
+#, kde-format
+msgid "LightDM KDE Greeter"
+msgstr "LightDM KDE harrera egilea"
+
+#: main.cpp:160
+#, kde-format
+msgid "Login screen using the LightDM framework"
+msgstr "Saioan sartzeko pantaila LightDM armazoia erabiliz"
+
+#: sessionsmodel.cpp:55
+#, kde-format
+msgid "Previously Used Session"
+msgstr "Aurrez erabilitako saioa"
+
+#: usersmodel.cpp:37
+#, kde-format
+msgid "Guest"
+msgstr "Gonbidatua"

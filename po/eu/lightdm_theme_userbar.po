@@ -1,0 +1,172 @@
+# Translation for lightdm_theme_userbar.po to Euskara/Basque (eu).
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
+#
+# Translators:
+# SPDX-FileCopyrightText: 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-10-27 18:39+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Atzeko planoko irudia:"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "Konexioa saio-sarrerako pantailan bakarrik egongo da aktibo."
+
+#: NetworkWidget.qml:55
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "%1(e)tik deskonektatuta?"
+
+#: NetworkWidget.qml:58
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "%1(e)rekiko konexioa bertan behera utzi?"
+
+#: NetworkWidget.qml:62
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "%1(e)ra konektatu?"
+
+#: NetworkWidget.qml:66
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "%1 sarbide-puntu ez-seguru batera konektatu?"
+
+#: NetworkWidget.qml:71
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Sartu %1(e)ra konektatzeko pasahitza"
+
+#: NetworkWidget.qml:76
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Sartu %1(e)ra konektatzeko saio-sarrera eta pasahitza"
+
+#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: Konexio errorea, berriz saiatu."
+
+#: NetworkWidget.qml:89
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "Segurtasun protokoloak ez dauka %1(e)ren euskarririk"
+
+#: NetworkWidget.qml:92
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "%1(e)ra konektatzea huts egin du"
+
+#: NetworkWidget.qml:95
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Errorea: Ezin du %1 sarbide-puntua aurkitu"
+
+#: NetworkWidget.qml:315
+#, kde-format
+msgid "Login"
+msgstr "Saio-sarrera"
+
+#: NetworkWidget.qml:330
+#, kde-format
+msgid "Password"
+msgstr "Pasahitza"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr "Ezgaitu haririk gabekoa"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Gaitu haririk gabekoa"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#, kde-format
+msgid "Action prohibited"
+msgstr "Debekatutako ekintza"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Disable networking"
+msgstr "Ezgaitu sarea"
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Enable networking"
+msgstr "Gaitu sarea"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "%1 sakatu pantaila nagusia aldatzeko"
+
+#: PrimaryScreen.qml:72
+#, kde-format
+msgid "Login failed"
+msgstr "Saio-sarrerak huts egin du"
+
+#: PrimaryScreen.qml:440
+#, kde-format
+msgid "Log in"
+msgstr "Saioan sartu"
+
+#: PrimaryScreen.qml:459
+#, kde-format
+msgid "Log in as another user"
+msgstr "Saioan sartu beste erabiltzaile bat bezala"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Teklatuaren antolaera"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Mahaigaineko saioa"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Eseki"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Hibernatu"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Berrabiarazi"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Itzali"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Alegiazko teklatua"
