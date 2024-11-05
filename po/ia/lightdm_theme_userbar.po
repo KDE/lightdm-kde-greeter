@@ -1,0 +1,171 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+#
+# SPDX-FileCopyrightText: 2024 giovanni <g.sora@tiscali.it>
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"PO-Revision-Date: 2024-11-04 18:15+0100\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Imagine de fundo"
+
+#: NetworkWidget.qml:23
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr ""
+"Le connexion essera active solmente sur le schermo de accesso de "
+"identification."
+
+#: NetworkWidget.qml:55
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:58
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:62
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "Connecte a %1 ?"
+
+#: NetworkWidget.qml:66
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr ""
+
+#: NetworkWidget.qml:71
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:76
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr ""
+
+#: NetworkWidget.qml:89
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr ""
+
+#: NetworkWidget.qml:92
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr ""
+
+#: NetworkWidget.qml:95
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr ""
+
+#: NetworkWidget.qml:315
+#, kde-format
+msgid "Login"
+msgstr "Accesso de identification"
+
+#: NetworkWidget.qml:330
+#, kde-format
+msgid "Password"
+msgstr "Contrasigno"
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Disable wireless"
+msgstr ""
+
+#: NetworkWidget.qml:382
+#, kde-format
+msgid "Enable wireless"
+msgstr "Habilita rete sin cablo"
+
+#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#, kde-format
+msgid "Action prohibited"
+msgstr ""
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Disable networking"
+msgstr ""
+
+#: NetworkWidget.qml:423
+#, kde-format
+msgid "Enable networking"
+msgstr "Habilita rete con cablo"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr ""
+
+#: PrimaryScreen.qml:72
+#, kde-format
+msgid "Login failed"
+msgstr "Accesso falleva"
+
+#: PrimaryScreen.qml:440
+#, kde-format
+msgid "Log in"
+msgstr "Accede"
+
+#: PrimaryScreen.qml:459
+#, kde-format
+msgid "Log in as another user"
+msgstr "Accede como un altere usator"
+
+#: PrimaryScreen.qml:588
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Disposition de Claviero"
+
+#: PrimaryScreen.qml:627
+#, kde-format
+msgid "Desktop session"
+msgstr "Session de scriptorio"
+
+#: PrimaryScreen.qml:651
+#, kde-format
+msgid "Suspend"
+msgstr "Suspende"
+
+#: PrimaryScreen.qml:662
+#, kde-format
+msgid "Hibernate"
+msgstr "Hiberna"
+
+#: PrimaryScreen.qml:674
+#, kde-format
+msgid "Restart"
+msgstr "Re-Initia"
+
+#: PrimaryScreen.qml:685
+#, kde-format
+msgid "Shutdown"
+msgstr "Stoppa (Shutdown)"
+
+#: PrimaryScreen.qml:714
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Claviero virtual"
