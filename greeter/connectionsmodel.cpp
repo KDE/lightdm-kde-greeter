@@ -114,6 +114,15 @@ public:
     {
         handleDBusCall(cm, reply, onError, [cm, dev, onError] { waitForDevice(cm, dev, onError); });
     }
+
+    static ConnectionEnum::Type nmConnectionTypeToInternalType(NetworkManager::ConnectionSettings::ConnectionType t) {
+        switch (t) {
+        case NetworkManager::ConnectionSettings::Wired: return ConnectionEnum::TYPE_WIRED;
+        case NetworkManager::ConnectionSettings::Wireless: return ConnectionEnum::TYPE_WIRELESS;
+        case NetworkManager::ConnectionSettings::Vpn: return ConnectionEnum::TYPE_VPN;
+        default: return ConnectionEnum::TYPE_NONE;
+        }
+    }
 };
 
 ConnectionsModel::ConnectionsModel(QObject *parent) :
@@ -170,7 +179,10 @@ void ConnectionsModel::fillConnections()
         if (!c->isValid()) continue;
 
         QString path = c->path();
-        if ((c->settings()->connectionType() == NetworkManager::ConnectionSettings::Wired) && !c->uuid().isEmpty()) {
+
+        ConnectionEnum::Type type = Util::nmConnectionTypeToInternalType(c->settings()->connectionType());
+
+        if ((type == ConnectionEnum::TYPE_WIRED || type == ConnectionEnum::TYPE_VPN) && !c->uuid().isEmpty()) {
             ConnectionEnum::State state = ConnectionEnum::STATE_OFF;
             for (const auto &ac : NetworkManager::activeConnections()) {
                 if (ac->uuid() == c->uuid()) {
@@ -181,7 +193,7 @@ void ConnectionsModel::fillConnections()
             }
 
             checkItem(std::move(ConnectionItem{}
-                                .setType(ConnectionEnum::TYPE_WIRED)
+                                .setType(type)
                                 .setName(c->name())
                                 .setPath(path)
                                 .setState(state)));
@@ -448,12 +460,7 @@ void ConnectionsModel::updatePrimaryConnection()
         m_primary->setName(ki18n("No connection").toString()).setType(ConnectionEnum::TYPE_NONE);
     } else {
         auto c = conn->connection();
-        ConnectionEnum::Type type;
-        switch (c->settings()->connectionType()) {
-            case NetworkManager::ConnectionSettings::Wired: type = ConnectionEnum::TYPE_WIRED; break;
-            case NetworkManager::ConnectionSettings::Wireless: type = ConnectionEnum::TYPE_WIRELESS; break;
-            default: type = ConnectionEnum::TYPE_NONE; break;
-        }
+        ConnectionEnum::Type type = Util::nmConnectionTypeToInternalType(c->settings()->connectionType());
 
         m_primary->setName(c->name()).setType(type);
         for (auto &item : m_connections) {

@@ -19,7 +19,8 @@ namespace ConnectionEnum
         TYPE_UNDEFINED,
         TYPE_NONE,
         TYPE_WIRED,
-        TYPE_WIRELESS
+        TYPE_WIRELESS,
+        TYPE_VPN
     };
     Q_ENUM_NS(Type)
 

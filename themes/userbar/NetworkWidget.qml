@@ -115,6 +115,7 @@ TooltipButton {
             case ConnectionEnum.TYPE_NONE: return "connect_no"
             case ConnectionEnum.TYPE_WIRED: return "network-wired";
             case ConnectionEnum.TYPE_WIRELESS: return iconByStrength(item.signalStrength);
+            case ConnectionEnum.TYPE_VPN: return "network-vpn";
             default: return "question";
         }
     }
