@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
 "PO-Revision-Date: 2024-10-25 01:45+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -23,92 +23,92 @@ msgstr ""
 msgid "Background image:"
 msgstr "ფონის გამოსახულება:"
 
-#: NetworkWidget.qml:23
+#: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
 msgstr "მიერთება, მხოლოდ, შესვლის ეკრანზე იქნება აქტიური."
 
-#: NetworkWidget.qml:55
+#: NetworkWidget.qml:56
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "გავთიშო %1-დან?"
 
-#: NetworkWidget.qml:58
+#: NetworkWidget.qml:59
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "გავაუქმო %1-სთან მიერთება?"
 
-#: NetworkWidget.qml:62
+#: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "დავუკავშირდე %1-ს?"
 
-#: NetworkWidget.qml:66
+#: NetworkWidget.qml:67
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "დავუკავშირდე დაუცველ წვდომის წერტილს %1?"
 
-#: NetworkWidget.qml:71
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "შეიყვანეთ პაროლი %1-სთან დასაკავშირებლად"
 
-#: NetworkWidget.qml:76
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "შეიყვანეთ მომხმარებელი და პაროლი %1-სთან დასაკავშირებლად"
 
-#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: კავშირის შეცდომა. თავიდან სცადეთ."
 
-#: NetworkWidget.qml:89
+#: NetworkWidget.qml:90
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "უსაფრთხოების პროტოკოლი %1-სთვის მხარდაჭერილი არაა"
 
-#: NetworkWidget.qml:92
+#: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "ჩავარდა შეერთება არხისთვის %1"
 
-#: NetworkWidget.qml:95
+#: NetworkWidget.qml:96
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "შეცდომა: წვდომის წერტილი %1 აღმოჩენილი არაა"
 
-#: NetworkWidget.qml:315
+#: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
 msgstr "შესვლა"
 
-#: NetworkWidget.qml:330
+#: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
 msgstr "პაროლი"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Disable wireless"
 msgstr "უსადენო ქსელის გათიშვა"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Enable wireless"
 msgstr "უსადენო ქსელის ჩართვა"
 
-#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
 #, kde-format
 msgid "Action prohibited"
 msgstr "ქმედება აკრძალულია"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Disable networking"
 msgstr "ქსელის გათიშვა"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Enable networking"
 msgstr "ქსელის ჩართვა"
@@ -118,52 +118,67 @@ msgstr "ქსელის ჩართვა"
 msgid "Press %1 to change the primary screen"
 msgstr "დააწექით %1-ს, რომ ძირითადი ეკრანი შეცვალოთ"
 
-#: PrimaryScreen.qml:72
+#: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
 msgstr "შესვლა წარუმატებელია"
 
-#: PrimaryScreen.qml:440
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
 msgstr "შესვლა"
 
-#: PrimaryScreen.qml:459
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Log in as another user"
 msgstr "სხვა მომხმარებლით შესვლა"
 
-#: PrimaryScreen.qml:588
+#: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
 msgstr "კლავიატური განლაგება"
 
-#: PrimaryScreen.qml:627
+#: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
 msgstr "სამუშაო მაგიდის სესია"
 
-#: PrimaryScreen.qml:651
+#: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
 msgstr "ძილი"
 
-#: PrimaryScreen.qml:662
+#: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
 msgstr "პროგრამული ძილი"
 
-#: PrimaryScreen.qml:674
+#: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
 msgstr "გადატვირთვა"
 
-#: PrimaryScreen.qml:685
+#: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
 msgstr "გამორთვა"
 
-#: PrimaryScreen.qml:714
+#: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

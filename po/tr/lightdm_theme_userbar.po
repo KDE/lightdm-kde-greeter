@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
 "PO-Revision-Date: 2024-06-06 01:27+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -22,92 +22,92 @@ msgstr ""
 msgid "Background image:"
 msgstr "Arka plan görseli:"
 
-#: NetworkWidget.qml:23
+#: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
 msgstr "Bağlantı, yalnızca oturum açma ekranında etkin olur."
 
-#: NetworkWidget.qml:55
+#: NetworkWidget.qml:56
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "%1 bağlantısı kesilsin mi?"
 
-#: NetworkWidget.qml:58
+#: NetworkWidget.qml:59
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "%1 bağlantısı iptal edilsin mi?"
 
-#: NetworkWidget.qml:62
+#: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "%1 bağlantısı yapılsın mı?"
 
-#: NetworkWidget.qml:66
+#: NetworkWidget.qml:67
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "%1 güvenliksiz erişim noktasına bağlanılsın mı?"
 
-#: NetworkWidget.qml:71
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "%1 bağlantısı için parolayı gir"
 
-#: NetworkWidget.qml:76
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "%1 bağlantısı için kullanıcı ve parola bilgisini gir"
 
-#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: Bağlantı hatası, yeniden deneyin."
 
-#: NetworkWidget.qml:89
+#: NetworkWidget.qml:90
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "%1 için güvenlik protokolü desteklenmiyor"
 
-#: NetworkWidget.qml:92
+#: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "%1 bağlantısı yapılamadı"
 
-#: NetworkWidget.qml:95
+#: NetworkWidget.qml:96
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Hata: %1 erişim noktası bulunamıyor"
 
-#: NetworkWidget.qml:315
+#: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
 msgstr "Kullanıcı"
 
-#: NetworkWidget.qml:330
+#: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
 msgstr "Parola"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Disable wireless"
 msgstr "Kablosuzu Devre Dışı Bırak"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Enable wireless"
 msgstr "Kablosuzu Etkinleştir"
 
-#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
 #, kde-format
 msgid "Action prohibited"
 msgstr "Eyleme izin verilmiyor"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Disable networking"
 msgstr "Ağı Devre Dışı Bırak"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Enable networking"
 msgstr "Ağı Etkinleştir"
@@ -117,52 +117,67 @@ msgstr "Ağı Etkinleştir"
 msgid "Press %1 to change the primary screen"
 msgstr "Birincil ekranı değiştirmek için %1 düğmesine bas"
 
-#: PrimaryScreen.qml:72
+#: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
 msgstr "Oturum açma başarısız"
 
-#: PrimaryScreen.qml:440
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
 msgstr "Oturum Aç"
 
-#: PrimaryScreen.qml:459
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Log in as another user"
 msgstr "Başka Bir Kullanıcı Olarak Oturum Aç"
 
-#: PrimaryScreen.qml:588
+#: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Klavye yerleşimi"
 
-#: PrimaryScreen.qml:627
+#: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
 msgstr "Masaüstü oturumu"
 
-#: PrimaryScreen.qml:651
+#: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
 msgstr "Askıya Al"
 
-#: PrimaryScreen.qml:662
+#: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
 msgstr "Derin Uykuya Geçir"
 
-#: PrimaryScreen.qml:674
+#: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
-#: PrimaryScreen.qml:685
+#: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
 msgstr "Kapat"
 
-#: PrimaryScreen.qml:714
+#: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

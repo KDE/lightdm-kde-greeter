@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
 "PO-Revision-Date: 2024-06-05 19:23\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -23,92 +23,92 @@ msgstr ""
 msgid "Background image:"
 msgstr "背景图像："
 
-#: NetworkWidget.qml:23
+#: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
 msgstr "此连接将仅在登录屏幕中生效。"
 
-#: NetworkWidget.qml:55
+#: NetworkWidget.qml:56
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "断开与 %1 的连接？"
 
-#: NetworkWidget.qml:58
+#: NetworkWidget.qml:59
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "取消连接到 %1？"
 
-#: NetworkWidget.qml:62
+#: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "连接到 %1？"
 
-#: NetworkWidget.qml:66
+#: NetworkWidget.qml:67
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "连接到不安全的接入点 %1？"
 
-#: NetworkWidget.qml:71
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "请输入密码以连接到 %1"
 
-#: NetworkWidget.qml:76
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "请输入登录名和密码以连接到 %1"
 
-#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1：连接错误，请重试。"
 
-#: NetworkWidget.qml:89
+#: NetworkWidget.qml:90
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "%1 不支持此安全协议"
 
-#: NetworkWidget.qml:92
+#: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "连接到 %1 失败"
 
-#: NetworkWidget.qml:95
+#: NetworkWidget.qml:96
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "错误：无法找到访问点 %1"
 
-#: NetworkWidget.qml:315
+#: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
 msgstr "登录"
 
-#: NetworkWidget.qml:330
+#: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
 msgstr "密码"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Disable wireless"
 msgstr "禁用无线网络"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Enable wireless"
 msgstr "启用无线网络"
 
-#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
 #, kde-format
 msgid "Action prohibited"
 msgstr "禁止的操作"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Disable networking"
 msgstr "禁用网络"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Enable networking"
 msgstr "启用网络"
@@ -118,52 +118,67 @@ msgstr "启用网络"
 msgid "Press %1 to change the primary screen"
 msgstr "点击 %1 以更改主屏幕"
 
-#: PrimaryScreen.qml:72
+#: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
 msgstr "登录失败"
 
-#: PrimaryScreen.qml:440
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
 msgstr "登录"
 
-#: PrimaryScreen.qml:459
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Log in as another user"
 msgstr "作为另一位用户登录"
 
-#: PrimaryScreen.qml:588
+#: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
 msgstr "键盘布局"
 
-#: PrimaryScreen.qml:627
+#: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
 msgstr "桌面会话"
 
-#: PrimaryScreen.qml:651
+#: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
 msgstr "挂起"
 
-#: PrimaryScreen.qml:662
+#: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
 msgstr "休眠"
 
-#: PrimaryScreen.qml:674
+#: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
 msgstr "重启"
 
-#: PrimaryScreen.qml:685
+#: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
 msgstr "关机"
 
-#: PrimaryScreen.qml:714
+#: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

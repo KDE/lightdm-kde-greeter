@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
 "PO-Revision-Date: 2024-06-05 07:45+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
@@ -24,92 +24,92 @@ msgstr ""
 msgid "Background image:"
 msgstr "Slika ozadja:"
 
-#: NetworkWidget.qml:23
+#: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
 msgstr "Povezava bo aktivna samo na prijavnem zaslonu."
 
-#: NetworkWidget.qml:55
+#: NetworkWidget.qml:56
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "Naj se odklopim od %1?"
 
-#: NetworkWidget.qml:58
+#: NetworkWidget.qml:59
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "Naj prekinem povezovanje z %1 ?"
 
-#: NetworkWidget.qml:62
+#: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "Naj se povežem z %1 ?"
 
-#: NetworkWidget.qml:66
+#: NetworkWidget.qml:67
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "Naj se povežem z nevarno dostopno točko %1 ?"
 
-#: NetworkWidget.qml:71
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "Vnesite geslo za povezavo z %1"
 
-#: NetworkWidget.qml:76
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "Vnesite prijavo in geslo za povezavo z %1"
 
-#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: Napaka pri povezavi, poskusite ponovno."
 
-#: NetworkWidget.qml:89
+#: NetworkWidget.qml:90
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "Varnostni protokol ni podprt za %1"
 
-#: NetworkWidget.qml:92
+#: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "Povezava z %1 ni uspela"
 
-#: NetworkWidget.qml:95
+#: NetworkWidget.qml:96
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Napaka: ni mogoče najti dostopne točke %1"
 
-#: NetworkWidget.qml:315
+#: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
 msgstr "Prijava"
 
-#: NetworkWidget.qml:330
+#: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
 msgstr "Geslo"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Disable wireless"
 msgstr "Onemogoči brezžično povezavo"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Enable wireless"
 msgstr "Omogoči brezžično povezavo"
 
-#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
 #, kde-format
 msgid "Action prohibited"
 msgstr "Dejanje prepovedano"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Disable networking"
 msgstr "Onemogoči mreženje"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Enable networking"
 msgstr "Omogoči mreženje"
@@ -119,52 +119,67 @@ msgstr "Omogoči mreženje"
 msgid "Press %1 to change the primary screen"
 msgstr "Pritisnite %1, da spremenite primarni zaslon"
 
-#: PrimaryScreen.qml:72
+#: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
 msgstr "Prijava neuspela"
 
-#: PrimaryScreen.qml:440
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
 msgstr "Prijavite se"
 
-#: PrimaryScreen.qml:459
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Log in as another user"
 msgstr "Prijavite se kot drug uporabnik"
 
-#: PrimaryScreen.qml:588
+#: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Razporeditev tipkovnice"
 
-#: PrimaryScreen.qml:627
+#: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
 msgstr "Namizna seja"
 
-#: PrimaryScreen.qml:651
+#: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
 msgstr "Prekini"
 
-#: PrimaryScreen.qml:662
+#: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
 msgstr "V mirovanje"
 
-#: PrimaryScreen.qml:674
+#: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
 msgstr "Ponovni zagon"
 
-#: PrimaryScreen.qml:685
+#: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
 msgstr "Zaustavi"
 
-#: PrimaryScreen.qml:714
+#: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

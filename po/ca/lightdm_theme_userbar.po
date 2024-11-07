@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
 "PO-Revision-Date: 2024-10-23 20:50+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -24,92 +24,92 @@ msgstr ""
 msgid "Background image:"
 msgstr "Imatge de fons:"
 
-#: NetworkWidget.qml:23
+#: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
 msgstr "La connexió només serà activa en la pantalla d'inici de sessió."
 
-#: NetworkWidget.qml:55
+#: NetworkWidget.qml:56
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "Desconnecto de %1?"
 
-#: NetworkWidget.qml:58
+#: NetworkWidget.qml:59
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "Interrompo la connexió a %1?"
 
-#: NetworkWidget.qml:62
+#: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "Connecto a %1?"
 
-#: NetworkWidget.qml:66
+#: NetworkWidget.qml:67
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "Connecto a un punt d'accés insegur %1?"
 
-#: NetworkWidget.qml:71
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "Introduïu la contrasenya per a connectar a %1"
 
-#: NetworkWidget.qml:76
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "Introduïu un usuari i contrasenya per a connectar a %1"
 
-#: NetworkWidget.qml:80 NetworkWidget.qml:86
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: Error de connexió, torneu a intentar-ho."
 
-#: NetworkWidget.qml:89
+#: NetworkWidget.qml:90
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "El protocol de seguretat no està admès per a %1"
 
-#: NetworkWidget.qml:92
+#: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "Ha fallat en connectar amb %1"
 
-#: NetworkWidget.qml:95
+#: NetworkWidget.qml:96
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Error: No s'ha pogut trobar el punt d'accés %1"
 
-#: NetworkWidget.qml:315
+#: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
 msgstr "Usuari"
 
-#: NetworkWidget.qml:330
+#: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
 msgstr "Contrasenya"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Disable wireless"
 msgstr "Desactiva la xarxa sense fil"
 
-#: NetworkWidget.qml:382
+#: NetworkWidget.qml:383
 #, kde-format
 msgid "Enable wireless"
 msgstr "Activa la xarxa sense fil"
 
-#: NetworkWidget.qml:383 NetworkWidget.qml:424
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
 #, kde-format
 msgid "Action prohibited"
 msgstr "Acció prohibida"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Disable networking"
 msgstr "Desactiva la xarxa"
 
-#: NetworkWidget.qml:423
+#: NetworkWidget.qml:424
 #, kde-format
 msgid "Enable networking"
 msgstr "Activa la xarxa"
@@ -119,52 +119,67 @@ msgstr "Activa la xarxa"
 msgid "Press %1 to change the primary screen"
 msgstr "Premeu %1 per a canviar la pantalla primària"
 
-#: PrimaryScreen.qml:72
+#: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
 msgstr "Ha fallat l'inici de la sessió"
 
-#: PrimaryScreen.qml:440
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
 msgstr "Inicia la sessió"
 
-#: PrimaryScreen.qml:459
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Log in as another user"
 msgstr "Inicia la sessió com un altre usuari"
 
-#: PrimaryScreen.qml:588
+#: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposició de teclat"
 
-#: PrimaryScreen.qml:627
+#: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
 msgstr "Sessió d'escriptori"
 
-#: PrimaryScreen.qml:651
+#: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
 msgstr "Suspèn"
 
-#: PrimaryScreen.qml:662
+#: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: PrimaryScreen.qml:674
+#: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
 msgstr "Reinicia"
 
-#: PrimaryScreen.qml:685
+#: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
 msgstr "Atura"
 
-#: PrimaryScreen.qml:714
+#: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
