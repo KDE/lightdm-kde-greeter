@@ -103,6 +103,7 @@ public:
                     if (newstate == NetworkManager::Device::Failed) {
                         qInfo() << "waitForDevice: new device state is \"failed\", reason:" << reason;
                         onError();
+                        disconnectAllDeviceEvents();
                     } else if (newstate == NetworkManager::Device::Activated) {
                         disconnectAllDeviceEvents();
                     }

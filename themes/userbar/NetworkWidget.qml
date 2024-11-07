@@ -46,7 +46,7 @@ TooltipButton {
         function onShowDialog(item, action) {
 
             confirmAction.data = { "connection": item, "action": action }
-            confirmAction.callback = connectionsModel.onActionDialogComplete
+            confirmAction.callback = (data) => connectionsModel.onActionDialogComplete(data)
             confirmLayout.sourceComponent = labelLayout
 
             switch (action) {
