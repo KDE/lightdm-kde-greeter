@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-07 00:41+0000\n"
-"PO-Revision-Date: 2024-06-05 10:41+0200\n"
+"PO-Revision-Date: 2024-11-07 12:35+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: config.qml:37
 #, kde-format
@@ -125,17 +125,17 @@ msgstr "Aanmelden mislukt"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock staat aan"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock staat aan"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock en Num Lock staan aan"
 
 #: PrimaryScreen.qml:502
 #, kde-format

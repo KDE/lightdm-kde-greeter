@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-07 00:41+0000\n"
-"PO-Revision-Date: 2024-10-25 01:45+0200\n"
+"PO-Revision-Date: 2024-11-07 03:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -126,17 +126,17 @@ msgstr "შესვლა წარუმატებელია"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "CapsLock ჩართულია"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock ჩართულია"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock და Num Lock ჩართულია"
 
 #: PrimaryScreen.qml:502
 #, kde-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-07 00:41+0000\n"
-"PO-Revision-Date: 2024-06-05 17:47+0200\n"
+"PO-Revision-Date: 2024-11-07 02:25+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: config.qml:37
 #, kde-format
@@ -127,17 +127,17 @@ msgstr "El inicio de sesión ha fallado"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "El bloqueo de mayúsculas está activado"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "El bloqueo numérico está activado"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "El bloqueo de mayúsculas y el bloqueo numérico están activados"
 
 #: PrimaryScreen.qml:502
 #, kde-format
