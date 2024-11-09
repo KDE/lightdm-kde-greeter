@@ -126,17 +126,17 @@ msgstr "登录失败"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "大写锁定已打开"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "数字小键盘锁定已打开"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "大写锁定和数字小键盘锁定已打开"
 
 #: PrimaryScreen.qml:502
 #, kde-format
