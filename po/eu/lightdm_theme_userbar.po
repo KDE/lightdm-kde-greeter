@@ -1,7 +1,7 @@
 # Translation for lightdm_theme_userbar.po to Euskara/Basque (eu).
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # SPDX-FileCopyrightText: 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-07 00:41+0000\n"
-"PO-Revision-Date: 2024-10-27 18:39+0100\n"
+"PO-Revision-Date: 2024-11-10 19:20+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: config.qml:37
 #, kde-format
@@ -128,17 +128,17 @@ msgstr "Saio-sarrerak huts egin du"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "«Maius.Giltz.» piztuta dago"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "«Zk.Gitz.» piztuta dago"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "«Maius.Giltz.» eta «Zk.Giltz.» piztuta daude"
 
 #: PrimaryScreen.qml:502
 #, kde-format
