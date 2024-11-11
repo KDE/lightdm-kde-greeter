@@ -437,6 +437,11 @@ void ConnectionsModel::connectItem(const ConnectionItem &item)
         qWarning("%s: attempting to connect without creating to a non-existing connection", __FUNCTION__);
         return;
     }
+    // in the case of VPN we do not have a device before connecting
+    if (item.type == ConnectionEnum::TYPE_VPN) {
+        Util::handleDBusCall(this, NetworkManager::activateConnection(item.path, {}, {}));
+        return;
+    }
     auto dev = Util::findDeviceForConnectionPath(item.path);
     if (!dev) {
         qWarning("%s: could not find device for connection: %s", __FUNCTION__, qPrintable(item.path));
