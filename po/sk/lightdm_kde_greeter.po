@@ -1,44 +1,44 @@
 # translation of lightdm_kde_greeter.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2024.
+# SPDX-FileCopyrightText: 2024 Roman Paholik <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_kde_greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 01:49+0000\n"
-"PO-Revision-Date: 2017-11-01 11:06+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-11 17:52+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Roman Paholík"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "wizzardsk@gmail.com"
 
 #: ../themes/components/Battery.qml:57
 #, kde-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../themes/components/Battery.qml:58
 #, kde-format
 msgid "Battery at %1%"
-msgstr ""
+msgstr "Batéria na %1%"
 
 #: connectionsmodel.cpp:448
 #, kde-format
 msgid "No connection"
-msgstr ""
+msgstr "Nie je spojenie"
 
 #: main.cpp:158
 #, kde-format
@@ -58,4 +58,4 @@ msgstr ""
 #: usersmodel.cpp:37
 #, kde-format
 msgid "Guest"
-msgstr ""
+msgstr "Hosť"

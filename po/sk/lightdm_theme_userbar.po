@@ -1,24 +1,24 @@
 # translation of lightdm_theme_userbar.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2024.
+# SPDX-FileCopyrightText: 2024 Roman Paholik <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-07 00:41+0000\n"
-"PO-Revision-Date: 2017-11-01 11:06+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-11 17:53+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: config.qml:37
 #, kde-format
 msgid "Background image:"
-msgstr ""
+msgstr "Obrázok pozadia:"
 
 #: NetworkWidget.qml:24
 #, kde-format
@@ -38,7 +38,7 @@ msgstr ""
 #: NetworkWidget.qml:63
 #, kde-format
 msgid "Connect to %1 ?"
-msgstr ""
+msgstr "Pripojiť k %1?"
 
 #: NetworkWidget.qml:67
 #, kde-format
@@ -68,7 +68,7 @@ msgstr ""
 #: NetworkWidget.qml:93
 #, kde-format
 msgid "Failed to connect to %1"
-msgstr ""
+msgstr "Zlyhalo pripojenie k %1"
 
 #: NetworkWidget.qml:96
 #, kde-format
@@ -78,12 +78,12 @@ msgstr ""
 #: NetworkWidget.qml:316
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "Prihlásenie"
 
 #: NetworkWidget.qml:331
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: NetworkWidget.qml:383
 #, kde-format
@@ -118,12 +118,12 @@ msgstr ""
 #: PrimaryScreen.qml:90
 #, kde-format
 msgid "Login failed"
-msgstr ""
+msgstr "Prihlásenie zlyhalo"
 
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Funkcia Caps Lock je zapnutá"
 
 #: PrimaryScreen.qml:486
 #, kde-format
@@ -138,7 +138,7 @@ msgstr ""
 #: PrimaryScreen.qml:502
 #, kde-format
 msgid "Log in"
-msgstr ""
+msgstr "Prihlásenie"
 
 #: PrimaryScreen.qml:521
 #, kde-format
@@ -148,35 +148,35 @@ msgstr ""
 #: PrimaryScreen.qml:680
 #, kde-format
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Rozloženie klávesnice"
 
 #: PrimaryScreen.qml:725
 #, kde-format
 msgid "Desktop session"
-msgstr ""
+msgstr "Sedenie plochy"
 
 #: PrimaryScreen.qml:752
 #, kde-format
 msgid "Suspend"
-msgstr ""
+msgstr "Uspať"
 
 #: PrimaryScreen.qml:764
 #, kde-format
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernovať"
 
 #: PrimaryScreen.qml:777
 #, kde-format
 msgid "Restart"
-msgstr ""
+msgstr "Reštart"
 
 #: PrimaryScreen.qml:789
 #, kde-format
 msgid "Shutdown"
-msgstr ""
+msgstr "Vypnutie"
 
 #: PrimaryScreen.qml:819
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
-msgstr ""
+msgstr "Virtuálna klávesnica"
