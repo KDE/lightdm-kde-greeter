@@ -14,6 +14,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <KLocalizedString>
 
 #include <NetworkManagerQt/Connection>
+#include <NetworkManagerQt/VpnConnection>
 #include <NetworkManagerQt/Settings>
 #include <NetworkManagerQt/WirelessDevice>
 #include <NetworkManagerQt/WirelessSetting>
@@ -25,6 +26,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include "connectionsmodel.h"
 #include "connectionitem.h"
 #include "connectionactivator.h"
+#include "nmsecretagent.h"
 
 using namespace Qt::StringLiterals;
 
@@ -57,6 +59,16 @@ public:
             if (ap) return wifiDev;
         }
         return {};
+    }
+
+    static NetworkManager::ActiveConnection::Ptr findActiveConnectionForPath(const QString &connectionPath)
+    {
+        for (const auto &ac : NetworkManager::activeConnections()) {
+            if (ac->path() == connectionPath) {
+                return ac;
+            }
+        }
+        return nullptr;
     }
 
     static void disconnectAllDeviceEvents()
@@ -124,6 +136,36 @@ public:
         case NetworkManager::ConnectionSettings::Wireless: return ConnectionEnum::TYPE_WIRELESS;
         case NetworkManager::ConnectionSettings::Vpn: return ConnectionEnum::TYPE_VPN;
         default: return ConnectionEnum::TYPE_NONE;
+        }
+    }
+
+    static QString reasonString(NetworkManager::VpnConnection::StateChangeReason reason)
+    {
+        switch (reason) {
+        case NetworkManager::VpnConnection::UserDisconnectedReason:
+            return ki18n("VPN connection deactivated.").toString();
+        case NetworkManager::VpnConnection::DeviceDisconnectedReason:
+            return ki18n("VPN connection was deactivated because the device it was using was disconnected.").toString();
+        case NetworkManager::VpnConnection::ServiceStoppedReason:
+            return ki18n("The service providing the VPN connection was stopped.").toString();
+        case NetworkManager::VpnConnection::IpConfigInvalidReason:
+            return ki18n("The IP config of the VPN connection was invalid.").toString();
+        case NetworkManager::VpnConnection::ConnectTimeoutReason:
+            return ki18n("The connection attempt to the VPN service timed out.").toString();
+        case NetworkManager::VpnConnection::ServiceStartTimeoutReason:
+            return ki18n("A timeout occurred while starting the service providing the VPN connection.").toString();
+        case NetworkManager::VpnConnection::ServiceStartFailedReason:
+            return ki18n("Starting the service providing the VPN connection failed.").toString();
+        case NetworkManager::VpnConnection::NoSecretsReason:
+            return ki18n("Necessary secrets for the VPN connection were not provided.").toString();
+        case NetworkManager::VpnConnection::LoginFailedReason:
+            return ki18n("Authentication to the VPN server failed.").toString();
+        case NetworkManager::VpnConnection::ConnectionRemovedReason:
+            return ki18n("The connection was deleted.").toString();
+        case NetworkManager::VpnConnection::UnknownReason:
+        case NetworkManager::VpnConnection::NoneReason:
+        default:
+            return {};
         }
     }
 };
@@ -435,15 +477,85 @@ void ConnectionsModel::setWirelessEnabled(bool value)
 void ConnectionsModel::connectItem(const ConnectionItem &item)
 {
     if (item.state != ConnectionEnum::STATE_OFF) return;
+
     if (!Util::isConnectionCreated(item)) {
         qWarning("%s: attempting to connect without creating to a non-existing connection", __FUNCTION__);
         return;
     }
+
     // in the case of VPN we do not have a device before connecting
     if (item.type == ConnectionEnum::TYPE_VPN) {
-        Util::handleDBusCall(this, NetworkManager::activateConnection(item.path, {}, {}));
+
+        // guaranteed to shut down the previous instance first
+        m_secretAgent.reset();
+        m_secretAgent.reset(new NMSecretAgent(item.name));
+
+        // QueuedConnection since the signal to open a new dialog can be triggered before the previous one is closed
+        connect(m_secretAgent.data(), &NMSecretAgent::needSecrets, this, &ConnectionsModel::getSecrets, Qt::ConnectionType::QueuedConnection);
+
+        auto reply = NetworkManager::activateConnection(item.path, { u"/"_s }, {});
+
+        auto cleanup = [this](){
+            m_secretAgent.reset();
+        };
+
+        Util::handleDBusCall(this, reply, [reply, cleanup](){
+            // on error
+            qWarning() << "connectItem: activateConnection error:" << reply.error();
+            cleanup();
+        },
+        [this, reply, cleanup](){
+            // on success
+            if (reply.count() != 1) {
+                qWarning() << "connectItem: unexpected reply size:" << reply.count() << "expected: 1";
+                return cleanup();
+            }
+
+            auto arg = reply.argumentAt(0);
+            auto argType = arg.metaType();
+            auto expType = QMetaType::fromType<QDBusObjectPath>();
+            if (argType != expType) {
+                qWarning() << "connectItem: unexpected reply type:" << argType << "expected:" << expType;
+                return cleanup();
+            }
+
+            auto path = arg.value<QDBusObjectPath>().path();
+            if (path.isEmpty()) {
+                qWarning() << "connectItem: empty active connection path.";
+                return cleanup();
+            }
+
+            auto ac = Util::findActiveConnectionForPath(path);
+            if (!ac) {
+                qWarning() << "connectItem:" <<
+                    "connection successfully activated but not found in the list of active connections:" << path;
+                return cleanup();
+            }
+
+            if (ac->state() == NetworkManager::ActiveConnection::Activated) {
+                return cleanup();
+            }
+            NetworkManager::VpnConnection::Ptr vc = ac.objectCast<NetworkManager::VpnConnection>();
+
+            auto cleanup2 = [cleanup, vc](){
+                disconnect(vc.data(), &NetworkManager::VpnConnection::stateChanged, nullptr, nullptr);
+                cleanup();
+            };
+
+            connect(vc.data(), &NetworkManager::VpnConnection::stateChanged,[this, cleanup2, vc](NetworkManager::VpnConnection::State state, NetworkManager::VpnConnection::StateChangeReason reason) {
+                if (state == NetworkManager::VpnConnection::Activated) {
+                    return cleanup2();
+                }
+                if (state == NetworkManager::VpnConnection::Failed || state == NetworkManager::VpnConnection::Disconnected) {
+                    QString reasonString = Util::reasonString(reason);
+                    errorPopup(vc->id(), reasonString);
+                    return cleanup2();
+                }
+            });
+        });
         return;
     }
+
     auto dev = Util::findDeviceForConnectionPath(item.path);
     if (!dev) {
         qWarning("%s: could not find device for connection: %s", __FUNCTION__, qPrintable(item.path));
@@ -490,15 +602,16 @@ ConnectionEnum::Action ConnectionsModel::selectActionForItem(const ConnectionIte
 {
     for (const auto &ci : m_connections) {
         if (ci.state == ConnectionEnum::STATE_WAIT) {
-            if (item.state != ConnectionEnum::STATE_WAIT) return ConnectionEnum::ACTION_NONE;
+            if (item.state == ConnectionEnum::STATE_OFF) return ConnectionEnum::ACTION_NONE;
             break;
         }
     }
 
-    // process only when waiting for a wifi connection
     if (item.state == ConnectionEnum::STATE_WAIT) {
-        if (item.type != ConnectionEnum::TYPE_WIRELESS) return ConnectionEnum::ACTION_NONE;
-        if (Util::isConnectionCreated(item)) {
+        if (item.type == ConnectionEnum::TYPE_VPN && m_secretAgent) {
+            return ConnectionEnum::ACTION_ABORT_CONNECTING;
+        }
+        if (item.type == ConnectionEnum::TYPE_WIRELESS && Util::isConnectionCreated(item)) {
             for (const auto &c : NetworkManager::activeConnections()) {
                 if (item.path != c->path()) continue;
                 if (c->state() != NetworkManager::ActiveConnection::Activating) return ConnectionEnum::ACTION_NONE;
@@ -543,15 +656,28 @@ void ConnectionsModel::onActionDialogComplete(QVariantMap data)
     switch (action) {
         case ConnectionEnum::ACTION_NONE: break;
         case ConnectionEnum::ACTION_DISCONNECT: disconnectItem(item); break;
-        case ConnectionEnum::ACTION_ABORT_CONNECTING: deleteConnection(item); break;
+        case ConnectionEnum::ACTION_ABORT_CONNECTING: abortConnection(item); break;
         case ConnectionEnum::ACTION_CONNECT: connectItem(item); break;
         case ConnectionEnum::ACTION_ERROR_RETYPE_PSK:  createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_FREE_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_WITH_PSK: createAndConnect(data); break;
         case ConnectionEnum::ACTION_CONNECT_8021X_WIFI: createAndConnect(data); break;
         case ConnectionEnum::ACTION_ERROR_8021X_WIFI: createAndConnect(data); break;
+        case ConnectionEnum::ACTION_PROVIDE_SECRET: gotSecrets(data); break;
         case ConnectionEnum::ACTION_UNSUPPORTED: break;
+        case ConnectionEnum::ACTION_FAILED_TO_CONNECT: break;
+        case ConnectionEnum::ACTION_FAILED_TO_CONNECT_WITH_REASON: break;
         default: qWarning() << __FUNCTION__ << "unhandled action:" << action; break;
+    }
+}
+
+void ConnectionsModel::onActionDialogCancel(QVariantMap data)
+{
+    Q_UNUSED(data);
+
+    if (m_secretAgent) {
+        m_secretAgent->userCancel();
+        m_secretAgent.reset();
     }
 }
 
@@ -655,6 +781,19 @@ void ConnectionsModel::deleteConnection(const ConnectionItem &item)
     qWarning("%s: could not delete connection: %s", __FUNCTION__, qPrintable(item.path));
 }
 
+void ConnectionsModel::abortConnection(const ConnectionItem &item)
+{
+    if (item.type == ConnectionEnum::TYPE_WIRELESS) {
+        deleteConnection(item);
+        return;
+    }
+    if (item.type == ConnectionEnum::TYPE_VPN && m_secretAgent) {
+        NetworkManager::deactivateConnection(item.path);
+        m_secretAgent->userCancel();
+        m_secretAgent.reset();
+    }
+}
+
 bool ConnectionsModel::hasManagedWifiDevices() {
     for (const auto &device : NetworkManager::networkInterfaces()) {
         if (device->type() == NetworkManager::Device::Wifi
@@ -662,4 +801,34 @@ bool ConnectionsModel::hasManagedWifiDevices() {
             return true;
     }
     return false;
+}
+
+void ConnectionsModel::getSecrets(const QString &connectionName, const QList<QVariantMap> &secrets)
+{
+    QVariantMap data;
+    data.insert(u"request"_s, QVariant::fromValue(secrets));
+    data.insert(u"connectionName"_s, QVariant::fromValue(connectionName));
+    data.insert(u"action"_s, QVariant::fromValue(ConnectionEnum::ACTION_PROVIDE_SECRET));
+    Q_EMIT showDialog(data);
+}
+
+void ConnectionsModel::gotSecrets(const QVariantMap &data)
+{
+    auto secrets = data[u"secrets"_s].value<QVariantMap>();
+    if (secrets.isEmpty() || !m_secretAgent) return;
+    m_secretAgent->gotSecrets(secrets);
+}
+
+void ConnectionsModel::errorPopup(const QString &connectionName, const QString &message)
+{
+    QVariantMap data;
+    data.insert(u"connectionName"_s, QVariant::fromValue(connectionName));
+    if (!message.isEmpty()) {
+        data.insert(u"reason"_s, message);
+        data.insert(u"action"_s, QVariant::fromValue(ConnectionEnum::ACTION_FAILED_TO_CONNECT_WITH_REASON));
+    } else {
+        data.insert(u"action"_s, QVariant::fromValue(ConnectionEnum::ACTION_FAILED_TO_CONNECT));
+    }
+
+    Q_EMIT showDialog(data);
 }

@@ -15,6 +15,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 class ConnectionItem;
 class ConnectionActivator;
+class NMSecretAgent;
 
 class ConnectionsModel: public QAbstractListModel
 {
@@ -35,6 +36,7 @@ public:
         actionDialog(item, selectActionForItem(item));
     }
     Q_INVOKABLE void onActionDialogComplete(QVariantMap data);
+    Q_INVOKABLE void onActionDialogCancel(QVariantMap data);
     Q_INVOKABLE bool hasManagedWifiDevices();
 
     // for the button in the menubar
@@ -49,6 +51,10 @@ public:
     Q_PROPERTY(bool allowModifyOwnSettings MEMBER m_allowModifyOwnSettings CONSTANT)
 
     Q_PROPERTY(bool networkManagerAvailable MEMBER m_networkManagerAvailable CONSTANT)
+
+public Q_SLOTS:
+    void getSecrets(const QString &connectionName, const QList<QVariantMap> &secrets);
+    void gotSecrets(const QVariantMap &data);
 
 Q_SIGNALS:
     void primaryChanged();
@@ -81,7 +87,10 @@ private:
     void disconnectItem(const ConnectionItem &item);
     void createAndConnect(QVariantMap data);
     void deleteConnection(const ConnectionItem &item);
+    void abortConnection(const ConnectionItem &item);
+
     void actionDialog(const ConnectionItem &item, ConnectionEnum::Action action);
+    void errorPopup(const QString &connectionName, const QString &message);
 
     ConnectionEnum::Action selectActionForItem(const ConnectionItem &item);
 
@@ -91,6 +100,7 @@ private:
 
     QVector<ConnectionItem> m_connections;
     QScopedPointer<ConnectionItem> m_primary;
+    QScopedPointer<NMSecretAgent> m_secretAgent;
     QString m_username;
     ConnectionActivator *m_activator;
 

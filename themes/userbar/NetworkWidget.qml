@@ -91,11 +91,21 @@ TooltipButton {
                 confirmLayout.sourceComponent = pskLayout
                 confirmAction.text = i18n("%1: Connection error, try again.", item.name)
             break
+            case ConnectionEnum.ACTION_PROVIDE_SECRET:
+                confirmLayout.sourceComponent = listLayout
+                confirmLayout.item.secrets = data.request
+                confirmAction.text = i18n("Provide the secrets to connect to %1:", data.connectionName)
+                confirmAction.cancelCallback = (data) => connectionsModel.onActionDialogCancel(data)
+            break
             case ConnectionEnum.ACTION_UNSUPPORTED:
                 confirmAction.text = i18n("The security protocol is not supported for %1", item.name)
             break
             case ConnectionEnum.ACTION_FAILED_TO_CONNECT:
-                confirmAction.text = i18n("Failed to connect to %1", item.name)
+                confirmAction.text = i18n("Failed to connect to %1", data.connectionName)
+                confirmAction.noCancel = true
+            break
+            case ConnectionEnum.ACTION_FAILED_TO_CONNECT_WITH_REASON:
+                confirmAction.text = i18n("Failed to connect to %1", data.connectionName) + ":\n\n" + data.reason
                 confirmAction.noCancel = true
             break
             case ConnectionEnum.ACTION_ERROR_CANT_FIND_AP:
@@ -292,6 +302,102 @@ TooltipButton {
                 echoMode: TextInput.Password
                 revealPasswordButtonShown: true
                 Keys.onReturnPressed: confirmAction.accept()
+            }
+        }
+    }
+
+    Component {
+        id: listLayout
+
+        Column {
+            id: listLayoutRoot
+
+            property alias secrets: secretList.model
+
+            property var focusTo
+            property var bottomItem
+
+            function grabData(data) {
+                data.secrets = {}
+                var i = 0
+                var item
+                while (item = secretList.itemAt(i)) {
+                    data.secrets[item.secretName] = item.secret
+                    ++i
+                }
+            }
+
+            PlasmaComponents.Label {
+                width: implicitWidth + root.gap * 2
+                height: implicitHeight + root.gap * 2
+                text: confirmAction.text
+            }
+
+            Column {
+
+                spacing: root.gap
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                Repeater {
+                    id: secretList
+
+                    Row {
+                        property alias secret: inputSecret.text
+                        property alias inputSecret: inputSecret
+                        property var secretName: modelData.secretName
+                        property var onAcceptedCallback
+
+                        spacing: screen.gridUnit
+                        anchors.right: parent.right
+
+                        PlasmaComponents.Label {
+                            text: modelData.secretLocalized
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        Shared.TextField {
+                            id: inputSecret
+                            echoMode: TextInput.Password
+                            revealPasswordButtonShown: true
+                        }
+                    }
+
+                    // assume that elements can be added in any order
+                    onItemAdded: (index, item) => {
+
+                        function reconnectOnAccepted(item, callback) {
+                            // connected callback is remembered in the property, so we can disconnect it
+                            if (item.onAcceptedCallback) {
+                                item.inputSecret.onAccepted.disconnect(item.onAcceptedCallback)
+                            }
+                            item.onAcceptedCallback = callback
+                            item.inputSecret.onAccepted.connect(item.onAcceptedCallback)
+                        }
+
+                        for (var i = 0; i < count - 1; ++i) {
+
+                            let currItem = itemAt(i)
+                            let nextItem = itemAt(i + 1)
+
+                            if (currItem && nextItem) {
+                                // by pressing Enter we go to the next element
+                                reconnectOnAccepted(currItem, () => nextItem.inputSecret.forceActiveFocus())
+                                // navigation with arrows
+                                currItem.inputSecret.KeyNavigation.down = nextItem.inputSecret
+                            }
+                        }
+
+                        let firstItem = itemAt(0)
+                        let lastItem = itemAt(count - 1)
+
+                        if (firstItem && lastItem) {
+                            listLayoutRoot.focusTo = firstItem.inputSecret
+                            listLayoutRoot.bottomItem = lastItem.inputSecret
+
+                            reconnectOnAccepted(lastItem, confirmAction.accept)
+                        }
+                    }
+                }
             }
         }
     }
