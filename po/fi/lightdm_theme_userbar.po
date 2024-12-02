@@ -1,0 +1,184 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# SPDX-FileCopyrightText: 2024 Tommi Nieminen <translator@legisign.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"PO-Revision-Date: 2024-10-17 13:48+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "Taustakuva:"
+
+#: NetworkWidget.qml:24
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "Yhteys on aktiivinen vain kirjautumisnäytössä."
+
+#: NetworkWidget.qml:56
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "Katkaistaanko yhteys: %1?"
+
+#: NetworkWidget.qml:59
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "Keskeytetäänkö yhdistäminen: %1?"
+
+#: NetworkWidget.qml:63
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "Yhdistetäänkö: %1?"
+
+#: NetworkWidget.qml:67
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "Yhdistetäänkö salaamattomaan tukiasemaan: %1?"
+
+#: NetworkWidget.qml:72
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "Anna yhteyden salasana (%1)"
+
+#: NetworkWidget.qml:77
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "Anna yhteyden käyttäjätunnus ja salasana (%1)"
+
+#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: yhteysvirhe, yritä uudelleen."
+
+#: NetworkWidget.qml:90
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "%1 ei tue tietoturvallista yhteyskäytäntöä"
+
+#: NetworkWidget.qml:93
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "%1: yhteydenotto epäonnistui"
+
+#: NetworkWidget.qml:96
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "Virhe: tukiasemaa %1 ei löydy"
+
+#: NetworkWidget.qml:316
+#, kde-format
+msgid "Login"
+msgstr "Kirjaudu"
+
+#: NetworkWidget.qml:331
+#, kde-format
+msgid "Password"
+msgstr "Salasana"
+
+#: NetworkWidget.qml:383
+#, kde-format
+msgid "Disable wireless"
+msgstr "Poista langaton verkko käytöstä"
+
+#: NetworkWidget.qml:383
+#, kde-format
+msgid "Enable wireless"
+msgstr "Käytä langatonta verkkoa"
+
+#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#, kde-format
+msgid "Action prohibited"
+msgstr "Toimenpide kielletty"
+
+#: NetworkWidget.qml:424
+#, kde-format
+msgid "Disable networking"
+msgstr "Poista verkko käytöstä"
+
+#: NetworkWidget.qml:424
+#, kde-format
+msgid "Enable networking"
+msgstr "Käytä verkkoa"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "Vaihda ensiönäytölle painamalla %1"
+
+#: PrimaryScreen.qml:90
+#, kde-format
+msgid "Login failed"
+msgstr "Kirjautuminen epäonnistui"
+
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr ""
+
+#: PrimaryScreen.qml:502
+#, kde-format
+msgid "Log in"
+msgstr "Kirjaudu"
+
+#: PrimaryScreen.qml:521
+#, kde-format
+msgid "Log in as another user"
+msgstr "Kirjaudu toisena käyttäjänä"
+
+#: PrimaryScreen.qml:680
+#, kde-format
+msgid "Keyboard layout"
+msgstr "Näppäimistöasettelu"
+
+#: PrimaryScreen.qml:725
+#, kde-format
+msgid "Desktop session"
+msgstr "Työpöytäistunto"
+
+#: PrimaryScreen.qml:752
+#, kde-format
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#: PrimaryScreen.qml:764
+#, kde-format
+msgid "Hibernate"
+msgstr "Lepotila"
+
+#: PrimaryScreen.qml:777
+#, kde-format
+msgid "Restart"
+msgstr "Käynnistä uudelleen"
+
+#: PrimaryScreen.qml:789
+#, kde-format
+msgid "Shutdown"
+msgstr "Sammuta"
+
+#: PrimaryScreen.qml:819
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "Näyttönäppäimistö"
