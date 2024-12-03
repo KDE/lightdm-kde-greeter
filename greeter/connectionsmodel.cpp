@@ -26,6 +26,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include "connectionitem.h"
 #include "connectionactivator.h"
 
+using namespace Qt::StringLiterals;
+
 class ConnectionsModel::Util
 {
 public:
@@ -449,7 +451,7 @@ void ConnectionsModel::connectItem(const ConnectionItem &item)
     }
     Util::handleDBusDeviceError(this, dev.data(), NetworkManager::activateConnection(item.path, dev->uni(), {}),
                                 [this, item] {
-                                    Q_EMIT showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
+                                    actionDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
                                 });
 }
 
@@ -527,14 +529,17 @@ ConnectionEnum::Action ConnectionsModel::selectActionForItem(const ConnectionIte
     return ConnectionEnum::ACTION_UNSUPPORTED;
 }
 
+void ConnectionsModel::actionDialog(const ConnectionItem &item, ConnectionEnum::Action action) {
+    QVariantMap data;
+    data.insert(u"item"_s, QVariant::fromValue(item));
+    data.insert(u"action"_s, QVariant::fromValue(action));
+    Q_EMIT showDialog(data);
+}
+
 void ConnectionsModel::onActionDialogComplete(QVariantMap data)
 {
     auto action = data[QStringLiteral("action")].value<ConnectionEnum::Action>();
-    auto item = data[QStringLiteral("connection")].value<ConnectionItem>();
-    if (item.path.length() == 0) {
-        qWarning("%s: empty dbus path, item %s", __FUNCTION__, qPrintable(item.name));
-        return;
-    }
+    auto item = data[QStringLiteral("item")].value<ConnectionItem>();
     switch (action) {
         case ConnectionEnum::ACTION_NONE: break;
         case ConnectionEnum::ACTION_DISCONNECT: disconnectItem(item); break;
@@ -552,7 +557,7 @@ void ConnectionsModel::onActionDialogComplete(QVariantMap data)
 
 void ConnectionsModel::createAndConnect(QVariantMap data)
 {
-    auto item = data[QStringLiteral("connection")].value<ConnectionItem>();
+    auto item = data[QStringLiteral("item")].value<ConnectionItem>();
 
     if (item.path.length() == 0) {
         qWarning("%s: empty dbus path, item %s", __FUNCTION__, qPrintable(item.name));
@@ -620,11 +625,11 @@ void ConnectionsModel::createAndConnect(QVariantMap data)
     connect(m_activator, &ConnectionActivator::wifiKeeperNewConnection, this, [this, wifiDev, item] (QString newPath) {
         Util::waitForDevice(this, wifiDev.data(), [this, item, newPath] {
             if (item.wpaFlags & NetworkManager::AccessPoint::KeyMgmt8021x) {
-                Q_EMIT showDialog(item, ConnectionEnum::ACTION_ERROR_8021X_WIFI);
+                actionDialog(item, ConnectionEnum::ACTION_ERROR_8021X_WIFI);
             } else if (item.wpaFlags) {
-                Q_EMIT showDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
+                actionDialog(item, ConnectionEnum::ACTION_ERROR_RETYPE_PSK);
             } else {
-                Q_EMIT showDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
+                actionDialog(item, ConnectionEnum::ACTION_FAILED_TO_CONNECT);
             }
         });
     });

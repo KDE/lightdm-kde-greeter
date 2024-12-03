@@ -43,13 +43,15 @@ TooltipButton {
     Connections {
         target: connectionsModel
 
-        function onShowDialog(item, action) {
+        function onShowDialog(data) {
 
-            confirmAction.data = { "connection": item, "action": action }
+            let item = data.item
+
+            confirmAction.data = data
             confirmAction.callback = (data) => connectionsModel.onActionDialogComplete(data)
             confirmLayout.sourceComponent = labelLayout
 
-            switch (action) {
+            switch (data.action) {
             case ConnectionEnum.ACTION_NONE: return;
             case ConnectionEnum.ACTION_DISCONNECT:
                 if (!connectionsModel.allowNetworkControl) return
@@ -95,7 +97,7 @@ TooltipButton {
             case ConnectionEnum.ACTION_ERROR_CANT_FIND_AP:
                 confirmAction.text = i18n("Error: Can't find access point %1", item.name)
             break
-                default: console.warn("NetworkWidget: error: " + item.actionName(action)); return
+                default: console.warn("NetworkWidget: error: " + item.actionName(data.action)); return
             }
 
             confirmAction.open()

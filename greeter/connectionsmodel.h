@@ -32,7 +32,7 @@ public:
     // processing a click on a connection element it two stages
     Q_INVOKABLE void onItemClick(const ConnectionItem &item)
     {
-        Q_EMIT showDialog(item, selectActionForItem(item));
+        actionDialog(item, selectActionForItem(item));
     }
     Q_INVOKABLE void onActionDialogComplete(QVariantMap data);
     Q_INVOKABLE bool hasManagedWifiDevices();
@@ -54,7 +54,7 @@ Q_SIGNALS:
     void primaryChanged();
     void networkingEnabledChanged();
     void wirelessEnabledChanged();
-    void showDialog(const ConnectionItem &item, ConnectionEnum::Action action);
+    void showDialog(const QVariantMap &data);
 
 private:
 
@@ -81,6 +81,7 @@ private:
     void disconnectItem(const ConnectionItem &item);
     void createAndConnect(QVariantMap data);
     void deleteConnection(const ConnectionItem &item);
+    void actionDialog(const ConnectionItem &item, ConnectionEnum::Action action);
 
     ConnectionEnum::Action selectActionForItem(const ConnectionItem &item);
 
