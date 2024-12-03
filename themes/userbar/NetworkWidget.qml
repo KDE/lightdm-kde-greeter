@@ -49,6 +49,9 @@ TooltipButton {
 
             confirmAction.data = data
             confirmAction.callback = (data) => connectionsModel.onActionDialogComplete(data)
+            confirmAction.cancelCallback = null
+            confirmAction.noCancel = false
+
             confirmLayout.sourceComponent = labelLayout
 
             switch (data.action) {
@@ -93,6 +96,7 @@ TooltipButton {
             break
             case ConnectionEnum.ACTION_FAILED_TO_CONNECT:
                 confirmAction.text = i18n("Failed to connect to %1", item.name)
+                confirmAction.noCancel = true
             break
             case ConnectionEnum.ACTION_ERROR_CANT_FIND_AP:
                 confirmAction.text = i18n("Error: Can't find access point %1", item.name)
@@ -156,8 +160,10 @@ TooltipButton {
         property var text: ""
         property var data
         property var callback
+        property var cancelCallback
         property var layoutType: confirmLayout.sourceComponent
         property var layout: confirmLayout.item
+        property var noCancel: false
 
         onAccepted: {
             if (layout.grabData) layout.grabData(data)
@@ -165,7 +171,10 @@ TooltipButton {
             popup.forceActiveFocus()
         }
 
-        onRejected: popup.forceActiveFocus()
+        onRejected: {
+            if (cancelCallback) cancelCallback(data)
+            popup.forceActiveFocus()
+        }
 
         background: PopupBackground {
             id: back
@@ -184,7 +193,7 @@ TooltipButton {
         footer: DialogButtonBox {
             id: confirmFooter
             property int minWidth: contentWidth + leftPadding + rightPadding + spacing * 2
-            standardButtons: Dialog.Ok | Dialog.Cancel
+            standardButtons: confirmAction.noCancel ? Dialog.Ok : Dialog.Ok | Dialog.Cancel
             buttonLayout: DialogButtonBox.KdeLayout
             alignment: Qt.AlignBottom | Qt.AlignCenter
             bottomPadding: confirmAction.bottomPadding
