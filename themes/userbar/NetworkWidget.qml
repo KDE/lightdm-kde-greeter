@@ -240,6 +240,7 @@ TooltipButton {
 
             function linkArrowNavigation(item) {
                 if (contentChildren.length <= 0) return
+                if (!item.bottomItem) return
 
                 item.bottomItem.KeyNavigation.down = contentChildren[0]
 
@@ -259,6 +260,11 @@ TooltipButton {
             id: label
             width: implicitWidth + gap * 2
             text: confirmAction.text
+
+            Keys.onReturnPressed: confirmAction.accept()
+            Keys.onEnterPressed: confirmAction.accept()
+
+            property var focusTo: label
         }
     }
 
