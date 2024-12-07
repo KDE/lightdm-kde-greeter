@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
 "PO-Revision-Date: 2024-11-11 16:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -27,87 +27,93 @@ msgstr "背景影像："
 msgid "The connection will be active only on the login screen."
 msgstr "連線只會在登入畫面上有作用。"
 
-#: NetworkWidget.qml:56
+#: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "要從 %1 中斷連線嗎？"
 
-#: NetworkWidget.qml:59
+#: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "要停止連線到 %1 嗎？"
 
-#: NetworkWidget.qml:63
+#: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "要連線到 %1 嗎？"
 
-#: NetworkWidget.qml:67
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "要連線到不完全的存取點 %1 嗎？"
 
-#: NetworkWidget.qml:72
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "輸入密碼來連線到 %1"
 
-#: NetworkWidget.qml:77
+#: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "輸入帳號與密碼來連線到 %1"
 
-#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1：連線錯誤，請重試。"
 
-#: NetworkWidget.qml:90
+#: NetworkWidget.qml:97
+#, fuzzy, kde-format
+#| msgid "Enter the password to connect to %1"
+msgid "Provide the secrets to connect to %1:"
+msgstr "輸入密碼來連線到 %1"
+
+#: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "%1 不支援安全性協定"
 
-#: NetworkWidget.qml:93
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "無法連線到 %1"
 
-#: NetworkWidget.qml:96
+#: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "錯誤：找不到存取點 %1"
 
-#: NetworkWidget.qml:316
+#: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
 msgstr "帳號"
 
-#: NetworkWidget.qml:331
+#: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
 msgstr "密碼"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
 msgstr "停用無線網路"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
 msgstr "啟用無線網路"
 
-#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
 msgstr "動作被拒"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
 msgstr "停用網路連線"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
 msgstr "啟用網路連線"

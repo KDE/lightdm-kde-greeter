@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
 "PO-Revision-Date: 2024-11-09 16:23+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -27,87 +27,93 @@ msgstr "Imaxe de fondo:"
 msgid "The connection will be active only on the login screen."
 msgstr "A conexión estará activa só na pantalla de identificación."
 
-#: NetworkWidget.qml:56
+#: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "Quere desconectar de %1?"
 
-#: NetworkWidget.qml:59
+#: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "Quere interromper a conexión a %1?"
 
-#: NetworkWidget.qml:63
+#: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "Quere conectar a %1?"
 
-#: NetworkWidget.qml:67
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "Quere conectar ao punto de acceso inseguro %1?"
 
-#: NetworkWidget.qml:72
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "Escriba o contrasinal para conectar a %1"
 
-#: NetworkWidget.qml:77
+#: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "Escriba o nome de persoa usuaria e o contrasinal para conectar a %1"
 
-#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: Erro de conexión, inténteo de novo."
 
-#: NetworkWidget.qml:90
+#: NetworkWidget.qml:97
+#, fuzzy, kde-format
+#| msgid "Enter the password to connect to %1"
+msgid "Provide the secrets to connect to %1:"
+msgstr "Escriba o contrasinal para conectar a %1"
+
+#: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "%1 non permite o protocolo de seguridade."
 
-#: NetworkWidget.qml:93
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "Non foi posíbel conectar con %1"
 
-#: NetworkWidget.qml:96
+#: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Erro: Non é posíbel atopar o punto de acceso %1."
 
-#: NetworkWidget.qml:316
+#: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
 msgstr "Nome de persoa usuaria"
 
-#: NetworkWidget.qml:331
+#: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
 msgstr "Contrasinal"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
 msgstr "Desactivar a conexión sen fíos"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
 msgstr "Activar a rede sen fíos"
 
-#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
 msgstr "A acción está prohibida"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
 msgstr "Desactivar as redes"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
 msgstr "Activar as redes"

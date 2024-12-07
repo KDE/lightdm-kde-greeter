@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
 "PO-Revision-Date: 2024-09-03 19:22+0200\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -30,87 +30,93 @@ msgstr "Hintergrundbild:"
 msgid "The connection will be active only on the login screen."
 msgstr "Diese Verbindung wird nur beim Anmeldebildschirm aktiv sein."
 
-#: NetworkWidget.qml:56
+#: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "Möchten Sie sich von %1 abmelden?"
 
-#: NetworkWidget.qml:59
+#: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "Möchten Sie die Verbindung mit %1 abbrechen?"
 
-#: NetworkWidget.qml:63
+#: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "Möchten Sie sich mit %1 verbinden?"
 
-#: NetworkWidget.qml:67
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "Möchten Sie sich mit einem unsicheren Zugangspunkt %1 verbinden?"
 
-#: NetworkWidget.qml:72
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "Bitte geben Sie das Passwort zum Verbinden mit %1 ein"
 
-#: NetworkWidget.qml:77
+#: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "Bitte geben Sie den Namen und das Passwort zum Verbinden mit %1 ein"
 
-#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: Verbindungsfehler. Bitte versuchen Sie es erneut."
 
-#: NetworkWidget.qml:90
+#: NetworkWidget.qml:97
+#, fuzzy, kde-format
+#| msgid "Enter the password to connect to %1"
+msgid "Provide the secrets to connect to %1:"
+msgstr "Bitte geben Sie das Passwort zum Verbinden mit %1 ein"
+
+#: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "Das Sicherheitsprotokoll wird für %1 nicht unterstützt"
 
-#: NetworkWidget.qml:93
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "Verbindung zu %1 kann nicht aufgebaut werden"
 
-#: NetworkWidget.qml:96
+#: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Fehler: Der Zugangspunkt %1 ist nicht verfügbar"
 
-#: NetworkWidget.qml:316
+#: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
 msgstr "Name"
 
-#: NetworkWidget.qml:331
+#: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
 msgstr "Passwort"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
 msgstr "Drahtlos deaktivieren"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
 msgstr "Drahtlos aktivieren"
 
-#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
 msgstr "Die Aktion ist verboten"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
 msgstr "Netzwerk deaktivieren"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
 msgstr "Netzwerk aktivieren"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
 "PO-Revision-Date: 2024-11-12 20:41+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -28,87 +28,93 @@ msgstr "Fona attēls:"
 msgid "The connection will be active only on the login screen."
 msgstr "Savienojums būs aktīvs tikai ierakstīšanās ekrānā."
 
-#: NetworkWidget.qml:56
+#: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "Vai atvienoties no „%1“?"
 
-#: NetworkWidget.qml:59
+#: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "Vai atcelt savienošanos ar „%1“?"
 
-#: NetworkWidget.qml:63
+#: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "Vai savienoties ar „%1“?"
 
-#: NetworkWidget.qml:67
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "Vai savienoties ar nedrošu piekļuves punktu „%1“?"
 
-#: NetworkWidget.qml:72
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "Ierakstiet paroli, lai savienotos ar „%1“"
 
-#: NetworkWidget.qml:77
+#: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "Ievadiet ierakstīšanās vārdu un paroli, lai savienotos ar „%1“"
 
-#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: savienojuma kļūda, mēģiniet vēlreiz."
 
-#: NetworkWidget.qml:90
+#: NetworkWidget.qml:97
+#, fuzzy, kde-format
+#| msgid "Enter the password to connect to %1"
+msgid "Provide the secrets to connect to %1:"
+msgstr "Ierakstiet paroli, lai savienotos ar „%1“"
+
+#: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "Drošības protokols nav atbalstīts ar „%1“"
 
-#: NetworkWidget.qml:93
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "Neizdevās savienoties ar „%1“"
 
-#: NetworkWidget.qml:96
+#: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "Kļūda: nevar atrast piekļuves punktu „%1“"
 
-#: NetworkWidget.qml:316
+#: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
 msgstr "Ierakstīšanās"
 
-#: NetworkWidget.qml:331
+#: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
 msgstr "Parole"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
 msgstr "Izslēgt bezvadu"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
 msgstr "Ieslēgt bezvadu"
 
-#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
 msgstr "Darbība ir aizliegta"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
 msgstr "Izslēgt tīkla sistēmu"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
 msgstr "Ieslēgt tīkla sistēmu"

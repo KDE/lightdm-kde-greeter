@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:41+0000\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
 "PO-Revision-Date: 2024-11-07 03:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -28,87 +28,93 @@ msgstr "ფონის გამოსახულება:"
 msgid "The connection will be active only on the login screen."
 msgstr "მიერთება, მხოლოდ, შესვლის ეკრანზე იქნება აქტიური."
 
-#: NetworkWidget.qml:56
+#: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
 msgstr "გავთიშო %1-დან?"
 
-#: NetworkWidget.qml:59
+#: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
 msgstr "გავაუქმო %1-სთან მიერთება?"
 
-#: NetworkWidget.qml:63
+#: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
 msgstr "დავუკავშირდე %1-ს?"
 
-#: NetworkWidget.qml:67
+#: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
 msgstr "დავუკავშირდე დაუცველ წვდომის წერტილს %1?"
 
-#: NetworkWidget.qml:72
+#: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
 msgstr "შეიყვანეთ პაროლი %1-სთან დასაკავშირებლად"
 
-#: NetworkWidget.qml:77
+#: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
 msgstr "შეიყვანეთ მომხმარებელი და პაროლი %1-სთან დასაკავშირებლად"
 
-#: NetworkWidget.qml:81 NetworkWidget.qml:87
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
 msgstr "%1: კავშირის შეცდომა. თავიდან სცადეთ."
 
-#: NetworkWidget.qml:90
+#: NetworkWidget.qml:97
+#, fuzzy, kde-format
+#| msgid "Enter the password to connect to %1"
+msgid "Provide the secrets to connect to %1:"
+msgstr "შეიყვანეთ პაროლი %1-სთან დასაკავშირებლად"
+
+#: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
 msgstr "უსაფრთხოების პროტოკოლი %1-სთვის მხარდაჭერილი არაა"
 
-#: NetworkWidget.qml:93
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
 msgstr "ჩავარდა შეერთება არხისთვის %1"
 
-#: NetworkWidget.qml:96
+#: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
 msgstr "შეცდომა: წვდომის წერტილი %1 აღმოჩენილი არაა"
 
-#: NetworkWidget.qml:316
+#: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
 msgstr "შესვლა"
 
-#: NetworkWidget.qml:331
+#: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
 msgstr "პაროლი"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
 msgstr "უსადენო ქსელის გათიშვა"
 
-#: NetworkWidget.qml:383
+#: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
 msgstr "უსადენო ქსელის ჩართვა"
 
-#: NetworkWidget.qml:384 NetworkWidget.qml:425
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
 msgstr "ქმედება აკრძალულია"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
 msgstr "ქსელის გათიშვა"
 
-#: NetworkWidget.qml:424
+#: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
 msgstr "ქსელის ჩართვა"
