@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-05 10:34+0200\n"
+"PO-Revision-Date: 2024-12-07 12:09+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,10 +38,9 @@ msgid "Battery at %1%"
 msgstr "Batterij op %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Geen verbinding"
+msgstr "VPN-verbinding gedeactiveerd."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -49,47 +48,53 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"Se VPN-verbinding is gedeactiveerd omdat de verbinding over het gebruikte "
+"apparaat was verbroken."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "De service die de VPN-verbinding levert is gestopt."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "De IP-configuratie van de VPN-verbinding was ongeldig."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
 msgstr ""
+"De poging om verbinding te maken met de VPN-service heeft de tijdslimiet "
+"overschreden."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"De wachttijd bij het starten van de service die de VPN-verbinding levert is "
+"verlopen."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Het starten van de service die de VPN-verbinding levert is mislukt."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "De noodzakelijke geheimen voor de VPN-verbinding zijn niet geleverd."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Authenticatie naar de VPN-server is mislukt."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "De verbinding was verwijderd."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -109,17 +114,17 @@ msgstr "Aanmeldscherm bij gebruik van LightDM framework"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Wachtwoord van certificaat"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "Wachtwoord van HTTP-proxy"
 
 #: sessionsmodel.cpp:55
 #, kde-format

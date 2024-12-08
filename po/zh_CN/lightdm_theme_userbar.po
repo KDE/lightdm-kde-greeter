@@ -64,10 +64,9 @@ msgid "%1: Connection error, try again."
 msgstr "%1：连接错误，请重试。"
 
 #: NetworkWidget.qml:97
-#, fuzzy, kde-format
-#| msgid "Enter the password to connect to %1"
+#, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr "请输入密码以连接到 %1"
+msgstr ""
 
 #: NetworkWidget.qml:101
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-06 01:28+0300\n"
+"PO-Revision-Date: 2024-12-07 13:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,10 +38,9 @@ msgid "Battery at %1%"
 msgstr "Pil %​%1"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Bağlantı yok"
+msgstr "VPN bağlantısı devre dışı bırakıldı."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -49,47 +48,51 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN bağlantısı devre dışı bırakıldı; çünkü onu kullanan aygıtın bağlantısı "
+"kesildi."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "VPN bağlantısını sağlayan hizmet durduruldu."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "VPN bağlantısının IP yapılandırması geçersiz."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "VPN hizmetine olan bağlantı denemesi zaman aşımına uğradı."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"VPN bağlantısını sağlayan hizmete bağlantı başlatılırken bir zaman aşımı "
+"oluştu."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "VPN bağlantısını sağlayan hizmeti başlatma başarısız oldu."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "VPN bağlantısı için gerekli olan gizler sağlanmadı."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "VPN sunucusuna kimlik doğrulama işlemi başarısız oldu."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Bağlantı silindi."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -109,17 +112,17 @@ msgstr "LightDM çatısını kullanan oturum açma ekranı"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Sertifika parolası"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP vekili parolası"
 
 #: sessionsmodel.cpp:55
 #, kde-format

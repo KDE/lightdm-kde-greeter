@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-05 10:43+0200\n"
+"PO-Revision-Date: 2024-12-07 10:08+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -40,10 +40,9 @@ msgid "Battery at %1%"
 msgstr "Bateria al %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Sense connexió"
+msgstr "Connexió VPN desactivada."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -51,47 +50,50 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"La connexió VPN s'ha desactivat perquè el dispositiu usat s'ha desconnectat."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "El servei que proporciona la connexió VPN s'ha aturat."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "La configuració IP de la connexió VPN no és vàlida."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "L'intent de connexió amb el servei VPN ha exhaurit el temps."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"S'ha exhaurit el temps mentre s'iniciava el servei que proporciona la "
+"connexió VPN."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "L'inici del servei que proporciona la connexió VPN ha fallat."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "No s'han proporcionat els secrets necessaris per a la connexió VPN."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "L'autenticació amb el servidor VPN ha fallat."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "S'ha suprimit la connexió."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -111,17 +113,17 @@ msgstr "Pantalla d'inici de sessió que fa servir l'entorn de treball LightDM"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Contrasenya"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Contrasenya del certificat"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "Contrasenya del servidor intermediari HTTP"
 
 #: sessionsmodel.cpp:55
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-11-07 05:40+0100\n"
+"PO-Revision-Date: 2024-12-07 08:40+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -65,10 +65,9 @@ msgid "%1: Connection error, try again."
 msgstr "%1: Napaka pri povezavi, poskusite ponovno."
 
 #: NetworkWidget.qml:97
-#, fuzzy, kde-format
-#| msgid "Enter the password to connect to %1"
+#, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr "Vnesite geslo za povezavo z %1"
+msgstr "Navedite skrivnosti za povezavo z %1:"
 
 #: NetworkWidget.qml:101
 #, kde-format

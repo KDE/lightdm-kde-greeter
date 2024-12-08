@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-05 08:22+0300\n"
+"PO-Revision-Date: 2024-12-07 19:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,10 +39,9 @@ msgid "Battery at %1%"
 msgstr "Акумулятор заряджено на %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Немає з’єднання"
+msgstr "З'єднання VPN деактивовано."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -50,47 +49,53 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"З'єднання VPN деактивовано через розірвання з'єднання з пристроєм, який "
+"забезпечував його працездатність."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Роботу служби, яка забезпечувала роботу з’єднання VPN, було зупинено."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "Налаштування IP-адреси з’єднання VPN є некоректними."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "Перевищено час очікування на встановлення з'єднання зі службою VPN."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"Під час спроби запуску служби, яка забезпечує роботу з’єднання VPN, було "
+"перевищено час очікування на відповідь."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
 msgstr ""
+"Спроба запуску служби, яка забезпечує роботу з’єднання VPN, зазнала невдачі."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
 msgstr ""
+"Не було надано необхідних реєстраційних даних для роботи з’єднання VPN."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Не вдалося пройти розпізнавання на сервері VPN."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "З'єднання було вилучено."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -110,17 +115,17 @@ msgstr "Вікно входу до системи з використанням 
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Пароль сертифіката"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "Пароль для розпізнавання за HTTP"
 
 #: sessionsmodel.cpp:55
 #, kde-format

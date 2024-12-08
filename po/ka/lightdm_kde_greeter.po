@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-10-25 01:42+0200\n"
+"PO-Revision-Date: 2024-12-07 05:55+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -39,10 +39,9 @@ msgid "Battery at %1%"
 msgstr "ელემენტის მუხტია %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "მიერთების გარეშე"
+msgstr "VPN კავშირი გამორთულია."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -50,47 +49,50 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"მოხდა VPN კავშირის დეაქტივაცია, რადგან მოწყობილობა, რომელსაც ის იყენებდა, "
+"გამოერთებულია."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "სერვისი, რომელიც VPN კავშირს უზრუნველყოფდა, გაჩერებულია."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "VPN კავშირის IP კონფიგურაცია არასწორი იყო."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "VPN სერვისთან მიერთების დრო გავიდა."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"სერვისის, რომელიც VPN კავშირს უზრუნველყოფს, გაშვებს მოლოდინის ვადა ამოიწურა."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "VPN კავშირის მომწოდებელი სერვისის გაშვება ჩავარდა."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "VPN კავშირისთვის აუცილებელი საიდუმლოებები არ მოგიწოდებიათ."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "VPN სერვერზე ავთენტიკაციის შეცდომა."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "შეერთება წაშლილია."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -110,17 +112,17 @@ msgstr "შესვლის ეკრანი LightDM პროექტი�
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "პაროლი"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "სერტიფიკატის პაროლი"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP პროქსის პაროლი"
 
 #: sessionsmodel.cpp:55
 #, kde-format

@@ -39,10 +39,9 @@ msgid "Battery at %1%"
 msgstr "电量 %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "没有网络连接"
+msgstr ""
 
 #: connectionsmodel.cpp:148
 #, kde-format
