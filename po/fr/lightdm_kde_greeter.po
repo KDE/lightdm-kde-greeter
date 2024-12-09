@@ -1,11 +1,10 @@
-#
 # SPDX-FileCopyrightText: 2024 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-06 20:55+0200\n"
+"PO-Revision-Date: 2024-12-08 09:55+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.11.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,10 +35,9 @@ msgid "Battery at %1%"
 msgstr "Batterie à %1 %"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Aucune connexion"
+msgstr "Connexion « VPN » désactivée."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -47,47 +45,51 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"La connexion « VPN » a été désactivée car le périphérique qu'il utilisait a "
+"été déconnecté."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Le service fournissant la connexion « VPN » a été arrêté."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "La configuration IP de la connexion « VPN » n'était pas valable."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "La tentative de connexion au service « VPN » a expiré."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"Le démarrage du service fournissant la connexion VPN n'a pu se faire dans le "
+"délai maximal imparti."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Le démarrage du service fournissant la connexion « VPN » a échoué."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "Les secrets nécessaires à la connexion « VPN » n'ont pas été fournis."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "L'authentification au serveur « VPN » a échoué."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "La connexion a été supprimée."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -108,17 +110,17 @@ msgstr ""
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Mot de passe du certificat"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "Mot de passe du serveur mandataire « HTTP »"
 
 #: sessionsmodel.cpp:55
 #, kde-format

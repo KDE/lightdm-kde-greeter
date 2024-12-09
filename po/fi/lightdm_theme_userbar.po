@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-10-17 13:48+0300\n"
+"PO-Revision-Date: 2024-12-01 14:56+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -131,17 +131,17 @@ msgstr "Kirjautuminen epäonnistui"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Vaihtolukko on käytössä"
 
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Numerolukko on käytössä"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Vaihto- ja numerolukko ovat käytössä"
 
 #: PrimaryScreen.qml:502
 #, kde-format
