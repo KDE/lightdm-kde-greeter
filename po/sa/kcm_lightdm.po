@@ -19,12 +19,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: lightdmkcm.cpp:80
 #, kde-format
@@ -90,7 +90,7 @@ msgstr "समय समाप्त"
 #, kde-format
 msgctxt "Short for second"
 msgid "s"
-msgstr ""
+msgstr "स"
 
 #: ui/main.qml:344
 #, kde-format

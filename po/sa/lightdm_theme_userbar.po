@@ -185,4 +185,4 @@ msgstr "शटडाउन"
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
-msgstr ""
+msgstr "आभासी कीबोर्ड"
