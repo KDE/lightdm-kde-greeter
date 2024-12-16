@@ -1,4 +1,4 @@
-# Sanskrit translations for lightdm-kde-greeter package.
+# Hindi translations for lightdm-kde-greeter package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 # Kali <EMAIL@ADDRESS>, 2024.
@@ -8,69 +8,68 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-25 01:49+0000\n"
-"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"PO-Revision-Date: 2024-12-15 17:37+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
-"Language: sa\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "भवतः नामानि"
+msgstr "तुम्हारे नाम"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "भवतः ईमेलपत्राणि"
+msgstr "आपके ईमेल"
 
 #: lightdmkcm.cpp:80
 #, kde-format
 msgid "Access denied"
-msgstr "प्रवेशः अङ्गीकृतः"
+msgstr "पहुंच अस्वीकृत"
 
 #: lightdmkcm.cpp:117
 #, kde-format
 msgid "Save settings failed:"
-msgstr "सेटिङ्ग्स् रक्षणं विफलम् अभवत् : १."
+msgstr "सेटिंग्स सहेजना विफल:"
 
 #: ui/components/SelectImageButton.qml:60
 #, kde-format
 msgid "No image"
-msgstr "न बिम्बम्"
+msgstr "चित्र उपलब्द नहीं है"
 
 #: ui/components/SelectImageButton.qml:90
 #, kde-format
 msgid "Clear Image"
-msgstr "चित्रं स्पष्टं कुरुत"
+msgstr "चित्र हटाएं"
 
 #: ui/components/SelectImageButton.qml:99
 #, kde-format
 msgid "Select image"
-msgstr "चित्रं चिनोतु"
+msgstr "छवि चुनें"
 
 #: ui/main.qml:146
 #, kde-format
 msgid "Theme changes will be lost"
-msgstr "विषयपरिवर्तनं नष्टं भविष्यति"
+msgstr "थीम में किए गए परिवर्तन खो जाएंगे"
 
 #: ui/main.qml:209
 #, kde-format
 msgid "Theme"
-msgstr "विषयवस्तु"
+msgstr "विषय"
 
 #: ui/main.qml:227
 #, kde-format
 msgid "Name:"
-msgstr "नामः:"
+msgstr "नाम:"
 
 #: ui/main.qml:229
 #, kde-format
 msgid "Description:"
-msgstr "वर्णनम्‌:"
+msgstr "विवरण:"
 
 #: ui/main.qml:279
 #, kde-format
@@ -80,7 +79,7 @@ msgstr "सामान्य"
 #: ui/main.qml:296
 #, kde-format
 msgid "Automatically log in:"
-msgstr "स्वयमेव प्रवेशं कुर्वन्तु:"
+msgstr "स्वचालित रूप से लॉग इन करें:"
 
 #: ui/main.qml:314
 #, kde-format
@@ -91,14 +90,14 @@ msgstr "समय समाप्त"
 #, kde-format
 msgctxt "Short for second"
 msgid "s"
-msgstr "स"
+msgstr "एस"
 
 #: ui/main.qml:344
 #, kde-format
 msgid "As user:"
-msgstr "उपयोक्तृरूपेण : १."
+msgstr "उपयोगकर्ता के रूप में:"
 
 #: ui/main.qml:359
 #, kde-format
 msgid "Using session:"
-msgstr "सत्रस्य उपयोगः : १."
+msgstr "सत्र का उपयोग करना:"

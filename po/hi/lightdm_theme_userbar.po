@@ -1,0 +1,188 @@
+# Hindi translations for lightdm-kde-greeter package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"PO-Revision-Date: 2024-12-15 17:37+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "पृष्ठभूमि छवि:"
+
+#: NetworkWidget.qml:24
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "कनेक्शन केवल लॉगिन स्क्रीन पर ही सक्रिय होगा।"
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "%1 से डिस्कनेक्ट करें?"
+
+#: NetworkWidget.qml:64
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "%1 से कनेक्ट करना निरस्त करें?"
+
+#: NetworkWidget.qml:68
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "%1 से कनेक्ट करें?"
+
+#: NetworkWidget.qml:72
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "असुरक्षित पहुँच बिंदु %1 से कनेक्ट करें?"
+
+#: NetworkWidget.qml:77
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "%1 से कनेक्ट करने के लिए पासवर्ड दर्ज करें"
+
+#: NetworkWidget.qml:82
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "%1 से कनेक्ट करने के लिए लॉगिन और पासवर्ड दर्ज करें"
+
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: कनेक्शन त्रुटि, पुनः प्रयास करें."
+
+#: NetworkWidget.qml:97
+#, kde-format
+msgid "Provide the secrets to connect to %1:"
+msgstr "%1 से जुड़ने के लिए रहस्य प्रदान करें:"
+
+#: NetworkWidget.qml:101
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "सुरक्षा प्रोटोकॉल %1 के लिए समर्थित नहीं है"
+
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "%1 से कनेक्ट करने में विफल"
+
+#: NetworkWidget.qml:112
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "त्रुटि: पहुँच बिंदु %1 नहीं मिल सका"
+
+#: NetworkWidget.qml:440
+#, kde-format
+msgid "Login"
+msgstr "लॉग इन करें"
+
+#: NetworkWidget.qml:455
+#, kde-format
+msgid "Password"
+msgstr "पासवर्ड"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Disable wireless"
+msgstr "वायरलेस अक्षम करें"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Enable wireless"
+msgstr "बिना तार का सक्षम करें"
+
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
+#, kde-format
+msgid "Action prohibited"
+msgstr "कार्रवाई निषिद्ध"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Disable networking"
+msgstr "नेटवर्किंग अक्षम करें"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Enable networking"
+msgstr "नेटवर्किंग सक्षम करें"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "प्राथमिक स्क्रीन बदलने के लिए %1 दबाएँ"
+
+#: PrimaryScreen.qml:90
+#, kde-format
+msgid "Login failed"
+msgstr "लॉगिन विफल"
+
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr "कैप्स लॉक ऑन है"
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr "नम्बर लॉक चालू है"
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr "कैप्स लॉक और नम्बर लॉक चालू है"
+
+#: PrimaryScreen.qml:502
+#, kde-format
+msgid "Log in"
+msgstr "लॉग इन करें"
+
+#: PrimaryScreen.qml:521
+#, kde-format
+msgid "Log in as another user"
+msgstr "दूसरे उपयोगकर्ता के रूप में लॉग इन करें"
+
+#: PrimaryScreen.qml:680
+#, kde-format
+msgid "Keyboard layout"
+msgstr "कीबोर्ड विन्यास"
+
+#: PrimaryScreen.qml:725
+#, kde-format
+msgid "Desktop session"
+msgstr "डेस्कटॉप सत्र"
+
+#: PrimaryScreen.qml:752
+#, kde-format
+msgid "Suspend"
+msgstr "निलंबित करें"
+
+#: PrimaryScreen.qml:764
+#, kde-format
+msgid "Hibernate"
+msgstr "हाइबरनेट"
+
+#: PrimaryScreen.qml:777
+#, kde-format
+msgid "Restart"
+msgstr "पुनः आरंभ करें"
+
+#: PrimaryScreen.qml:789
+#, kde-format
+msgid "Shutdown"
+msgstr "शट डाउन"
+
+#: PrimaryScreen.qml:819
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "वर्चुअल कीबोर्ड"
