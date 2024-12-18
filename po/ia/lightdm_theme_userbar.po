@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-11-04 18:15+0100\n"
+"PO-Revision-Date: 2024-12-17 12:43+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -32,7 +32,7 @@ msgstr ""
 #: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
-msgstr ""
+msgstr "Disconnecte ex %1?"
 
 #: NetworkWidget.qml:64
 #, kde-format
@@ -132,7 +132,7 @@ msgstr "Accesso falleva"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock es active"
 
 #: PrimaryScreen.qml:486
 #, kde-format
