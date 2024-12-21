@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-12-17 12:43+0100\n"
+"PO-Revision-Date: 2024-12-20 12:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: config.qml:37
 #, kde-format
 msgid "Background image:"
-msgstr "Imagine de fundo"
+msgstr "Imagine de fundo:"
 
 #: NetworkWidget.qml:24
 #, kde-format
