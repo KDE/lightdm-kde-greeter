@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-11-10 15:03+0100\n"
+"PO-Revision-Date: 2024-12-21 11:14+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: config.qml:37
 #, kde-format
@@ -64,10 +64,9 @@ msgid "%1: Connection error, try again."
 msgstr "%1: Błąd połączenia, spróbuj ponownie."
 
 #: NetworkWidget.qml:97
-#, fuzzy, kde-format
-#| msgid "Enter the password to connect to %1"
+#, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr "Wpisz hasło, aby połączyć się z %1"
+msgstr "Wpisz hasło, aby połączyć się z %1:"
 
 #: NetworkWidget.qml:101
 #, kde-format
