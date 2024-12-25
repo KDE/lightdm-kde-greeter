@@ -1,0 +1,189 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# SPDX-FileCopyrightText: 2024 Shinjo Park <kde@peremen.name>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"PO-Revision-Date: 2024-12-24 17:57+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "배경 그림:"
+
+#: NetworkWidget.qml:24
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "이 연결은 로그인 화면에서만 활성화됩니다."
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "%1에서 연결을 해제하시겠습니까?"
+
+#: NetworkWidget.qml:64
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "%1(으)로의 연결을 중단하시겠습니까?"
+
+#: NetworkWidget.qml:68
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "%1에 연결하시겠습니까?"
+
+#: NetworkWidget.qml:72
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "보안되지 않은 액세스 포인트 %1에 연결하시겠습니까?"
+
+#: NetworkWidget.qml:77
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "%1에 연결하려면 암호 입력"
+
+#: NetworkWidget.qml:82
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "%1에 연결하려면 로그인과 암호 입력"
+
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: 연결 오류, 다시 시도하십시오."
+
+#: NetworkWidget.qml:97
+#, kde-format
+msgid "Provide the secrets to connect to %1:"
+msgstr "%1에 연결하기 위한 비밀 정보 제공:"
+
+#: NetworkWidget.qml:101
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "%1에서 보안 프로토콜을 지원하지 않음"
+
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "%1에 접속할 수 없음"
+
+#: NetworkWidget.qml:112
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "오류: 액세스 포인트 %1을(를) 찾을 수 없음"
+
+#: NetworkWidget.qml:440
+#, kde-format
+msgid "Login"
+msgstr "로그인"
+
+#: NetworkWidget.qml:455
+#, kde-format
+msgid "Password"
+msgstr "암호"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Disable wireless"
+msgstr "무선 비활성화"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Enable wireless"
+msgstr "무선 활성화"
+
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
+#, kde-format
+msgid "Action prohibited"
+msgstr "동작 거부됨"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Disable networking"
+msgstr "네트워크 비활성화"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Enable networking"
+msgstr "네트워크 활성화"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "%1을(를) 누르면 주 화면을 변경함"
+
+#: PrimaryScreen.qml:90
+#, kde-format
+msgid "Login failed"
+msgstr "로그인 실패"
+
+#: PrimaryScreen.qml:483
+#, kde-format
+msgid "Caps Lock is on"
+msgstr "Caps Lock이 켜져 있음"
+
+#: PrimaryScreen.qml:486
+#, kde-format
+msgid "Num Lock is on"
+msgstr "Num Lock이 켜져 있음"
+
+#: PrimaryScreen.qml:489
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr "Caps Lock과 Num Lock이 켜져 있음"
+
+#: PrimaryScreen.qml:502
+#, kde-format
+msgid "Log in"
+msgstr "로그인"
+
+#: PrimaryScreen.qml:521
+#, kde-format
+msgid "Log in as another user"
+msgstr "다른 사용자로 로그인"
+
+#: PrimaryScreen.qml:680
+#, kde-format
+msgid "Keyboard layout"
+msgstr "키보드 레이아웃"
+
+#: PrimaryScreen.qml:725
+#, kde-format
+msgid "Desktop session"
+msgstr "데스크톱 세션"
+
+#: PrimaryScreen.qml:752
+#, kde-format
+msgid "Suspend"
+msgstr "절전"
+
+#: PrimaryScreen.qml:764
+#, kde-format
+msgid "Hibernate"
+msgstr "최대 절전 모드"
+
+#: PrimaryScreen.qml:777
+#, kde-format
+msgid "Restart"
+msgstr "다시 시작"
+
+#: PrimaryScreen.qml:789
+#, kde-format
+msgid "Shutdown"
+msgstr "컴퓨터 끄기"
+
+#: PrimaryScreen.qml:819
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "가상 키보드"

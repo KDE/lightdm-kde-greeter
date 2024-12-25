@@ -1,0 +1,133 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# SPDX-FileCopyrightText: 2024 Shinjo Park <kde@peremen.name>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"PO-Revision-Date: 2024-12-24 17:54+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "박신조"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#: ../themes/components/Battery.qml:57
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../themes/components/Battery.qml:58
+#, kde-format
+msgid "Battery at %1%"
+msgstr "배터리 %1%"
+
+#: connectionsmodel.cpp:146
+#, kde-format
+msgid "VPN connection deactivated."
+msgstr "VPN 연결이 비활성화됨."
+
+#: connectionsmodel.cpp:148
+#, kde-format
+msgid ""
+"VPN connection was deactivated because the device it was using was "
+"disconnected."
+msgstr ""
+"마지막으로 VPN 연결을 사용하는 장치 연결이 해제되어 VPN 연결이 해제되었습니"
+"다."
+
+#: connectionsmodel.cpp:150
+#, kde-format
+msgid "The service providing the VPN connection was stopped."
+msgstr "VPN 연결을 제공하는 서비스가 중단되었습니다."
+
+#: connectionsmodel.cpp:152
+#, kde-format
+msgid "The IP config of the VPN connection was invalid."
+msgstr "VPN 연결의 IP 설정이 잘못되었습니다."
+
+#: connectionsmodel.cpp:154
+#, kde-format
+msgid "The connection attempt to the VPN service timed out."
+msgstr "VPN 서비스에 연결하려는 시도의 시간이 초과되었습니다."
+
+#: connectionsmodel.cpp:156
+#, kde-format
+msgid ""
+"A timeout occurred while starting the service providing the VPN connection."
+msgstr "VPN 연결을 제공하는 서비스를 시작하는 시간이 초과되었습니다."
+
+#: connectionsmodel.cpp:158
+#, kde-format
+msgid "Starting the service providing the VPN connection failed."
+msgstr "VPN 연결을 제공하는 서비스를 시작할 수 없습니다."
+
+#: connectionsmodel.cpp:160
+#, kde-format
+msgid "Necessary secrets for the VPN connection were not provided."
+msgstr "VPN 연결을 맺는 데 필요한 비밀 정보를 입력하지 않았습니다."
+
+#: connectionsmodel.cpp:162
+#, kde-format
+msgid "Authentication to the VPN server failed."
+msgstr "VPN 서버 인증이 실패했습니다."
+
+#: connectionsmodel.cpp:164
+#, kde-format
+msgid "The connection was deleted."
+msgstr "연결이 삭제되었습니다."
+
+#: connectionsmodel.cpp:580
+#, kde-format
+msgid "No connection"
+msgstr "연결 없음"
+
+#: main.cpp:158
+#, kde-format
+msgid "LightDM KDE Greeter"
+msgstr "LightDM KDE 환영 도구"
+
+#: main.cpp:160
+#, kde-format
+msgid "Login screen using the LightDM framework"
+msgstr "LightDM 프레임워크를 사용하는 로그인 화면"
+
+#: nmsecretagent.cpp:79
+#, kde-format
+msgid "Password"
+msgstr "암호"
+
+#: nmsecretagent.cpp:80
+#, kde-format
+msgid "Certificate password"
+msgstr "인증서 암호"
+
+#: nmsecretagent.cpp:81
+#, kde-format
+msgid "HTTP proxy password"
+msgstr "HTTP 프록시 암호"
+
+#: sessionsmodel.cpp:55
+#, kde-format
+msgid "Previously Used Session"
+msgstr "이전에 사용한 세션"
+
+#: usersmodel.cpp:37
+#, kde-format
+msgid "Guest"
+msgstr "게스트"
