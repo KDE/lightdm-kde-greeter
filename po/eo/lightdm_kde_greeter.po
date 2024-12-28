@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-30 21:25+0200\n"
+"PO-Revision-Date: 2024-12-27 10:42+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -38,10 +38,9 @@ msgid "Battery at %1%"
 msgstr "Baterio ĉe %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Neniu konekto"
+msgstr "VPN-konekto malaktivigita."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -109,17 +108,17 @@ msgstr "Ensaluta ekrano uzante la LightDM-framon"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Pasvorto"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Atestila pasvorto"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP-prokurila pasvorto"
 
 #: sessionsmodel.cpp:55
 #, kde-format
