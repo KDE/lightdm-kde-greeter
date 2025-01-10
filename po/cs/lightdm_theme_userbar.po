@@ -131,7 +131,7 @@ msgstr "Přihlášení selhalo"
 #: PrimaryScreen.qml:483
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "CapsLock je zapnut"
 
 #: PrimaryScreen.qml:486
 #, kde-format
