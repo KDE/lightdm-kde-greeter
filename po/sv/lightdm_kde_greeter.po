@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024 Stefan Asserhäll <stefan.asserhall@bredband.net>
+# SPDX-FileCopyrightText: 2024, 2025 Stefan Asserhäll <stefan.asserhall@bredband.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-06-06 08:44+0200\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"PO-Revision-Date: 2025-01-11 12:21+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -38,10 +38,9 @@ msgid "Battery at %1%"
 msgstr "Batteri %1 %"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Ingen anslutning"
+msgstr "VPN-anslutning inaktiverad."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -49,47 +48,50 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN-anslutningen inaktiverades eftersom enheten den använde kopplades ner."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Tjänsten som tillhandahåller VPN-anslutningen stoppades."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "IP-inställningen för VPN-anslutningen är ogiltig."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "Tidsgräns gick ut för anslutningsförsöket till VPN-tjänsten."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"En tidsgräns överskreds vid start av tjänsten som tillhandahåller VPN-"
+"anslutningen."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Start av tjänsten som tillhandahåller VPN-anslutningen misslyckades."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "Nödvändiga hemligheter för VPN-anslutningen tillhandahölls inte."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Behörighetskontroll till VPN-servern misslyckades."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Anslutningen togs bort."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -109,17 +111,17 @@ msgstr "Inloggningsskärm som använder ramverket LightDM"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Lösenord"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Certifikatlösenord"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP-proxylösenord"
 
 #: sessionsmodel.cpp:55
 #, kde-format
