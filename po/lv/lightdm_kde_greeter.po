@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-10-29 20:04+0200\n"
+"PO-Revision-Date: 2025-01-20 16:47+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -39,10 +39,9 @@ msgid "Battery at %1%"
 msgstr "Baterijas līmenis: %1 %"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Nav savienojuma"
+msgstr "VPN savienojums ir deaktivēts."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -50,47 +49,48 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN savienojums ir deaktivēts, jo ierīce, kas to izmantoja, ir atvienota."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Ir apturēts serviss, kas nodrošina VPN savienojumu."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "VPN savienojuma IP konfigurācija ir nederīga."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "Savienojuma mēģinājumam ar VPN servisu iestājās noildze."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
-msgstr ""
+msgstr "Iestājās noildze, ieslēdzot servisu, kas nodrošina VPN savienojumu."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Kļūda, sākot servisu, kas nodrošina VPN savienojumu."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "Nav sniegta slepenā informācija, lai izveidotu VPN savienojumu."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Nav izdevusies autentifikācija ar VPN serveri."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Savienojums ir dzēsts."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -110,17 +110,17 @@ msgstr "Ierakstīšanās ekrāns, izmantojot „LightDM“ satvaru"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Parole"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Sertifikāta parole"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP starpnieka parole"
 
 #: sessionsmodel.cpp:55
 #, kde-format
