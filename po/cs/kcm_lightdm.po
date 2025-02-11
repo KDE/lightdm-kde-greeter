@@ -102,9 +102,3 @@ msgstr "Jako uživatel:"
 #, kde-format
 msgid "Using session:"
 msgstr "Do sezení:"
-
-#~ msgid "Recommended wallpaper file"
-#~ msgstr "Doporučovaný soubor s tapetou"
-
-#~ msgid "Recommended dark wallpaper file"
-#~ msgstr "Doporučovaný soubor s tmavou tapetou"

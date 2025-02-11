@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2024, 2025 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-07 00:42+0000\n"
-"PO-Revision-Date: 2024-12-20 12:48+0100\n"
+"PO-Revision-Date: 2025-02-10 11:43+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -37,7 +37,7 @@ msgstr "Disconnecte ex %1?"
 #: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
-msgstr ""
+msgstr "Aborta Connecter a %1 ?"
 
 #: NetworkWidget.qml:68
 #, kde-format
@@ -47,42 +47,42 @@ msgstr "Connecte a %1 ?"
 #: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
-msgstr ""
+msgstr "Connecte a un puncto de accesso insecure  %1 ?"
 
 #: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr ""
+msgstr "Inserta le contrasigno per connecter a %1"
 
 #: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr ""
+msgstr "Inserta accesso (login) e contrasigno perconnecter a %1"
 
 #: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
-msgstr ""
+msgstr "%1: Error de connexion, essaya novemente."
 
 #: NetworkWidget.qml:97
 #, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr ""
+msgstr "Forni le secretos per connecter a %1':"
 
 #: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
-msgstr ""
+msgstr "Le protocollo de securitate non es supportate per %1"
 
 #: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
-msgstr ""
+msgstr "Falleva a connecter a %1"
 
 #: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
-msgstr ""
+msgstr "Error: Non pote trovar punctoa de accesso %1"
 
 #: NetworkWidget.qml:440
 #, kde-format
@@ -97,7 +97,7 @@ msgstr "Contrasigno"
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
-msgstr ""
+msgstr "Dishabilita Wireless (Sin Cablos)"
 
 #: NetworkWidget.qml:507
 #, kde-format
@@ -107,12 +107,12 @@ msgstr "Habilita rete sin cablo"
 #: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
-msgstr ""
+msgstr "Action prohibite"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
-msgstr ""
+msgstr "Dishabilita rete"
 
 #: NetworkWidget.qml:548
 #, kde-format
@@ -122,7 +122,7 @@ msgstr "Habilita rete con cablo"
 #: OtherScreen.qml:27
 #, kde-format
 msgid "Press %1 to change the primary screen"
-msgstr ""
+msgstr "Pressa %1 per cambiar le schermo primari"
 
 #: PrimaryScreen.qml:90
 #, kde-format
@@ -137,12 +137,12 @@ msgstr "Caps Lock es active"
 #: PrimaryScreen.qml:486
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock es active"
 
 #: PrimaryScreen.qml:489
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock e Num Lock es active"
 
 #: PrimaryScreen.qml:502
 #, kde-format

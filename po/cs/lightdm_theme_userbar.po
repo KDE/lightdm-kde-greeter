@@ -63,10 +63,9 @@ msgid "%1: Connection error, try again."
 msgstr ""
 
 #: NetworkWidget.qml:97
-#, fuzzy, kde-format
-#| msgid "Failed to connect to %1"
+#, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr "Nelze se připojit k %1"
+msgstr ""
 
 #: NetworkWidget.qml:101
 #, kde-format
