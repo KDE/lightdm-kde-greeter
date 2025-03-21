@@ -101,6 +101,11 @@ Item {
                 startDefaultScreen()
             }
         }
+
+        function onFixupUsersListQueued() {
+            // This call leads to updating the position of the users list.
+            usersList.returnToBounds()
+        }
     }
 
     function consumePrompt() {
@@ -348,6 +353,17 @@ Item {
                         usersList.currentIndex = index
                         usersList.forceActiveFocus()
                         usersList.animateDelegate = false
+                    }
+                    // In Qt 6.8, at the start, the position of user list is calculated too early,
+                    // before the positions of the elements inside the list are calculated.
+                    // As a result, the list of users is not centered on the chosen element, since
+                    // its coordinate is not yet calculated and equal to 0.
+                    // The coordinate of the item inside the list is calculated later, in the idle queue.
+                    // We want to postpone the update of the position of the user list
+                    // after the coordinates of all elements are calculated.
+                    // To do this, we use signal with QueuedConnection type.
+                    onXChanged: {
+                        greeter.fixupUsersList();
                     }
                     Keys.onReturnPressed: startLoginScreen()
                 }

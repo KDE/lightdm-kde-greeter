@@ -22,6 +22,7 @@ GreeterWrapper::GreeterWrapper(QObject *parent)
     connectSync();
     m_config = KSharedConfig::openConfig(QStringLiteral("state-kde"));
     QCoreApplication::instance()->installEventFilter(this);
+    connect(this, &GreeterWrapper::fixupUsersList, this, &GreeterWrapper::fixupUsersListQueued, Qt::ConnectionType::QueuedConnection);
 }
 
 QString GreeterWrapper::lastLoggedInUser() const

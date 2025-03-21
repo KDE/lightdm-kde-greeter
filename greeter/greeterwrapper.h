@@ -36,6 +36,9 @@ public:
 Q_SIGNALS:
     void aboutToLogin();
 
+    void fixupUsersList();
+    void fixupUsersListQueued();
+
 public Q_SLOTS:
     bool startSessionSync(const QString &session = QString());
 
