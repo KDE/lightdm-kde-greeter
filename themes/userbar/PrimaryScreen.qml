@@ -547,7 +547,7 @@ Item {
 
             anchors.horizontalCenter: parent.horizontalCenter
             y: (centerPanel.y - height) / 2
-            width: contentItem.childrenRect.width
+            width: Math.max(1, contentItem.childrenRect.width)
             height: Math.min(centerPanel.y, contentItem.childrenRect.height)
             clip: true
 
