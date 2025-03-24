@@ -454,6 +454,8 @@ Item {
 
                             focus: true
 
+                            Kirigami.Theme.inherit: false
+
                             // if set overrideText, the first clear will set this text
                             // need for 'log in as another user'
                             property string overrideText
