@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"POT-Creation-Date: 2025-04-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-08 09:49+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -126,62 +126,62 @@ msgstr "Veuillez appuyer sur %1 pour modifier l'écran principal"
 msgid "Login failed"
 msgstr "Il a été impossible de se connecter"
 
-#: PrimaryScreen.qml:483
+#: PrimaryScreen.qml:501
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Verr. Maj est activé"
 
-#: PrimaryScreen.qml:486
+#: PrimaryScreen.qml:504
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Verr. Num est activé"
 
-#: PrimaryScreen.qml:489
+#: PrimaryScreen.qml:507
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Verr. Maj et Verr. Num sont activés"
 
-#: PrimaryScreen.qml:502
+#: PrimaryScreen.qml:520
 #, kde-format
 msgid "Log in"
 msgstr "Se connecter"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:539
 #, kde-format
 msgid "Log in as another user"
 msgstr "Se connecter comme autre utilisateur"
 
-#: PrimaryScreen.qml:680
+#: PrimaryScreen.qml:698
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposition de clavier"
 
-#: PrimaryScreen.qml:725
+#: PrimaryScreen.qml:743
 #, kde-format
 msgid "Desktop session"
 msgstr "Session de bureau"
 
-#: PrimaryScreen.qml:752
+#: PrimaryScreen.qml:770
 #, kde-format
 msgid "Suspend"
 msgstr "Suspendre"
 
-#: PrimaryScreen.qml:764
+#: PrimaryScreen.qml:782
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberner"
 
-#: PrimaryScreen.qml:777
+#: PrimaryScreen.qml:795
 #, kde-format
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: PrimaryScreen.qml:789
+#: PrimaryScreen.qml:807
 #, kde-format
 msgid "Shutdown"
 msgstr "Éteindre"
 
-#: PrimaryScreen.qml:819
+#: PrimaryScreen.qml:837
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"POT-Creation-Date: 2025-04-05 00:43+0000\n"
 "PO-Revision-Date: 2025-02-10 11:43+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -129,62 +129,62 @@ msgstr "Pressa %1 per cambiar le schermo primari"
 msgid "Login failed"
 msgstr "Accesso falleva"
 
-#: PrimaryScreen.qml:483
+#: PrimaryScreen.qml:501
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock es active"
 
-#: PrimaryScreen.qml:486
+#: PrimaryScreen.qml:504
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock es active"
 
-#: PrimaryScreen.qml:489
+#: PrimaryScreen.qml:507
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock e Num Lock es active"
 
-#: PrimaryScreen.qml:502
+#: PrimaryScreen.qml:520
 #, kde-format
 msgid "Log in"
 msgstr "Accede"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:539
 #, kde-format
 msgid "Log in as another user"
 msgstr "Accede como un altere usator"
 
-#: PrimaryScreen.qml:680
+#: PrimaryScreen.qml:698
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposition de Claviero"
 
-#: PrimaryScreen.qml:725
+#: PrimaryScreen.qml:743
 #, kde-format
 msgid "Desktop session"
 msgstr "Session de scriptorio"
 
-#: PrimaryScreen.qml:752
+#: PrimaryScreen.qml:770
 #, kde-format
 msgid "Suspend"
 msgstr "Suspende"
 
-#: PrimaryScreen.qml:764
+#: PrimaryScreen.qml:782
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: PrimaryScreen.qml:777
+#: PrimaryScreen.qml:795
 #, kde-format
 msgid "Restart"
 msgstr "Re-Initia"
 
-#: PrimaryScreen.qml:789
+#: PrimaryScreen.qml:807
 #, kde-format
 msgid "Shutdown"
 msgstr "Stoppa (Shutdown)"
 
-#: PrimaryScreen.qml:819
+#: PrimaryScreen.qml:837
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

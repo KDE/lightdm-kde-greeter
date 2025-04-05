@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"POT-Creation-Date: 2025-04-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-07 23:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -129,62 +129,62 @@ msgstr "Pulse %1 para cambiar la pantalla principal"
 msgid "Login failed"
 msgstr "El inicio de sesión ha fallado"
 
-#: PrimaryScreen.qml:483
+#: PrimaryScreen.qml:501
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "El bloqueo de mayúsculas está activado"
 
-#: PrimaryScreen.qml:486
+#: PrimaryScreen.qml:504
 #, kde-format
 msgid "Num Lock is on"
 msgstr "El bloqueo numérico está activado"
 
-#: PrimaryScreen.qml:489
+#: PrimaryScreen.qml:507
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "El bloqueo de mayúsculas y el bloqueo numérico están activados"
 
-#: PrimaryScreen.qml:502
+#: PrimaryScreen.qml:520
 #, kde-format
 msgid "Log in"
 msgstr "Iniciar sesión"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:539
 #, kde-format
 msgid "Log in as another user"
 msgstr "Iniciar sesión como otro usuario"
 
-#: PrimaryScreen.qml:680
+#: PrimaryScreen.qml:698
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Distribución de teclado"
 
-#: PrimaryScreen.qml:725
+#: PrimaryScreen.qml:743
 #, kde-format
 msgid "Desktop session"
 msgstr "Sesión de escritorio"
 
-#: PrimaryScreen.qml:752
+#: PrimaryScreen.qml:770
 #, kde-format
 msgid "Suspend"
 msgstr "Suspender"
 
-#: PrimaryScreen.qml:764
+#: PrimaryScreen.qml:782
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: PrimaryScreen.qml:777
+#: PrimaryScreen.qml:795
 #, kde-format
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: PrimaryScreen.qml:789
+#: PrimaryScreen.qml:807
 #, kde-format
 msgid "Shutdown"
 msgstr "Apagar"
 
-#: PrimaryScreen.qml:819
+#: PrimaryScreen.qml:837
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

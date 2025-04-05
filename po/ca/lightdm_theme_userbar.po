@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"POT-Creation-Date: 2025-04-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-07 10:07+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -129,64 +129,64 @@ msgstr "Premeu %1 per a canviar la pantalla primària"
 msgid "Login failed"
 msgstr "Ha fallat l'inici de la sessió"
 
-#: PrimaryScreen.qml:483
+#: PrimaryScreen.qml:501
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "El bloqueig de majúscules està activat"
 
 # skip-rule: k-Num_Lock
-#: PrimaryScreen.qml:486
+#: PrimaryScreen.qml:504
 #, kde-format
 msgid "Num Lock is on"
 msgstr "El bloqueig numèric està activat"
 
 # skip-rule: k-Num_Lock
-#: PrimaryScreen.qml:489
+#: PrimaryScreen.qml:507
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "El bloqueig de majúscules i el bloqueig numèric estan activats"
 
-#: PrimaryScreen.qml:502
+#: PrimaryScreen.qml:520
 #, kde-format
 msgid "Log in"
 msgstr "Inicia la sessió"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:539
 #, kde-format
 msgid "Log in as another user"
 msgstr "Inicia la sessió com un altre usuari"
 
-#: PrimaryScreen.qml:680
+#: PrimaryScreen.qml:698
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposició de teclat"
 
-#: PrimaryScreen.qml:725
+#: PrimaryScreen.qml:743
 #, kde-format
 msgid "Desktop session"
 msgstr "Sessió d'escriptori"
 
-#: PrimaryScreen.qml:752
+#: PrimaryScreen.qml:770
 #, kde-format
 msgid "Suspend"
 msgstr "Suspèn"
 
-#: PrimaryScreen.qml:764
+#: PrimaryScreen.qml:782
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: PrimaryScreen.qml:777
+#: PrimaryScreen.qml:795
 #, kde-format
 msgid "Restart"
 msgstr "Reinicia"
 
-#: PrimaryScreen.qml:789
+#: PrimaryScreen.qml:807
 #, kde-format
 msgid "Shutdown"
 msgstr "Atura"
 
-#: PrimaryScreen.qml:819
+#: PrimaryScreen.qml:837
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

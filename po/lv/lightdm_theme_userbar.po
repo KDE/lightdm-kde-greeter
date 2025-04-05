@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:42+0000\n"
+"POT-Creation-Date: 2025-04-05 00:43+0000\n"
 "PO-Revision-Date: 2025-01-20 16:46+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -128,62 +128,62 @@ msgstr "Spiediet „%1“, lai mainītu primāro ekrānu"
 msgid "Login failed"
 msgstr "Ierakstīšanās neizdevās"
 
-#: PrimaryScreen.qml:483
+#: PrimaryScreen.qml:501
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Ieslēgts burtslēga („Caps Lock“) taustiņš"
 
-#: PrimaryScreen.qml:486
+#: PrimaryScreen.qml:504
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Ieslēgts ciparslēga („Num Lock“) taustiņš"
 
-#: PrimaryScreen.qml:489
+#: PrimaryScreen.qml:507
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Ieslēgts burtslēga („Caps Lock“) un ciparslēga („Num Lock“) taustiņš"
 
-#: PrimaryScreen.qml:502
+#: PrimaryScreen.qml:520
 #, kde-format
 msgid "Log in"
 msgstr "Ierakstīties"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:539
 #, kde-format
 msgid "Log in as another user"
 msgstr "Ierakstīties kā citam lietotājam"
 
-#: PrimaryScreen.qml:680
+#: PrimaryScreen.qml:698
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Tastatūras izkārtojums"
 
-#: PrimaryScreen.qml:725
+#: PrimaryScreen.qml:743
 #, kde-format
 msgid "Desktop session"
 msgstr "Darbvirsmas sesija"
 
-#: PrimaryScreen.qml:752
+#: PrimaryScreen.qml:770
 #, kde-format
 msgid "Suspend"
 msgstr "Iesnaudināt"
 
-#: PrimaryScreen.qml:764
+#: PrimaryScreen.qml:782
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernēt"
 
-#: PrimaryScreen.qml:777
+#: PrimaryScreen.qml:795
 #, kde-format
 msgid "Restart"
 msgstr "Pārstartēt"
 
-#: PrimaryScreen.qml:789
+#: PrimaryScreen.qml:807
 #, kde-format
 msgid "Shutdown"
 msgstr "Izslēgt"
 
-#: PrimaryScreen.qml:819
+#: PrimaryScreen.qml:837
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
