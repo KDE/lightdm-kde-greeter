@@ -14,7 +14,7 @@ Item {
 
     property Item activeScreen: {
         let window = manager.children[0].delegateWindow
-        return window ? window.contentItem : null
+        return window ? window.crop : null
     }
 
     property Component delegate
@@ -38,7 +38,7 @@ Item {
         // determine the index of the current active screen
         var currentIndex = -1
         for (var i = 0; i < screens.length; ++i) {
-            if (screens[i].contentItem == activeScreen) {
+            if (screens[i].crop == activeScreen) {
                 currentIndex = i
                 break
             }
@@ -61,8 +61,8 @@ Item {
         var newX = screens[newIndex].x + xRatio * areaTo.width
         var newY = screens[newIndex].y + yRatio * areaTo.height
 
-        activeScreen = screens[newIndex].contentItem
-        screens[newIndex].requestActivate()
+        activeScreen = screens[newIndex].crop
+        activeScreen.forceActiveFocus()
 
         mouseCursor.move(newX, newY)
     }
@@ -83,6 +83,7 @@ Item {
 
                 property var mouseArea: mouseArea
                 property var storedFocusItem
+                property alias crop: crop
 
                 MouseArea {
                     id: mouseArea
@@ -90,11 +91,11 @@ Item {
                     hoverEnabled: true
                     onEntered: {
                         delegateWindow.requestActivate()
-                        activeScreen = parent
+                        activeScreen = crop
                     }
                     onWidthChanged: {
                         // the width is supposed to change only at startup
-                        if (parent != activeScreen) return
+                        if (crop != activeScreen) return
                         // put the mouse cursor inside the primary window
                         var newX = delegateWindow.x + mouseArea.width * 0.3
                         var newY = delegateWindow.y + mouseArea.height * 0.3
@@ -103,9 +104,15 @@ Item {
                 }
 
                 Loader {
-                    property var thisScreen: parent
+                    id: crop
+                    property var cropRatio: [ 16, 9 ]
+
+                    height: parent.height
+                    width: Math.min(Math.round(parent.height * cropRatio[0] / cropRatio[1]), parent.width)
+                    x: Math.round((parent.width - width) * 0.5)
+                    y: parent.y
+
                     sourceComponent: manager.delegate
-                    anchors.fill: parent
                 }
                 // need to keep track of where the previous focus was, so that you can return the focus when you click somewhere else
                 onActiveFocusItemChanged: {

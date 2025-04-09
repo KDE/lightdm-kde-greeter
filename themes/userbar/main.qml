@@ -42,7 +42,7 @@ Item {
             }
 
             OtherScreen {
-                visible: primary.parent && thisScreen != screenManager.activeScreen
+                visible: primary.parent && parent.parent != screenManager.activeScreen
             }
         }
     }
