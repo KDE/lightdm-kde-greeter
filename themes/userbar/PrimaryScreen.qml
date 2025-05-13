@@ -258,6 +258,20 @@ Item {
         height: Math.min(inputPanel.item ? inputPanel.item.y : 0 - menuBar.height, wholeScreen.height - menuBar.height)
     }
 
+    Item {
+        id: inputPanelArea
+
+        // The maximum ratio of the keyboard width to the screen height
+        // On wider screens, the entire width is not filled
+        property var maxRatio: [ 4, 3 ]
+
+        height: wholeScreen.height
+        width: Math.min(wholeScreen.width, Math.round(wholeScreen.height * maxRatio[0] / maxRatio[1]))
+
+        x: wholeScreen.x + Math.round((wholeScreen.width - width) * 0.5)
+        y: wholeScreen.y
+    }
+
     ListModel {
         id: messages
     }

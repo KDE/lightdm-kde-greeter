@@ -11,17 +11,17 @@ import QtQuick.VirtualKeyboard 2.1
 
 InputPanel {
     id: inputPanel
+    x: inputPanelArea.x
     y: yPositionWhenHidden
-    x: 0
-    width: wholeScreen.width
+    width: inputPanelArea.width
     active: keyboardEnabled && inputMethodVisible
     desktopPanel: true
 
-    keyboard.shadowInputControl.height: wholeScreen.height - keyboard.height
+    keyboard.shadowInputControl.height: inputPanelArea.height - keyboard.height
 
     property bool inputMethodVisible: Qt.inputMethod.visible
     property bool keyboardEnabled: false
-    property real yPositionWhenHidden: wholeScreen.height
+    property real yPositionWhenHidden: inputPanelArea.height + inputPanelArea.y
 
     function switchState() {
         keyboardEnabled = !keyboardEnabled
