@@ -105,7 +105,23 @@ Item {
 
                 Loader {
                     id: crop
-                    property var cropRatio: [ 16, 9 ]
+
+                    property var cropRatio: {
+
+                        let ratioOption = "MaxScreenRatio"
+                        let defaultRatio = [ 16, 9 ]
+
+                        let ratioStr = config.readEntry(ratioOption)
+                        if (!ratioStr) return defaultRatio
+
+                        let ratio = ratioStr.split(":").map(Number)
+
+                        if (ratio.length != 2 || isNaN(ratio[0]) || isNaN(ratio[1]) || ratio[0] < 1 || ratio[1] < 1 || ratio[0] / ratio[1] < 1) {
+                            console.warn("ScreenManager: bad option " + ratioOption + " (" + ratioStr + ")")
+                            return defaultRatio
+                        }
+                        return ratio
+                    }
 
                     height: parent.height
                     width: Math.min(Math.round(parent.height * cropRatio[0] / cropRatio[1]), parent.width)

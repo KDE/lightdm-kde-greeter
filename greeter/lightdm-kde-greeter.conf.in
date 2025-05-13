@@ -19,6 +19,7 @@
 #    4: TileVertically
 #    5: TileHorizontally
 #    6: Pad (the image is not transformed)
+#  MaxScreenRatio = string, like "M:N" ("16:9" by default) If physically the screen is wider, the edges will be cut in black.
 
 [greeter]
 #enable-high-dpi=
@@ -28,3 +29,4 @@ theme-name=userbar
 [lightdm_theme_userbar]
 #Background=@GREETER_DEFAULT_WALLPAPER@
 #BackgroundFillMode=
+#MaxScreenRatio=16:9
