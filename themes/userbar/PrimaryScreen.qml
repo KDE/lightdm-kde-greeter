@@ -255,7 +255,10 @@ Item {
         x: wholeScreen.x
         y: wholeScreen.y + menuBar.height
         width: wholeScreen.width
-        height: Math.min(inputPanel.item ? inputPanel.item.y : 0 - menuBar.height, wholeScreen.height - menuBar.height)
+        height: {
+            let defaultHeight = wholeScreen.height - menuBar.height - bottomBar.height
+            return inputPanel.item ? Math.min(inputPanel.item.y - menuBar.height, defaultHeight) : defaultHeight
+        }
     }
 
     Item {
