@@ -840,8 +840,8 @@ Item {
     Row {
         id: bottomBar
         anchors {
-            right: activeScreen.right
-            bottom: activeScreen.bottom
+            right: wholeScreen.right
+            bottom: wholeScreen.bottom
             margins: screen.padding
         }
         spacing: screen.padding
