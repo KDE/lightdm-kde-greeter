@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
 "PO-Revision-Date: 2024-11-11 17:53+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -126,62 +126,62 @@ msgstr ""
 msgid "Login failed"
 msgstr "Prihlásenie zlyhalo"
 
-#: PrimaryScreen.qml:501
+#: PrimaryScreen.qml:518
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Funkcia Caps Lock je zapnutá"
 
-#: PrimaryScreen.qml:504
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Num Lock is on"
 msgstr ""
 
-#: PrimaryScreen.qml:507
+#: PrimaryScreen.qml:524
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr ""
 
-#: PrimaryScreen.qml:520
+#: PrimaryScreen.qml:537
 #, kde-format
 msgid "Log in"
 msgstr "Prihlásenie"
 
-#: PrimaryScreen.qml:539
+#: PrimaryScreen.qml:556
 #, kde-format
 msgid "Log in as another user"
 msgstr ""
 
-#: PrimaryScreen.qml:698
+#: PrimaryScreen.qml:715
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Rozloženie klávesnice"
 
-#: PrimaryScreen.qml:743
+#: PrimaryScreen.qml:760
 #, kde-format
 msgid "Desktop session"
 msgstr "Sedenie plochy"
 
-#: PrimaryScreen.qml:770
+#: PrimaryScreen.qml:787
 #, kde-format
 msgid "Suspend"
 msgstr "Uspať"
 
-#: PrimaryScreen.qml:782
+#: PrimaryScreen.qml:799
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernovať"
 
-#: PrimaryScreen.qml:795
+#: PrimaryScreen.qml:812
 #, kde-format
 msgid "Restart"
 msgstr "Reštart"
 
-#: PrimaryScreen.qml:807
+#: PrimaryScreen.qml:824
 #, kde-format
 msgid "Shutdown"
 msgstr "Vypnutie"
 
-#: PrimaryScreen.qml:837
+#: PrimaryScreen.qml:854
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

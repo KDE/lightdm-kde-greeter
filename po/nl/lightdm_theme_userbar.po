@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 12:06+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -127,62 +127,62 @@ msgstr "Druk op %1 om het primaire scherm te wijzigen"
 msgid "Login failed"
 msgstr "Aanmelden mislukt"
 
-#: PrimaryScreen.qml:501
+#: PrimaryScreen.qml:518
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock staat aan"
 
-#: PrimaryScreen.qml:504
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock staat aan"
 
-#: PrimaryScreen.qml:507
+#: PrimaryScreen.qml:524
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock en Num Lock staan aan"
 
-#: PrimaryScreen.qml:520
+#: PrimaryScreen.qml:537
 #, kde-format
 msgid "Log in"
 msgstr "Aanmelden"
 
-#: PrimaryScreen.qml:539
+#: PrimaryScreen.qml:556
 #, kde-format
 msgid "Log in as another user"
 msgstr "Als een andere gebruiker aanmelden"
 
-#: PrimaryScreen.qml:698
+#: PrimaryScreen.qml:715
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Toetsenbordindeling"
 
-#: PrimaryScreen.qml:743
+#: PrimaryScreen.qml:760
 #, kde-format
 msgid "Desktop session"
 msgstr "Bureaubladsessie"
 
-#: PrimaryScreen.qml:770
+#: PrimaryScreen.qml:787
 #, kde-format
 msgid "Suspend"
 msgstr "Onderbreken"
 
-#: PrimaryScreen.qml:782
+#: PrimaryScreen.qml:799
 #, kde-format
 msgid "Hibernate"
 msgstr "Slaapstand naar schijf"
 
-#: PrimaryScreen.qml:795
+#: PrimaryScreen.qml:812
 #, kde-format
 msgid "Restart"
 msgstr "Herstarten"
 
-#: PrimaryScreen.qml:807
+#: PrimaryScreen.qml:824
 #, kde-format
 msgid "Shutdown"
 msgstr "Afsluiten"
 
-#: PrimaryScreen.qml:837
+#: PrimaryScreen.qml:854
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

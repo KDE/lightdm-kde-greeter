@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
 "PO-Revision-Date: 2024-12-15 17:37+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -127,62 +127,62 @@ msgstr "प्राथमिक स्क्रीन बदलने के �
 msgid "Login failed"
 msgstr "लॉगिन विफल"
 
-#: PrimaryScreen.qml:501
+#: PrimaryScreen.qml:518
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "कैप्स लॉक ऑन है"
 
-#: PrimaryScreen.qml:504
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Num Lock is on"
 msgstr "नम्बर लॉक चालू है"
 
-#: PrimaryScreen.qml:507
+#: PrimaryScreen.qml:524
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "कैप्स लॉक और नम्बर लॉक चालू है"
 
-#: PrimaryScreen.qml:520
+#: PrimaryScreen.qml:537
 #, kde-format
 msgid "Log in"
 msgstr "लॉग इन करें"
 
-#: PrimaryScreen.qml:539
+#: PrimaryScreen.qml:556
 #, kde-format
 msgid "Log in as another user"
 msgstr "दूसरे उपयोगकर्ता के रूप में लॉग इन करें"
 
-#: PrimaryScreen.qml:698
+#: PrimaryScreen.qml:715
 #, kde-format
 msgid "Keyboard layout"
 msgstr "कीबोर्ड विन्यास"
 
-#: PrimaryScreen.qml:743
+#: PrimaryScreen.qml:760
 #, kde-format
 msgid "Desktop session"
 msgstr "डेस्कटॉप सत्र"
 
-#: PrimaryScreen.qml:770
+#: PrimaryScreen.qml:787
 #, kde-format
 msgid "Suspend"
 msgstr "निलंबित करें"
 
-#: PrimaryScreen.qml:782
+#: PrimaryScreen.qml:799
 #, kde-format
 msgid "Hibernate"
 msgstr "हाइबरनेट"
 
-#: PrimaryScreen.qml:795
+#: PrimaryScreen.qml:812
 #, kde-format
 msgid "Restart"
 msgstr "पुनः आरंभ करें"
 
-#: PrimaryScreen.qml:807
+#: PrimaryScreen.qml:824
 #, kde-format
 msgid "Shutdown"
 msgstr "शट डाउन"
 
-#: PrimaryScreen.qml:837
+#: PrimaryScreen.qml:854
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

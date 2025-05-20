@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 11:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -128,62 +128,62 @@ msgstr "לחיצה על %1 תשנה את המסך הראשי"
 msgid "Login failed"
 msgstr "הכניסה נכשלה"
 
-#: PrimaryScreen.qml:501
+#: PrimaryScreen.qml:518
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock דולק"
 
-#: PrimaryScreen.qml:504
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock דולק"
 
-#: PrimaryScreen.qml:507
+#: PrimaryScreen.qml:524
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock ו־Num Lock דולקים"
 
-#: PrimaryScreen.qml:520
+#: PrimaryScreen.qml:537
 #, kde-format
 msgid "Log in"
 msgstr "כניסה"
 
-#: PrimaryScreen.qml:539
+#: PrimaryScreen.qml:556
 #, kde-format
 msgid "Log in as another user"
 msgstr "כניסה כמשתמש אחר"
 
-#: PrimaryScreen.qml:698
+#: PrimaryScreen.qml:715
 #, kde-format
 msgid "Keyboard layout"
 msgstr "פריסת מקלדת"
 
-#: PrimaryScreen.qml:743
+#: PrimaryScreen.qml:760
 #, kde-format
 msgid "Desktop session"
 msgstr "הפעלת שולחן עבודה"
 
-#: PrimaryScreen.qml:770
+#: PrimaryScreen.qml:787
 #, kde-format
 msgid "Suspend"
 msgstr "השהיה"
 
-#: PrimaryScreen.qml:782
+#: PrimaryScreen.qml:799
 #, kde-format
 msgid "Hibernate"
 msgstr "הרדמה"
 
-#: PrimaryScreen.qml:795
+#: PrimaryScreen.qml:812
 #, kde-format
 msgid "Restart"
 msgstr "הפעלה מחדש"
 
-#: PrimaryScreen.qml:807
+#: PrimaryScreen.qml:824
 #, kde-format
 msgid "Shutdown"
 msgstr "כיבוי"
 
-#: PrimaryScreen.qml:837
+#: PrimaryScreen.qml:854
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

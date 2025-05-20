@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
 "PO-Revision-Date: 2024-12-29 01:45+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -127,62 +127,62 @@ msgstr "按下 %1 來變更主要螢幕"
 msgid "Login failed"
 msgstr "登入失敗"
 
-#: PrimaryScreen.qml:501
+#: PrimaryScreen.qml:518
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "大寫鎖定已開啟"
 
-#: PrimaryScreen.qml:504
+#: PrimaryScreen.qml:521
 #, kde-format
 msgid "Num Lock is on"
 msgstr "數字鎖定已開啟"
 
-#: PrimaryScreen.qml:507
+#: PrimaryScreen.qml:524
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "大寫鎖定和數字鎖定皆已開啟"
 
-#: PrimaryScreen.qml:520
+#: PrimaryScreen.qml:537
 #, kde-format
 msgid "Log in"
 msgstr "登入"
 
-#: PrimaryScreen.qml:539
+#: PrimaryScreen.qml:556
 #, kde-format
 msgid "Log in as another user"
 msgstr "登入為另一個使用者"
 
-#: PrimaryScreen.qml:698
+#: PrimaryScreen.qml:715
 #, kde-format
 msgid "Keyboard layout"
 msgstr "鍵盤佈局"
 
-#: PrimaryScreen.qml:743
+#: PrimaryScreen.qml:760
 #, kde-format
 msgid "Desktop session"
 msgstr "桌面工作階段"
 
-#: PrimaryScreen.qml:770
+#: PrimaryScreen.qml:787
 #, kde-format
 msgid "Suspend"
 msgstr "暫停"
 
-#: PrimaryScreen.qml:782
+#: PrimaryScreen.qml:799
 #, kde-format
 msgid "Hibernate"
 msgstr "休眠"
 
-#: PrimaryScreen.qml:795
+#: PrimaryScreen.qml:812
 #, kde-format
 msgid "Restart"
 msgstr "重新啟動"
 
-#: PrimaryScreen.qml:807
+#: PrimaryScreen.qml:824
 #, kde-format
 msgid "Shutdown"
 msgstr "關機"
 
-#: PrimaryScreen.qml:837
+#: PrimaryScreen.qml:854
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
