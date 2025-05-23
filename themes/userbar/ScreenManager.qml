@@ -62,7 +62,6 @@ Item {
         var newY = screens[newIndex].y + yRatio * areaTo.height
 
         activeScreen = screens[newIndex].crop
-        activeScreen.forceActiveFocus()
 
         mouseCursor.move(newX, newY)
     }
@@ -123,6 +122,7 @@ Item {
                         return ratio
                     }
 
+                    focus: true
                     height: parent.height
                     width: Math.min(Math.round(parent.height * cropRatio[0] / cropRatio[1]), parent.width)
                     x: Math.round((parent.width - width) * 0.5)
