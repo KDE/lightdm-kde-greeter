@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -37,6 +37,12 @@ struct MyScreen {
 QList<MyScreen> getScreens(float &dpi) {
     QList<MyScreen> result;
     Display *dpy = XOpenDisplay(nullptr);
+
+    if (!dpy) {
+        qWarning("%s: can't open X display", __FUNCTION__);
+        return result;
+    }
+
     dpi = 0.f;
 
     do {
@@ -142,8 +148,16 @@ int main(int argc, char **argv)
 
     qputenv("QT_IM_MODULE", configGroup.readEntry("input-method", "qtvirtualkeyboard").toUtf8());
 
-    // need to do this before declaring the Qt application
-    applyScreenScales();
+    // find out if we are on Wayland
+    // QGuiApplication::platformName() is not yet defined properly
+    // how it is done in QGuiApplicationPrivate::createPlatformIntegration
+    const bool hasWaylandDisplay = qEnvironmentVariableIsSet("WAYLAND_DISPLAY");
+    const bool isWaylandSessionType = qgetenv("XDG_SESSION_TYPE") == "wayland";
+
+    // need to do some Xorg-specific adjustmenst, before declaring the Qt application
+    if (!hasWaylandDisplay && !isWaylandSessionType) {
+        applyScreenScales();
+    }
 
     QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
 
