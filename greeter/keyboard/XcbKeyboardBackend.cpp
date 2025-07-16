@@ -1,5 +1,6 @@
 /***************************************************************************
 * Copyright (c) 2013 Nikita Mikhaylov <nslqqq@gmail.com>
+* Copyright (c) 2025 Anton Golubev <golubevan@altlinux.org>
 *
 * SPDX-License-Identifier: GPL-2.0-or-later
 ***************************************************************************/
@@ -95,8 +96,8 @@ void XcbKeyboardBackend::initLedMap() {
             XCB_XKB_NAME_DETAIL_INDICATOR_NAMES);
     reply = xcb_xkb_get_names_reply(m_conn, cookie, &error);
 
-    if (error) {
-        qCritical() << "Can't init led map: " << error->error_code;
+    if (error || !reply) {
+        qCritical() << "Can't init led map: " << (error ? std::to_string(error->error_code) : "empty reply");
         d->enabled = false;
         return;
     }
