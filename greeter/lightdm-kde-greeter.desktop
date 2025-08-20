@@ -66,6 +66,7 @@ Comment[tr]=Bu, KDE karşılayıcısını çalıştırır; yalnızca LightDM üz
 Comment[uk]=Запускає засіб вітання KDE, слід запускати лише з LightDM
 Comment[zh_CN]=用于启动 KDE Greeter，只应从 LightDM 启动
 Comment[zh_TW]=這會執行 KDE Greeter，它只適合從 LightDM 執行
-Exec=lightdm-kde-greeter
+Exec=env QT_WAYLAND_SHELL_INTEGRATION=layer-shell /usr/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --no-kactivities /usr/sbin/lightdm-kde-greeter
 Type=Application
 X-Ubuntu-Gettext-Domain=lightdm
+X-LightDM-Session-Type=wayland

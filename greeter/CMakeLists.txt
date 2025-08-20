@@ -50,7 +50,8 @@ qt6_add_shaders(lightdm-kde-greeter "lightdm-kde-greeter_shaders"
 )
 
 install(TARGETS lightdm-kde-greeter RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/sbin/)
-install(FILES lightdm-kde-greeter.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/xgreeters)
+install(FILES lightdm-kde-greeter-x11.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/xgreeters)
+install(FILES lightdm-kde-greeter.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/lightdm/greeters)
 configure_file(lightdm-kde-greeter.conf.in lightdm-kde-greeter.conf @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lightdm-kde-greeter.conf DESTINATION ${LIGHTDM_CONFIG_DIR})
 
