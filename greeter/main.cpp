@@ -12,6 +12,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QApplication>
 #include <QQuickStyle>
 #include <QDBusInterface>
+#include <QQmlApplicationEngine>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -187,16 +188,11 @@ int main(int argc, char **argv)
                           QDBusConnection::sessionBus());
 
     qiface.asyncCall(QStringLiteral("RestartUnit"),
-                                   QStringLiteral("lightdm-kde-greeter-wifikeeper.service"),
-                                   QStringLiteral("replace"));
+                     QStringLiteral("lightdm-kde-greeter-wifikeeper.service"),
+                     QStringLiteral("replace"));
 
-    GreeterWindow *w = new GreeterWindow();
-    w->show();
-
-    // receive focus
-    if (QGuiApplication::primaryScreen() == w->screen()) {
-        w->requestActivate();
-    }
+    QQmlApplicationEngine engine;
+    GreeterWindow w(engine);
 
     return app.exec();
 }

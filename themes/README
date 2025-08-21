@@ -14,7 +14,6 @@ This will save having two rebuild an entire theme each time just to change the b
 
 Context Properties:
   powerInterface
-  screenSize
   greeter
   usersModel
   sessionsModel

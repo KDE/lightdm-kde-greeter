@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021, 2022 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -13,8 +13,6 @@ import QtQuick 2.15
 Item {
     id: desktop
 
-    width: screenSize.width
-    height: screenSize.height
     property bool showDebugInfo: false
     property var previousFocusItem
 

@@ -12,20 +12,18 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QQuickView>
 
 class GreeterWrapper;
+class QQmlApplicationEngine;
 
-class GreeterWindow: public QQuickView
+class GreeterWindow: public QObject
 {
     Q_OBJECT
 
 public:
-    explicit GreeterWindow(QWindow *parent = nullptr);
+    explicit GreeterWindow(QQmlApplicationEngine &engine);
     ~GreeterWindow();
 
 public Q_SLOTS:
     void setRootImage();
-
-protected:
-    void resizeEvent(QResizeEvent *event) override;
 
 private:
     GreeterWrapper *m_greeter;

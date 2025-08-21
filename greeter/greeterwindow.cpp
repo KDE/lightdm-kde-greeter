@@ -17,12 +17,13 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QPixmap>
 #include <QProcess>
 #include <QQmlContext>
-#include <QQmlEngine>
+#include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QScreen>
 #include <QStandardPaths>
 #include <QUrl>
 #include <QWidget>
+#include <QLoggingCategory>
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -46,14 +47,12 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <config.h>
 
-GreeterWindow::GreeterWindow(QWindow *parent)
-    : QQuickView(parent)
-    , m_greeter(new GreeterWrapper(this))
-{
-    QRect screen = QGuiApplication::primaryScreen()->geometry();
-    setGeometry(screen);
+static const QLoggingCategory lc("GreeterCore");
 
-    engine()->addImageProvider(QStringLiteral("icon"), new KQuickIconProvider);
+GreeterWindow::GreeterWindow(QQmlApplicationEngine &engine)
+    : m_greeter(new GreeterWrapper(this))
+{
+    engine.addImageProvider(QStringLiteral("icon"), new KQuickIconProvider);
 
     UsersModel *usersModel = new UsersModel(this);
 
@@ -75,7 +74,7 @@ GreeterWindow::GreeterWindow(QWindow *parent)
     qmlRegisterUncreatableMetaObject(ConnectionEnum::staticMetaObject, "ConnectionEnum", 1, 0, "ConnectionEnum", QStringLiteral("Error: only enums"));
     qRegisterMetaType<ConnectionEnum::Action>();
 
-    engine()->addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
+    engine.addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
 
     auto keyboard = new KeyboardModel(this);
 
@@ -98,22 +97,21 @@ GreeterWindow::GreeterWindow(QWindow *parent)
 
     qDebug() << "Loading" << source;
 
-    rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
-    rootContext()->setContextProperty(QStringLiteral("generalConfig"), new ConfigWrapper(QStringLiteral("greeter"), this));
-    rootContext()->setContextProperty(QStringLiteral("mouseCursor"), cursor);
-    rootContext()->setContextProperty(QStringLiteral("screenSize"), size());
-    rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
-    rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
-    rootContext()->setContextProperty(QStringLiteral("connectionsModel"), new ConnectionsModel(this));
-    rootContext()->setContextProperty(QStringLiteral("keyboard"), keyboard);
-    rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
-    rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
-    rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
-    rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
-    rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));
-    rootContext()->setContextProperty(QStringLiteral("localHostName"), QHostInfo::localHostName());
+    engine.rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
+    engine.rootContext()->setContextProperty(QStringLiteral("generalConfig"), new ConfigWrapper(QStringLiteral("greeter"), this));
+    engine.rootContext()->setContextProperty(QStringLiteral("mouseCursor"), cursor);
+    engine.rootContext()->setContextProperty(QStringLiteral("greeter"), m_greeter);
+    engine.rootContext()->setContextProperty(QStringLiteral("usersModel"), usersModel);
+    engine.rootContext()->setContextProperty(QStringLiteral("connectionsModel"), new ConnectionsModel(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("keyboard"), keyboard);
+    engine.rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));
+    engine.rootContext()->setContextProperty(QStringLiteral("localHostName"), QHostInfo::localHostName());
 
-    setSource(source);
+    engine.load(source);
 
     connect(m_greeter, &GreeterWrapper::aboutToLogin, this, &GreeterWindow::setRootImage);
 }
@@ -122,16 +120,49 @@ GreeterWindow::~GreeterWindow()
 {
 }
 
-void GreeterWindow::resizeEvent(QResizeEvent *event)
+static QPixmap grabScreens()
 {
-    Q_UNUSED(event)
-    rootContext()->setContextProperty(QStringLiteral("screenSize"), event->size());
+    QPixmap result;
+
+    QList<QScreen*> screens = QGuiApplication::screens();
+    if (screens.isEmpty()) return result;
+
+    struct Rag {
+        QPoint pos;
+        QPixmap pixmap;
+    };
+    QList<Rag> rags;
+    rags.reserve(screens.size());
+
+    QRect whole;
+    for (const auto &screen : screens) {
+        QRect g = screen->geometry();
+        whole |= g;
+        QPixmap pix = screen->grabWindow();
+        rags.push_back({ g.topLeft(), pix });
+    }
+    if (whole.isNull()) return result;
+
+    result = QPixmap(whole.size());
+    QPainter painter(&result);
+    result.fill(Qt::black);
+    for (const auto &rag : rags) {
+        painter.drawPixmap(rag.pos, rag.pixmap);
+    }
+
+    return result;
 }
 
 void GreeterWindow::setRootImage()
 {
     if (!m_enableRootImageApp) return;
-    QPixmap pix = screen()->grabWindow(winId());
+
+    QPixmap pix = grabScreens();
+    if (pix.isNull()) {
+        qCWarning(lc,) << "Failed to get root image";
+        return;
+    }
+
     QProcess process;
     process.start(QStandardPaths::findExecutable(QStringLiteral("lightdm-kde-greeter-rootimage"), QStringList { QStringLiteral(LIBEXEC_DIR) }),
         QStringList(), QIODevice::WriteOnly);
