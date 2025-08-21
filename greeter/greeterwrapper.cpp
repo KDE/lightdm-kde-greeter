@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2024 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2024-2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -74,4 +74,9 @@ bool GreeterWrapper::eventFilter(QObject*, QEvent *event)
         m_allowAutologin = false;
     }
     return false;
+}
+
+QString GreeterWrapper::getPlatformName()
+{
+    return QGuiApplication::platformName();
 }

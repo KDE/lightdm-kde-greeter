@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -45,6 +45,7 @@ Item {
         + "\n" + "Device pixel ratio: " + (Screen.devicePixelRatio).toFixed(3)
         + "\n" + (softwareRendering ? "Software rendering" : "Hardware rendering")
         + "\n" + "gridUnit: " + gridUnit + " padding: " + screen.padding
+        + "\n" + "Platform name: " + greeter.platformName
     }
 
     Shadow { source: debugInfo }

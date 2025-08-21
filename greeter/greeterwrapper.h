@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -25,6 +26,7 @@ class GreeterWrapper: public QLightDM::Greeter
     Q_PROPERTY(QString autologinSession READ autologinSessionHint)
     Q_PROPERTY(bool hideUsers READ hideUsersHint CONSTANT)
     Q_PROPERTY(bool showManualLogin READ showManualLoginHint CONSTANT)
+    Q_PROPERTY(QString platformName READ getPlatformName CONSTANT)
 
 public:
     explicit GreeterWrapper(QObject *parent = nullptr);
@@ -46,6 +48,7 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
+    QString getPlatformName();
     void saveLastUserAndSession(const QString &user, const QString &session);
     KSharedConfig::Ptr m_config;
     bool m_allowAutologin = true;
