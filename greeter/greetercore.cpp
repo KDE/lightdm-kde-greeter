@@ -3,11 +3,11 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022-2024 Anton Golubev <golubevan@basealt.ru>
+Copyright (C) 2022-2025 Anton Golubev <golubevan@basealt.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
-#include "greeterwindow.h"
+#include "greetercore.h"
 
 #include <QApplication>
 #include <QDebug>
@@ -49,7 +49,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 static const QLoggingCategory lc("GreeterCore");
 
-GreeterWindow::GreeterWindow(QQmlApplicationEngine &engine)
+GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
     : m_greeter(new GreeterWrapper(this))
 {
     engine.addImageProvider(QStringLiteral("icon"), new KQuickIconProvider);
@@ -113,10 +113,10 @@ GreeterWindow::GreeterWindow(QQmlApplicationEngine &engine)
 
     engine.load(source);
 
-    connect(m_greeter, &GreeterWrapper::aboutToLogin, this, &GreeterWindow::setRootImage);
+    connect(m_greeter, &GreeterWrapper::aboutToLogin, this, &GreeterCore::setRootImage);
 }
 
-GreeterWindow::~GreeterWindow()
+GreeterCore::~GreeterCore()
 {
 }
 
@@ -153,7 +153,7 @@ static QPixmap grabScreens()
     return result;
 }
 
-void GreeterWindow::setRootImage()
+void GreeterCore::setRootImage()
 {
     if (!m_enableRootImageApp) return;
 

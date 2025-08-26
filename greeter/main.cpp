@@ -20,7 +20,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <KConfigGroup>
 
 #include "../about.h"
-#include "greeterwindow.h"
+#include "greetercore.h"
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
                      QStringLiteral("replace"));
 
     QQmlApplicationEngine engine;
-    GreeterWindow w(engine);
+    GreeterCore w(engine);
 
     return app.exec();
 }

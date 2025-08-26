@@ -6,21 +6,21 @@ Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
-#ifndef GREETER_WINDOW_H
-#define GREETER_WINDOW_H
+#ifndef GREETER_CORE_H
+#define GREETER_CORE_H
 
 #include <QQuickView>
 
 class GreeterWrapper;
 class QQmlApplicationEngine;
 
-class GreeterWindow: public QObject
+class GreeterCore: public QObject
 {
     Q_OBJECT
 
 public:
-    explicit GreeterWindow(QQmlApplicationEngine &engine);
-    ~GreeterWindow();
+    explicit GreeterCore(QQmlApplicationEngine &engine);
+    ~GreeterCore();
 
 public Q_SLOTS:
     void setRootImage();
@@ -30,4 +30,4 @@ private:
     bool m_enableRootImageApp = false;
 };
 
-#endif // GREETER_WINDOW_H
+#endif // GREETER_CORE_H
