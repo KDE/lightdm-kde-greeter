@@ -40,14 +40,14 @@ Item {
             }
 
             OtherScreen {
-                visible: primary.parent && parent.parent != screenManager.activeScreen
+                visible: primary.parent && screenManager.activeScreen && parent.parent != screenManager.activeScreen.crop
             }
         }
     }
 
     PrimaryScreen {
         id: primary
-        parent: screenManager.activeScreen
+        parent: screenManager.activeScreen && screenManager.activeScreen.crop
         anchors.fill: parent
         Keys.onPressed: (event) => {
             if (event.key == Qt.Key_F1 || event.key == Qt.Key_P && (event.modifiers & Qt.MetaModifier)) {

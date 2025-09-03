@@ -12,10 +12,10 @@ import QtQuick.Window 2.15
 Item {
     id: manager
 
-    property Item activeScreen: {
-        // default value, will be overwritten
-        let window = manager.windows.objectAt(0)
-        return window ? window.crop : null
+    property QtObject activeScreen
+
+    onActiveScreenChanged: {
+        if (activeScreen) activeScreen.requestActivate()
     }
 
     property Component delegate
@@ -35,7 +35,7 @@ Item {
         // determine the index of the current active screen
         var currentIndex = -1
         for (var i = 0; i < screens.length; ++i) {
-            if (screens[i].crop == activeScreen) {
+            if (screens[i] == activeScreen) {
                 currentIndex = i
                 break
             }
@@ -58,7 +58,7 @@ Item {
         var newX = screens[newIndex].x + xRatio * areaTo.width
         var newY = screens[newIndex].y + yRatio * areaTo.height
 
-        activeScreen = screens[newIndex].crop
+        activeScreen = screens[newIndex]
 
         mouseCursor.move(newX, newY)
     }
@@ -85,12 +85,11 @@ Item {
                 anchors.fill: parent
                 hoverEnabled: true
                 onEntered: {
-                    window.requestActivate()
-                    activeScreen = crop
+                    activeScreen = window
                 }
                 onWidthChanged: {
                     // the width is supposed to change only at startup
-                    if (crop != activeScreen) return
+                    if (window != activeScreen) return
                     // put the mouse cursor inside the primary window
                     var newX = delegateWindow.x + mouseArea.width * 0.3
                     var newY = delegateWindow.y + mouseArea.height * 0.3
