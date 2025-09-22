@@ -39,6 +39,7 @@ target_link_libraries(lightdm-kde-greeter
   ${LIBXCB_LIBRARIES}
   ${LIBXKB_LIBRARIES}
   liblightdm-qt-my
+  PkgConfig::libei
 )
 # PkgConfig::UPOWER
 

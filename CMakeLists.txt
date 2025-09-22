@@ -54,6 +54,7 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(liblightdm REQUIRED IMPORTED_TARGET liblightdm-gobject-1)
 pkg_check_modules(gtk2 REQUIRED IMPORTED_TARGET gtk+-2.0)
+pkg_check_modules(libei REQUIRED IMPORTED_TARGET libei-1.0)
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
