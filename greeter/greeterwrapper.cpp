@@ -76,7 +76,7 @@ bool GreeterWrapper::eventFilter(QObject*, QEvent *event)
     return false;
 }
 
-QString GreeterWrapper::getPlatformName()
+QString GreeterWrapper::getPlatformName() const
 {
     return QGuiApplication::platformName();
 }

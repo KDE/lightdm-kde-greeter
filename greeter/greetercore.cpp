@@ -48,6 +48,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <config.h>
 
 static const QLoggingCategory lc("GreeterCore");
+using namespace Qt::StringLiterals;
 
 GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
     : m_greeter(new GreeterWrapper(this))
@@ -76,7 +77,10 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
 
     engine.addImageProvider(QStringLiteral("face"), new FaceImageProvider(usersModel));
 
-    auto keyboard = new KeyboardModel(this);
+    auto keyboardBackendType = m_greeter->getPlatformName() == u"wayland"_s
+        ? KeyboardModel::BackendType::KWIN
+        : KeyboardModel::BackendType::XCB;
+    auto keyboard = new KeyboardModel(keyboardBackendType, this);
 
     KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
     KConfigGroup configGroup = config.group(QStringLiteral("greeter"));

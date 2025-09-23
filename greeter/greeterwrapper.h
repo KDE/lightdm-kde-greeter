@@ -34,6 +34,7 @@ public:
     QString lastLoggedInUser() const;
     QString lastLoggedInSession() const;
     QString guestLoginName() const;
+    QString getPlatformName() const;
 
 Q_SIGNALS:
     void aboutToLogin();
@@ -48,7 +49,6 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
-    QString getPlatformName();
     void saveLastUserAndSession(const QString &user, const QString &session);
     KSharedConfig::Ptr m_config;
     bool m_allowAutologin = true;

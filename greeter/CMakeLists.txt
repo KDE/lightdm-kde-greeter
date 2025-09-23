@@ -16,6 +16,9 @@ file(GLOB_RECURSE GREETER_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
 list(REMOVE_ITEM GREETER_HDRS rootimageapp.h)
 list(REMOVE_ITEM GREETER_HDRS wifikeeper.h)
 
+set_source_files_properties(keyboard/org.kde.KeyboardLayouts.xml PROPERTIES INCLUDE keyboard/layoutnames.h)
+qt_add_dbus_interface(GREETER_SRCS "keyboard/org.kde.KeyboardLayouts.xml" keyboard_layout_interface)
+
 # Create the greeter
 add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS})
 target_compile_definitions(lightdm-kde-greeter PRIVATE LIBEXEC_DIR="${LIBEXEC_INSTALL_DIR}")

@@ -1,5 +1,6 @@
 /***************************************************************************
 * Copyright (c) 2013 Nikita Mikhaylov <nslqqq@gmail.com>
+* Copyright (c) 2025 Anton Golubev <golubevan@altlinux.org>
 *
 * SPDX-License-Identifier: GPL-2.0-or-later
 ***************************************************************************/
@@ -29,7 +30,13 @@ public:
     Q_PROPERTY(bool enabled READ enabled CONSTANT)
 
 public:
-    KeyboardModel(QObject *parent = nullptr);
+
+    enum class BackendType {
+        XCB,
+        KWIN
+    };
+
+    KeyboardModel(BackendType backendType, QObject *parent = nullptr);
     virtual ~KeyboardModel();
 
 Q_SIGNALS:

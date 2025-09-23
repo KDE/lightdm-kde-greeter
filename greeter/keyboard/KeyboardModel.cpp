@@ -1,5 +1,6 @@
 /***************************************************************************
 * Copyright (c) 2013 Nikita Mikhaylov <nslqqq@gmail.com>
+* Copyright (c) 2025 Anton Golubev <golubevan@altlinux.org>
 *
 * SPDX-License-Identifier: GPL-2.0-or-later
 ***************************************************************************/
@@ -7,16 +8,26 @@
 #include "KeyboardModel.h"
 #include "KeyboardModel_p.h"
 #include "XcbKeyboardBackend.h"
+#include "KWinKeyboardBackend.h"
 
 /**********************************************/
 /* KeyboardModel                              */
 /**********************************************/
 
-KeyboardModel::KeyboardModel(QObject *parent)
+KeyboardModel::KeyboardModel(BackendType backendType, QObject *parent)
     : QObject(parent)
     , d(new KeyboardModelPrivate)
 {
-    m_backend = new XcbKeyboardBackend(d);
+    switch(backendType) {
+
+    case BackendType::XCB:
+        m_backend = new XcbKeyboardBackend(d);
+        break;
+    case BackendType::KWIN:
+        m_backend = new KWinKeyboardBackend(d);
+        break;
+    }
+
     m_backend->init();
     m_backend->connectEventsDispatcher(this);
 }
