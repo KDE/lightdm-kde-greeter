@@ -33,6 +33,7 @@ kcmutils_add_qml_kcm(kcm_lightdm SOURCES ${LIGHTDM_KCM_SRCS} ${LIGHTDM_KCM_HDRS}
 
 # Link against the needed libraries
 target_link_libraries(kcm_lightdm
+    Qt6::DBus
     Qt6::Quick
     KF6::ConfigWidgets
     KF6::I18n
@@ -51,7 +52,7 @@ set(KCMLIGHTDMHELPER_HDRS
 )
 
 add_executable(kcmlightdmhelper ${KCMLIGHTDMHELPER_SRCS} ${KCMLIGHTDMHELPER_HDRS})
-target_link_libraries(kcmlightdmhelper KF6::AuthCore KF6::ConfigCore)
+target_link_libraries(kcmlightdmhelper Qt6::DBus KF6::AuthCore KF6::ConfigCore)
 install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
 # common qml components for the configuration utility

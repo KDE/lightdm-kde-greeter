@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2023-2024 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -11,7 +11,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QQuickItem>
 #include <QFileInfo>
+#include <QDBusUnixFileDescriptor>
 #include <QDir>
+#include <QLoggingCategory>
 
 #include <KAboutData>
 #include <KAuth/Action>
@@ -28,6 +30,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include "themesmodel.h"
 #include "sessionsmodel.h"
 #include "usersmodel.h"
+
+using namespace Qt::StringLiterals;
+static const QLoggingCategory lc("LightDMKcm");
 
 QString LightDMKcm::s_defaultWallpaper = QStringLiteral(GREETER_DEFAULT_WALLPAPER);
 
@@ -83,29 +88,41 @@ static QString deniedIfEmpty(QString errorString)
 void LightDMKcm::save()
 {
     QVariantMap args;
+    QVariantMap options;
+
     for (auto i = m_storedConfig.begin(); i != m_storedConfig.end(); ++i) {
-        args[i.key()] = i.value();
+        options[i.key()] = i.value();
     }
     // overwrite the changed values, if any
     for (auto i = m_updatedConfig.begin(); i != m_updatedConfig.end(); ++i) {
-        args[i.key()] = i.value();
+        options[i.key()] = i.value();
     }
 
     // any entry ending with 'Preview' is treated as an image
     // it can be either a file or a kpackage
     // need to identify a specific file and copy it to the home directory of
     // the greeter
+    // KAuth allows to send fd only at the top level of the args container
+    // therefore all top-level keys not called "options" are files to be copied
+    const QString previewSuffix = u"Preview"_s;
+    for (auto entry = options.begin(); entry != options.end(); ++entry) {
 
-    // "<path>/<id>Preview" -> "<path>/copy_<id>"
-    for (auto entry = args.begin(); entry != args.end(); ++entry) {
-        if(!entry.key().endsWith(QStringLiteral("Preview"))) continue;
-        QString key = entry.key();
-        int sep = key.lastIndexOf(QLatin1Char('/'));
-        QString path = key.left(sep);
-        QString id = key.mid(sep + 1).chopped(7);
-        QString copyEntry = QStringLiteral("%1/copy_%2").arg(path).arg(id);
-        args[copyEntry] = preferredImage(entry.value().toString());
+        if(!entry.key().endsWith(previewSuffix)) continue;
+
+        QString fileName = preferredImage(entry.value().toString());
+
+        QFile file{ fileName };
+        if (!file.open(QIODevice::ReadOnly)) {
+            qCWarning(lc,) << "Can't open file:" << fileName;
+        }
+        QDBusUnixFileDescriptor dbusFD{ file.handle() };
+
+        QString imageKey = entry.key().chopped(previewSuffix.size());
+
+        args[imageKey] = QVariant::fromValue(dbusFD);
     }
+
+    args[u"options"_s] = QVariant::fromValue(options);
 
     KAuth::Action saveAction(QStringLiteral("org.kde.kcontrol.kcmlightdm.save"));
     saveAction.setHelperId(QStringLiteral("org.kde.kcontrol.kcmlightdm"));
