@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=LightDM KDE Greeter
+Name[ar]=مُرحِّب LightDM لكيدي
 Name[ca]=Pantalla de benvinguda de KDE del LightDM
 Name[ca@valencia]=Pantalla de benvinguda de KDE de LightDM
 Name[cs]=Přihlašovací obrazovka LightDM KDE
@@ -34,6 +35,7 @@ Name[uk]=Засіб вітання KDE LightDM
 Name[zh_CN]=LightDM KDE 欢迎屏幕
 Name[zh_TW]=LightDM KDE Greeter
 Comment=This runs the KDE greeter, it should only be run from LightDM
+Comment[ar]=يؤدي هذا إلى تشغيل مُرحِّب كيدي، ويجب تشغيله فقط من LightDM
 Comment[ca]=Això executa la pantalla de benvinguda de KDE, només s'ha d'executar des del LightDM
 Comment[ca@valencia]=Açò executa la pantalla de benvinguda de KDE, només s'ha d'executar des de LightDM
 Comment[de]=Hiermit wird das KDE-Anmeldefenster gestartet. Es sollte nur von LightDM aufgerufen werden

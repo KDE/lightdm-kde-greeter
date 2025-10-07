@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: CC0-1.0
 [Desktop Entry]
 Name=User Bar
+Name[ar]=شريط المستخدم
 Name[ca]=Barra d'usuaris
 Name[ca@valencia]=Barra d'usuaris
 Name[cs]=Pruh uživatelů
@@ -33,6 +34,7 @@ Name[uk]=Панель користувачів
 Name[zh_CN]=用户栏
 Name[zh_TW]=使用者列
 Comment=Pick your user from the user bar.
+Comment[ar]=اختر المستخدم الخاص بك من شريط المستخدم.
 Comment[ca]=Trieu el vostre usuari de la barra d'usuaris.
 Comment[ca@valencia]=Seleccioneu el vostre usuari de la barra d'usuaris.
 Comment[cs]=Vyberte si svůj účet z pruhu uživatelů.
