@@ -1,0 +1,190 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the lightdm-kde-greeter package.
+# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-05-20 00:44+0000\n"
+"PO-Revision-Date: 2025-10-06 12:22+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: config.qml:37
+#, kde-format
+msgid "Background image:"
+msgstr "صورة الخلفية:"
+
+#: NetworkWidget.qml:24
+#, kde-format
+msgid "The connection will be active only on the login screen."
+msgstr "الاتصال سيبقى نشطًا في شاشة الولوج فقط."
+
+#: NetworkWidget.qml:61
+#, kde-format
+msgid "Disconnect from %1 ?"
+msgstr "افصِل عن %1 ؟"
+
+#: NetworkWidget.qml:64
+#, kde-format
+msgid "Abort connecting to %1 ?"
+msgstr "أجهِض الاتصال بـ %1 ؟"
+
+#: NetworkWidget.qml:68
+#, kde-format
+msgid "Connect to %1 ?"
+msgstr "متصل ب %1 ؟"
+
+#: NetworkWidget.qml:72
+#, kde-format
+msgid "Connect to an insecure access point %1 ?"
+msgstr "اتّصِل بنقطة وصول غير آمنة %1 ؟"
+
+#: NetworkWidget.qml:77
+#, kde-format
+msgid "Enter the password to connect to %1"
+msgstr "أدخِل كلمة السّر للاتصال بـ %1"
+
+#: NetworkWidget.qml:82
+#, kde-format
+msgid "Enter login and password to connect to %1"
+msgstr "أدخِل اسم الولوج وكلمة السّر للاتصال بـ %1"
+
+#: NetworkWidget.qml:86 NetworkWidget.qml:92
+#, kde-format
+msgid "%1: Connection error, try again."
+msgstr "%1: خطأ في الاتصال، حاوِل مجدّدًا."
+
+#: NetworkWidget.qml:97
+#, kde-format
+msgid "Provide the secrets to connect to %1:"
+msgstr "وفِّر الأسرار للاتصال بـ %1:"
+
+#: NetworkWidget.qml:101
+#, kde-format
+msgid "The security protocol is not supported for %1"
+msgstr "بروتوكول الأمان غير مدعوم لـ %1"
+
+#: NetworkWidget.qml:104 NetworkWidget.qml:108
+#, kde-format
+msgid "Failed to connect to %1"
+msgstr "فشل الاتصال بـ %1"
+
+#: NetworkWidget.qml:112
+#, kde-format
+msgid "Error: Can't find access point %1"
+msgstr "خطأ: لا يمكن إيجاد نقطة الوصول %1"
+
+#: NetworkWidget.qml:440
+#, kde-format
+msgid "Login"
+msgstr "ولوج"
+
+#: NetworkWidget.qml:455
+#, kde-format
+msgid "Password"
+msgstr "كلمة السّر"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Disable wireless"
+msgstr "عطِّل اللاسلكي"
+
+#: NetworkWidget.qml:507
+#, kde-format
+msgid "Enable wireless"
+msgstr "فعِّل اللاسلكي"
+
+#: NetworkWidget.qml:508 NetworkWidget.qml:549
+#, kde-format
+msgid "Action prohibited"
+msgstr "الإجراء محظور"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Disable networking"
+msgstr "عطِّل الشبكات"
+
+#: NetworkWidget.qml:548
+#, kde-format
+msgid "Enable networking"
+msgstr "فعِّل الشبكات"
+
+#: OtherScreen.qml:27
+#, kde-format
+msgid "Press %1 to change the primary screen"
+msgstr "اضغَط %1 لتبديل الشاشة مبدئية"
+
+#: PrimaryScreen.qml:90
+#, kde-format
+msgid "Login failed"
+msgstr "فشل الولوج"
+
+#: PrimaryScreen.qml:518
+#, kde-format
+msgid "Caps Lock is on"
+msgstr "مفتاح Caps Lock مفعّل"
+
+#: PrimaryScreen.qml:521
+#, kde-format
+msgid "Num Lock is on"
+msgstr "مفتاح Num Lock مفعّل"
+
+#: PrimaryScreen.qml:524
+#, kde-format
+msgid "Caps Lock and Num Lock is on"
+msgstr "مفتاحا Caps Lock و Num Lock مفعّلان"
+
+#: PrimaryScreen.qml:537
+#, kde-format
+msgid "Log in"
+msgstr "لِج"
+
+#: PrimaryScreen.qml:556
+#, kde-format
+msgid "Log in as another user"
+msgstr "لِج بصفة مستخدم آخر"
+
+#: PrimaryScreen.qml:715
+#, kde-format
+msgid "Keyboard layout"
+msgstr "تخطيط لوحة المفاتيح"
+
+#: PrimaryScreen.qml:760
+#, kde-format
+msgid "Desktop session"
+msgstr "جلسة سطح المكتب"
+
+#: PrimaryScreen.qml:787
+#, kde-format
+msgid "Suspend"
+msgstr "علّق"
+
+#: PrimaryScreen.qml:799
+#, kde-format
+msgid "Hibernate"
+msgstr "أسبِت"
+
+#: PrimaryScreen.qml:812
+#, kde-format
+msgid "Restart"
+msgstr "أعد التّشغيل"
+
+#: PrimaryScreen.qml:824
+#, kde-format
+msgid "Shutdown"
+msgstr "أطفئ"
+
+#: PrimaryScreen.qml:854
+#, kde-format
+msgctxt "Button to show/hide virtual keyboard"
+msgid "Virtual Keyboard"
+msgstr "لوحة مفاتيح افتراضية"
