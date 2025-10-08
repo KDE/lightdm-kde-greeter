@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Configure Login Manager",
+        "Description[ar]": "اضبط مدير الولوج",
         "Description[ca@valencia]": "Configura el gestor d'inici de sessió",
         "Description[ca]": "Configura el gestor d'inici de sessió",
         "Description[cs]": "Nastavit správce přihlášení...",
@@ -36,6 +37,7 @@
         "Description[zh_TW]": "設定登入管理器",
         "Icon": "preferences-system-login",
         "Name": "Login Screen (LightDM)",
+        "Name[ar]": "شاشة الولوج (LightDM)",
         "Name[ca@valencia]": "Pantalla d'inici de sessió (LightDM)",
         "Name[ca]": "Pantalla d'inici de sessió (LightDM)",
         "Name[cs]": "Přihlašovací obrazovka (LightDM)",
@@ -72,6 +74,7 @@
         ]
     },
     "X-KDE-Keywords": "lightdm,display manager,themes,login theme,login screen,login skin,login visual,login look,logout,enter,authentication screen,sync settings,synchronize settings,session,default session,default user,user uid,login as,authenticate as,command to shutdown,command to restart",
+    "X-KDE-Keywords[ar]": "lightdm,مدير العرض,السمات,سمة تسجيل الدخول,شاشة تسجيل الدخول,واجهة تسجيل الدخول,مرئيات تسجيل الدخول,مظهر تسجيل الدخول,تسجيل الخروج,الدخول,شاشة الاستيثاق,إعدادات المزامنة,إعدادات المزامنة,الجلسة,الجلسة المبدئية,المستخدم المبدئي,معرف المستخدم,تسجيل الدخول باسم,الاستيثاق باسم,أمر إيقاف التشغيل,أمر إعادة التشغيل",
     "X-KDE-Keywords[ca@valencia]": "lightdm,gestor de pantalla,temes,tema d'inici de sessió,pantalla d'inici de sessió,aparença d'inici de sessió,aspecte d'inici de sessió,eixida de sessió,entrada,pantalla d'autenticació,paràmetres de sincronització,configuració de sincronització,sessió,sessió predeterminada,usuari predeterminat,uid d'usuari,inici de sessió com,autenticació com,ordre per parar,ordre per reiniciar",
     "X-KDE-Keywords[ca]": "lightdm,gestor de pantalla,temes,tema d'inici de sessió,pantalla d'inici de sessió,aparença d'inici de sessió,aspecte d'inici de sessió,sortida de sessió,entrada,pantalla d'autenticació,paràmetres de sincronització,configuració de sincronització,sessió,sessió predeterminada,usuari predeterminat,uid d'usuari,inici de sessió com,autenticació com,ordre per a aturar,ordre per a reiniciar",
     "X-KDE-Keywords[de]": "LightDM,Anzeigeverwaltung,Motive,Designs,Anmeldebildschirm-Design,Anmeldebildschirm-Motiv,Anmeldebildschirm,Anmeldeoberfläche,visuelle Anmeldung,grafische Anmeldung,Aussehen des Anmeldebildschirms,Abmelden,Abmeldung,Eingabetaste,Synchronisierungseinstellungen,Einstellungen abgleichen,Einstellungen synchronisieren,Sitzung,Standardsitzung,Standardbenutzer,eindeutige Benutzerkennung,UUID,Anmeldung als,anmelden als,authentifizieren als,Befehl zum Herunterfahren,Befehl zum Neustart",
