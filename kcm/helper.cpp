@@ -18,9 +18,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QFile>
 #include <QUrl>
 
+#include <pwd.h>
+#include <unistd.h>
+
 #include "config.h"
 
 using namespace Qt::StringLiterals;
+
+static const char *s_greeterUserName = "_ldm";
 
 struct Helper::ParsedKey {
 
@@ -102,6 +107,41 @@ private:
     QSharedPointer<KConfig> m_greeterConfig;
 };
 
+static bool drop_privileges(const char *username)
+{
+    auto pw = getpwnam(username);
+    if (!pw) {
+        qWarning() << "Failed to retrieve the user database entry";
+        return false;
+    }
+
+    if (setegid(pw->pw_gid)) {
+        qWarning() << "Failed to set gid:" << strerror(errno);
+        return false;
+    }
+
+    if (seteuid(pw->pw_uid)) {
+        qWarning() << "Failed to set uid:" << strerror(errno);
+        return false;
+    }
+
+    return true;
+}
+
+static bool reset_privileges()
+{
+    if (setegid(0)) {
+        qWarning() << "Failed to reset gid:" << strerror(errno);
+        return false;
+    }
+
+    if (seteuid(0)) {
+        qWarning() << "Failed to reset uid:" << strerror(errno);
+        return false;
+    }
+    return true;
+}
+
 KAuth::ActionReply Helper::save(const QVariantMap &args)
 {
     const QString optionsKey = u"options"_s;
@@ -130,6 +170,10 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
     // all keys except "options" carry in their value file descriptors of files
     // that need to be copied to the home directory of the greeter user
+    if (!drop_privileges(s_greeterUserName)) {
+        return setReplyError(u"Can't drop privileges to greeter user (%1)"_s.arg(s_greeterUserName));
+    }
+
     for (auto i = args.constBegin() ; i != args.constEnd() ; ++i)
     {
         if (i.key() == optionsKey) continue;
@@ -150,6 +194,8 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
         config->group(p.groupName).writeEntry(p.keyName, ldmPath);
     }
+
+    if (!reset_privileges()) return setReplyError(u"Can't reset privileges"_s);
 
     configs.sync();
 
