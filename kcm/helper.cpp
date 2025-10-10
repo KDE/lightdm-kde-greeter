@@ -112,19 +112,18 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
     auto options = args[optionsKey].value<QVariantMap>();
 
+    auto setReplyError = [&errorReply](const QString &errorMessage) {
+        errorReply.setErrorDescription(errorMessage);
+        return errorReply;
+    };
+
     for (auto i = options.constBegin(); i != options.constEnd(); ++i)
     {
         auto p = ParsedKey::parse(i.key(), errorMessage);
-        if (!errorMessage.isEmpty()) {
-            errorReply.setErrorDescription(errorMessage);
-            return errorReply;
-        }
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         auto config = configs.getByFilename(p.fileName, errorMessage);
-        if (!errorMessage.isEmpty()) {
-            errorReply.setErrorDescription(errorMessage);
-            return errorReply;
-        }
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         config->group(p.groupName).writeEntry(p.keyName, i.value());
     }
@@ -137,27 +136,17 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
         auto dbusFD = i.value().value<QDBusUnixFileDescriptor>();
         if (!dbusFD.isValid()) {
-            errorReply.setErrorDescription(u"Invalid file descriptor for key: %1"_s.arg(i.key()));
-            return errorReply;
+            return setReplyError(u"Invalid file descriptor for key: %1"_s.arg(i.key()));
         }
 
         auto p = ParsedKey::parse(i.key(), errorMessage);
-        if (!errorMessage.isEmpty()) {
-            errorReply.setErrorDescription(errorMessage);
-            return errorReply;
-        }
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         auto config = configs.getByFilename(p.fileName, errorMessage);
-        if (!errorMessage.isEmpty()) {
-            errorReply.setErrorDescription(errorMessage);
-            return errorReply;
-        }
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
-        QString ldmPath = copyImage(dbusFD.fileDescriptor(), p.groupName, p.keyName);
-        if (ldmPath.isEmpty()) {
-            errorReply.setErrorDescription(u"Error when copying file for key: %s"_s.arg(i.key()));
-            return errorReply;
-        }
+        QString ldmPath = copyImage(dbusFD.fileDescriptor(), p.groupName, p.keyName, errorMessage);
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         config->group(p.groupName).writeEntry(p.keyName, ldmPath);
     }
@@ -173,35 +162,32 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
  * @param sourceFD file descriptor
  * @param theme theme name, in which the image will be used
  * @param name filename, must not contain subdirectories, they are ignored
- * @return path to the resulting file, empty string means error
+ * @param errorMessage reference to string, to write an error in it
+ * @return path to the resulting file
  */
-QString Helper::copyImage(int sourceFD, QString theme, QString name)
+QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &errorMessage)
 {
+    auto setError = [&errorMessage] (const QString &msg) {
+        errorMessage = msg;
+        return QString{};
+    };
     // in case anyone put some path instead of name
     theme = QFileInfo(theme).fileName();
-    if (theme.isEmpty()) {
-        qWarning() << "Theme is empty";
-        return QString{};
-    }
+    if (theme.isEmpty()) return setError(u"Theme is empty"_s);
 
     name = QFileInfo(name).fileName();
-    if (name.isEmpty()) {
-        qWarning() << "Name is empty";
-        return QString{};
-    }
+    if (name.isEmpty()) return setError(u"Name is empty"_s);
 
     QFile source;
     if (!source.open(sourceFD, QFile::ReadOnly)) {
-        qWarning() << "Can't open file from FD:" << sourceFD;
-        return QString{};
+        return setError(u"Can't open file from FD: %1"_s.arg(sourceFD));
     }
 
     // that should be enough
     constexpr qint64 maxImageFileSize = 1024 * 1024 * 50;
 
     if (source.size() > maxImageFileSize) {
-        qWarning() << "Image size is too large:" << source.size() << "max size:" << maxImageFileSize;
-        return QString{};
+        return setError(u"Image size is too large: %1 max size %2"_s.arg(source.size()).arg(maxImageFileSize));
     }
 
     QFile dest{ QStringLiteral("%1/%2/%3").arg(QStringLiteral(GREETER_IMAGES_DIR)).arg(theme).arg(name) };
@@ -211,26 +197,22 @@ QString Helper::copyImage(int sourceFD, QString theme, QString name)
     } else {
         QDir dir{ QFileInfo{ dest }.absolutePath() };
         if (!dir.exists() && !dir.mkpath(QStringLiteral("."))) {
-            qWarning() << "Can't create target directory: " << dir.absolutePath();
-            return QString{};
+            return setError(u"Can't create target directory: %1"_s.arg(dir.absolutePath()));
         }
     }
 
     if (!dest.open(QFile::WriteOnly)) {
-        qWarning() << "Can't open destination file for writing:" << dest.fileName();
-        return QString{};
+        return setError(u"Can't open destination file for writing: %1"_s.arg(dest.fileName()));
     }
 
     auto mappedSource = source.map(0, source.size());
     if (!mappedSource) {
-        qWarning() << "Can't map source file:" << source.fileName();
-        return QString{};
+        return setError(u"Can't map source file: %1"_s.arg(source.fileName()));
     }
 
     qint64 written = dest.write((char*)mappedSource, source.size());
     if (written != source.size()) {
-        qWarning() << "Not the whole image is copied, copied" << written << "from" << source.fileName();
-        return QString{};
+        return setError(u"Not the whole image is copied, copied %1 from %2"_s.arg(written).arg(source.fileName()));
     }
 
     return dest.fileName();

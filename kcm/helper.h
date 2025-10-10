@@ -21,7 +21,7 @@ public Q_SLOTS:
     KAuth::ActionReply save(const QVariantMap &args);
 
 private:
-    QString copyImage(int sourceFD, QString theme, QString name);
+    QString copyImage(int sourceFD, QString theme, QString name, QString &errorMessage);
 
     struct ParsedKey;
     class Configs;
