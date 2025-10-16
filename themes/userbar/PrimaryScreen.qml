@@ -52,6 +52,10 @@ Item {
 
     Component.onCompleted: {
         startDefaultScreen()
+        if (isFallbackSession) {
+            putMessage(i18n("A fallback version of the login screen is running"), 1)
+            dissolveMessages()
+        }
     }
 
     Timer {

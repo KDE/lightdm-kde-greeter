@@ -99,6 +99,8 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
         }
     }
 
+    const bool isFallbackSession = qgetenv("LIGHTDM_USING_FALLBACK_GREETER") == "1";
+
     qDebug() << "Loading" << source;
 
     engine.rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
@@ -114,6 +116,7 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
     engine.rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
     engine.rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));
     engine.rootContext()->setContextProperty(QStringLiteral("localHostName"), QHostInfo::localHostName());
+    engine.rootContext()->setContextProperty(QStringLiteral("isFallbackSession"), isFallbackSession);
 
     engine.load(source);
 
