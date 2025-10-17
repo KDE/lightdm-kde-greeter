@@ -58,8 +58,6 @@ Item {
         var newX = screens[newIndex].x + xRatio * areaTo.width
         var newY = screens[newIndex].y + yRatio * areaTo.height
 
-        activeScreen = screens[newIndex]
-
         mouseCursor.move(newX, newY)
     }
 
