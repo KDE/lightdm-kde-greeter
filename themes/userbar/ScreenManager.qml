@@ -15,7 +15,7 @@ Item {
     property QtObject activeScreen
 
     onActiveScreenChanged: {
-        if (activeScreen) activeScreen.requestActivate()
+        if (activeScreen) screensModel.setFocusedWindow(activeScreen)
     }
 
     property Component delegate

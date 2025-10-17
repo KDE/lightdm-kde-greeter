@@ -101,6 +101,9 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
 
     const bool isFallbackSession = qgetenv("LIGHTDM_USING_FALLBACK_GREETER") == "1";
 
+    auto screensModel = new ScreensModel(this);
+    connect(qGuiApp, &QGuiApplication::focusWindowChanged, screensModel, &ScreensModel::maintainFocusedWindow);
+
     qDebug() << "Loading" << source;
 
     engine.rootContext()->setContextProperty(QStringLiteral("config"), new ConfigWrapper(QStringLiteral("lightdm_theme_") + theme, this));
@@ -111,7 +114,7 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
     engine.rootContext()->setContextProperty(QStringLiteral("connectionsModel"), new ConnectionsModel(this));
     engine.rootContext()->setContextProperty(QStringLiteral("keyboard"), keyboard);
     engine.rootContext()->setContextProperty(QStringLiteral("sessionsModel"), new SessionsModel(this));
-    engine.rootContext()->setContextProperty(QStringLiteral("screensModel"), new ScreensModel(this));
+    engine.rootContext()->setContextProperty(QStringLiteral("screensModel"), screensModel);
     engine.rootContext()->setContextProperty(QStringLiteral("power"), new QLightDM::PowerInterface(this));
     engine.rootContext()->setContextProperty(QStringLiteral("plasmaTheme"), new Plasma::Theme(this));
     engine.rootContext()->setContextProperty(QStringLiteral("defaultWallpaper"), QStringLiteral(GREETER_DEFAULT_WALLPAPER));

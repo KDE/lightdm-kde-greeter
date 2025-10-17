@@ -3,6 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
+Copyright (C) 2025 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -11,6 +12,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QApplication>
 #include <QScreen>
+#include <QWindow>
 
 ScreensModel::ScreensModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -88,4 +90,12 @@ void ScreensModel::loadScreens()
     }
 
     endResetModel();
+}
+
+void ScreensModel::maintainFocusedWindow()
+{
+    auto current = QGuiApplication::focusWindow();
+    if (m_focusedWindow && current != m_focusedWindow) {
+        m_focusedWindow->requestActivate();
+    }
 }
