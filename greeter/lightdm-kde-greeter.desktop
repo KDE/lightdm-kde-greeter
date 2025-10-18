@@ -38,6 +38,7 @@ Comment=This runs the KDE greeter, it should only be run from LightDM
 Comment[ar]=يؤدي هذا إلى تشغيل مُرحِّب كيدي، ويجب تشغيله فقط من LightDM
 Comment[ca]=Això executa la pantalla de benvinguda de KDE, només s'ha d'executar des del LightDM
 Comment[ca@valencia]=Açò executa la pantalla de benvinguda de KDE, només s'ha d'executar des de LightDM
+Comment[cs]=Toto spouští uvítací obrazovku KDE, která by měla být spuštěna pouze z LightDM
 Comment[de]=Hiermit wird das KDE-Anmeldefenster gestartet. Es sollte nur von LightDM aufgerufen werden
 Comment[en_GB]=This runs the KDE greeter, it should only be run from LightDM
 Comment[eo]=Ĉi tio ruligas la KDE-salutanton, ĝi devus nur lanĉiĝi el LightDM
