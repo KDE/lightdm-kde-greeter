@@ -150,12 +150,12 @@ public:
     bool reset()
     {
         if (setegid(0)) {
-            qWarning() << "Failed to reset gid:" << strerror(errno);
+            qCritical() << "Failed to reset gid:" << strerror(errno);
             return false;
         }
 
         if (seteuid(0)) {
-            qWarning() << "Failed to reset uid:" << strerror(errno);
+            qCritical() << "Failed to reset uid:" << strerror(errno);
             return false;
         }
 
@@ -229,7 +229,12 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         config->group(p.groupName).writeEntry(p.keyName, ldmPath);
     }
 
-    if (!privileges.reset()) return setReplyError(u"Can't reset privileges"_s);
+    if (!privileges.reset()) {
+        // If resetting privileges fails then there is a bigger issue at hand
+        // and the helper should actually kill itself, because it can no longer
+        // fulfill its purpose.
+        exit(1);
+    }
 
     configs.sync();
 
