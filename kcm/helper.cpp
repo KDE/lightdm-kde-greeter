@@ -18,6 +18,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QFile>
 #include <QUrl>
 
+#include <grp.h>
 #include <pwd.h>
 #include <unistd.h>
 
@@ -107,40 +108,72 @@ private:
     QSharedPointer<KConfig> m_greeterConfig;
 };
 
-static bool drop_privileges(const char *username)
-{
-    auto pw = getpwnam(username);
-    if (!pw) {
-        qWarning() << "Failed to retrieve the user database entry";
-        return false;
+class Helper::Privileges {
+
+public:
+    bool drop(const char *username)
+    {
+        auto pw = getpwnam(username);
+        if (!pw) {
+            qWarning() << "Failed to retrieve the user database entry";
+            return false;
+        }
+
+        if (setegid(pw->pw_gid)) {
+            qWarning() << "Failed to set gid:" << strerror(errno);
+            return false;
+        }
+
+        m_groupListSize = getgroups(sizeof(m_groupList) / sizeof(m_groupList[0]), m_groupList);
+
+        if (m_groupListSize < 0) {
+            qWarning() << "Failed to get groups:" << strerror(errno);
+            return false;
+        }
+
+        if (m_groupListSize > 0) {
+            // drop any supplementary group membership
+            if (setgroups(0, nullptr)) {
+                qWarning() << "Failed to unset groups:" << strerror(errno);
+                return false;
+            }
+        }
+
+        if (seteuid(pw->pw_uid)) {
+            qWarning() << "Failed to set uid:" << strerror(errno);
+            return false;
+        }
+
+        return true;
     }
 
-    if (setegid(pw->pw_gid)) {
-        qWarning() << "Failed to set gid:" << strerror(errno);
-        return false;
+    bool reset()
+    {
+        if (setegid(0)) {
+            qWarning() << "Failed to reset gid:" << strerror(errno);
+            return false;
+        }
+
+        if (seteuid(0)) {
+            qWarning() << "Failed to reset uid:" << strerror(errno);
+            return false;
+        }
+
+        if (m_groupListSize > 0) {
+            // get back supplementary group membership
+            if (setgroups(m_groupListSize, m_groupList)) {
+                qWarning() << "Failed to get back groups:" << strerror(errno);
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    if (seteuid(pw->pw_uid)) {
-        qWarning() << "Failed to set uid:" << strerror(errno);
-        return false;
-    }
-
-    return true;
-}
-
-static bool reset_privileges()
-{
-    if (setegid(0)) {
-        qWarning() << "Failed to reset gid:" << strerror(errno);
-        return false;
-    }
-
-    if (seteuid(0)) {
-        qWarning() << "Failed to reset uid:" << strerror(errno);
-        return false;
-    }
-    return true;
-}
+private:
+    int m_groupListSize{};
+    gid_t m_groupList[NGROUPS_MAX]{};
+};
 
 KAuth::ActionReply Helper::save(const QVariantMap &args)
 {
@@ -170,7 +203,8 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
 
     // all keys except "options" carry in their value file descriptors of files
     // that need to be copied to the home directory of the greeter user
-    if (!drop_privileges(s_greeterUserName)) {
+    Privileges privileges;
+    if (!privileges.drop(s_greeterUserName)) {
         return setReplyError(u"Can't drop privileges to greeter user (%1)"_s.arg(s_greeterUserName));
     }
 
@@ -195,7 +229,7 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         config->group(p.groupName).writeEntry(p.keyName, ldmPath);
     }
 
-    if (!reset_privileges()) return setReplyError(u"Can't reset privileges"_s);
+    if (!privileges.reset()) return setReplyError(u"Can't reset privileges"_s);
 
     configs.sync();
 

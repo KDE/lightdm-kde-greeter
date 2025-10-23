@@ -25,6 +25,7 @@ private:
 
     struct ParsedKey;
     class Configs;
+    class Privileges;
 };
 
 #endif
