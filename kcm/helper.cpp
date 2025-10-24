@@ -19,8 +19,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QUrl>
 
 #include <grp.h>
+#include <fcntl.h>
 #include <pwd.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
 #include "config.h"
 
@@ -175,6 +177,28 @@ private:
     gid_t m_groupList[NGROUPS_MAX]{};
 };
 
+static bool check_fd_sanity(int fd)
+{
+    struct stat s;
+    if (fstat(fd, &s)) {
+        qWarning() << "Failed to get file params:" << strerror(errno);
+        return false;
+    }
+
+    if (!S_ISREG(s.st_mode)) {
+        qWarning() << "Provided file is not regular";
+        return false;
+    };
+
+    int flags = fcntl(fd, F_GETFL);
+    if ((flags & (O_PATH|O_DIRECTORY)) != 0) {
+        qWarning() << "Provided file is a directory or an O_PATH file descriptor";
+        return false;
+    }
+
+    return true;
+}
+
 KAuth::ActionReply Helper::save(const QVariantMap &args)
 {
     const QString optionsKey = u"options"_s;
@@ -215,6 +239,10 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         auto dbusFD = i.value().value<QDBusUnixFileDescriptor>();
         if (!dbusFD.isValid()) {
             return setReplyError(u"Invalid file descriptor for key: %1"_s.arg(i.key()));
+        }
+
+        if (!check_fd_sanity(dbusFD.fileDescriptor())) {
+            return setReplyError(u"Invalid file for key: %1"_s.arg(i.key()));
         }
 
         auto p = ParsedKey::parse(i.key(), errorMessage);
