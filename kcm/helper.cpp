@@ -285,11 +285,13 @@ QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &er
         return QString{};
     };
     // in case anyone put some path instead of name
-    theme = QFileInfo(theme).fileName();
+    theme = QFileInfo(theme).fileName().trimmed();
     if (theme.isEmpty()) return setError(u"Theme is empty"_s);
+    if (theme == u".."_s) return setError(u"Theme is equal to '..'"_s);
 
-    name = QFileInfo(name).fileName();
+    name = QFileInfo(name).fileName().trimmed();
     if (name.isEmpty()) return setError(u"Name is empty"_s);
+    if (name == u".."_s) return setError(u"Name is equal to '..'"_s);
 
     QFile source;
     if (!source.open(sourceFD, QFile::ReadOnly)) {
