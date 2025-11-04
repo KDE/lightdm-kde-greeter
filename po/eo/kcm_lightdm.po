@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2025-11-04 00:43+0000\n"
 "PO-Revision-Date: 2024-06-30 21:25+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -28,12 +28,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "olivermkellogg@gmail.com"
 
-#: lightdmkcm.cpp:80
+#: lightdmkcm.cpp:85
 #, kde-format
 msgid "Access denied"
 msgstr "Aliro malakceptita"
 
-#: lightdmkcm.cpp:117
+#: lightdmkcm.cpp:134
 #, kde-format
 msgid "Save settings failed:"
 msgstr "Konservado de agordo malsukcesis:"

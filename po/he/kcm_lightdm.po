@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2025-11-04 00:43+0000\n"
 "PO-Revision-Date: 2024-10-25 22:17+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -28,12 +28,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
-#: lightdmkcm.cpp:80
+#: lightdmkcm.cpp:85
 #, kde-format
 msgid "Access denied"
 msgstr "הגישה נדחתה"
 
-#: lightdmkcm.cpp:117
+#: lightdmkcm.cpp:134
 #, kde-format
 msgid "Save settings failed:"
 msgstr "שמירת ההגדרות נכשלה:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-25 01:49+0000\n"
+"POT-Creation-Date: 2025-11-04 00:43+0000\n"
 "PO-Revision-Date: 2024-06-05 08:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -28,12 +28,12 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yurchor@ukr.net"
 
-#: lightdmkcm.cpp:80
+#: lightdmkcm.cpp:85
 #, kde-format
 msgid "Access denied"
 msgstr "Доступ заборонено"
 
-#: lightdmkcm.cpp:117
+#: lightdmkcm.cpp:134
 #, kde-format
 msgid "Save settings failed:"
 msgstr "Не вдалося зберегти параметри:"
