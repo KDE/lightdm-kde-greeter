@@ -251,7 +251,8 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         auto config = configs.getByFilename(p.fileName, errorMessage);
         if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
-        QString ldmPath = copyImage(dbusFD.fileDescriptor(), p.groupName, p.keyName, errorMessage);
+        QString ldmPath{};
+        errorMessage = copyImage(dbusFD.fileDescriptor(), p.groupName, p.keyName, ldmPath);
         if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         config->group(p.groupName).writeEntry(p.keyName, ldmPath);
@@ -275,34 +276,30 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
  * @param sourceFD file descriptor
  * @param theme theme name, in which the image will be used
  * @param name filename, must not contain subdirectories, they are ignored
- * @param errorMessage reference to string, to write an error in it
- * @return path to the resulting file
+ * @param out argument, path to the resulting file
+ * @return errorMessage reference to string, to write an error in it
  */
-QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &errorMessage)
+QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &ldmPath)
 {
-    auto setError = [&errorMessage] (const QString &msg) {
-        errorMessage = msg;
-        return QString{};
-    };
     // in case anyone put some path instead of name
     theme = QFileInfo(theme).fileName().trimmed();
-    if (theme.isEmpty()) return setError(u"Theme is empty"_s);
-    if (theme == u".."_s) return setError(u"Theme is equal to '..'"_s);
+    if (theme.isEmpty()) return u"Theme is empty"_s;
+    if (theme == u".."_s) return u"Theme is equal to '..'"_s;
 
     name = QFileInfo(name).fileName().trimmed();
-    if (name.isEmpty()) return setError(u"Name is empty"_s);
-    if (name == u".."_s) return setError(u"Name is equal to '..'"_s);
+    if (name.isEmpty()) return u"Name is empty"_s;
+    if (name == u".."_s) return u"Name is equal to '..'"_s;
 
     QFile source;
     if (!source.open(sourceFD, QFile::ReadOnly)) {
-        return setError(u"Can't open file from FD: %1"_s.arg(sourceFD));
+        return u"Can't open file from FD: %1"_s.arg(sourceFD);
     }
 
     // that should be enough
     constexpr qint64 maxImageFileSize = 1024 * 1024 * 50;
 
     if (source.size() > maxImageFileSize) {
-        return setError(u"Image size is too large: %1 max size %2"_s.arg(source.size()).arg(maxImageFileSize));
+        return u"Image size is too large: %1 max size %2"_s.arg(source.size()).arg(maxImageFileSize);
     }
 
     QFile dest{ QStringLiteral("%1/%2/%3").arg(QStringLiteral(GREETER_IMAGES_DIR)).arg(theme).arg(name) };
@@ -312,25 +309,26 @@ QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &er
     } else {
         QDir dir{ QFileInfo{ dest }.absolutePath() };
         if (!dir.exists() && !dir.mkpath(QStringLiteral("."))) {
-            return setError(u"Can't create target directory: %1"_s.arg(dir.absolutePath()));
+            return u"Can't create target directory: %1"_s.arg(dir.absolutePath());
         }
     }
 
     if (!dest.open(QFile::WriteOnly)) {
-        return setError(u"Can't open destination file for writing: %1"_s.arg(dest.fileName()));
+        return u"Can't open destination file for writing: %1"_s.arg(dest.fileName());
     }
 
     auto mappedSource = source.map(0, source.size());
     if (!mappedSource) {
-        return setError(u"Can't map source file: %1"_s.arg(source.fileName()));
+        return u"Can't map source file: %1"_s.arg(source.fileName());
     }
 
     qint64 written = dest.write((char*)mappedSource, source.size());
     if (written != source.size()) {
-        return setError(u"Not the whole image is copied, copied %1 from %2"_s.arg(written).arg(source.fileName()));
+        return u"Not the whole image is copied, copied %1 from %2"_s.arg(written).arg(source.fileName());
     }
 
-    return dest.fileName();
+    ldmPath = dest.fileName();
+    return {};
 }
 
 KAUTH_HELPER_MAIN("org.kde.kcontrol.kcmlightdm", Helper)
