@@ -110,15 +110,21 @@ void LightDMKcm::save()
         if(!entry.key().endsWith(previewSuffix)) continue;
 
         QString fileName = preferredImage(entry.value().toString());
+        QString imageKey = entry.key().chopped(previewSuffix.size());
+
+        if (fileName.isEmpty()) {
+            // we want to delete the file
+            args[imageKey] = QVariant{};
+            continue;
+        }
 
         QFile file{ fileName };
         if (!file.open(QIODevice::ReadOnly)) {
             qCWarning(lc,) << "Can't open file:" << fileName;
+            continue;
         }
+
         QDBusUnixFileDescriptor dbusFD{ file.handle() };
-
-        QString imageKey = entry.key().chopped(previewSuffix.size());
-
         args[imageKey] = QVariant::fromValue(dbusFD);
     }
 
