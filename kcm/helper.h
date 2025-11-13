@@ -22,6 +22,7 @@ public Q_SLOTS:
 
 private:
     QString copyImage(int sourceFD, QString theme, QString name, QString &ldmPath);
+    QString removeImage(QString theme, QString name);
 
     struct ParsedKey;
     class Configs;

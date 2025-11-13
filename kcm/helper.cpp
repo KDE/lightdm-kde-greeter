@@ -236,6 +236,23 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
     {
         if (i.key() == optionsKey) continue;
 
+        auto p = ParsedKey::parse(i.key(), errorMessage);
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
+
+        auto config = configs.getByFilename(p.fileName, errorMessage);
+        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
+
+        if (i.value().isNull()) {
+
+            errorMessage = removeImage(p.groupName, p.keyName);
+            if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
+
+            // erase the value of this option
+            // do not delete the key so that the default value is not used
+            config->group(p.groupName).writeEntry(p.keyName, u""_s);
+            continue;
+        }
+
         auto dbusFD = i.value().value<QDBusUnixFileDescriptor>();
         if (!dbusFD.isValid()) {
             return setReplyError(u"Invalid file descriptor for key: %1"_s.arg(i.key()));
@@ -244,12 +261,6 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
         if (!check_fd_sanity(dbusFD.fileDescriptor())) {
             return setReplyError(u"Invalid file for key: %1"_s.arg(i.key()));
         }
-
-        auto p = ParsedKey::parse(i.key(), errorMessage);
-        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
-
-        auto config = configs.getByFilename(p.fileName, errorMessage);
-        if (!errorMessage.isEmpty()) return setReplyError(errorMessage);
 
         QString ldmPath{};
         errorMessage = copyImage(dbusFD.fileDescriptor(), p.groupName, p.keyName, ldmPath);
@@ -270,6 +281,44 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
     return KAuth::ActionReply::SuccessReply();
 }
 
+static QString safe_theme_and_name(QString &theme, QString &name)
+{
+    // in case anyone put some path instead of name
+    theme = QFileInfo(theme).fileName().trimmed();
+    if (theme.isEmpty()) return u"Theme is empty"_s;
+    if (theme == u".."_s) return u"Theme is equal to '..'"_s;
+
+    name = QFileInfo(name).fileName().trimmed();
+    if (name.isEmpty()) return u"Name is empty"_s;
+    if (name == u".."_s) return u"Name is equal to '..'"_s;
+    return QString{};
+}
+
+static QString construct_filename(const QString &theme, const QString &name)
+{
+    return QStringLiteral("%1/%2/%3").arg(QStringLiteral(GREETER_IMAGES_DIR)).arg(theme).arg(name);
+}
+
+/**
+ * Remove the image from the home directory of the greeter.
+ *
+ * @param theme theme name, in which the image will be used
+ * @param name filename, must not contain subdirectories, they are ignored
+ * @return errorMessage reference to string, to write an error in it
+ */
+QString Helper::removeImage(QString theme, QString name)
+{
+    QString errorMessage = safe_theme_and_name(theme, name);
+    if (!errorMessage.isEmpty()) return errorMessage;
+
+    QFile dest{ construct_filename(theme, name) };
+
+    if (!dest.exists()) return QString{};
+    if (!dest.remove()) return u"Can't remove file: %1"_s.arg(dest.fileName());
+
+    return QString{};
+}
+
 /**
  * Copy the image to the home directory of the greeter.
  *
@@ -281,14 +330,8 @@ KAuth::ActionReply Helper::save(const QVariantMap &args)
  */
 QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &ldmPath)
 {
-    // in case anyone put some path instead of name
-    theme = QFileInfo(theme).fileName().trimmed();
-    if (theme.isEmpty()) return u"Theme is empty"_s;
-    if (theme == u".."_s) return u"Theme is equal to '..'"_s;
-
-    name = QFileInfo(name).fileName().trimmed();
-    if (name.isEmpty()) return u"Name is empty"_s;
-    if (name == u".."_s) return u"Name is equal to '..'"_s;
+    QString errorMessage = safe_theme_and_name(theme, name);
+    if (!errorMessage.isEmpty()) return errorMessage;
 
     QFile source;
     if (!source.open(sourceFD, QFile::ReadOnly)) {
@@ -302,7 +345,7 @@ QString Helper::copyImage(int sourceFD, QString theme, QString name, QString &ld
         return u"Image size is too large: %1 max size %2"_s.arg(source.size()).arg(maxImageFileSize);
     }
 
-    QFile dest{ QStringLiteral("%1/%2/%3").arg(QStringLiteral(GREETER_IMAGES_DIR)).arg(theme).arg(name) };
+    QFile dest{ construct_filename(theme, name) };
 
     if (dest.exists()) {
         dest.remove();
