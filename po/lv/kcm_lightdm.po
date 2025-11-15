@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 00:43+0000\n"
+"POT-Creation-Date: 2025-11-15 00:43+0000\n"
 "PO-Revision-Date: 2024-10-29 20:03+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -33,7 +33,7 @@ msgstr "toms.trasuns@posteo.net"
 msgid "Access denied"
 msgstr "Piekļuve atteikta"
 
-#: lightdmkcm.cpp:134
+#: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
 msgstr "Iestatījumu saglabāšana neizdevās:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 00:43+0000\n"
+"POT-Creation-Date: 2025-11-15 00:43+0000\n"
 "PO-Revision-Date: 2024-12-15 17:37+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -32,7 +32,7 @@ msgstr "आपके ईमेल"
 msgid "Access denied"
 msgstr "पहुंच अस्वीकृत"
 
-#: lightdmkcm.cpp:134
+#: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
 msgstr "सेटिंग्स सहेजना विफल:"

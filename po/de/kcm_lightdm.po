@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_lightdm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 00:43+0000\n"
+"POT-Creation-Date: 2025-11-15 00:43+0000\n"
 "PO-Revision-Date: 2024-09-03 19:14+0200\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -33,7 +33,7 @@ msgstr "kde-i18n-de@kde.org"
 msgid "Access denied"
 msgstr "Zugriff verweigert"
 
-#: lightdmkcm.cpp:134
+#: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
 msgstr "Das Speichern der Einstellungen ist fehlgeschlagen:"

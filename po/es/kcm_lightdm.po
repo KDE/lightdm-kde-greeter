@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_lightdm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-04 00:43+0000\n"
+"POT-Creation-Date: 2025-11-15 00:43+0000\n"
 "PO-Revision-Date: 2024-06-05 17:20+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -34,7 +34,7 @@ msgstr "ecuadra@eloihr.net"
 msgid "Access denied"
 msgstr "Acceso denegado"
 
-#: lightdmkcm.cpp:134
+#: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
 msgstr "No se han podido guardar las preferencias:"
