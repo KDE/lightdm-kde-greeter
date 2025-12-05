@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-06-05 19:23\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -123,67 +123,72 @@ msgstr "启用网络"
 msgid "Press %1 to change the primary screen"
 msgstr "点击 %1 以更改主屏幕"
 
-#: PrimaryScreen.qml:90
+#: PrimaryScreen.qml:56
+#, kde-format
+msgid "A fallback version of the login screen is running"
+msgstr ""
+
+#: PrimaryScreen.qml:95
 #, kde-format
 msgid "Login failed"
 msgstr "登录失败"
 
-#: PrimaryScreen.qml:518
+#: PrimaryScreen.qml:523
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "大写锁定已打开"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
 msgstr "数字小键盘锁定已打开"
 
-#: PrimaryScreen.qml:524
+#: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "大写锁定和数字小键盘锁定已打开"
 
-#: PrimaryScreen.qml:537
+#: PrimaryScreen.qml:542
 #, kde-format
 msgid "Log in"
 msgstr "登录"
 
-#: PrimaryScreen.qml:556
+#: PrimaryScreen.qml:561
 #, kde-format
 msgid "Log in as another user"
 msgstr "作为另一位用户登录"
 
-#: PrimaryScreen.qml:715
+#: PrimaryScreen.qml:720
 #, kde-format
 msgid "Keyboard layout"
 msgstr "键盘布局"
 
-#: PrimaryScreen.qml:760
+#: PrimaryScreen.qml:765
 #, kde-format
 msgid "Desktop session"
 msgstr "桌面会话"
 
-#: PrimaryScreen.qml:787
+#: PrimaryScreen.qml:792
 #, kde-format
 msgid "Suspend"
 msgstr "挂起"
 
-#: PrimaryScreen.qml:799
+#: PrimaryScreen.qml:804
 #, kde-format
 msgid "Hibernate"
 msgstr "休眠"
 
-#: PrimaryScreen.qml:812
+#: PrimaryScreen.qml:817
 #, kde-format
 msgid "Restart"
 msgstr "重启"
 
-#: PrimaryScreen.qml:824
+#: PrimaryScreen.qml:829
 #, kde-format
 msgid "Shutdown"
 msgstr "关机"
 
-#: PrimaryScreen.qml:854
+#: PrimaryScreen.qml:859
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

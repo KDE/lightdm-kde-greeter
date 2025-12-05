@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 13:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -99,12 +99,12 @@ msgstr "Bağlantı silindi."
 msgid "No connection"
 msgstr "Bağlantı yok"
 
-#: main.cpp:158
+#: main.cpp:173
 #, kde-format
 msgid "LightDM KDE Greeter"
 msgstr "LightDM KDE Karşılayıcısı"
 
-#: main.cpp:160
+#: main.cpp:175
 #, kde-format
 msgid "Login screen using the LightDM framework"
 msgstr "LightDM çatısını kullanan oturum açma ekranı"

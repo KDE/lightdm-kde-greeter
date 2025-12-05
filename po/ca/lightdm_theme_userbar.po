@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 10:07+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -124,69 +124,74 @@ msgstr "Activa la xarxa"
 msgid "Press %1 to change the primary screen"
 msgstr "Premeu %1 per a canviar la pantalla primària"
 
-#: PrimaryScreen.qml:90
+#: PrimaryScreen.qml:56
+#, kde-format
+msgid "A fallback version of the login screen is running"
+msgstr ""
+
+#: PrimaryScreen.qml:95
 #, kde-format
 msgid "Login failed"
 msgstr "Ha fallat l'inici de la sessió"
 
-#: PrimaryScreen.qml:518
+#: PrimaryScreen.qml:523
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "El bloqueig de majúscules està activat"
 
 # skip-rule: k-Num_Lock
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
 msgstr "El bloqueig numèric està activat"
 
 # skip-rule: k-Num_Lock
-#: PrimaryScreen.qml:524
+#: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "El bloqueig de majúscules i el bloqueig numèric estan activats"
 
-#: PrimaryScreen.qml:537
+#: PrimaryScreen.qml:542
 #, kde-format
 msgid "Log in"
 msgstr "Inicia la sessió"
 
-#: PrimaryScreen.qml:556
+#: PrimaryScreen.qml:561
 #, kde-format
 msgid "Log in as another user"
 msgstr "Inicia la sessió com un altre usuari"
 
-#: PrimaryScreen.qml:715
+#: PrimaryScreen.qml:720
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposició de teclat"
 
-#: PrimaryScreen.qml:760
+#: PrimaryScreen.qml:765
 #, kde-format
 msgid "Desktop session"
 msgstr "Sessió d'escriptori"
 
-#: PrimaryScreen.qml:787
+#: PrimaryScreen.qml:792
 #, kde-format
 msgid "Suspend"
 msgstr "Suspèn"
 
-#: PrimaryScreen.qml:799
+#: PrimaryScreen.qml:804
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: PrimaryScreen.qml:812
+#: PrimaryScreen.qml:817
 #, kde-format
 msgid "Restart"
 msgstr "Reinicia"
 
-#: PrimaryScreen.qml:824
+#: PrimaryScreen.qml:829
 #, kde-format
 msgid "Shutdown"
 msgstr "Atura"
 
-#: PrimaryScreen.qml:854
+#: PrimaryScreen.qml:859
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

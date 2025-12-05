@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 12:09+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -101,12 +101,12 @@ msgstr "De verbinding was verwijderd."
 msgid "No connection"
 msgstr "Geen verbinding"
 
-#: main.cpp:158
+#: main.cpp:173
 #, kde-format
 msgid "LightDM KDE Greeter"
 msgstr "LightDM KDE begroeting"
 
-#: main.cpp:160
+#: main.cpp:175
 #, kde-format
 msgid "Login screen using the LightDM framework"
 msgstr "Aanmeldscherm bij gebruik van LightDM framework"

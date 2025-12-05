@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-24 17:54+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -97,12 +97,12 @@ msgstr "연결이 삭제되었습니다."
 msgid "No connection"
 msgstr "연결 없음"
 
-#: main.cpp:158
+#: main.cpp:173
 #, kde-format
 msgid "LightDM KDE Greeter"
 msgstr "LightDM KDE 환영 도구"
 
-#: main.cpp:160
+#: main.cpp:175
 #, kde-format
 msgid "Login screen using the LightDM framework"
 msgstr "LightDM 프레임워크를 사용하는 로그인 화면"

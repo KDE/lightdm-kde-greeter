@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-08 09:49+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -121,67 +121,72 @@ msgstr "Activer la gestion de réseau"
 msgid "Press %1 to change the primary screen"
 msgstr "Veuillez appuyer sur %1 pour modifier l'écran principal"
 
-#: PrimaryScreen.qml:90
+#: PrimaryScreen.qml:56
+#, kde-format
+msgid "A fallback version of the login screen is running"
+msgstr ""
+
+#: PrimaryScreen.qml:95
 #, kde-format
 msgid "Login failed"
 msgstr "Il a été impossible de se connecter"
 
-#: PrimaryScreen.qml:518
+#: PrimaryScreen.qml:523
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Verr. Maj est activé"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Verr. Num est activé"
 
-#: PrimaryScreen.qml:524
+#: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Verr. Maj et Verr. Num sont activés"
 
-#: PrimaryScreen.qml:537
+#: PrimaryScreen.qml:542
 #, kde-format
 msgid "Log in"
 msgstr "Se connecter"
 
-#: PrimaryScreen.qml:556
+#: PrimaryScreen.qml:561
 #, kde-format
 msgid "Log in as another user"
 msgstr "Se connecter comme autre utilisateur"
 
-#: PrimaryScreen.qml:715
+#: PrimaryScreen.qml:720
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposition de clavier"
 
-#: PrimaryScreen.qml:760
+#: PrimaryScreen.qml:765
 #, kde-format
 msgid "Desktop session"
 msgstr "Session de bureau"
 
-#: PrimaryScreen.qml:787
+#: PrimaryScreen.qml:792
 #, kde-format
 msgid "Suspend"
 msgstr "Suspendre"
 
-#: PrimaryScreen.qml:799
+#: PrimaryScreen.qml:804
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberner"
 
-#: PrimaryScreen.qml:812
+#: PrimaryScreen.qml:817
 #, kde-format
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: PrimaryScreen.qml:824
+#: PrimaryScreen.qml:829
 #, kde-format
 msgid "Shutdown"
 msgstr "Éteindre"
 
-#: PrimaryScreen.qml:854
+#: PrimaryScreen.qml:859
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

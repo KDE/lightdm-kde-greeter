@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-05 00:44+0000\n"
 "PO-Revision-Date: 2024-12-07 11:14+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -123,67 +123,72 @@ msgstr "הפעלת תקשורת"
 msgid "Press %1 to change the primary screen"
 msgstr "לחיצה על %1 תשנה את המסך הראשי"
 
-#: PrimaryScreen.qml:90
+#: PrimaryScreen.qml:56
+#, kde-format
+msgid "A fallback version of the login screen is running"
+msgstr ""
+
+#: PrimaryScreen.qml:95
 #, kde-format
 msgid "Login failed"
 msgstr "הכניסה נכשלה"
 
-#: PrimaryScreen.qml:518
+#: PrimaryScreen.qml:523
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock דולק"
 
-#: PrimaryScreen.qml:521
+#: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock דולק"
 
-#: PrimaryScreen.qml:524
+#: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock ו־Num Lock דולקים"
 
-#: PrimaryScreen.qml:537
+#: PrimaryScreen.qml:542
 #, kde-format
 msgid "Log in"
 msgstr "כניסה"
 
-#: PrimaryScreen.qml:556
+#: PrimaryScreen.qml:561
 #, kde-format
 msgid "Log in as another user"
 msgstr "כניסה כמשתמש אחר"
 
-#: PrimaryScreen.qml:715
+#: PrimaryScreen.qml:720
 #, kde-format
 msgid "Keyboard layout"
 msgstr "פריסת מקלדת"
 
-#: PrimaryScreen.qml:760
+#: PrimaryScreen.qml:765
 #, kde-format
 msgid "Desktop session"
 msgstr "הפעלת שולחן עבודה"
 
-#: PrimaryScreen.qml:787
+#: PrimaryScreen.qml:792
 #, kde-format
 msgid "Suspend"
 msgstr "השהיה"
 
-#: PrimaryScreen.qml:799
+#: PrimaryScreen.qml:804
 #, kde-format
 msgid "Hibernate"
 msgstr "הרדמה"
 
-#: PrimaryScreen.qml:812
+#: PrimaryScreen.qml:817
 #, kde-format
 msgid "Restart"
 msgstr "הפעלה מחדש"
 
-#: PrimaryScreen.qml:824
+#: PrimaryScreen.qml:829
 #, kde-format
 msgid "Shutdown"
 msgstr "כיבוי"
 
-#: PrimaryScreen.qml:854
+#: PrimaryScreen.qml:859
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
