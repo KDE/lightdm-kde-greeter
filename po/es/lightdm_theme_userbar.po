@@ -1,15 +1,15 @@
 # Spanish translations for lightdm_theme_userbar.po package.
-# Copyright (C) 2024 This file is copyright:
+# Copyright (C) 2024-2025 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 # Automatically generated, 2024.
 #
-# SPDX-FileCopyrightText: 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-05 00:44+0000\n"
-"PO-Revision-Date: 2024-12-07 23:57+0100\n"
+"PO-Revision-Date: 2025-12-05 19:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: config.qml:37
 #, kde-format
@@ -128,6 +128,7 @@ msgstr "Pulse %1 para cambiar la pantalla principal"
 #, kde-format
 msgid "A fallback version of the login screen is running"
 msgstr ""
+"Se está ejecutando una versión alternativa de la pantalla de inicio de sesión"
 
 #: PrimaryScreen.qml:95
 #, kde-format
