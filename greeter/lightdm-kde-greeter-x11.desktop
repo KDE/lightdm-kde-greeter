@@ -3,7 +3,21 @@
 
 [Desktop Entry]
 Name=LightDM KDE Greeter (X11)
+Name[ca]=Pantalla de benvinguda de KDE del LightDM (X11)
+Name[es]=Bienvenida a KDE en LightDM (X11)
+Name[he]=LightDM - מקבל הפנים של KDE (X11)
+Name[ka]=LightDM KDE მისალმების პროგრამა (X11)
+Name[nl]=LightDM KDE begroeting (X11)
+Name[pt_BR]=Autenticador do KDE no LightDM (X11)
+Name[sl]=LightDM KDE Greeter (X11)
 Comment=This runs the KDE greeter (X11 session), it should only be run from LightDM
+Comment[ca]=Això executa la pantalla de benvinguda de KDE (sessió X11), només s'ha d'executar des del LightDM
+Comment[es]=Esto ejecuta la bienvenida a KDE (sesión X11), que solo se debe ejecutar desde LightDM
+Comment[he]=מריץ את מקבל הפנים של KDE (הפעלה של X11), יש להריץ אותו רק מ־LightDM
+Comment[ka]=ეს უშვებს KDE-ის მისალმების პროგრამას (X11-ის სესიაზე), რომელიც, მხოლოდ, LightDM-დან უნდა გაეშვას
+Comment[nl]=Dit activeert de KDE begroeting (X11-sessie), het zou alleen actief moeten zijn vanuit LightDM
+Comment[pt_BR]=Isso executa o autenticador do KDE (sessão X11), ele só deve ser executado no LightDM
+Comment[sl]=To zažene KDE pozdravni program (v seji X11), zagnati se ga sme le iz programa LightDM
 Exec=lightdm-kde-greeter
 Type=Application
 X-Ubuntu-Gettext-Domain=lightdm
