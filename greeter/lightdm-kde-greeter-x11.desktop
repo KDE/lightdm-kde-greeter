@@ -3,21 +3,35 @@
 
 [Desktop Entry]
 Name=LightDM KDE Greeter (X11)
+Name[ar]=مُرحِّب LightDM لكيدي (اكس 11)
 Name[ca]=Pantalla de benvinguda de KDE del LightDM (X11)
+Name[ca@valencia]=Pantalla de benvinguda de KDE de LightDM (X11)
 Name[es]=Bienvenida a KDE en LightDM (X11)
+Name[eu]=LightDM KDE harreragilea (X11)
 Name[he]=LightDM - מקבל הפנים של KDE (X11)
+Name[it]=Schermata di benvenuto per KDE di LightDM (X11)
 Name[ka]=LightDM KDE მისალმების პროგრამა (X11)
 Name[nl]=LightDM KDE begroeting (X11)
+Name[pl]=Odźwierny KDE LightDM (X11)
 Name[pt_BR]=Autenticador do KDE no LightDM (X11)
 Name[sl]=LightDM KDE Greeter (X11)
+Name[uk]=Засіб вітання KDE LightDM (X11)
+Name[zh_CN]=LightDM KDE 欢迎屏幕 (X11)
 Comment=This runs the KDE greeter (X11 session), it should only be run from LightDM
+Comment[ar]=يؤدي هذا إلى تشغيل مُرحِّب كيدي (جلسة اكس 11)، ويجب تشغيله فقط من LightDM
 Comment[ca]=Això executa la pantalla de benvinguda de KDE (sessió X11), només s'ha d'executar des del LightDM
+Comment[ca@valencia]=Açò executa la pantalla de benvinguda de KDE (sessió X11), només s'ha d'executar des de LightDM
 Comment[es]=Esto ejecuta la bienvenida a KDE (sesión X11), que solo se debe ejecutar desde LightDM
+Comment[eu]=Honek KDE harreragilea (X11 saioa) exekutatzen du, LightDM-etik bakarrik exekutatu beharko litzateke
 Comment[he]=מריץ את מקבל הפנים של KDE (הפעלה של X11), יש להריץ אותו רק מ־LightDM
+Comment[it]=Questo esegue la schermata di benvenuto di KDE (sessione di X11), dovrebbe essere eseguito solo da LightDM
 Comment[ka]=ეს უშვებს KDE-ის მისალმების პროგრამას (X11-ის სესიაზე), რომელიც, მხოლოდ, LightDM-დან უნდა გაეშვას
 Comment[nl]=Dit activeert de KDE begroeting (X11-sessie), het zou alleen actief moeten zijn vanuit LightDM
+Comment[pl]=Uruchamia to odźwiernego KDE (posiedzenie X11), który powinien być uruchamiany tylko z LightDM
 Comment[pt_BR]=Isso executa o autenticador do KDE (sessão X11), ele só deve ser executado no LightDM
 Comment[sl]=To zažene KDE pozdravni program (v seji X11), zagnati se ga sme le iz programa LightDM
+Comment[uk]=Запускає засіб вітання KDE (сеанс X11), слід запускати лише з LightDM
+Comment[zh_CN]=用于启动 KDE 欢迎屏幕 (X11 会话)，只应从 LightDM 启动
 Exec=lightdm-kde-greeter
 Type=Application
 X-Ubuntu-Gettext-Domain=lightdm
