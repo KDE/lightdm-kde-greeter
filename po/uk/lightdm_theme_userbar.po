@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2024.
+# Yuri Chornoivan <yurchor@ukr.net>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-05 00:44+0000\n"
-"PO-Revision-Date: 2024-12-07 19:40+0200\n"
+"PO-Revision-Date: 2025-12-05 09:07+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -126,7 +126,7 @@ msgstr "Натисніть %1, щоб змінити основний екран
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "Запущено резервну версію вікна вітання у системі"
 
 #: PrimaryScreen.qml:95
 #, kde-format

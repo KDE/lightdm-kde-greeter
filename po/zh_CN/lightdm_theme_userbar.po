@@ -126,7 +126,7 @@ msgstr "点击 %1 以更改主屏幕"
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "登录屏幕的一个备用版本正在运行"
 
 #: PrimaryScreen.qml:95
 #, kde-format

@@ -1,16 +1,16 @@
 # Translation for lightdm_theme_userbar.po to Euskara/Basque (eu).
-# Copyright (C) 2024 This file is copyright:
+# Copyright (C) 2024-2025 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# SPDX-FileCopyrightText: 2024 Iñigo Salvador Azurmendi <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 Iñigo Salvador Azurmendi <xalba@ni.eus>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-05 00:44+0000\n"
-"PO-Revision-Date: 2024-12-07 18:57+0100\n"
+"PO-Revision-Date: 2025-12-06 20:49+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: config.qml:37
 #, kde-format
@@ -28,7 +28,7 @@ msgstr "Atzeko planoko irudia:"
 #: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
-msgstr "Konexioa saio-sarrerako pantailan bakarrik egongo da aktibo."
+msgstr "Konexioa saioa hasteko pantailan bakarrik egongo da aktibo."
 
 #: NetworkWidget.qml:61
 #, kde-format
@@ -128,7 +128,7 @@ msgstr "%1 sakatu pantaila nagusia aldatzeko"
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "Saioa hasteko pantailaren erreserbako bertsio bat exekutatzen ari da"
 
 #: PrimaryScreen.qml:95
 #, kde-format
