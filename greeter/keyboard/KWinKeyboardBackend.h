@@ -54,7 +54,7 @@ private:
 
     QList<LayoutNames> mLayoutsList;
 
-    OrgKdeKeyboardLayoutsInterface *mIface;
+    OrgKdeKeyboardLayoutsInterface *mIface = nullptr;
     uint mLayout = 0;
 };
 
