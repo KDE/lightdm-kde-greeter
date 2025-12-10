@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# SPDX-FileCopyrightText: 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2024, 2025 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-05 00:44+0000\n"
-"PO-Revision-Date: 2024-08-20 15:23+0200\n"
+"PO-Revision-Date: 2025-12-03 11:25+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: config.qml:37
 #, kde-format
@@ -65,7 +65,7 @@ msgstr ""
 #: NetworkWidget.qml:97
 #, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr ""
+msgstr "Zadejte přihlašovací údaje pro připojení k %1:"
 
 #: NetworkWidget.qml:101
 #, kde-format
@@ -140,12 +140,12 @@ msgstr "CapsLock je zapnut"
 #: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock je zapnut"
 
 #: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock a Num Lock jsou zapnuty"
 
 #: PrimaryScreen.qml:542
 #, kde-format
