@@ -11,40 +11,25 @@ import QtQuick.Layouts 1.15
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.workspace.components 2.0 as PW
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as Plasma5Support
+
+import org.kde.plasma.private.battery
 
 RowLayout {
     id: root
 
     property int fontSize: Kirigami.Theme.defaultFont.pointSize
 
-    function getOrDefault(source /*object?*/, prop /*string*/, fallback /*T*/) /*-> T*/ {
-        return (source !== null && source !== undefined && source.hasOwnProperty(prop))
-            ? source[prop] : fallback;
-    }
-
-    readonly property var battery: pmSource.data["Battery"]
-
-    // State: Unknown NoCharge Charging Discharging FullyCharged
-    // See plasma-workspace/dataengines/powermanagement/powermanagementengine.cpp, batteryStateToString
-    readonly property string batteryState: getOrDefault(battery, "State", "Unknown")
-    readonly property bool pluggedIn: batteryState !== "Discharging"
-    readonly property bool hasBattery: getOrDefault(battery, "Has Battery", false)
-    readonly property int percent: getOrDefault(battery, "Percent", 0)
-
     spacing: Kirigami.Units.smallSpacing
-    visible: getOrDefault(battery, "Has Cumulative", false)
+    visible: batteryControl.hasInternalBatteries
 
-    Plasma5Support.DataSource {
-        id: pmSource
-        engine: "powermanagement"
-        connectedSources: ["Battery"]
+    BatteryControlModel {
+        id: batteryControl
     }
 
     PW.BatteryIcon {
-        pluggedIn: root.pluggedIn
-        hasBattery: root.hasBattery
-        percent: root.percent
+        pluggedIn: batteryControl.pluggedIn
+        hasBattery: batteryControl.hasCumulative
+        percent: batteryControl.percent
 
         Layout.preferredHeight: Math.max(Kirigami.Units.iconSizes.medium, batteryLabel.implicitHeight)
         Layout.preferredWidth: Layout.preferredHeight
@@ -54,8 +39,8 @@ RowLayout {
     PlasmaComponents3.Label {
         id: batteryLabel
         font.pointSize: root.fontSize
-        text: i18nd("lightdm_kde_greeter", "%1%", root.percent)
-        Accessible.name: i18nd("lightdm_kde_greeter", "Battery at %1%", root.percent)
+        text: i18nd("lightdm_kde_greeter", "%1%", batteryControl.percent)
+        Accessible.name: i18nd("lightdm_kde_greeter", "Battery at %1%", batteryControl.percent)
         Layout.alignment: Qt.AlignVCenter
     }
 }
