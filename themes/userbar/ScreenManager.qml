@@ -95,6 +95,12 @@ Item {
                 }
             }
 
+            Component.onCompleted: {
+                if (screensModel.windowIsOnPrimaryScreen(window)) {
+                    activeScreen = window
+                }
+            }
+
             Loader {
                 id: crop
 

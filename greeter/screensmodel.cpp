@@ -99,3 +99,11 @@ void ScreensModel::maintainFocusedWindow()
         m_focusedWindow->requestActivate();
     }
 }
+
+bool ScreensModel::windowIsOnPrimaryScreen(QWindow *window)
+{
+    if (!window) return false;
+    auto screen = window->screen();
+    if (!screen) return false;
+    return screen == QGuiApplication::primaryScreen();
+}

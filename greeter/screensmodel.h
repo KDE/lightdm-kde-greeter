@@ -35,6 +35,8 @@ public:
         maintainFocusedWindow();
     };
 
+    Q_INVOKABLE bool windowIsOnPrimaryScreen(QWindow *window);
+
 public Q_SLOTS:
     void maintainFocusedWindow();
 
