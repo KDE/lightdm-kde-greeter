@@ -14,6 +14,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QAbstractListModel>
 #include <QList>
 #include <QRect>
+#include <QPointer>
 
 #include <stddef.h>
 
@@ -55,7 +56,7 @@ private:
     QList<ScreenData> m_screens;
 
     QHash<int, QByteArray> m_roles;
-    QWindow *m_focusedWindow = nullptr;
+    QPointer<QWindow> m_focusedWindow;
 };
 
 #endif // SCREENSMODEL_H
