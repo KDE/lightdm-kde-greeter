@@ -28,6 +28,8 @@ Item {
 
     function nextActiveScreen() {
 
+        if (manager.windows.count < 2) return;
+
         var screens = []
         for (let i = 0; i < manager.windows.count; ++i) {
             screens.push(manager.windows.objectAt(i))
@@ -54,6 +56,10 @@ Item {
         // move the mouse cursor to proportionally the same position on the new screen
         var xRatio = areaFrom.mouseX / areaFrom.width
         var yRatio = areaFrom.mouseY / areaFrom.height
+
+        // guarantee that the mouse cursor will move to the desired screen
+        if (xRatio <= 0) xRatio = 0.5
+        if (yRatio <= 0) yRatio = 0.5
 
         var newX = screens[newIndex].x + xRatio * areaTo.width
         var newY = screens[newIndex].y + yRatio * areaTo.height
@@ -84,14 +90,6 @@ Item {
                 hoverEnabled: true
                 onEntered: {
                     activeScreen = window
-                }
-                onWidthChanged: {
-                    // the width is supposed to change only at startup
-                    if (window != activeScreen) return
-                    // put the mouse cursor inside the primary window
-                    var newX = delegateWindow.x + mouseArea.width * 0.3
-                    var newY = delegateWindow.y + mouseArea.height * 0.3
-                    mouseCursor.move(newX, newY)
                 }
             }
 
