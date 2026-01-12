@@ -37,7 +37,7 @@ msgstr "S'ha denegat l'accés"
 #: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
-msgstr "No s'ha pogut guardar la configuració:"
+msgstr "Ha fallat mentre es guardava la configuració:"
 
 #: ui/components/SelectImageButton.qml:60
 #, kde-format
