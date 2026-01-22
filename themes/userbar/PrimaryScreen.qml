@@ -593,10 +593,21 @@ Item {
                         source: model.type == 0 ? "dialog-information" : "dialog-error"
                         anchors.verticalCenter: parent.verticalCenter
                     }
+
+                    // raw message string, possibly too wide, having line breaks
                     Label {
-                        id: label
-                        anchors.verticalCenter: parent.verticalCenter
+                        id: labelRaw
                         text: model.text.trim()
+                        visible: false
+                    }
+
+                    Label {
+                        id: labelFormatted
+                        property int maxWidth: screen.width * 0.7
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: Math.min(maxWidth, labelRaw.width)
+                        wrapMode: Text.WordWrap
+                        text: labelRaw.width > maxWidth ? labelRaw.text.replace(/(\r\n|\n|\r)/gm, " ") : labelRaw.text
                     }
                 }
             }
