@@ -42,19 +42,24 @@ Dialog {
         }
         if (!formLayout) return false
 
-        var radioButton, rowLayout
+        var radioButton, rowLayout1, rowLayout2
         for (var p in formLayout.children) {
             var propertyName = formLayout.children[p].toString()
             if (propertyName.startsWith("RadioButton_QMLTYPE_")) {
                 radioButton = formLayout.children[p]
             } else if (propertyName.startsWith("QQuickRowLayout")) {
-                rowLayout = formLayout.children[p]
+                if (!rowLayout1) {
+                    rowLayout1 = formLayout.children[p]
+                } else {
+                    rowLayout2 = formLayout.children[p]
+                }
             }
         }
-        if (!radioButton || !rowLayout) return false
+        if (!radioButton || !rowLayout1 || !rowLayout2) return false
 
         radioButton.visible = false
-        rowLayout.visible = false
+        rowLayout1.visible = false
+        rowLayout2.visible = false
 
         return true
     }
