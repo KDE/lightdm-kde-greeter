@@ -249,6 +249,11 @@ static void find_preferred_image_in_package(KPackage::Package &package, const QS
 QString LightDMKcm::preferredImage(QString path)
 {
     if (path.isEmpty()) return QStringLiteral("");
+
+    // in case the path came as a URL
+    auto fromUrl = QUrl(path).toLocalFile();
+    if (!fromUrl.isEmpty()) path = fromUrl;
+
     // probably it's just the path to the image file
     if (!QFileInfo(path).isDir()) return path;
 
