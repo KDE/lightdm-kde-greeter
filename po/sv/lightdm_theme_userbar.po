@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Stefan Asserhäll <stefan.asserhall@bredband.net>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Stefan Asserhäll <stefan.asserhall@bredband.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-05 00:44+0000\n"
-"PO-Revision-Date: 2025-01-11 12:19+0100\n"
+"PO-Revision-Date: 2026-01-23 20:53+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: config.qml:37
 #, kde-format
@@ -125,7 +125,7 @@ msgstr "Tryck på %1 för att ändra huvudskärm"
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "En reservversion av inloggningsskärmen kör"
 
 #: PrimaryScreen.qml:95
 #, kde-format
