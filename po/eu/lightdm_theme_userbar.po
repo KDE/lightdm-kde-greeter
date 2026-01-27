@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-05 00:44+0000\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
 "PO-Revision-Date: 2025-12-06 20:49+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -160,37 +160,37 @@ msgstr "Saioan sartu"
 msgid "Log in as another user"
 msgstr "Saioan sartu beste erabiltzaile bat bezala"
 
-#: PrimaryScreen.qml:720
+#: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Teklatuaren antolaera"
 
-#: PrimaryScreen.qml:765
+#: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
 msgstr "Mahaigaineko saioa"
 
-#: PrimaryScreen.qml:792
+#: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
 msgstr "Eseki"
 
-#: PrimaryScreen.qml:804
+#: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: PrimaryScreen.qml:817
+#: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
 msgstr "Berrabiarazi"
 
-#: PrimaryScreen.qml:829
+#: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
 msgstr "Itzali"
 
-#: PrimaryScreen.qml:859
+#: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

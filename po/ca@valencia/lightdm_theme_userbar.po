@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-05 00:44+0000\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
 "PO-Revision-Date: 2025-12-05 09:04+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -163,37 +163,37 @@ msgstr "Inicia la sessió"
 msgid "Log in as another user"
 msgstr "Inicia la sessió com un altre usuari"
 
-#: PrimaryScreen.qml:720
+#: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Disposició de teclat"
 
-#: PrimaryScreen.qml:765
+#: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
 msgstr "Sessió d'escriptori"
 
-#: PrimaryScreen.qml:792
+#: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
 msgstr "Suspén"
 
-#: PrimaryScreen.qml:804
+#: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: PrimaryScreen.qml:817
+#: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
 msgstr "Reinicia"
 
-#: PrimaryScreen.qml:829
+#: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
 msgstr "Para"
 
-#: PrimaryScreen.qml:859
+#: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

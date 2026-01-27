@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-05 00:44+0000\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
 "PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -159,37 +159,37 @@ msgstr "प्रवेशं कुर्वन्तु"
 msgid "Log in as another user"
 msgstr "अन्यः उपयोक्ता इति रूपेण प्रवेशं कुर्वन्तु"
 
-#: PrimaryScreen.qml:720
+#: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
 msgstr "कीबोर्डविन्यासः"
 
-#: PrimaryScreen.qml:765
+#: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
 msgstr "डेस्कटॉप सत्रम्"
 
-#: PrimaryScreen.qml:792
+#: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
 msgstr "निलम्बनम्"
 
-#: PrimaryScreen.qml:804
+#: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
 msgstr "शीतनिद्रा"
 
-#: PrimaryScreen.qml:817
+#: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
 msgstr "पुनः आरभत"
 
-#: PrimaryScreen.qml:829
+#: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
 msgstr "शटडाउन"
 
-#: PrimaryScreen.qml:859
+#: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

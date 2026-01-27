@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-05 00:44+0000\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
 "PO-Revision-Date: 2024-06-05 19:23\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -158,37 +158,37 @@ msgstr "登录"
 msgid "Log in as another user"
 msgstr "作为另一位用户登录"
 
-#: PrimaryScreen.qml:720
+#: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
 msgstr "键盘布局"
 
-#: PrimaryScreen.qml:765
+#: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
 msgstr "桌面会话"
 
-#: PrimaryScreen.qml:792
+#: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
 msgstr "挂起"
 
-#: PrimaryScreen.qml:804
+#: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
 msgstr "休眠"
 
-#: PrimaryScreen.qml:817
+#: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
 msgstr "重启"
 
-#: PrimaryScreen.qml:829
+#: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
 msgstr "关机"
 
-#: PrimaryScreen.qml:859
+#: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

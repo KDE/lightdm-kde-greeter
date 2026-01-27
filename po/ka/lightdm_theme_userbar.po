@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-05 00:44+0000\n"
+"POT-Creation-Date: 2026-01-27 00:46+0000\n"
 "PO-Revision-Date: 2025-12-05 05:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -158,37 +158,37 @@ msgstr "შესვლა"
 msgid "Log in as another user"
 msgstr "სხვა მომხმარებლით შესვლა"
 
-#: PrimaryScreen.qml:720
+#: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
 msgstr "კლავიატური განლაგება"
 
-#: PrimaryScreen.qml:765
+#: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
 msgstr "სამუშაო მაგიდის სესია"
 
-#: PrimaryScreen.qml:792
+#: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
 msgstr "ძილი"
 
-#: PrimaryScreen.qml:804
+#: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
 msgstr "პროგრამული ძილი"
 
-#: PrimaryScreen.qml:817
+#: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
 msgstr "გადატვირთვა"
 
-#: PrimaryScreen.qml:829
+#: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
 msgstr "გამორთვა"
 
-#: PrimaryScreen.qml:859
+#: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
