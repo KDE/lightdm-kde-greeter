@@ -161,6 +161,9 @@ Item {
     }
 
     function dissolveMessages() {
+        let hideLastMessage = messages.get(messages.count - 1).hideTime
+        let viewInterval = Math.max(hideLastMessage - Date.now(), msgList.dissolve.defaultPause)
+        msgList.dissolve.pause = viewInterval
         msgList.dissolve.restart()
     }
 
@@ -613,12 +616,16 @@ Item {
             }
 
             property var dissolve: SequentialAnimation {
+                id: dissolveAnimation
                 running: false
-                PauseAnimation { duration: 5000 }
+                property int defaultPause: 5000
+                property int pause: defaultPause
+                PauseAnimation { duration: dissolveAnimation.pause }
                 NumberAnimation { target: msgList; property: "opacity"; from: 1.0; to: 0.0; duration: 1000 }
                 onFinished: {
                     messages.clear()
                     msgList.opacity = 1.0
+                    pause = defaultPause
                 }
             }
         }
