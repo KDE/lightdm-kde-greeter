@@ -136,6 +136,7 @@ Item {
     }
 
     function putMessage(text, type) {
+        if (!type) type = 0;
         // provide some time to view the message
         var readStart = Date.now()
         if (messages.count > 0) {
@@ -587,9 +588,14 @@ Item {
                 Kirigami.Theme.inherit: false
                 Row {
                     id: msgBody
-                    anchors.centerIn: parent
+
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
                     spacing: screen.padding
-                    padding: spacing * 2
+                    leftPadding: spacing * 2
+                    topPadding: leftPadding
+                    bottomPadding: leftPadding
+
                     Kirigami.Icon {
                         width: Kirigami.Units.iconSizes.medium
                         height: width
@@ -611,6 +617,13 @@ Item {
                         width: Math.min(maxWidth, labelRaw.width)
                         wrapMode: Text.WordWrap
                         text: labelRaw.width > maxWidth ? labelRaw.text.replace(/(\r\n|\n|\r)/gm, " ") : labelRaw.text
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        width: Kirigami.Units.iconSizes.smallMedium
+                        height: width
+                        anchors.top: parent.top
+                        icon.name: "dialog-close"
                     }
                 }
             }
