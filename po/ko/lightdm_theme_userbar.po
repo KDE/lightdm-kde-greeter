@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# SPDX-FileCopyrightText: 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2024, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-27 00:46+0000\n"
-"PO-Revision-Date: 2024-12-24 17:57+0100\n"
+"PO-Revision-Date: 2026-02-03 23:49+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: config.qml:37
 #, kde-format
@@ -125,7 +125,7 @@ msgstr "%1을(를) 누르면 주 화면을 변경함"
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "로그인 화면의 폴백 버전 실행 중"
 
 #: PrimaryScreen.qml:95
 #, kde-format
