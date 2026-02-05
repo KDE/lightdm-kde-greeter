@@ -80,16 +80,7 @@ Item {
 
         function onAuthenticationComplete() {
             if (greeter.authenticated) {
-                if (messages.count > 0) {
-                    var now = Date.now()
-                    var hideLastMessage = messages.get(messages.count - 1).hideTime
-                    if (hideLastMessage > now) {
-                        lastMessageTimer.interval = hideLastMessage - now
-                        lastMessageTimer.start()
-                        return
-                    }
-                }
-                doSessionSync()
+                setupLastMessageTimer()
             } else if (visibleScreen != screens.DefaultScreen) {
                 if (messages.count == 0) {
                     putMessage(i18n("Login failed"), 1)
@@ -111,6 +102,26 @@ Item {
             // This call leads to updating the position of the users list.
             usersList.returnToBounds()
         }
+    }
+
+    function setupLastMessageTimer() {
+
+        var now = Date.now()
+
+        let hideLastMessage
+        if (messages.count != 0) {
+            hideLastMessage = messages.get(messages.count - 1).hideTime
+        }
+
+        if (!hideLastMessage || hideLastMessage < now) {
+            lastMessageTimer.stop()
+            lastMessageTimer.triggered()
+            return
+        }
+
+        lastMessageTimer.interval = hideLastMessage - now
+        lastMessageTimer.restart()
+        return
     }
 
     function consumePrompt() {
@@ -624,6 +635,12 @@ Item {
                         height: width
                         anchors.top: parent.top
                         icon.name: "dialog-close"
+                        onClicked: {
+                            msgList.model.remove(index)
+                            if (lastMessageTimer.running) {
+                                setupLastMessageTimer()
+                            }
+                        }
                     }
                 }
             }
