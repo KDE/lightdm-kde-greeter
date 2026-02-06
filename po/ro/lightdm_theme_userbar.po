@@ -1,195 +1,195 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-27 00:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
-"Language: ga\n"
+"PO-Revision-Date: 2026-02-05 12:12+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
-"3 : 4\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: config.qml:37
 #, kde-format
 msgid "Background image:"
-msgstr ""
+msgstr "Imagine de fundal:"
 
 #: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
-msgstr ""
+msgstr "Conexiunea va fi activă doar pe ecranul de autentificare."
 
 #: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
-msgstr ""
+msgstr "Vă deconectați de la %1?"
 
 #: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
-msgstr ""
+msgstr "Abandonați conectarea la %1?"
 
 #: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
-msgstr ""
+msgstr "Vă conectați la %1?"
 
 #: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
-msgstr ""
+msgstr "Vă conectați la punctul de acces nesigur %1?"
 
 #: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr ""
+msgstr "Introduceți parola pentru conectare la %1"
 
 #: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr ""
+msgstr "Introduceți numele și parola pentru conectare la %1"
 
 #: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
-msgstr ""
+msgstr "%1: Eroare la conectare, încercați din nou."
 
 #: NetworkWidget.qml:97
 #, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr ""
+msgstr "Furnizați secretele pentru conectarea la %1:"
 
 #: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
-msgstr ""
+msgstr "Protocolul de securitate nu e susținut pentru %1"
 
 #: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
-msgstr ""
+msgstr "Conectarea la %1 a eșuat"
 
 #: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
-msgstr ""
+msgstr "Eroare: Punctul de acces %1 nu poate fi găsit"
 
 #: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "Utilizator"
 
 #: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Parolă"
 
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
-msgstr ""
+msgstr "Dezactivează rețeaua fără fir"
 
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
-msgstr ""
+msgstr "Activează rețeaua fără fir"
 
 #: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
-msgstr ""
+msgstr "Acțiune interzisă"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
-msgstr ""
+msgstr "Dezactivează rețelistica"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
-msgstr ""
+msgstr "Activează rețelistica"
 
 #: OtherScreen.qml:27
 #, kde-format
 msgid "Press %1 to change the primary screen"
-msgstr ""
+msgstr "Apăsați %1 pentru a schimba ecranul principal"
 
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "Rulează o versiune de rezervă a ecranului de autentificare"
 
 #: PrimaryScreen.qml:95
 #, kde-format
 msgid "Login failed"
-msgstr ""
+msgstr "Autentificare eșuată"
 
 #: PrimaryScreen.qml:523
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock e activ"
 
 #: PrimaryScreen.qml:526
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock e activ"
 
 #: PrimaryScreen.qml:529
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock și Num Lock sunt active"
 
 #: PrimaryScreen.qml:542
 #, kde-format
 msgid "Log in"
-msgstr ""
+msgstr "Autentifică"
 
 #: PrimaryScreen.qml:561
 #, kde-format
 msgid "Log in as another user"
-msgstr ""
+msgstr "Autentifică ca alt utilizator"
 
 #: PrimaryScreen.qml:731
 #, kde-format
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Aranjament de tastatură"
 
 #: PrimaryScreen.qml:776
 #, kde-format
 msgid "Desktop session"
-msgstr ""
+msgstr "Sesiune de birou"
 
 #: PrimaryScreen.qml:803
 #, kde-format
 msgid "Suspend"
-msgstr ""
+msgstr "Suspendă"
 
 #: PrimaryScreen.qml:815
 #, kde-format
 msgid "Hibernate"
-msgstr ""
+msgstr "Hibernează"
 
 #: PrimaryScreen.qml:828
 #, kde-format
 msgid "Restart"
-msgstr ""
+msgstr "Repornește"
 
 #: PrimaryScreen.qml:840
 #, kde-format
 msgid "Shutdown"
-msgstr ""
+msgstr "Oprește"
 
 #: PrimaryScreen.qml:870
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
-msgstr ""
+msgstr "Tastatură virtuală"

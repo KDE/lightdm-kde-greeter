@@ -1,105 +1,105 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Irish Gaelic <kde-i18n-doc@kde.org>\n"
-"Language: ga\n"
+"PO-Revision-Date: 2026-02-05 13:24+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
-"3 : 4\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Sergiu Bivol"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "sergiu@cip.md"
 
 #: lightdmkcm.cpp:85
 #, kde-format
 msgid "Access denied"
-msgstr ""
+msgstr "Acces refuzat"
 
 #: lightdmkcm.cpp:140
 #, kde-format
 msgid "Save settings failed:"
-msgstr ""
+msgstr "Salvarea configurărilor a eșuat:"
 
 #: ui/components/SelectImageButton.qml:60
 #, kde-format
 msgid "No image"
-msgstr ""
+msgstr "Fără imagine"
 
 #: ui/components/SelectImageButton.qml:90
 #, kde-format
 msgid "Clear Image"
-msgstr ""
+msgstr "Golește imaginea"
 
 #: ui/components/SelectImageButton.qml:99
 #, kde-format
 msgid "Select image"
-msgstr ""
+msgstr "Alege imaginea"
 
 #: ui/main.qml:146
 #, kde-format
 msgid "Theme changes will be lost"
-msgstr ""
+msgstr "Modificările tematicii se vor pierde"
 
 #: ui/main.qml:209
 #, kde-format
 msgid "Theme"
-msgstr ""
+msgstr "Tematică"
 
 #: ui/main.qml:227
 #, kde-format
 msgid "Name:"
-msgstr ""
+msgstr "Denumire:"
 
 #: ui/main.qml:229
 #, kde-format
 msgid "Description:"
-msgstr ""
+msgstr "Descriere:"
 
 #: ui/main.qml:279
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: ui/main.qml:296
 #, kde-format
 msgid "Automatically log in:"
-msgstr ""
+msgstr "Autentifică automat în:"
 
 #: ui/main.qml:314
 #, kde-format
 msgid "Timeout"
-msgstr ""
+msgstr "Expirare"
 
 #: ui/main.qml:332
 #, kde-format
 msgctxt "Short for second"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ui/main.qml:344
 #, kde-format
 msgid "As user:"
-msgstr ""
+msgstr "Ca utilizator:"
 
 #: ui/main.qml:359
 #, kde-format
 msgid "Using session:"
-msgstr ""
+msgstr "Folosind sesiunea:"
