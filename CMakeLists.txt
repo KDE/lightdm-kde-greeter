@@ -10,6 +10,8 @@ set(LIGHTDM_KDE_VERSION_MINOR 1)
 set(LIGHTDM_KDE_VERSION_PATCH 5)
 set(LIGHTDM_KDE_VERSION ${LIGHTDM_KDE_VERSION_MAJOR}.${LIGHTDM_KDE_VERSION_MINOR}.${LIGHTDM_KDE_VERSION_PATCH})
 
+enable_testing()
+
 # directory where images will be saved so that the greeter has access to it,
 # since it runs without privileges
 if(NOT DEFINED GREETER_IMAGES_DIR)
@@ -44,6 +46,7 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS
     Qml
     Quick
     QuickWidgets
+    QuickTest
     UiPlugin
     UiTools
     QuickControls2
@@ -85,6 +88,7 @@ add_subdirectory(liblightdm-qt)
 add_subdirectory(greeter)
 add_subdirectory(kcm)
 add_subdirectory(themes)
+add_subdirectory(tests)
 
 find_package(KF6I18n CONFIG REQUIRED)
 ki18n_install(po)
