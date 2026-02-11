@@ -19,6 +19,10 @@ Dependencies:
     'frameworks/networkmanager-qt': '@latest-kf6'
     'plasma/libplasma': '@latest-kf6'
 
+    # for tests
+    'plasma/plasma-workspace': '@latest-kf6'
+    'plasma/plasma5support': '@latest-kf6'
+
 Options:
   cmake-options: '-DGREETER_IMAGES_DIR=/var/lib/$CI_PROJECT_NAME/images'
   require-passing-tests-on: [ 'Linux' ]
