@@ -38,13 +38,13 @@ target_link_libraries(lightdm-kde-greeter
   KF6::NetworkManagerQt
   Plasma::Plasma
   X11::X11
+  Qt6::WaylandClientPrivate
   X11::Xrandr
   ${LIBXCB_LIBRARIES}
   ${LIBXKB_LIBRARIES}
   liblightdm-qt-my
   PkgConfig::libei
 )
-# PkgConfig::UPOWER
 
 qt6_add_shaders(lightdm-kde-greeter "lightdm-kde-greeter_shaders"
     PREFIX

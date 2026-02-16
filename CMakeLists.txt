@@ -49,7 +49,11 @@ find_package(Qt6 CONFIG REQUIRED COMPONENTS
     QuickControls2
     Core5Compat
     ShaderTools
+    WaylandClientPrivate # for qt-wrappers of Wayland core objects
 )
+
+# Qt::WaylancClientPrivate imports Qt::GuiPrivate, which needs XKB::XKB target
+add_library(XKB::XKB INTERFACE IMPORTED)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(liblightdm REQUIRED IMPORTED_TARGET liblightdm-gobject-1)

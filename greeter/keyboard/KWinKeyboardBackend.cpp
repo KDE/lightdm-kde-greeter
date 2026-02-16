@@ -15,6 +15,7 @@
 #include "KeyboardModel_p.h"
 
 #include "keyboard_layout_interface.h"
+#include "WaylandKeystate.h"
 
 static const QLoggingCategory lc("KWinKeyboardBackend");
 using namespace Qt::StringLiterals;
@@ -61,6 +62,8 @@ void KWinKeyboardBackend::requestDBusData(QDBusPendingReply<T> pendingReply, T &
 
 void KWinKeyboardBackend::init()
 {
+    mKeystate = new WaylandKeystate(this);
+
     LayoutNames::registerMetaType();
 
     auto watcher = new QDBusServiceWatcher(QLatin1String(dbusService), QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration, this);
@@ -140,12 +143,16 @@ void KWinKeyboardBackend::dispatchEvents()
             }
         }
     }
+
+    d->numlock.enabled = mKeystate->getState() & WaylandKeystate::Num;
+    d->capslock.enabled = mKeystate->getState() & WaylandKeystate::Lock;
 }
 
 void KWinKeyboardBackend::connectEventsDispatcher(KeyboardModel *model)
 {
     QObject::connect(this, SIGNAL(layoutChanged()), model, SLOT(dispatchEvents()));
     QObject::connect(this, SIGNAL(layoutListChanged()), model, SLOT(dispatchEvents()));
+    QObject::connect(mKeystate, SIGNAL(updated()), model, SLOT(dispatchEvents()));
 }
 
 void KWinKeyboardBackend::updateLayoutList()

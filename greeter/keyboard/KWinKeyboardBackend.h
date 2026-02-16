@@ -14,6 +14,7 @@
 
 class LayoutNames;
 class OrgKdeKeyboardLayoutsInterface;
+class WaylandKeystate;
 
 class KWinKeyboardBackend :  public QObject, public KeyboardBackend {
 
@@ -56,6 +57,7 @@ private:
 
     OrgKdeKeyboardLayoutsInterface *mIface = nullptr;
     uint mLayout = 0;
+    WaylandKeystate *mKeystate;
 };
 
 #endif // KWINKEYBOARDBACKEND_H
