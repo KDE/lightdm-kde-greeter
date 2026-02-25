@@ -58,7 +58,7 @@ install(TARGETS kcmlightdmhelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 # common qml components for the configuration utility
 # copied for use from the theme directories, and from the main config directory
 install(DIRECTORY ui/components/
-        DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes/components/kcm
+        DESTINATION ${KDE_INSTALL_FULL_DATADIR}/lightdm-kde-greeter/themes/components/kcm
 )
 
 kauth_install_helper_files(kcmlightdmhelper org.kde.kcontrol.kcmlightdm root)

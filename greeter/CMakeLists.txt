@@ -21,7 +21,7 @@ qt_add_dbus_interface(GREETER_SRCS "keyboard/org.kde.KeyboardLayouts.xml" keyboa
 
 # Create the greeter
 add_executable(lightdm-kde-greeter ${GREETER_SRCS} ${GREETER_HDRS})
-target_compile_definitions(lightdm-kde-greeter PRIVATE LIBEXEC_DIR="${LIBEXEC_INSTALL_DIR}")
+target_compile_definitions(lightdm-kde-greeter PRIVATE LIBEXEC_DIR="${KDE_INSTALL_FULL_LIBEXECDIR}")
 
 # Link against the needed libraries
 target_link_libraries(lightdm-kde-greeter
@@ -69,10 +69,10 @@ set(WIFIKEEPER_HDRS wifikeeper.h)
 
 add_executable(lightdm-kde-greeter-rootimage ${ROOTIMAGE_SRCS} ${ROOTIMAGE_HDRS})
 target_link_libraries(lightdm-kde-greeter-rootimage Qt6::Widgets ${X11_X11_LIB})
-install(TARGETS lightdm-kde-greeter-rootimage DESTINATION ${LIBEXEC_INSTALL_DIR})
+install(TARGETS lightdm-kde-greeter-rootimage DESTINATION ${KDE_INSTALL_FULL_LIBEXECDIR})
 
 add_executable(lightdm-kde-greeter-wifikeeper ${WIFIKEEPER_SRCS} ${WIFIKEEPER_HDRS})
 target_link_libraries(lightdm-kde-greeter-wifikeeper Qt6::Core KF6::NetworkManagerQt)
-install(TARGETS lightdm-kde-greeter-wifikeeper DESTINATION ${LIBEXEC_INSTALL_DIR})
+install(TARGETS lightdm-kde-greeter-wifikeeper DESTINATION ${KDE_INSTALL_FULL_LIBEXECDIR})
 configure_file(lightdm-kde-greeter-wifikeeper.service.in lightdm-kde-greeter-wifikeeper.service @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lightdm-kde-greeter-wifikeeper.service DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/systemd/user)

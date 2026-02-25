@@ -6,4 +6,4 @@ Description=LightDM KDE Greeter, to create a wifi connection that will last a li
 
 [Service]
 Type=simple
-ExecStart=@LIBEXEC_INSTALL_DIR@/lightdm-kde-greeter-wifikeeper
+ExecStart=@KDE_INSTALL_FULL_LIBEXECDIR@/lightdm-kde-greeter-wifikeeper

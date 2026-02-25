@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: CC0-1.0
 
 install(DIRECTORY userbar
-        DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes
+        DESTINATION ${KDE_INSTALL_FULL_DATADIR}/lightdm-kde-greeter/themes
         PATTERN Messages.sh EXCLUDE
 )
 install(DIRECTORY components
-        DESTINATION ${DATA_INSTALL_DIR}/lightdm-kde-greeter/themes
+        DESTINATION ${KDE_INSTALL_FULL_DATADIR}/lightdm-kde-greeter/themes
 )
 
 # custom targets just for displaying sources in IDE
