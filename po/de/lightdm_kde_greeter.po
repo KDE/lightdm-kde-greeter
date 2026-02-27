@@ -3,20 +3,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 # SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm_kde_greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:47+0000\n"
-"PO-Revision-Date: 2024-09-03 19:23+0200\n"
-"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
+"PO-Revision-Date: 2026-02-23 21:55+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -31,18 +32,17 @@ msgstr "kde-i18n-de@kde.org"
 #: ../themes/components/Battery.qml:42
 #, kde-format
 msgid "%1%"
-msgstr "%1 %"
+msgstr "%1 %"
 
 #: ../themes/components/Battery.qml:43
 #, kde-format
 msgid "Battery at %1%"
-msgstr "Akku bei %1 %"
+msgstr "Akku bei %1 %"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
-msgstr "Keine Verbindung"
+msgstr "VPN-Verbindung deaktiviert."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -50,47 +50,56 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN-Verbindung wurde deaktiviert, da das dafür verwendete Gerät getrennt "
+"wurde."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Der Dienst, der die VPN-Verbindung bereitstellt, wurde angehalten."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "Die IP-Konfiguration der VPN-Verbindung ist ungültig."
 
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
 msgstr ""
+"Beim Verbindungsversuch zum VPN-Dienst ist eine Zeitüberschreitung "
+"aufgetreten."
 
 #: connectionsmodel.cpp:156
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"Beim Start des Dienstes, der die VPN-Verbindung bereitstellt, ist eine "
+"Zeitüberschreitung aufgetreten."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
 msgstr ""
+"Das Starten des Dienstes, der die VPN-Verbindung bereitstellt, ist "
+"fehlgeschlagen."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
 msgstr ""
+"Die nötigen Anmeldedaten für die VPN-Verbindung wurden nicht angegeben."
 
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Die Authentifizierung am VPN-Server ist fehlgeschlagen."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Die Verbindung wurde gelöscht."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -110,17 +119,17 @@ msgstr "Anmeldebildschirm für das LightDM-Framework"
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Zertifikat-Passwort"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP-Proxy-Passwort"
 
 #: sessionsmodel.cpp:55
 #, kde-format
