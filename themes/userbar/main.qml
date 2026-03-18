@@ -26,6 +26,7 @@ Item {
         id: screenManager
 
         delegate: Item {
+            property alias crop: crop
 
             // background
             Image {
@@ -39,15 +40,41 @@ Item {
                 }
             }
 
-            OtherScreen {
-                visible: primary.parent && screenManager.activeScreen && parent.parent != screenManager.activeScreen.crop
+            Item {
+                id: crop
+
+                height: parent.height
+                width: Math.min(Math.round(parent.height * cropRatio[0] / cropRatio[1]), parent.width)
+                x: Math.round((parent.width - width) * 0.5)
+                y: parent.y
+
+                property var cropRatio: {
+
+                    let ratioOption = "MaxScreenRatio"
+                    let defaultRatio = [ 16, 9 ]
+
+                    let ratioStr = config.readEntry(ratioOption)
+                    if (!ratioStr) return defaultRatio
+
+                    let ratio = ratioStr.split(":").map(Number)
+
+                    if (ratio.length != 2 || isNaN(ratio[0]) || isNaN(ratio[1]) || ratio[0] < 1 || ratio[1] < 1 || ratio[0] / ratio[1] < 1) {
+                        console.warn("ScreenManager: bad option " + ratioOption + " (" + ratioStr + ")")
+                        return defaultRatio
+                    }
+                    return ratio
+                }
+
+                OtherScreen {
+                    visible: parent != primary.parent
+                }
             }
         }
     }
 
     PrimaryScreen {
         id: primary
-        parent: screenManager.activeScreen && screenManager.activeScreen.crop
+        parent: screenManager.activeScreen && screenManager.activeScreen.loader.item.crop
         anchors.fill: parent
         Keys.onPressed: (event) => {
             if (event.key == Qt.Key_F1 || event.key == Qt.Key_P && (event.modifiers & Qt.MetaModifier)) {
