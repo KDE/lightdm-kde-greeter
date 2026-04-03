@@ -39,6 +39,12 @@ TestCase {
         function indexForUserName(user) {
             return 0
         }
+
+        ListElement {
+            session: "session0"
+            name: "username0"
+            display: "display0"
+        }
     }
 
     QtObject {
@@ -70,6 +76,9 @@ TestCase {
         function startSessionSync(session) {
             testSessionStarted = authenticated
             return authenticated
+        }
+
+        function fixupUsersList() {
         }
     }
 
@@ -111,6 +120,17 @@ TestCase {
         return nthChildrenStartsWith(focusScope.children, "QQuickListView_QML_")
     }
 
+    function findUsersList(primary) {
+
+        let focusScope = nthChildrenStartsWith(primary.children, "QQuickFocusScope")
+        if (!focusScope) return
+
+        let centerPanel = nthChildrenStartsWith(focusScope.children, "QQuickColumn_QML_")
+        if (!centerPanel) return
+
+        return nthChildrenStartsWith(centerPanel.children, "QQuickListView_QML_")
+    }
+
     function closeAllTheMessages(msgList) {
         let data = msgList.data[0]
         verify(data)
@@ -144,6 +164,12 @@ TestCase {
 
         let msgList = findMessagesView(primary)
         verify(msgList)
+
+        let usersList = findUsersList(primary)
+        verify(usersList)
+
+        usersList.enabled = true
+        verify(usersList.activeFocus)
 
         let dissolveAnimation = msgList.dissolve
         verify(dissolveAnimation.defaultPause == 5000)
@@ -222,5 +248,8 @@ TestCase {
 
         verify(messages.rowCount() == 0)
         verify(greeter.testSessionStarted)
+
+        // focus should not move from usersList when closing message
+        verify(usersList.activeFocus)
     }
 }
