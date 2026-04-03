@@ -640,6 +640,7 @@ Item {
                             if (lastMessageTimer.running) {
                                 setupLastMessageTimer()
                             }
+                            usersList.forceActiveFocus()
                         }
                     }
                 }
