@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-27 00:46+0000\n"
+"POT-Creation-Date: 2026-04-07 00:45+0000\n"
 "PO-Revision-Date: 2025-12-06 08:56+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -127,67 +127,67 @@ msgstr "Premi %1 per cambiare lo schermo principale"
 msgid "A fallback version of the login screen is running"
 msgstr "È in esecuzione una versione di ripiego della schermata di accesso"
 
-#: PrimaryScreen.qml:95
+#: PrimaryScreen.qml:86
 #, kde-format
 msgid "Login failed"
 msgstr "Accesso non riuscito"
 
-#: PrimaryScreen.qml:523
+#: PrimaryScreen.qml:538
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Bloc Maiusc è attivo"
 
-#: PrimaryScreen.qml:526
+#: PrimaryScreen.qml:541
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Bloc Num è attivo"
 
-#: PrimaryScreen.qml:529
+#: PrimaryScreen.qml:544
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Bloc Maiusc e Bloc Num sono attivi"
 
-#: PrimaryScreen.qml:542
+#: PrimaryScreen.qml:557
 #, kde-format
 msgid "Log in"
 msgstr "Accedi"
 
-#: PrimaryScreen.qml:561
+#: PrimaryScreen.qml:576
 #, kde-format
 msgid "Log in as another user"
 msgstr "Accedi come un altro utente"
 
-#: PrimaryScreen.qml:731
+#: PrimaryScreen.qml:769
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Mappatura della tastiera"
 
-#: PrimaryScreen.qml:776
+#: PrimaryScreen.qml:814
 #, kde-format
 msgid "Desktop session"
 msgstr "Sessione del desktop"
 
-#: PrimaryScreen.qml:803
+#: PrimaryScreen.qml:841
 #, kde-format
 msgid "Suspend"
 msgstr "Sospendi"
 
-#: PrimaryScreen.qml:815
+#: PrimaryScreen.qml:853
 #, kde-format
 msgid "Hibernate"
 msgstr "Iberna"
 
-#: PrimaryScreen.qml:828
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Restart"
 msgstr "Riavvia"
 
-#: PrimaryScreen.qml:840
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Shutdown"
 msgstr "Spegni"
 
-#: PrimaryScreen.qml:870
+#: PrimaryScreen.qml:908
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

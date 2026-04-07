@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-27 00:46+0000\n"
+"POT-Creation-Date: 2026-04-07 00:45+0000\n"
 "PO-Revision-Date: 2025-12-06 16:56+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -128,67 +128,67 @@ msgstr "اضغَط %1 لتبديل الشاشة مبدئية"
 msgid "A fallback version of the login screen is running"
 msgstr "تُشغيل نسخة بديلة من شاشة الولوج"
 
-#: PrimaryScreen.qml:95
+#: PrimaryScreen.qml:86
 #, kde-format
 msgid "Login failed"
 msgstr "فشل الولوج"
 
-#: PrimaryScreen.qml:523
+#: PrimaryScreen.qml:538
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "مفتاح Caps Lock مفعّل"
 
-#: PrimaryScreen.qml:526
+#: PrimaryScreen.qml:541
 #, kde-format
 msgid "Num Lock is on"
 msgstr "مفتاح Num Lock مفعّل"
 
-#: PrimaryScreen.qml:529
+#: PrimaryScreen.qml:544
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "مفتاحا Caps Lock و Num Lock مفعّلان"
 
-#: PrimaryScreen.qml:542
+#: PrimaryScreen.qml:557
 #, kde-format
 msgid "Log in"
 msgstr "لِج"
 
-#: PrimaryScreen.qml:561
+#: PrimaryScreen.qml:576
 #, kde-format
 msgid "Log in as another user"
 msgstr "لِج بصفة مستخدم آخر"
 
-#: PrimaryScreen.qml:731
+#: PrimaryScreen.qml:769
 #, kde-format
 msgid "Keyboard layout"
 msgstr "تخطيط لوحة المفاتيح"
 
-#: PrimaryScreen.qml:776
+#: PrimaryScreen.qml:814
 #, kde-format
 msgid "Desktop session"
 msgstr "جلسة سطح المكتب"
 
-#: PrimaryScreen.qml:803
+#: PrimaryScreen.qml:841
 #, kde-format
 msgid "Suspend"
 msgstr "علّق"
 
-#: PrimaryScreen.qml:815
+#: PrimaryScreen.qml:853
 #, kde-format
 msgid "Hibernate"
 msgstr "أسبِت"
 
-#: PrimaryScreen.qml:828
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Restart"
 msgstr "أعد التّشغيل"
 
-#: PrimaryScreen.qml:840
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Shutdown"
 msgstr "أطفئ"
 
-#: PrimaryScreen.qml:870
+#: PrimaryScreen.qml:908
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
