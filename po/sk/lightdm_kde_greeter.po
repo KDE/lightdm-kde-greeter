@@ -12,8 +12,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,8 +36,7 @@ msgid "Battery at %1%"
 msgstr "Batéria na %1%"
 
 #: connectionsmodel.cpp:146
-#, fuzzy, kde-format
-#| msgid "No connection"
+#, kde-format
 msgid "VPN connection deactivated."
 msgstr "Nie je spojenie"
 
@@ -61,7 +60,7 @@ msgstr ""
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "Pokus o pripojenie k službe VPN vypršalo."
 
 #: connectionsmodel.cpp:156
 #, kde-format
@@ -82,12 +81,12 @@ msgstr ""
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Overenie pre VPN server zlyhalo."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Pripojenie bolo odstránené."
 
 #: connectionsmodel.cpp:580
 #, kde-format
@@ -107,12 +106,12 @@ msgstr ""
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Certifikát heslo"
 
 #: nmsecretagent.cpp:81
 #, kde-format
@@ -122,7 +121,7 @@ msgstr ""
 #: sessionsmodel.cpp:55
 #, kde-format
 msgid "Previously Used Session"
-msgstr ""
+msgstr "Previously Used Session"
 
 #: usersmodel.cpp:37
 #, kde-format
