@@ -53,7 +53,7 @@ msgstr "Vybrať obrázok"
 #: ui/main.qml:146
 #, kde-format
 msgid "Theme changes will be lost"
-msgstr ""
+msgstr "Zmeny témy budú stratené"
 
 #: ui/main.qml:209
 #, kde-format
@@ -99,4 +99,4 @@ msgstr "Ako používateľ:"
 #: ui/main.qml:359
 #, kde-format
 msgid "Using session:"
-msgstr ""
+msgstr "Používanie relácie:"

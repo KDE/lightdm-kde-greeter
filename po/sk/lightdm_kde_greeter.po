@@ -46,16 +46,18 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN pripojenie bolo deaktivované, pretože zariadenie, ktoré používalo, bolo "
+"odpojené."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Služba poskytujúca VPN pripojenie bola zastavená."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "Konfigurácia IP VPN pripojenia bola neplatná."
 
 #: connectionsmodel.cpp:154
 #, kde-format
@@ -67,16 +69,18 @@ msgstr "Pokus o pripojenie k službe VPN vypršalo."
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
 msgstr ""
+"Pri spúšťaní služby poskytujúcej VPN pripojenie nastalo prekročenie časového "
+"limitu."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Spustenie služby poskytujúcej VPN pripojenie zlyhalo."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "Potrebné tajné údaje pre VPN pripojenie neboli poskytnuté."
 
 #: connectionsmodel.cpp:162
 #, kde-format
@@ -96,12 +100,12 @@ msgstr "Nie je spojenie"
 #: main.cpp:173
 #, kde-format
 msgid "LightDM KDE Greeter"
-msgstr ""
+msgstr "Uvítacia obrazovka KDE pre LightDM"
 
 #: main.cpp:175
 #, kde-format
 msgid "Login screen using the LightDM framework"
-msgstr ""
+msgstr "Prihlasovacia obrazovka využívajúca rámec LightDM"
 
 #: nmsecretagent.cpp:79
 #, kde-format
@@ -116,7 +120,7 @@ msgstr "Certifikát heslo"
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "Heslo HTTP proxy"
 
 #: sessionsmodel.cpp:55
 #, kde-format

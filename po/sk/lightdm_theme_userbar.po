@@ -23,17 +23,17 @@ msgstr "Obrázok pozadia:"
 #: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
-msgstr ""
+msgstr "Pripojenie bude aktívne iba na prihlasovacej obrazovke."
 
 #: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
-msgstr ""
+msgstr "Odpojiť sa od %1?"
 
 #: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
-msgstr ""
+msgstr "Prerušiť pripájanie k %1?"
 
 #: NetworkWidget.qml:68
 #, kde-format
@@ -43,22 +43,22 @@ msgstr "Pripojiť k %1?"
 #: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
-msgstr ""
+msgstr "Pripojiť sa k nezabezpečenému prístupovému bodu %1?"
 
 #: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr ""
+msgstr "Zadajte heslo na pripojenie k %1"
 
 #: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr ""
+msgstr "Zadajte prihlasovacie meno a heslo na pripojenie k %1"
 
 #: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
-msgstr ""
+msgstr "%1: Chyba pripojenia, skúste znova."
 
 #: NetworkWidget.qml:97
 #, kde-format
@@ -68,7 +68,7 @@ msgstr "Zlyhalo pripojenie k %1"
 #: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
-msgstr ""
+msgstr "Bezpečnostný protokol nie je podporovaný pre %1"
 
 #: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
@@ -93,37 +93,37 @@ msgstr "Heslo"
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
-msgstr ""
+msgstr "Zakázať bezdrôtové pripojenie"
 
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
-msgstr ""
+msgstr "Povoliť bezdrôtové pripojenie"
 
 #: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
-msgstr ""
+msgstr "Akcia zakázaná"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
-msgstr ""
+msgstr "Zakázať sieť"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
-msgstr ""
+msgstr "Povoliť sieť"
 
 #: OtherScreen.qml:27
 #, kde-format
 msgid "Press %1 to change the primary screen"
-msgstr ""
+msgstr "Stlačte %1 na zmenu primárnej obrazovky"
 
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "Je spustená záložná verzia prihlasovacej obrazovky"
 
 #: PrimaryScreen.qml:86
 #, kde-format
@@ -138,12 +138,12 @@ msgstr "Funkcia Caps Lock je zapnutá"
 #: PrimaryScreen.qml:541
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock je zapnutý"
 
 #: PrimaryScreen.qml:544
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Caps Lock a Num Lock sú zapnuté"
 
 #: PrimaryScreen.qml:557
 #, kde-format
@@ -153,7 +153,7 @@ msgstr "Prihlásenie"
 #: PrimaryScreen.qml:576
 #, kde-format
 msgid "Log in as another user"
-msgstr ""
+msgstr "Prihlásiť sa ako iný používateľ"
 
 #: PrimaryScreen.qml:769
 #, kde-format
