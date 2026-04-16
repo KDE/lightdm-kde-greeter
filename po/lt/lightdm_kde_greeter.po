@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:47+0000\n"
-"PO-Revision-Date: 2024-12-07 00:42+0000\n"
+"PO-Revision-Date: 2026-04-15 14:08+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Moo"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "<>"
 
 #: ../themes/components/Battery.qml:42
 #, kde-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../themes/components/Battery.qml:43
 #, kde-format
 msgid "Battery at %1%"
-msgstr ""
+msgstr "Akumuliatorius ties %1%"
 
 #: connectionsmodel.cpp:146
 #, kde-format
 msgid "VPN connection deactivated."
-msgstr ""
+msgstr "VPN ryšys pasyvintas."
 
 #: connectionsmodel.cpp:148
 #, kde-format
@@ -63,7 +64,7 @@ msgstr ""
 #: connectionsmodel.cpp:154
 #, kde-format
 msgid "The connection attempt to the VPN service timed out."
-msgstr ""
+msgstr "Pasibaigė bandymo prisijungti prie VPN paslaugos laiko limitas."
 
 #: connectionsmodel.cpp:156
 #, kde-format
@@ -84,32 +85,32 @@ msgstr ""
 #: connectionsmodel.cpp:162
 #, kde-format
 msgid "Authentication to the VPN server failed."
-msgstr ""
+msgstr "Tapatybės nustatymas VPN serveryje patyrė nesėkmę."
 
 #: connectionsmodel.cpp:164
 #, kde-format
 msgid "The connection was deleted."
-msgstr ""
+msgstr "Ryšys buvo ištrintas."
 
 #: connectionsmodel.cpp:580
 #, kde-format
 msgid "No connection"
-msgstr ""
+msgstr "Nėra ryšio"
 
 #: main.cpp:173
 #, kde-format
 msgid "LightDM KDE Greeter"
-msgstr ""
+msgstr "LightDM KDE sveikintojas"
 
 #: main.cpp:175
 #, kde-format
 msgid "Login screen using the LightDM framework"
-msgstr ""
+msgstr "Prisijungimo langas naudojantis LightDM karkasą"
 
 #: nmsecretagent.cpp:79
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Slaptažodis"
 
 #: nmsecretagent.cpp:80
 #, kde-format
@@ -124,9 +125,9 @@ msgstr ""
 #: sessionsmodel.cpp:55
 #, kde-format
 msgid "Previously Used Session"
-msgstr ""
+msgstr "Anksčiau naudotas seansas"
 
 #: usersmodel.cpp:37
 #, kde-format
 msgid "Guest"
-msgstr ""
+msgstr "Svečias"

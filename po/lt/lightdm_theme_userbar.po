@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-07 00:45+0000\n"
-"PO-Revision-Date: 2025-05-20 00:44+0000\n"
+"PO-Revision-Date: 2026-04-15 14:07+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,31 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.8\n"
 
 #: config.qml:37
 #, kde-format
 msgid "Background image:"
-msgstr ""
+msgstr "Fono paveikslas:"
 
 #: NetworkWidget.qml:24
 #, kde-format
 msgid "The connection will be active only on the login screen."
-msgstr ""
+msgstr "Ryšys bus aktyvus tik prisijungimo lange."
 
 #: NetworkWidget.qml:61
 #, kde-format
 msgid "Disconnect from %1 ?"
-msgstr ""
+msgstr "Atsijungti nuo %1 ?"
 
 #: NetworkWidget.qml:64
 #, kde-format
 msgid "Abort connecting to %1 ?"
-msgstr ""
+msgstr "Nutraukti prisijungimą prie %1 ?"
 
 #: NetworkWidget.qml:68
 #, kde-format
 msgid "Connect to %1 ?"
-msgstr ""
+msgstr "Prisijungti prie %1 ?"
 
 #: NetworkWidget.qml:72
 #, kde-format
@@ -61,7 +62,7 @@ msgstr ""
 #: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
 msgid "%1: Connection error, try again."
-msgstr ""
+msgstr "%1: Ryšio klaida, bandykite dar kartą."
 
 #: NetworkWidget.qml:97
 #, kde-format
@@ -76,7 +77,7 @@ msgstr ""
 #: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
 msgid "Failed to connect to %1"
-msgstr ""
+msgstr "Nepavyko prisijungti prie %1"
 
 #: NetworkWidget.qml:112
 #, kde-format
@@ -86,110 +87,110 @@ msgstr ""
 #: NetworkWidget.qml:440
 #, kde-format
 msgid "Login"
-msgstr ""
+msgstr "Prisijungimas"
 
 #: NetworkWidget.qml:455
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Slaptažodis"
 
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Disable wireless"
-msgstr ""
+msgstr "Išjungti belaidį ryšį"
 
 #: NetworkWidget.qml:507
 #, kde-format
 msgid "Enable wireless"
-msgstr ""
+msgstr "Įjungti belaidį ryšį"
 
 #: NetworkWidget.qml:508 NetworkWidget.qml:549
 #, kde-format
 msgid "Action prohibited"
-msgstr ""
+msgstr "Veiksmas draudžiamas"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Disable networking"
-msgstr ""
+msgstr "Išjungti darbą tinkle"
 
 #: NetworkWidget.qml:548
 #, kde-format
 msgid "Enable networking"
-msgstr ""
+msgstr "Įjungti darbą tinkle"
 
 #: OtherScreen.qml:27
 #, kde-format
 msgid "Press %1 to change the primary screen"
-msgstr ""
+msgstr "Paspauskite %1 norėdami pakeisti pirminį ekraną"
 
 #: PrimaryScreen.qml:56
 #, kde-format
 msgid "A fallback version of the login screen is running"
-msgstr ""
+msgstr "Veikia atsarginė prisijungimo lango versija"
 
 #: PrimaryScreen.qml:86
 #, kde-format
 msgid "Login failed"
-msgstr ""
+msgstr "Prisijungti nepavyko"
 
 #: PrimaryScreen.qml:538
 #, kde-format
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Įjungtos didžiosios raidės"
 
 #: PrimaryScreen.qml:541
 #, kde-format
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Įjungta skaitmenų klaviatūra"
 
 #: PrimaryScreen.qml:544
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
-msgstr ""
+msgstr "Įjungtos didžiosios raidės ir skaitmenų klaviatūra"
 
 #: PrimaryScreen.qml:557
 #, kde-format
 msgid "Log in"
-msgstr ""
+msgstr "Prisijungti"
 
 #: PrimaryScreen.qml:576
 #, kde-format
 msgid "Log in as another user"
-msgstr ""
+msgstr "Prisijungti kaip kitas naudotojas"
 
 #: PrimaryScreen.qml:769
 #, kde-format
 msgid "Keyboard layout"
-msgstr ""
+msgstr "Klaviatūros išdėstymas"
 
 #: PrimaryScreen.qml:814
 #, kde-format
 msgid "Desktop session"
-msgstr ""
+msgstr "Darbalaukio seansas"
 
 #: PrimaryScreen.qml:841
 #, kde-format
 msgid "Suspend"
-msgstr ""
+msgstr "Pristabdyti"
 
 #: PrimaryScreen.qml:853
 #, kde-format
 msgid "Hibernate"
-msgstr ""
+msgstr "Užmigdyti"
 
 #: PrimaryScreen.qml:866
 #, kde-format
 msgid "Restart"
-msgstr ""
+msgstr "Paleisti iš naujo"
 
 #: PrimaryScreen.qml:878
 #, kde-format
 msgid "Shutdown"
-msgstr ""
+msgstr "Išjungti"
 
 #: PrimaryScreen.qml:908
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
-msgstr ""
+msgstr "Virtuali klaviatūra"

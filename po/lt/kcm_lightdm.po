@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-09 21:26+0300\n"
+"PO-Revision-Date: 2026-04-15 13:56+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -72,7 +72,7 @@ msgstr ""
 #: ui/main.qml:229
 #, kde-format
 msgid "Description:"
-msgstr ""
+msgstr "Aprašas:"
 
 #: ui/main.qml:279
 #, kde-format
@@ -82,25 +82,25 @@ msgstr "Bendra"
 #: ui/main.qml:296
 #, kde-format
 msgid "Automatically log in:"
-msgstr ""
+msgstr "Automatiškai prisijungti:"
 
 #: ui/main.qml:314
 #, kde-format
 msgid "Timeout"
-msgstr ""
+msgstr "Laiko limitas"
 
 #: ui/main.qml:332
 #, kde-format
 msgctxt "Short for second"
 msgid "s"
-msgstr ""
+msgstr "sek."
 
 #: ui/main.qml:344
 #, kde-format
 msgid "As user:"
-msgstr ""
+msgstr "Kaip naudotojas:"
 
 #: ui/main.qml:359
 #, kde-format
 msgid "Using session:"
-msgstr ""
+msgstr "Naudojant seansą:"
