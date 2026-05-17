@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-07 00:45+0000\n"
-"PO-Revision-Date: 2026-04-15 14:07+0300\n"
+"PO-Revision-Date: 2026-05-17 01:03+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -47,17 +47,17 @@ msgstr "Prisijungti prie %1 ?"
 #: NetworkWidget.qml:72
 #, kde-format
 msgid "Connect to an insecure access point %1 ?"
-msgstr ""
+msgstr "Prisijungti prie nesaugaus prieigos taško %1?"
 
 #: NetworkWidget.qml:77
 #, kde-format
 msgid "Enter the password to connect to %1"
-msgstr ""
+msgstr "Įveskite slaptažodį norėdami prisijungti prie %1"
 
 #: NetworkWidget.qml:82
 #, kde-format
 msgid "Enter login and password to connect to %1"
-msgstr ""
+msgstr "Įveskite prisijungimą ir slaptažodį norėdami prisijungti prie %1"
 
 #: NetworkWidget.qml:86 NetworkWidget.qml:92
 #, kde-format
@@ -67,12 +67,12 @@ msgstr "%1: Ryšio klaida, bandykite dar kartą."
 #: NetworkWidget.qml:97
 #, kde-format
 msgid "Provide the secrets to connect to %1:"
-msgstr ""
+msgstr "Pateikite paslaptis norėdami prisijungti prie %1:"
 
 #: NetworkWidget.qml:101
 #, kde-format
 msgid "The security protocol is not supported for %1"
-msgstr ""
+msgstr "Saugumo protokolas, skirtas %1, yra nepalaikomas"
 
 #: NetworkWidget.qml:104 NetworkWidget.qml:108
 #, kde-format
@@ -82,7 +82,7 @@ msgstr "Nepavyko prisijungti prie %1"
 #: NetworkWidget.qml:112
 #, kde-format
 msgid "Error: Can't find access point %1"
-msgstr ""
+msgstr "Klaida: Nepavyksta rasti prieigos tašką %1"
 
 #: NetworkWidget.qml:440
 #, kde-format

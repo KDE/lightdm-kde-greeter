@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-04-15 13:56+0300\n"
+"PO-Revision-Date: 2026-05-17 01:08+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -67,7 +67,7 @@ msgstr "Apipavidalinimas"
 #: ui/main.qml:227
 #, kde-format
 msgid "Name:"
-msgstr ""
+msgstr "Pavadinimas:"
 
 #: ui/main.qml:229
 #, kde-format

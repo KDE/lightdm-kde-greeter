@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 00:47+0000\n"
-"PO-Revision-Date: 2026-04-15 14:08+0300\n"
+"PO-Revision-Date: 2026-05-17 01:15+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -50,16 +50,17 @@ msgid ""
 "VPN connection was deactivated because the device it was using was "
 "disconnected."
 msgstr ""
+"VPN ryšys buvo pasyvintas, nes įrenginys, kurį jis naudojo, buvo atjungtas."
 
 #: connectionsmodel.cpp:150
 #, kde-format
 msgid "The service providing the VPN connection was stopped."
-msgstr ""
+msgstr "Paslauga, kuri teikia VPN ryšį, buvo sustabdyta."
 
 #: connectionsmodel.cpp:152
 #, kde-format
 msgid "The IP config of the VPN connection was invalid."
-msgstr ""
+msgstr "VPN ryšio IP konfigūracija buvo neteisinga."
 
 #: connectionsmodel.cpp:154
 #, kde-format
@@ -70,17 +71,17 @@ msgstr "Pasibaigė bandymo prisijungti prie VPN paslaugos laiko limitas."
 #, kde-format
 msgid ""
 "A timeout occurred while starting the service providing the VPN connection."
-msgstr ""
+msgstr "Pasibaigė laiko limitas, paleidžiant paslaugą, kuri teikia VPN ryšį."
 
 #: connectionsmodel.cpp:158
 #, kde-format
 msgid "Starting the service providing the VPN connection failed."
-msgstr ""
+msgstr "Nepavyko paleisti paslaugos, teikiančios VPN ryšį."
 
 #: connectionsmodel.cpp:160
 #, kde-format
 msgid "Necessary secrets for the VPN connection were not provided."
-msgstr ""
+msgstr "Nebuvo pateiktos VPN ryšiui reikalingos paslaptys."
 
 #: connectionsmodel.cpp:162
 #, kde-format
@@ -115,12 +116,12 @@ msgstr "Slaptažodis"
 #: nmsecretagent.cpp:80
 #, kde-format
 msgid "Certificate password"
-msgstr ""
+msgstr "Liudijimo slaptažodis"
 
 #: nmsecretagent.cpp:81
 #, kde-format
 msgid "HTTP proxy password"
-msgstr ""
+msgstr "HTTP įgaliotojo serverio slaptažodis"
 
 #: sessionsmodel.cpp:55
 #, kde-format
