@@ -25,4 +25,4 @@ Dependencies:
 
 Options:
   cmake-options: '-DGREETER_IMAGES_DIR=/var/lib/$CI_PROJECT_NAME/images'
-  require-passing-tests-on: [ 'Linux' ]
+  require-passing-tests-on: ['@all']
