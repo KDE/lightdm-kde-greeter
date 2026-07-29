@@ -903,6 +903,14 @@ Item {
         }
         spacing: screen.padding
 
+        AccessibilityButton {
+            id: accessibilityButton
+            backend: greeter.accessibility
+            caption: i18nc("Button to show/hide accessibility menu", "Accessibility")
+            expand: true
+            icon.name: "preferences-desktop-accessibility-symbolic"
+        }
+
         TooltipButton {
             id: virtualKeyboardButton
             caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
