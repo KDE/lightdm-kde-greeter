@@ -15,6 +15,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QLightDM/Greeter>
 
+class Accessibility;
+
 class GreeterWrapper: public QLightDM::Greeter
 {
     Q_OBJECT
@@ -27,6 +29,7 @@ class GreeterWrapper: public QLightDM::Greeter
     Q_PROPERTY(bool hideUsers READ hideUsersHint CONSTANT)
     Q_PROPERTY(bool showManualLogin READ showManualLoginHint CONSTANT)
     Q_PROPERTY(QString platformName READ getPlatformName CONSTANT)
+    Q_PROPERTY(Accessibility *accessibility MEMBER m_accessibility)
 
 public:
     explicit GreeterWrapper(QObject *parent = nullptr);
@@ -55,6 +58,7 @@ private:
     void saveLastUserAndSession(const QString &user, const QString &session);
     KSharedConfig::Ptr m_config;
     bool m_allowAutologin = true;
+    Accessibility *m_accessibility;
 };
 
 #endif // GREETERWRAPPER_H

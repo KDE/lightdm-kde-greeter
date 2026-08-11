@@ -10,6 +10,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "greeterwrapper.h"
 
+#include "accessibility.h"
+
 #include <QEvent>
 #include <QApplication>
 #include <QLoggingCategory>
@@ -27,6 +29,7 @@ GreeterWrapper::GreeterWrapper(QObject *parent)
 {
     connectSync();
     m_config = KSharedConfig::openConfig(QStringLiteral("state-kde"));
+    m_accessibility = new Accessibility(this);
     QCoreApplication::instance()->installEventFilter(this);
     connect(this, &GreeterWrapper::fixupUsersList, this, &GreeterWrapper::fixupUsersListQueued, Qt::ConnectionType::QueuedConnection);
 }
