@@ -36,6 +36,9 @@ public:
     QString guestLoginName() const;
     QString getPlatformName() const;
 
+    QString getAccessibilitySetting(const QString &key) const;
+    void setAccessibilitySetting(const QString &key, const QString &value);
+
 Q_SIGNALS:
     void aboutToLogin();
 

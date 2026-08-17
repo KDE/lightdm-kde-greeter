@@ -12,9 +12,15 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QEvent>
 #include <QApplication>
+#include <QLoggingCategory>
 
 #include <KConfig>
 #include <KConfigGroup>
+
+static const QLoggingCategory lc("GreeterWrapper");
+using namespace Qt::StringLiterals;
+
+static const QString s_accessibilityGroup = u"accessibility"_s;
 
 GreeterWrapper::GreeterWrapper(QObject *parent)
     : QLightDM::Greeter(parent)
@@ -79,4 +85,22 @@ bool GreeterWrapper::eventFilter(QObject*, QEvent *event)
 QString GreeterWrapper::getPlatformName() const
 {
     return QGuiApplication::platformName();
+}
+
+QString GreeterWrapper::getAccessibilitySetting(const QString &key) const
+{
+    if (!m_config) {
+        qCWarning(lc,) << "attempt to read from an uninitialized config";
+        return {};
+    }
+    return m_config->group(s_accessibilityGroup).readEntry(key);
+}
+
+void GreeterWrapper::setAccessibilitySetting(const QString &key, const QString &value)
+{
+    if (!m_config) {
+        qCWarning(lc,) << "attempt to save to an uninitialized config";
+        return;
+    }
+    m_config->group(s_accessibilityGroup).writeEntry(key, value);
 }
