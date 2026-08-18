@@ -32,6 +32,13 @@ Item {
 
     readonly property int userReadTime: 48 // ms
 
+    property var commonTabOrder: [
+        keyboardLayoutButton, sessionButton, connectionsButton,
+        suspendButton, hibernateButton, restartButton, shutdownButton,
+        loginAsOtherButton,
+        accessibilityButton, virtualKeyboardButton
+    ]
+
     PlasmaComponents.Label {
         id: debugInfo
         visible: showDebugInfo
@@ -203,7 +210,7 @@ Item {
     function startLoginScreen() {
         clearMessages()
         visibleScreen = screens.LoginScreen
-        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
+        setTabOrder([ inputBox ].concat(commonTabOrder))
         inputBox.forceActiveFocus()
         var username = usersList.currentItem.username
         inputBox.clear()
@@ -216,7 +223,7 @@ Item {
 
     function startPromptScreen() {
         visibleScreen = screens.PromptScreen
-        setTabOrder([ inputBox, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
+        setTabOrder([ inputBox ].concat(commonTabOrder))
         inputBox.forceActiveFocus()
     }
 
@@ -229,7 +236,7 @@ Item {
         visibleScreen = screens.DefaultScreen
         // don't show password prompt unless prompted by PAM
         inputDialog.visibleOnLoginScreen = false
-        setTabOrder([ usersList, keyboardLayoutButton, sessionButton, connectionsButton, suspendButton, hibernateButton, restartButton, shutdownButton, loginAsOtherButton ])
+        setTabOrder([ usersList ].concat(commonTabOrder))
         usersList.forceActiveFocus()
     }
 
