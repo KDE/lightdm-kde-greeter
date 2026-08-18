@@ -306,6 +306,14 @@ Item {
 
         anchors.fill: activeScreen
 
+        function forceDefaultFocus() {
+            if (usersList.visible && !inputBox.visible) {
+                usersList.forceActiveFocus()
+            } else {
+                forceActiveFocus()
+            }
+        }
+
         Column {
             id: centerPanel
             spacing: screen.padding
@@ -909,6 +917,8 @@ Item {
             caption: i18nc("Button to show/hide accessibility menu", "Accessibility")
             expand: true
             icon.name: "preferences-desktop-accessibility-symbolic"
+
+            onPopupEnded: centerPanelFocus.forceDefaultFocus()
         }
 
         TooltipButton {
