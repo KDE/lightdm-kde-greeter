@@ -310,6 +310,7 @@ Item {
         id: centerPanelFocus
 
         KeyNavigation.up: keyboardLayoutButton
+        KeyNavigation.down: accessibilityButton
 
         anchors.fill: activeScreen
 
@@ -911,6 +912,9 @@ Item {
 
     Row {
         id: bottomBar
+
+        KeyNavigation.up: centerPanelFocus
+
         anchors {
             right: wholeScreen.right
             bottom: wholeScreen.bottom
@@ -920,6 +924,9 @@ Item {
 
         AccessibilityButton {
             id: accessibilityButton
+
+            KeyNavigation.right: virtualKeyboardButton
+
             backend: greeter.accessibility
             caption: i18nc("Button to show/hide accessibility menu", "Accessibility")
             expand: true
@@ -930,6 +937,7 @@ Item {
 
         TooltipButton {
             id: virtualKeyboardButton
+
             caption: i18nc("Button to show/hide virtual keyboard", "Virtual Keyboard")
             expand: true
             icon.name: inputPanel.keyboardEnabled ? "input-keyboard-virtual-on" : "input-keyboard-virtual-off"
