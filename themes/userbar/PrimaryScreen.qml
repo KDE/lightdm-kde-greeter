@@ -21,6 +21,7 @@ Item {
 
     property var screens: VisibleScreenEnum.VisibleScreen
     property int visibleScreen: screens.DefaultScreen
+    property string lastMessage: ""
 
     property real gridUnit: Kirigami.Units.gridUnit
     property int padding: gridUnit / 3
@@ -60,8 +61,7 @@ Item {
     Component.onCompleted: {
         startDefaultScreen()
         if (isFallbackSession) {
-            putMessage(i18n("A fallback version of the login screen is running"), 1)
-            dissolveMessages()
+            putDissolvingMessage(i18n("A fallback version of the login screen is running"), 1)
         }
     }
 
@@ -172,6 +172,11 @@ Item {
         }
         messages.append({ text: text, type: type, hideTime: hideTime })
         msgList.positionViewAtEnd()
+    }
+
+    function putDissolvingMessage(text, type) {
+        putMessage(text, type)
+        if (messages.count > 0) dissolveMessages()
     }
 
     function clearMessages() {
