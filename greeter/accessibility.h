@@ -33,7 +33,7 @@ public Q_SLOTS:
 private:
     bool isScreenReaderActive() { return m_screenReaderActive; }
     void setScreenReaderActive(bool active);
-    void reportScreenReaderActive(bool active);
+    void reportScreenReaderActive(bool active, bool force = false);
 
     void subscribeOnDBusSignals();
     void subscribeOnScreenReaderState();

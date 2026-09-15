@@ -43,9 +43,9 @@ void Accessibility::setScreenReaderActive(bool active)
     active ? enableScreenReader() : disableScreenReader();
 }
 
-void Accessibility::reportScreenReaderActive(bool active)
+void Accessibility::reportScreenReaderActive(bool active, bool force)
 {
-    if (m_screenReaderActive == active) return;
+    if (m_screenReaderActive == active && !force) return;
 
     m_screenReaderActive = active;
     Q_EMIT screenReaderActiveChanged();
@@ -60,7 +60,10 @@ void Accessibility::handleDBusSignal(const QString &interfaceName, const QVarian
         auto value = props.value(u"ActiveState"_s);
 
         if (value.isValid()) {
-            reportScreenReaderActive(value.toString() == u"active"_s);
+            auto state = value.toString();
+            if (state == u"active"_s) reportScreenReaderActive(true);
+            else if (state == u"inactive"_s) reportScreenReaderActive(false);
+            else if (state == u"failed"_s) reportScreenReaderActive(false, true);
         }
     }
 }
