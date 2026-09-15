@@ -39,13 +39,31 @@ TooltipButton {
                 text: i18nc("Button to enable/disable screen reader", "Screen Reader")
 
                 checkable: true
-                checked: backend.screenReaderActive
 
                 focus: true
                 highlighted: focus
 
+                indicator: PC.CheckBox {
+                    id: checkbox
+
+                    x: parent.leftPadding
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    tristate: true
+
+                    onClicked: screenReaderItem.triggered()
+                }
+
                 onTriggered: {
-                    backend.screenReaderActive = checked
+                    backend.screenReaderActive = !backend.screenReaderActive
+                    checkbox.checkState = Qt.PartiallyChecked
+                }
+
+                Connections {
+                    target: backend
+                    function onScreenReaderActiveChanged() {
+                        checkbox.checkState = backend.screenReaderActive ? Qt.Checked : Qt.Unchecked
+                    }
                 }
 
                 Shortcut {
