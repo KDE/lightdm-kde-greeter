@@ -64,6 +64,9 @@ TooltipButton {
                     function onScreenReaderActiveChanged() {
                         checkbox.checkState = backend.screenReaderActive ? Qt.Checked : Qt.Unchecked
                     }
+                    function onScreenReaderBackendError(errorMessage) {
+                        screen.putDissolvingMessage(errorMessage, 1)
+                    }
                 }
 
                 Shortcut {

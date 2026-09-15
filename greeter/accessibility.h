@@ -25,6 +25,7 @@ public:
 Q_SIGNALS:
 
     void screenReaderActiveChanged();
+    void screenReaderBackendError(const QString &errorMessage);
 
 public Q_SLOTS:
 
@@ -42,6 +43,7 @@ private:
     void disableScreenReader();
 
     bool m_screenReaderActive;
+    QString m_screenReaderPreviousState;
 };
 
 #endif // ACCESSIBILITY_H

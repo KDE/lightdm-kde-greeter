@@ -15,6 +15,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
+#define TRANSLATION_DOMAIN "lightdm_kde_greeter"
+#include <KLocalizedString>
+
 static const QLoggingCategory lc("Accessibility");
 using namespace Qt::StringLiterals;
 
@@ -63,7 +66,13 @@ void Accessibility::handleDBusSignal(const QString &interfaceName, const QVarian
             auto state = value.toString();
             if (state == u"active"_s) reportScreenReaderActive(true);
             else if (state == u"inactive"_s) reportScreenReaderActive(false);
-            else if (state == u"failed"_s) reportScreenReaderActive(false, true);
+            else if (state == u"failed"_s) {
+                reportScreenReaderActive(false, true);
+                if (m_screenReaderPreviousState == u"activating"_s) {
+                    Q_EMIT screenReaderBackendError(ki18n("Screen reading service failed to start.").toString());
+                }
+            }
+            m_screenReaderPreviousState = state;
         }
     }
 }
@@ -78,6 +87,11 @@ void Accessibility::queryScreenReaderState()
     }
 
     QVariant result = qiface.property("ActiveState");
+
+    if (!result.isValid()) {
+        qCWarning(lc,) << "failed to get 'ActiveState' property from screen reader unit interface";
+        return;
+    }
 
     bool screenReaderActive = result.toString() == u"active"_s;
     reportScreenReaderActive(screenReaderActive);
@@ -137,8 +151,20 @@ void Accessibility::subscribeOnScreenReaderState()
 void Accessibility::enableScreenReader()
 {
     QDBusInterface qiface(s_systemdService, s_systemdPath, s_managerInterface, QDBusConnection::sessionBus());
-    qiface.asyncCall(u"RestartUnit"_s, s_screenReaderServiceName, u"replace"_s);
-    static_cast<GreeterWrapper*>(parent())->setAccessibilitySetting(u"screenReader"_s, u"enabled"_s);
+
+    QDBusPendingReply<QDBusObjectPath> reply = qiface.asyncCall(u"RestartUnit"_s, s_screenReaderServiceName, u"replace"_s);
+    auto pendingCallWatcher = new QDBusPendingCallWatcher(reply, this);
+    connect(pendingCallWatcher, &QDBusPendingCallWatcher::finished, this, [this] (QDBusPendingCallWatcher *w) {
+        w->deleteLater();
+        QDBusPendingReply<QDBusObjectPath> reply = *w;
+        if (reply.isError()) {
+            qCWarning(lc,) << "failed to start screen reader unit:" << reply.error().message();
+            Q_EMIT screenReaderBackendError(ki18n("Screen reading service not found.").toString());
+            reportScreenReaderActive(false, true);
+        } else {
+            static_cast<GreeterWrapper*>(parent())->setAccessibilitySetting(u"screenReader"_s, u"enabled"_s);
+        }
+    });
 }
 
 void Accessibility::disableScreenReader()
