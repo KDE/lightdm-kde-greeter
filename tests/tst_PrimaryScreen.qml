@@ -189,13 +189,13 @@ TestCase {
 
         greeter.authenticated = false
         primary.putMessage("1234") // 192 ms read time
-        primary.putMessage("1234") // same messages do not lengthen reading time
-        primary.putMessage("1234") // same messages do not lengthen reading time
+        primary.putMessage("1234") // same messages are not displayed
+        primary.putMessage("1234") // same messages are not displayed
         greeter.authenticationComplete()
 
-        verify(messages.rowCount() == 3)
+        verify(messages.rowCount() == 1)
         wait(300)
-        verify(messages.rowCount() == 3)
+        verify(messages.rowCount() == 1)
         wait(200)
         verify(messages.rowCount() == 0)
 

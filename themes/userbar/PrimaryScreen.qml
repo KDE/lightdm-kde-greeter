@@ -154,6 +154,10 @@ Item {
     }
 
     function putMessage(text, type) {
+
+        if (text === lastMessage && messages.count > 0) return
+        lastMessage = text
+
         if (!type) type = 0;
         // provide some time to view the message
         var readStart = Date.now()
