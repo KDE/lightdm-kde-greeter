@@ -31,9 +31,12 @@ public Q_SLOTS:
 
     void handleDBusSignal(const QString &interfaceName, const QVariantMap &props, const QStringList &invalidatedProps);
 
-private:
+public:
+
     bool isScreenReaderActive() { return m_screenReaderActive; }
     void setScreenReaderActive(bool active);
+
+private:
     void reportScreenReaderActive(bool active, bool force = false);
 
     void subscribeOnDBusSignals();
