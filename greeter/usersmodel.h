@@ -31,4 +31,4 @@ private:
     bool m_showGuest;
 };
 
-#endif // SESSIONSMODEL_H
+#endif // USERSMODEL_H
