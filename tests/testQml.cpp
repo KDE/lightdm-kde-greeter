@@ -10,6 +10,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QQmlEngine>
 #include <QQmlContext>
 #include "connectionenum.h"
+#include "mock_accessibilitybackend.h"
+
+using namespace Qt::StringLiterals;
 
 class Setup : public QObject
 {
@@ -26,11 +29,15 @@ public Q_SLOTS:
 
     void qmlEngineAvailable(QQmlEngine *engine)
     {
+        engine->rootContext()->setContextProperty(u"mockAccessibility"_s, &m_backend);
     }
 
     void cleanupTestCase()
     {
     }
+
+private:
+    MockBackend m_backend;
 };
 
 QUICK_TEST_MAIN_WITH_SETUP(testQml, Setup)

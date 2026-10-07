@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
 
-add_executable(testQml testQml.cpp ${CMAKE_SOURCE_DIR}/greeter/connectionenum.h)
+add_executable(testQml testQml.cpp ${CMAKE_SOURCE_DIR}/greeter/connectionenum.h mock_accessibilitybackend.h)
 add_test(NAME testQml COMMAND testQml -platform offscreen -input ${CMAKE_SOURCE_DIR}/tests)
 
 target_link_libraries(testQml
