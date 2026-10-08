@@ -1,0 +1,131 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: lightdm-kde-greeter\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-02-18 00:47+0000\n"
+"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@ijekavianlatin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Nemanja Hiršl"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "nemhirsl@gmail.com"
+
+#: ../themes/components/Battery.qml:42
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../themes/components/Battery.qml:43
+#, kde-format
+msgid "Battery at %1%"
+msgstr "Baterija na %1%"
+
+#: connectionsmodel.cpp:146
+#, kde-format
+msgid "VPN connection deactivated."
+msgstr "VPN veza deaktivirana."
+
+#: connectionsmodel.cpp:148
+#, kde-format
+msgid ""
+"VPN connection was deactivated because the device it was using was "
+"disconnected."
+msgstr "VPN veza je deaktivirana jer je uređaj koji je koristila nestao."
+
+#: connectionsmodel.cpp:150
+#, kde-format
+msgid "The service providing the VPN connection was stopped."
+msgstr "Zaustavljen je servis koji pruža VPN vezu."
+
+#: connectionsmodel.cpp:152
+#, kde-format
+msgid "The IP config of the VPN connection was invalid."
+msgstr "IP postava VPN veze nije ispravna."
+
+#: connectionsmodel.cpp:154
+#, kde-format
+msgid "The connection attempt to the VPN service timed out."
+msgstr "Isteklo je vrijeme za pokušaj povezivanja sa VPN servisom."
+
+#: connectionsmodel.cpp:156
+#, kde-format
+msgid ""
+"A timeout occurred while starting the service providing the VPN connection."
+msgstr "Prekovrijeme u pokretanju servisa koji pruža VPN vezu."
+
+#: connectionsmodel.cpp:158
+#, kde-format
+msgid "Starting the service providing the VPN connection failed."
+msgstr "Propalo pokretanje servisa koji pruža VPN vezu."
+
+#: connectionsmodel.cpp:160
+#, kde-format
+msgid "Necessary secrets for the VPN connection were not provided."
+msgstr "Neophodne tajne za VPN vezu nisu zadate."
+
+#: connectionsmodel.cpp:162
+#, kde-format
+msgid "Authentication to the VPN server failed."
+msgstr "Autentifikacija na VPN serveru propala."
+
+#: connectionsmodel.cpp:164
+#, kde-format
+msgid "The connection was deleted."
+msgstr "Veza je obrisana."
+
+#: connectionsmodel.cpp:580
+#, kde-format
+msgid "No connection"
+msgstr "Nema veze"
+
+#: main.cpp:173
+#, kde-format
+msgid "LightDM KDE Greeter"
+msgstr "KDE pozdravni dijalog za LightDM"
+
+#: main.cpp:175
+#, kde-format
+msgid "Login screen using the LightDM framework"
+msgstr "Prijavni ekran zasnovan na radnom okviru LightDM‑a"
+
+#: nmsecretagent.cpp:79
+#, kde-format
+msgid "Password"
+msgstr "Lozinka"
+
+#: nmsecretagent.cpp:80
+#, kde-format
+msgid "Certificate password"
+msgstr "Lozinka sertifikata"
+
+#: nmsecretagent.cpp:81
+#, kde-format
+msgid "HTTP proxy password"
+msgstr "Lozinka HTTP proksija"
+
+#: sessionsmodel.cpp:55
+#, kde-format
+msgid "Previously Used Session"
+msgstr "Prethodno korišćena sesija"
+
+#: usersmodel.cpp:37
+#, kde-format
+msgid "Guest"
+msgstr "Gost"
