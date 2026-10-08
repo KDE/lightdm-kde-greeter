@@ -24,6 +24,7 @@ TooltipButton {
 
     PC.Popup {
         id: menu
+        objectName: "menu"
 
         y: -height + parent.height
         width: contentWidth + leftPadding + rightPadding
@@ -35,6 +36,7 @@ TooltipButton {
         Column {
             PC.MenuItem {
                 id: screenReaderItem
+                objectName: "screenReaderItem"
 
                 text: i18nc("Button to enable/disable screen reader", "Screen Reader")
 
@@ -45,6 +47,7 @@ TooltipButton {
 
                 indicator: PC.CheckBox {
                     id: checkbox
+                    objectName: "screenReaderCheckBox"
 
                     x: parent.leftPadding
                     anchors.verticalCenter: parent.verticalCenter
@@ -55,8 +58,8 @@ TooltipButton {
                 }
 
                 onTriggered: {
-                    backend.screenReaderActive = !backend.screenReaderActive
                     checkbox.checkState = Qt.PartiallyChecked
+                    backend.screenReaderActive = !backend.screenReaderActive
                 }
 
                 Connections {
