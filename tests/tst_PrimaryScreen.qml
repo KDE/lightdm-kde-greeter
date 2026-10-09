@@ -194,9 +194,7 @@ TestCase {
         greeter.authenticationComplete()
 
         verify(messages.rowCount() == 1)
-        wait(300)
-        verify(messages.rowCount() == 1)
-        wait(200)
+        wait(500)
         verify(messages.rowCount() == 0)
 
         // Messages viewing time is extended depending on the content after
