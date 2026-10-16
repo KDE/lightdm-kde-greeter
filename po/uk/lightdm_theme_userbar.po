@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-07 00:45+0000\n"
+"POT-Creation-Date: 2026-10-16 00:50+0000\n"
 "PO-Revision-Date: 2025-12-05 09:07+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.3\n"
+
+#: AccessibilityButton.qml:41
+#, kde-format
+msgctxt "Button to enable/disable screen reader"
+msgid "Screen Reader"
+msgstr ""
 
 #: config.qml:37
 #, kde-format
@@ -123,72 +129,78 @@ msgstr "Увімкнути роботу у мережі"
 msgid "Press %1 to change the primary screen"
 msgstr "Натисніть %1, щоб змінити основний екран"
 
-#: PrimaryScreen.qml:56
+#: PrimaryScreen.qml:64
 #, kde-format
 msgid "A fallback version of the login screen is running"
 msgstr "Запущено резервну версію вікна вітання у системі"
 
-#: PrimaryScreen.qml:86
+#: PrimaryScreen.qml:93
 #, kde-format
 msgid "Login failed"
 msgstr "Невдала спроба увійти"
 
-#: PrimaryScreen.qml:538
+#: PrimaryScreen.qml:563
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock увімкнено"
 
-#: PrimaryScreen.qml:541
+#: PrimaryScreen.qml:566
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock увімкнено"
 
-#: PrimaryScreen.qml:544
+#: PrimaryScreen.qml:569
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock і Num Lock увімкнено"
 
-#: PrimaryScreen.qml:557
+#: PrimaryScreen.qml:582
 #, kde-format
 msgid "Log in"
 msgstr "Увійти"
 
-#: PrimaryScreen.qml:576
+#: PrimaryScreen.qml:601
 #, kde-format
 msgid "Log in as another user"
 msgstr "Увійти як інший користувач"
 
-#: PrimaryScreen.qml:769
+#: PrimaryScreen.qml:794
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Розкладка клавіатури"
 
-#: PrimaryScreen.qml:814
+#: PrimaryScreen.qml:839
 #, kde-format
 msgid "Desktop session"
 msgstr "Сеанс стільниці"
 
-#: PrimaryScreen.qml:841
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: PrimaryScreen.qml:853
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:891
 #, kde-format
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:903
 #, kde-format
 msgid "Shutdown"
 msgstr "Вимкнути"
 
-#: PrimaryScreen.qml:908
+#: PrimaryScreen.qml:940
+#, kde-format
+msgctxt "Button to show/hide accessibility menu"
+msgid "Accessibility"
+msgstr ""
+
+#: PrimaryScreen.qml:950
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

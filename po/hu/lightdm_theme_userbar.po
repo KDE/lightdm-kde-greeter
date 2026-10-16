@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-07 00:45+0000\n"
+"POT-Creation-Date: 2026-10-16 00:50+0000\n"
 "PO-Revision-Date: 2024-11-14 22:06+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -16,6 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.08.3\n"
+
+#: AccessibilityButton.qml:41
+#, kde-format
+msgctxt "Button to enable/disable screen reader"
+msgid "Screen Reader"
+msgstr ""
 
 #: config.qml:37
 #, kde-format
@@ -125,72 +131,78 @@ msgstr ""
 "Nyomja meg a(z) %1 billentyűkombinációt az elsődleges képernyő "
 "megváltoztatásához"
 
-#: PrimaryScreen.qml:56
+#: PrimaryScreen.qml:64
 #, kde-format
 msgid "A fallback version of the login screen is running"
 msgstr ""
 
-#: PrimaryScreen.qml:86
+#: PrimaryScreen.qml:93
 #, kde-format
 msgid "Login failed"
 msgstr "Sikertelen bejelentkezés"
 
-#: PrimaryScreen.qml:538
+#: PrimaryScreen.qml:563
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "A Caps Lock be van kapcsolva"
 
-#: PrimaryScreen.qml:541
+#: PrimaryScreen.qml:566
 #, kde-format
 msgid "Num Lock is on"
 msgstr "A Num Lock be van kapcsolva"
 
-#: PrimaryScreen.qml:544
+#: PrimaryScreen.qml:569
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "A Caps Lock és a Num Lock be van kapcsolva"
 
-#: PrimaryScreen.qml:557
+#: PrimaryScreen.qml:582
 #, kde-format
 msgid "Log in"
 msgstr "Bejelentkezés"
 
-#: PrimaryScreen.qml:576
+#: PrimaryScreen.qml:601
 #, kde-format
 msgid "Log in as another user"
 msgstr "Bejelentkezés másik felhasználóval"
 
-#: PrimaryScreen.qml:769
+#: PrimaryScreen.qml:794
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Billentyűzetkiosztás"
 
-#: PrimaryScreen.qml:814
+#: PrimaryScreen.qml:839
 #, kde-format
 msgid "Desktop session"
 msgstr "Asztali munkamenet"
 
-#: PrimaryScreen.qml:841
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Suspend"
 msgstr "Alvó állapot"
 
-#: PrimaryScreen.qml:853
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:891
 #, kde-format
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:903
 #, kde-format
 msgid "Shutdown"
 msgstr "Leállítás"
 
-#: PrimaryScreen.qml:908
+#: PrimaryScreen.qml:940
+#, kde-format
+msgctxt "Button to show/hide accessibility menu"
+msgid "Accessibility"
+msgstr ""
+
+#: PrimaryScreen.qml:950
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

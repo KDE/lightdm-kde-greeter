@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-07 00:45+0000\n"
+"POT-Creation-Date: 2026-10-16 00:50+0000\n"
 "PO-Revision-Date: 2025-12-06 20:49+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19,6 +19,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.08.3\n"
+
+#: AccessibilityButton.qml:41
+#, kde-format
+msgctxt "Button to enable/disable screen reader"
+msgid "Screen Reader"
+msgstr ""
 
 #: config.qml:37
 #, kde-format
@@ -125,72 +131,78 @@ msgstr "Gaitu sarea"
 msgid "Press %1 to change the primary screen"
 msgstr "%1 sakatu pantaila nagusia aldatzeko"
 
-#: PrimaryScreen.qml:56
+#: PrimaryScreen.qml:64
 #, kde-format
 msgid "A fallback version of the login screen is running"
 msgstr "Saioa hasteko pantailaren erreserbako bertsio bat exekutatzen ari da"
 
-#: PrimaryScreen.qml:86
+#: PrimaryScreen.qml:93
 #, kde-format
 msgid "Login failed"
 msgstr "Saio-sarrerak huts egin du"
 
-#: PrimaryScreen.qml:538
+#: PrimaryScreen.qml:563
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "«Maius.Giltz.» piztuta dago"
 
-#: PrimaryScreen.qml:541
+#: PrimaryScreen.qml:566
 #, kde-format
 msgid "Num Lock is on"
 msgstr "«Zk.Gitz.» piztuta dago"
 
-#: PrimaryScreen.qml:544
+#: PrimaryScreen.qml:569
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "«Maius.Giltz.» eta «Zk.Giltz.» piztuta daude"
 
-#: PrimaryScreen.qml:557
+#: PrimaryScreen.qml:582
 #, kde-format
 msgid "Log in"
 msgstr "Saioan sartu"
 
-#: PrimaryScreen.qml:576
+#: PrimaryScreen.qml:601
 #, kde-format
 msgid "Log in as another user"
 msgstr "Saioan sartu beste erabiltzaile bat bezala"
 
-#: PrimaryScreen.qml:769
+#: PrimaryScreen.qml:794
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Teklatuaren antolaera"
 
-#: PrimaryScreen.qml:814
+#: PrimaryScreen.qml:839
 #, kde-format
 msgid "Desktop session"
 msgstr "Mahaigaineko saioa"
 
-#: PrimaryScreen.qml:841
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Suspend"
 msgstr "Eseki"
 
-#: PrimaryScreen.qml:853
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:891
 #, kde-format
 msgid "Restart"
 msgstr "Berrabiarazi"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:903
 #, kde-format
 msgid "Shutdown"
 msgstr "Itzali"
 
-#: PrimaryScreen.qml:908
+#: PrimaryScreen.qml:940
+#, kde-format
+msgctxt "Button to show/hide accessibility menu"
+msgid "Accessibility"
+msgstr ""
+
+#: PrimaryScreen.qml:950
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

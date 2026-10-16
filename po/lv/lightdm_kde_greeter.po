@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-18 00:47+0000\n"
+"POT-Creation-Date: 2026-10-16 00:50+0000\n"
 "PO-Revision-Date: 2025-01-20 16:47+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -37,6 +37,16 @@ msgstr "%1 %"
 #, kde-format
 msgid "Battery at %1%"
 msgstr "Baterijas līmenis: %1 %"
+
+#: accessibility.cpp:77
+#, kde-format
+msgid "Screen reading service failed to start."
+msgstr ""
+
+#: accessibility.cpp:167
+#, kde-format
+msgid "Screen reading service not found."
+msgstr ""
 
 #: connectionsmodel.cpp:146
 #, kde-format

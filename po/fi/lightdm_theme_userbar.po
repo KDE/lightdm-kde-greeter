@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-07 00:45+0000\n"
+"POT-Creation-Date: 2026-10-16 00:50+0000\n"
 "PO-Revision-Date: 2026-01-05 17:35+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.04.0\n"
+
+#: AccessibilityButton.qml:41
+#, kde-format
+msgctxt "Button to enable/disable screen reader"
+msgid "Screen Reader"
+msgstr ""
 
 #: config.qml:37
 #, kde-format
@@ -123,72 +129,78 @@ msgstr "Käytä verkkoa"
 msgid "Press %1 to change the primary screen"
 msgstr "Vaihda ensiönäytölle painamalla %1"
 
-#: PrimaryScreen.qml:56
+#: PrimaryScreen.qml:64
 #, kde-format
 msgid "A fallback version of the login screen is running"
 msgstr "Käytössä on kirjautumisnäytön varaversio"
 
-#: PrimaryScreen.qml:86
+#: PrimaryScreen.qml:93
 #, kde-format
 msgid "Login failed"
 msgstr "Kirjautuminen epäonnistui"
 
-#: PrimaryScreen.qml:538
+#: PrimaryScreen.qml:563
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Vaihtolukko on käytössä"
 
-#: PrimaryScreen.qml:541
+#: PrimaryScreen.qml:566
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Numerolukko on käytössä"
 
-#: PrimaryScreen.qml:544
+#: PrimaryScreen.qml:569
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Vaihto- ja numerolukko ovat käytössä"
 
-#: PrimaryScreen.qml:557
+#: PrimaryScreen.qml:582
 #, kde-format
 msgid "Log in"
 msgstr "Kirjaudu"
 
-#: PrimaryScreen.qml:576
+#: PrimaryScreen.qml:601
 #, kde-format
 msgid "Log in as another user"
 msgstr "Kirjaudu toisena käyttäjänä"
 
-#: PrimaryScreen.qml:769
+#: PrimaryScreen.qml:794
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Näppäimistöasettelu"
 
-#: PrimaryScreen.qml:814
+#: PrimaryScreen.qml:839
 #, kde-format
 msgid "Desktop session"
 msgstr "Työpöytäistunto"
 
-#: PrimaryScreen.qml:841
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Suspend"
 msgstr "Valmiustila"
 
-#: PrimaryScreen.qml:853
+#: PrimaryScreen.qml:878
 #, kde-format
 msgid "Hibernate"
 msgstr "Lepotila"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:891
 #, kde-format
 msgid "Restart"
 msgstr "Käynnistä uudelleen"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:903
 #, kde-format
 msgid "Shutdown"
 msgstr "Sammuta"
 
-#: PrimaryScreen.qml:908
+#: PrimaryScreen.qml:940
+#, kde-format
+msgctxt "Button to show/hide accessibility menu"
+msgid "Accessibility"
+msgstr ""
+
+#: PrimaryScreen.qml:950
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
