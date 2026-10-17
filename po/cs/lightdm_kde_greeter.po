@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-16 00:50+0000\n"
-"PO-Revision-Date: 2026-08-17 23:46+0200\n"
+"PO-Revision-Date: 2026-10-17 01:10+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -41,12 +41,12 @@ msgstr "Baterie je na %1%"
 #: accessibility.cpp:77
 #, kde-format
 msgid "Screen reading service failed to start."
-msgstr ""
+msgstr "Službu pro čtení obrazovky se nepodařilo spustit."
 
 #: accessibility.cpp:167
 #, kde-format
 msgid "Screen reading service not found."
-msgstr ""
+msgstr "Služba pro čtení obrazovky nebyla nalezena."
 
 #: connectionsmodel.cpp:146
 #, kde-format
