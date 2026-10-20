@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: lightdm_theme_userbar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-16 00:50+0000\n"
-"PO-Revision-Date: 2026-10-10 10:04+0200\n"
+"PO-Revision-Date: 2026-10-19 09:57+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -24,7 +24,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button to enable/disable screen reader"
 msgid "Screen Reader"
-msgstr ""
+msgstr "Средство чтения с экрана"
 
 #: config.qml:37
 #, kde-format
@@ -200,7 +200,7 @@ msgstr "Выключить"
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
-msgstr ""
+msgstr "Специальные возможности"
 
 #: PrimaryScreen.qml:950
 #, kde-format
