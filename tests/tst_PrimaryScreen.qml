@@ -40,6 +40,15 @@ TestCase {
             return 0
         }
 
+        function sessionForUserName(name) {
+            for (let i = 0; i < usersModel.count; ++i) {
+                if (usersModel.get(i).name === name) {
+                    return usersModel.get(i).session
+                }
+            }
+            return ""
+        }
+
         ListElement {
             session: "session0"
             name: "username0"
@@ -58,7 +67,9 @@ TestCase {
     QtObject {
         id: greeter
 
-        property string lastLoggedInUser: "last_logged"
+        property var lastLoggedInUsers: [ "last_logged" ]
+        property var lastLoggedInSessions: [ "last_session" ]
+        property string selectUser: ""
         property bool authenticated: false
         property bool allowAutologin: false
 
