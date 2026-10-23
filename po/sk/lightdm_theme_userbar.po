@@ -19,7 +19,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button to enable/disable screen reader"
 msgid "Screen Reader"
-msgstr ""
+msgstr "Čítačka obrazovky"
 
 #: config.qml:37
 #, kde-format
@@ -195,7 +195,7 @@ msgstr "Vypnutie"
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
-msgstr ""
+msgstr "Prístupnosť"
 
 #: PrimaryScreen.qml:950
 #, kde-format

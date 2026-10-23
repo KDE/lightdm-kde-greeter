@@ -38,12 +38,12 @@ msgstr "Batéria na %1%"
 #: accessibility.cpp:77
 #, kde-format
 msgid "Screen reading service failed to start."
-msgstr ""
+msgstr "Službu čítania obrazovky sa nepodarilo spustiť."
 
 #: accessibility.cpp:167
 #, kde-format
 msgid "Screen reading service not found."
-msgstr ""
+msgstr "Služba čítania obrazovky sa nenašla."
 
 #: connectionsmodel.cpp:146
 #, kde-format
