@@ -1,7 +1,7 @@
 /*
 This file is part of LightDM-KDE.
 
-Copyright (C) 2023-2025 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2023-2026 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -249,11 +249,35 @@ Item {
         usersList.forceActiveFocus()
     }
 
+    function preferredUser() {
+        if (greeter.selectUser.length) return greeter.selectUser
+        if (greeter.selectGuestHint) return greeter.guestLoginName
+
+        let lastLogged = greeter.lastLoggedInUsers
+        if (lastLogged.length) return lastLogged[0];
+
+        return ""
+    }
+
+    function sessionForUser(userName) {
+        let systemSession = usersModel.sessionForUserName(userName)
+        if (systemSession.length) return systemSession
+
+        let historyIndex = greeter.lastLoggedInUsers.indexOf(userName)
+        if (historyIndex >= 0 && historyIndex < greeter.lastLoggedInSessions.length) {
+            return greeter.lastLoggedInSessions[historyIndex]
+        }
+
+        return ""
+    }
+
     function loginAsOtherUser() {
         visibleScreen = screens.WaitScreen
         greeter.authenticate()
-        inputBox.overrideText = greeter.lastLoggedInUser
-        sessionButton.setCurrentSession(greeter.lastLoggedInSession)
+
+        let userName = preferredUser()
+        inputBox.overrideText = userName
+        sessionButton.setCurrentSession(sessionForUser(userName))
     }
 
     function finishDialog() {
@@ -385,7 +409,10 @@ Item {
                 width: activeScreen.width
                 height: currentItemSafe.height
                 model: usersModel
-                currentIndex: Math.max(model.indexForUserName(greeter.lastLoggedInUser), 0)
+                currentIndex: {
+                    let name = preferredUser()
+                    return Math.max(model.indexForUserName(name), 0);
+                }
                 cacheBuffer: count * 80
                 delegate: UserDelegate {
 

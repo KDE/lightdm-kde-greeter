@@ -61,10 +61,13 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
         usersModel->addUser(m_greeter->guestLoginName(), QString());
     }
 
-    // add the last logged in user to the model, if it is not present in the model (perhaps this is a domain user).
-    QString lastUserName = m_greeter->lastLoggedInUser();
-    if (lastUserName.length() > 0 && usersModel->indexForUserName(lastUserName) < 0) {
-        usersModel->addUser(lastUserName, m_greeter->lastLoggedInSession());
+    const QStringList lastUsers = m_greeter->lastLoggedInUsers();
+    const QStringList lastSessions = m_greeter->lastLoggedInSessions();
+
+    // add the last logged in users to the model, if they are not present in
+    // the model (perhaps these are domain users).
+    for (int i = 0; i < lastUsers.size(); ++i) {
+        usersModel->addUser(lastUsers[i], lastSessions[i]);
     }
 
     const QString selectUser = m_greeter->selectUserHint();

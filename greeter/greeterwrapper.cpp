@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2024-2025 Anton Golubev <golubevan@altlinux.org>
+Copyright (C) 2024-2026 Anton Golubev <golubevan@altlinux.org>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -19,6 +19,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <KConfig>
 #include <KConfigGroup>
 
+#include <config.h>
+
 static const QLoggingCategory lc("GreeterWrapper");
 using namespace Qt::StringLiterals;
 
@@ -32,27 +34,66 @@ GreeterWrapper::GreeterWrapper(QObject *parent)
     m_accessibility = new Accessibility(this);
     QCoreApplication::instance()->installEventFilter(this);
     connect(this, &GreeterWrapper::fixupUsersList, this, &GreeterWrapper::fixupUsersListQueued, Qt::ConnectionType::QueuedConnection);
+
+    KConfig config(QStringLiteral(LIGHTDM_CONFIG_DIR "/lightdm-kde-greeter.conf"));
+    m_lastUsersCount = config.group(QStringLiteral("greeter")).readEntry("last-users-count", 4);
+
+    readAndValidateLastUsers();
 }
 
-QString GreeterWrapper::lastLoggedInUser() const
+void GreeterWrapper::readAndValidateLastUsers()
 {
-    //use suggested user from lightdm.conf if they exist, otherwise load from local config file of last logged in user.
-    if (selectGuestHint())
-    {
-        return QStringLiteral("*guest");
+    m_lastUsers.clear();
+
+    const QString usersData = m_config->group(QStringLiteral("lightdm")).readEntry("lastUser");
+    const QString sessionsData = m_config->group(QStringLiteral("lightdm")).readEntry("lastSession");
+
+    if (usersData.isEmpty() && sessionsData.isEmpty()) {
+        return;
     }
 
-    if (!selectUserHint().isEmpty())
-    {
-        return selectUserHint();
+    const QStringList userList = usersData.split(QLatin1Char(','));
+    const QStringList sessionList = sessionsData.split(QLatin1Char(','));
+
+    if (userList.size() != sessionList.size()) {
+        qCWarning(lc,) << "Mismatch between lastUser size" << userList.size()
+                      << "and lastSession size" << sessionList.size()
+                      << ", clearing the remembered users list";
+        return;
     }
 
-    return m_config->group(QStringLiteral("lightdm")).readEntry("lastUser");
+    for (const QString &name : userList) {
+        if (name.isEmpty()) {
+            qCWarning(lc,) << "Empty user name found in lastUser, clearing the remembered users list";
+            return;
+        }
+    }
+
+    for (int i = 0; i < userList.size(); ++i) {
+        m_lastUsers.append({userList[i], sessionList[i]});
+    }
+
+    if (m_lastUsers.size() > m_lastUsersCount) {
+        m_lastUsers.resize(m_lastUsersCount);
+    }
 }
 
-QString GreeterWrapper::lastLoggedInSession() const
+QStringList GreeterWrapper::lastLoggedInUsers() const
 {
-    return m_config->group(QStringLiteral("lightdm")).readEntry("lastSession");
+    QStringList users;
+    for (const auto &entry : m_lastUsers) {
+        users.append(entry.user);
+    }
+    return users;
+}
+
+QStringList GreeterWrapper::lastLoggedInSessions() const
+{
+    QStringList sessions;
+    for (const auto &entry : m_lastUsers) {
+        sessions.append(entry.session);
+    }
+    return sessions;
 }
 
 QString GreeterWrapper::guestLoginName() const
@@ -69,9 +110,35 @@ bool GreeterWrapper::startSessionSync(const QString &session)
 
 void GreeterWrapper::saveLastUserAndSession(const QString &user, const QString &session)
 {
-    m_config->group(QStringLiteral("lightdm")).writeEntry("lastUser", user);
-    m_config->group(QStringLiteral("lightdm")).writeEntry("lastSession", session);
-    //force a sync as our greeter gets killed
+    if (user.isEmpty()) {
+        qCWarning(lc,) << "Attempt to save an empty user name, ignoring";
+        return;
+    }
+
+    for (int i = 0; i < m_lastUsers.size(); ++i) {
+        if (m_lastUsers[i].user == user) {
+            m_lastUsers.removeAt(i);
+            break;
+        }
+    }
+
+    m_lastUsers.prepend({user, session});
+
+    if (m_lastUsers.size() > m_lastUsersCount) {
+        m_lastUsers.resize(m_lastUsersCount);
+    }
+
+    QStringList usersToSave;
+    QStringList sessionsToSave;
+    for (const auto &entry : m_lastUsers) {
+        usersToSave.append(entry.user);
+        sessionsToSave.append(entry.session);
+    }
+
+    m_config->group(QStringLiteral("lightdm")).writeEntry("lastUser", usersToSave.join(QLatin1Char(',')));
+    m_config->group(QStringLiteral("lightdm")).writeEntry("lastSession", sessionsToSave.join(QLatin1Char(',')));
+
+    // force a sync as our greeter gets killed
     m_config->sync();
 }
 

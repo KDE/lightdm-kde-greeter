@@ -8,6 +8,7 @@
 #  theme-name = greeter theme to use
 #  enable-high-dpi = false|true ("false" by default)  Enable high DPI scaling and pixmaps. (Qt::AA_EnableHighDpiScaling and Qt::AA_UseHighDpiPixmaps are enabled)
 #  hide-network-widget = false|true ("false" by default) The theme should not show the network setting, even if there is one
+#  last-users-count = number of the last successfully logged-in users to remember and display in the user list (4 by default)
 #
 # Theme "userbar" settings:
 #  Background = Background file to use, should be readable by all users
@@ -25,6 +26,7 @@
 #enable-high-dpi=
 theme-name=userbar
 #hide-network-widget=false
+#last-users-count=4
 
 [lightdm_theme_userbar]
 #Background=@GREETER_DEFAULT_WALLPAPER@
