@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022 Anton Golubev <golubevan@basealt.ru>
+Copyright (C) 2022-2026 Anton Golubev <golubevan@basealt.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -59,4 +59,13 @@ int UsersModel::indexForUserName(QString name) const
         ++i;
     }
     return -1;
+}
+
+QString UsersModel::sessionForUserName(const QString &name) const
+{
+    int row = indexForUserName(name);
+    if (row < 0) {
+        return QString();
+    }
+    return data(createIndex(row, 0), QLightDM::UsersModel::UserModelRoles::SessionRole).toString();
 }
