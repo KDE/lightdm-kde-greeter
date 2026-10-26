@@ -18,35 +18,25 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 UsersModel::UsersModel(QObject *parent)
     : ExtraRowProxyModel(parent)
-    , m_showGuest(false)
 {
     setSourceModel(QSharedPointer<QAbstractItemModel>(new QLightDM::UsersModel(this)));
 }
 
-void UsersModel::setShowGuest(bool showGuest)
+bool UsersModel::addUser(const QString &name, const QString &session)
 {
-    if (showGuest == m_showGuest)
-    {
-        return;
+    if (indexForUserName(name) >= 0) {
+        return false;
     }
 
-    m_showGuest = showGuest;
-
-    if (m_showGuest)
-    {
-        QStandardItem *guest = new QStandardItem(i18n("Guest"));
-        guest->setData(QStringLiteral("*guest"), QLightDM::UsersModel::NameRole);
-        extraRowModel()->appendRow(guest);
+    const bool isGuest = name == QStringLiteral("*guest");
+    QStandardItem *item = new QStandardItem(isGuest ? i18n("Guest") : name);
+    item->setData(name, QLightDM::UsersModel::NameRole);
+    item->setData(session, QLightDM::UsersModel::SessionRole);
+    if (!isGuest) {
+        item->setData(QStringLiteral("/home/%1/.face").arg(name), QLightDM::UsersModel::ImagePathRole);
     }
-    else
-    {
-        extraRowModel()->removeRow(0);
-    }
-}
-
-bool UsersModel::showGuest() const
-{
-    return m_showGuest;
+    extraRowModel()->appendRow(item);
+    return true;
 }
 
 int UsersModel::indexForUserName(QString name) const

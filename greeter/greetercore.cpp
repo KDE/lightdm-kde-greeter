@@ -3,7 +3,7 @@ This file is part of LightDM-KDE.
 
 Copyright 2011, 2012 David Edmundson <kde@davidedmundson.co.uk>
 Copyright (C) 2021 Aleksei Nikiforov <darktemplar@basealt.ru>
-Copyright (C) 2022-2025 Anton Golubev <golubevan@basealt.ru>
+Copyright (C) 2022-2026 Anton Golubev <golubevan@basealt.ru>
 
 SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -32,7 +32,6 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <Plasma/Theme>
 
 #include <QLightDM/Power>
-#include <QLightDM/UsersModel>
 
 #include "extrarowproxymodel.h"
 #include "faceimageprovider.h"
@@ -59,17 +58,18 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
 
     if (m_greeter->hasGuestAccountHint())
     {
-        usersModel->setShowGuest(true);
+        usersModel->addUser(m_greeter->guestLoginName(), QString());
     }
 
     // add the last logged in user to the model, if it is not present in the model (perhaps this is a domain user).
     QString lastUserName = m_greeter->lastLoggedInUser();
     if (lastUserName.length() > 0 && usersModel->indexForUserName(lastUserName) < 0) {
-        QStandardItem *lastUser = new QStandardItem(lastUserName);
-        lastUser->setData(lastUserName, QLightDM::UsersModel::NameRole);
-        lastUser->setData(m_greeter->lastLoggedInSession(), QLightDM::UsersModel::SessionRole);
-        lastUser->setData(QStringLiteral("/home/%1/.face").arg(lastUserName), QLightDM::UsersModel::ImagePathRole);
-        usersModel->extraRowModel()->appendRow(lastUser);
+        usersModel->addUser(lastUserName, m_greeter->lastLoggedInSession());
+    }
+
+    const QString selectUser = m_greeter->selectUserHint();
+    if (!selectUser.isEmpty()) {
+        usersModel->addUser(selectUser, QString());
     }
 
     qmlRegisterUncreatableMetaObject(ConnectionEnum::staticMetaObject, "ConnectionEnum", 1, 0, "ConnectionEnum", QStringLiteral("Error: only enums"));

@@ -17,19 +17,13 @@ class UsersModel: public ExtraRowProxyModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool showGuest READ showGuest WRITE setShowGuest)
-
 public:
     explicit UsersModel(QObject *parent = nullptr);
 
-    /** Add a row to the sessions model titled "Last Used Session" */
-    void setShowGuest(bool showGuest);
-    bool showGuest() const;
+    // Add a user row to the extra rows if not already present. Returns true if added.
+    bool addUser(const QString &name, const QString &session);
     Q_INVOKABLE int indexForUserName(QString name) const;
     Q_INVOKABLE QString sessionForUserName(const QString &name) const;
-
-private:
-    bool m_showGuest;
 };
 
 #endif // USERSMODEL_H
