@@ -104,7 +104,14 @@ QString GreeterWrapper::guestLoginName() const
 bool GreeterWrapper::startSessionSync(const QString &session)
 {
     Q_EMIT aboutToLogin();
-    saveLastUserAndSession(authenticationUser(), session);
+    QString user = authenticationUser();
+
+    // if the user string is empty here, it’s most likely a guest
+    // also check that hints are enabled
+    if (user.isEmpty() && (hasGuestAccountHint() || autologinGuestHint())) {
+        user = guestLoginName();
+    }
+    saveLastUserAndSession(user, session);
     return QLightDM::Greeter::startSessionSync(session);
 }
 
