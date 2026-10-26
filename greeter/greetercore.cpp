@@ -56,13 +56,20 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
 
     UsersModel *usersModel = new UsersModel(this);
 
-    if (m_greeter->hasGuestAccountHint())
-    {
-        usersModel->addUser(m_greeter->guestLoginName(), QString());
-    }
-
     const QStringList lastUsers = m_greeter->lastLoggedInUsers();
     const QStringList lastSessions = m_greeter->lastLoggedInSessions();
+
+    auto sessionFromHistory = [&lastUsers, &lastSessions](const QString &name) {
+        const int idx = lastUsers.indexOf(name);
+        if (idx >= 0 && !lastSessions.at(idx).isEmpty()) {
+            return lastSessions.at(idx);
+        }
+        return QString();
+    };
+
+    if (m_greeter->hasGuestAccountHint()) {
+        usersModel->addUser(m_greeter->guestLoginName(), sessionFromHistory(m_greeter->guestLoginName()));
+    }
 
     // add the last logged in users to the model, if they are not present in
     // the model (perhaps these are domain users).
@@ -72,7 +79,7 @@ GreeterCore::GreeterCore(QQmlApplicationEngine &engine)
 
     const QString selectUser = m_greeter->selectUserHint();
     if (!selectUser.isEmpty()) {
-        usersModel->addUser(selectUser, QString());
+        usersModel->addUser(selectUser, sessionFromHistory(selectUser));
     }
 
     qmlRegisterUncreatableMetaObject(ConnectionEnum::staticMetaObject, "ConnectionEnum", 1, 0, "ConnectionEnum", QStringLiteral("Error: only enums"));
