@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2024 Anton Golubev <golubevan@altlinux.org>
+    SPDX-FileCopyrightText: 2024-2026 Anton Golubev <golubevan@altlinux.org>
 
     SPDX-License-Identifier: GPL-3.0-or-later
 */
@@ -7,4 +7,5 @@
 #define LIGHTDM_KDE_VERSION "@LIGHTDM_KDE_VERSION@"
 #define GREETER_IMAGES_DIR "@GREETER_IMAGES_DIR@"
 #define GREETER_DEFAULT_WALLPAPER "@GREETER_DEFAULT_WALLPAPER@"
+#define GUEST_LOGIN_NAME "*guest"
 #cmakedefine GREETER_WAYLAND_SESSIONS_FIRST

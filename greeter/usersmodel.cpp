@@ -13,6 +13,8 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include <QLightDM/UsersModel>
 #include <QDebug>
 
+#include <config.h>
+
 #define TRANSLATION_DOMAIN "lightdm_kde_greeter"
 #include <KLocalizedString>
 
@@ -28,7 +30,7 @@ bool UsersModel::addUser(const QString &name, const QString &session)
         return false;
     }
 
-    const bool isGuest = name == QStringLiteral("*guest");
+    const bool isGuest = name == QStringLiteral(GUEST_LOGIN_NAME);
     QStandardItem *item = new QStandardItem(isGuest ? i18n("Guest") : name);
     item->setData(name, QLightDM::UsersModel::NameRole);
     item->setData(session, QLightDM::UsersModel::SessionRole);

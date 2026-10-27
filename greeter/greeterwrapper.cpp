@@ -98,7 +98,7 @@ QStringList GreeterWrapper::lastLoggedInSessions() const
 
 QString GreeterWrapper::guestLoginName() const
 {
-    return QStringLiteral("*guest");
+    return QStringLiteral(GUEST_LOGIN_NAME);
 }
 
 bool GreeterWrapper::startSessionSync(const QString &session)
