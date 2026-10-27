@@ -15,6 +15,7 @@ add_compile_definitions(MOCK_INCLUDES)
 add_executable(testCpp
     testCpp.cpp
     tst_Accessibility.cpp
+    tst_GreeterWrapper.cpp
     mock_qdbus.h
     mock_qlightdmgreeter.h
     ${CMAKE_SOURCE_DIR}/greeter/accessibility.cpp
