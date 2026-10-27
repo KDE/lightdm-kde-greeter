@@ -7,15 +7,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 */
 
 #include "accessibility.h"
+#include "greeterwrapper.h"
 
 #ifndef MOCK_INCLUDES
-    #include "greeterwrapper.h"
     #include <QDBusInterface>
     #include <QDBusPendingCallWatcher>
     #include <QDBusPendingReply>
 #else
     #include "mock_qdbus.h"
-    #include "mock_greeterwrapper.h"
 #endif
 
 #include <QLoggingCategory>

@@ -12,7 +12,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 #include "mock_qdbus.h"
 
 #include "accessibility.h"
-#include "mock_greeterwrapper.h"
+#include "greeterwrapper.h"
 
 using namespace Qt::StringLiterals;
 

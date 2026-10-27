@@ -12,12 +12,19 @@ target_link_libraries(testQml
 
 add_compile_definitions(MOCK_INCLUDES)
 
-add_executable(testCpp tst_Accessibility.cpp mock_greeterwrapper.h mock_qdbus.h ${CMAKE_SOURCE_DIR}/greeter/accessibility.cpp)
+add_executable(testCpp
+    tst_Accessibility.cpp
+    mock_qdbus.h
+    mock_qlightdmgreeter.h
+    ${CMAKE_SOURCE_DIR}/greeter/accessibility.cpp
+    ${CMAKE_SOURCE_DIR}/greeter/greeterwrapper.cpp
+)
 
 target_link_libraries(testCpp
     PRIVATE
     Qt6::Test
     Qt6::Core
+    Qt6::Widgets
     KF6::ConfigGui
     KF6::I18n
 )

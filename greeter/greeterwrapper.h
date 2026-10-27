@@ -13,7 +13,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <KSharedConfig>
 
-#include <QLightDM/Greeter>
+#ifndef MOCK_INCLUDES
+    #include <QLightDM/Greeter>
+#else
+    #include "mock_qlightdmgreeter.h"
+#endif
 
 class Accessibility;
 
