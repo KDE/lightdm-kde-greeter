@@ -13,6 +13,7 @@ target_link_libraries(testQml
 add_compile_definitions(MOCK_INCLUDES)
 
 add_executable(testCpp
+    testCpp.cpp
     tst_Accessibility.cpp
     mock_qdbus.h
     mock_qlightdmgreeter.h
@@ -24,6 +25,7 @@ target_link_libraries(testCpp
     PRIVATE
     Qt6::Test
     Qt6::Core
+    Qt6::Gui
     Qt6::Widgets
     KF6::ConfigGui
     KF6::I18n
@@ -33,9 +35,10 @@ target_include_directories(testCpp
     PRIVATE
     ${CMAKE_SOURCE_DIR}/greeter
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}
 )
 
-add_test(NAME testCpp COMMAND testCpp -platform offscreen)
+add_test(NAME testCpp COMMAND testCpp)
 
 target_include_directories(testQml
     PRIVATE

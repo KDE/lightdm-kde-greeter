@@ -6,10 +6,9 @@ Copyright (C) 2026 Anton Golubev <golubevan@altlinux.org>
 SPDX-License-Identifier: GPL-3.0-or-later
 */
 
-#include <QtTest>
-#include <QObject>
+#include "tst_Accessibility.h"
 
-#include "mock_qdbus.h"
+#include <QtTest>
 
 #include "accessibility.h"
 #include "greeterwrapper.h"
@@ -26,31 +25,26 @@ static const QString s_unitInterface =           u"org.freedesktop.systemd1.Unit
 static const QString s_managerInterface =        u"org.freedesktop.systemd1.Manager"_s;
 static const QString s_propertiesInterface =     u"org.freedesktop.DBus.Properties"_s;
 
-class TestAccessibility : public QObject
+void TestAccessibility::initTestCase()
 {
-    Q_OBJECT
+}
 
-private Q_SLOTS:
-    void initTestCase()
-    {
-    }
+void TestAccessibility::cleanupTestCase()
+{
+}
 
-    void cleanupTestCase()
-    {
-    }
-
-    void init()
-    {
+void TestAccessibility::init()
+{
         auto bus = QDBusConnection::sessionBus();
         bus.clearMockServices();
 
         bus.addMockService(u"manager"_s, mock_key(s_systemdService, s_systemdPath, s_managerInterface));
         bus.addMockService(u"orcaUnit"_s, mock_key(s_systemdService, s_screenReaderUnitPath, s_unitInterface));
         bus.addMockService(u"properties"_s, mock_key(s_systemdService, s_screenReaderUnitPath, s_propertiesInterface));
-    }
+}
 
-    bool triggerWatcher(const QString &mockServiceName, const QString &methodName, const QDBusError error = {})
-    {
+bool TestAccessibility::triggerWatcher(const QString &mockServiceName, const QString &methodName, const QDBusError error)
+{
         QDBusConnection bus = QDBusConnection::sessionBus();
 
         auto mockService = bus.mockService(mockServiceName);
@@ -79,10 +73,10 @@ private Q_SLOTS:
         }
         watcher->triggerFinished();
         return true;
-    }
+}
 
-    bool checkLastCall(const QString &mockServiceName, const QString &methodName)
-    {
+bool TestAccessibility::checkLastCall(const QString &mockServiceName, const QString &methodName)
+{
 
         QDBusConnection bus = QDBusConnection::sessionBus();
 
@@ -104,10 +98,10 @@ private Q_SLOTS:
             return false;
         }
         return true;
-    }
+}
 
-    void testAccessibilityInstantiation()
-    {
+void TestAccessibility::testAccessibilityInstantiation()
+{
         QDBusConnection bus = QDBusConnection::sessionBus();
 
         auto orca = bus.mockService(u"orcaUnit"_s);
@@ -126,10 +120,10 @@ private Q_SLOTS:
         QCOMPARE(propSubscriber->signal, u"PropertiesChanged"_s);
 
         QVERIFY(accessibility.isScreenReaderActive() == false);
-    }
+}
 
-    void testScreenReaderActiveProperty()
-    {
+void TestAccessibility::testScreenReaderActiveProperty()
+{
         auto bus = QDBusConnection::sessionBus();
 
         GreeterWrapper greeter;
@@ -164,10 +158,10 @@ private Q_SLOTS:
         QCOMPARE(accessibility.isScreenReaderActive(), false);
         QCOMPARE(spy.count(), 1);
         QCOMPARE(greeter.getAccessibilitySetting(u"screenReader"_s), u"disabled"_s);
-    }
+}
 
-    void testHandleDBusSignalFailed()
-    {
+void TestAccessibility::testHandleDBusSignalFailed()
+{
         GreeterWrapper greeter;
         Accessibility accessibility(&greeter);
         QVERIFY(triggerWatcher(u"manager"_s, u"Subscribe"_s));
@@ -182,10 +176,10 @@ private Q_SLOTS:
         QCOMPARE(accessibility.isScreenReaderActive(), false);
         QCOMPARE(spy.count(), 1);
         QCOMPARE(errorSpy.count(), 0); // No error if not transitioning from activating
-    }
+}
 
-    void testHandleDBusSignalFailedFromActivating()
-    {
+void TestAccessibility::testHandleDBusSignalFailedFromActivating()
+{
         GreeterWrapper greeter;
         Accessibility accessibility(&greeter);
 
@@ -203,10 +197,10 @@ private Q_SLOTS:
 
         QCOMPARE(accessibility.isScreenReaderActive(), false);
         QCOMPARE(errorSpy.count(), 1);
-    }
+}
 
-    void testAutoEnableScreenReader()
-    {
+void TestAccessibility::testAutoEnableScreenReader()
+{
         QDBusConnection bus = QDBusConnection::sessionBus();
 
         auto orca = bus.mockService(u"orcaUnit"_s);
@@ -220,10 +214,10 @@ private Q_SLOTS:
 
         QVERIFY(triggerWatcher(u"manager"_s, u"Subscribe"_s));
         QVERIFY(triggerWatcher(u"manager"_s, u"RestartUnit"_s));
-    }
+}
 
-    void testAutoDisableScreenReader()
-    {
+void TestAccessibility::testAutoDisableScreenReader()
+{
         QDBusConnection bus = QDBusConnection::sessionBus();
 
         auto orca = bus.mockService(u"orcaUnit"_s);
@@ -237,10 +231,10 @@ private Q_SLOTS:
 
         QVERIFY(triggerWatcher(u"manager"_s, u"Subscribe"_s));
         QVERIFY(checkLastCall(u"manager"_s, u"StopUnit"_s));
-    }
+}
 
-    void testInvalidManagerInterface()
-    {
+void TestAccessibility::testInvalidManagerInterface()
+{
         auto bus = QDBusConnection::sessionBus();
 
         auto manager = bus.mockService(u"manager"_s);
@@ -250,10 +244,10 @@ private Q_SLOTS:
         Accessibility accessibility(&greeter);
 
         QVERIFY(!checkLastCall(u"manager"_s, u"Subscribe"_s));
-    }
+}
 
-    void testNoScreenReaderInSystem()
-    {
+void TestAccessibility::testNoScreenReaderInSystem()
+{
         auto bus = QDBusConnection::sessionBus();
 
         bus.mockService(u"orcaUnit"_s)->setValid(false);
@@ -280,9 +274,6 @@ private Q_SLOTS:
         QCOMPARE(accessibility.isScreenReaderActive(), false);
         // error sent to user
         QCOMPARE(errorSpy.count(), 1);
-    }
-};
-
-QTEST_MAIN(TestAccessibility)
+}
 
 #include "tst_Accessibility.moc"
