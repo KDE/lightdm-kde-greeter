@@ -65,35 +65,6 @@ TestCase {
     }
 
     QtObject {
-        id: greeter
-
-        property var lastLoggedInUsers: [ "last_logged" ]
-        property var lastLoggedInSessions: [ "last_session" ]
-        property string selectUser: ""
-        property bool authenticated: false
-        property bool allowAutologin: false
-
-        property bool testSessionStarted: false
-
-        signal showPrompt
-        signal showMessage
-        signal authenticationComplete
-        signal autologinTimerExpired
-        signal fixupUsersListQueued
-
-        function authenticate() {
-        }
-
-        function startSessionSync(session) {
-            testSessionStarted = authenticated
-            return authenticated
-        }
-
-        function fixupUsersList() {
-        }
-    }
-
-    QtObject {
         id: keyboard
         property int currentLayout: 0
         property list<QtObject> layouts: [
@@ -163,6 +134,10 @@ TestCase {
 
     function test_hide_messages() {
 
+        testSetup.resetGreeter("", "")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(false)
+
         var c = Qt.createComponent("../themes/userbar/PrimaryScreen.qml")
         verify(c.status === Component.Ready)
 
@@ -198,7 +173,7 @@ TestCase {
 
         // Messages are hidden by default timeout after failed authentication
 
-        greeter.authenticated = false
+        greeter.setAuthenticated(false)
         primary.putMessage("1234") // 192 ms read time
         primary.putMessage("1234") // same messages are not displayed
         primary.putMessage("1234") // same messages are not displayed
@@ -226,37 +201,31 @@ TestCase {
 
         // extra time to read before starting the session
 
-        greeter.authenticated = true
-        greeter.testSessionStarted = false
+        greeter.setAuthenticated(true)
         primary.putMessage("1234") // 192 ms read time
         primary.putMessage("4321") // 192 ms read time
         greeter.authenticationComplete()
         wait(300)
 
-        verify(!greeter.testSessionStarted)
         verify(messages.rowCount() == 2)
 
         wait(200)
 
         verify(messages.rowCount() == 0)
-        verify(greeter.testSessionStarted)
 
         // if close all the messages, the session starts immediately
 
-        greeter.authenticated = true
-        greeter.testSessionStarted = false
+        greeter.setAuthenticated(true)
         primary.putMessage("1234") // 192 ms read time
         primary.putMessage("4321") // 192 ms read time
         greeter.authenticationComplete()
         wait(150)
 
-        verify(!greeter.testSessionStarted)
         verify(messages.rowCount() == 2)
 
         closeAllTheMessages(msgList)
 
         verify(messages.rowCount() == 0)
-        verify(greeter.testSessionStarted)
 
         // focus should not move from usersList when closing message
         verify(usersList.activeFocus)

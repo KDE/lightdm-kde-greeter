@@ -1,13 +1,25 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
 
-add_executable(testQml testQml.cpp ${CMAKE_SOURCE_DIR}/greeter/connectionenum.h mock_accessibilitybackend.h)
+add_executable(testQml
+    testQml.cpp
+    mock_accessibilitybackend.h
+    mock_qlightdmgreeter.h
+    mock_qdbus.h
+    ${CMAKE_SOURCE_DIR}/greeter/connectionenum.h
+    ${CMAKE_SOURCE_DIR}/greeter/greeterwrapper.cpp
+    ${CMAKE_SOURCE_DIR}/greeter/accessibility.cpp
+)
 add_test(NAME testQml COMMAND testQml -platform offscreen -input ${CMAKE_SOURCE_DIR}/tests)
 
 target_link_libraries(testQml
     PRIVATE
     Qt6::QuickTest
     Qt6::Qml
+    Qt6::Gui
+    Qt6::Widgets
+    KF6::ConfigGui
+    KF6::I18n
 )
 
 add_compile_definitions(MOCK_INCLUDES)
@@ -44,4 +56,6 @@ add_test(NAME testCpp COMMAND testCpp)
 target_include_directories(testQml
     PRIVATE
     ${CMAKE_SOURCE_DIR}/greeter
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}
 )
