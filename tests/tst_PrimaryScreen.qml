@@ -21,6 +21,9 @@ TestCase {
 
     ListModel {
         id: sessionsModel
+
+        ListElement { key: "plasma"; display: "Plasma (X11)" }
+        ListElement { key: "plasma-wayland"; display: "Plasma (Wayland)" }
     }
 
     ListModel {
@@ -37,16 +40,18 @@ TestCase {
     ListModel {
         id: usersModel
         function indexForUserName(user) {
-            return 0
+            for (let i = 0; i < usersModel.count; ++i) {
+                if (usersModel.get(i).name === user) {
+                    return i
+                }
+            }
+            return -1
         }
 
         function sessionForUserName(name) {
-            for (let i = 0; i < usersModel.count; ++i) {
-                if (usersModel.get(i).name === name) {
-                    return usersModel.get(i).session
-                }
-            }
-            return ""
+            let index = indexForUserName(name)
+            if (index < 0) return ""
+            return usersModel.get(index).session
         }
 
         ListElement {
@@ -130,6 +135,15 @@ TestCase {
 
             ++i
         }
+    }
+
+    function createPrimary() {
+        var c = Qt.createComponent("../themes/userbar/PrimaryScreen.qml")
+        verify(c.status === Component.Ready)
+
+        let primary = c.createObject(testCase, { width: 1920, height: 1080 })
+        verify(primary)
+        return primary
     }
 
     function test_hide_messages() {
@@ -229,5 +243,121 @@ TestCase {
 
         // focus should not move from usersList when closing message
         verify(usersList.activeFocus)
+    }
+
+    function test_preferred_user_select_user() {
+        testSetup.resetGreeter("last_logged", "last_session")
+        greeter.setSelectUserHint("domainuser")
+        greeter.setSelectGuestHint(true)
+
+        let primary = createPrimary()
+
+        verify(primary.preferredUser() === "domainuser")
+    }
+
+    function test_preferred_user_guest_hint() {
+        testSetup.resetGreeter("last_logged", "last_session")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(true)
+
+        let primary = createPrimary()
+
+        verify(primary.preferredUser() === greeter.guestLoginName)
+    }
+
+    function test_preferred_user_last_logged_in() {
+        testSetup.resetGreeter("last_logged", "last_session")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(false)
+
+        let primary = createPrimary()
+
+        verify(primary.preferredUser() === "last_logged")
+    }
+
+    function test_preferred_user_empty() {
+        testSetup.resetGreeter("", "")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(false)
+
+        let primary = createPrimary()
+
+        verify(primary.preferredUser() === "")
+    }
+
+    function test_session_for_user_from_model() {
+        // username0 is in the users model with session "session0", but the
+        // history remembers a different session for it
+        testSetup.resetGreeter("username0", "plasma-wayland")
+
+        let primary = createPrimary()
+
+        verify(primary.sessionForUser("username0") === "session0")
+    }
+
+    function test_session_for_user_from_history() {
+        // domainuser is not in the users model, only in the history
+        testSetup.resetGreeter("domainuser", "plasma-wayland")
+
+        let primary = createPrimary()
+
+        verify(primary.sessionForUser("domainuser") === "plasma-wayland")
+    }
+
+    function test_session_for_user_empty() {
+        testSetup.resetGreeter("", "")
+
+        let primary = createPrimary()
+
+        verify(primary.sessionForUser("unknownuser") === "")
+    }
+
+    function test_login_as_other_user_prefills() {
+        testSetup.resetGreeter("domainuser", "plasma-wayland")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(false)
+
+        let primary = createPrimary()
+
+        primary.loginAsOtherUser()
+
+        // find sessionButton in the tree
+        function findSessionButton(item, depth = 0) {
+            if (depth > 5) return null
+            let name = item.toString()
+            if (name.startsWith("ListButton")) {
+                return item
+            }
+            for (let i in item.children) {
+                let found = findSessionButton(item.children[i], depth + 1)
+                if (found) return found
+            }
+            return null
+        }
+        let sessionBtn = findSessionButton(primary)
+        verify(sessionBtn)
+        // the session remembered in the history is selected
+        verify(sessionBtn.currentData() === "plasma-wayland")
+    }
+
+    function test_users_list_current_index() {
+        // add more users to the model
+        usersModel.append({ session: "s1", name: "user1", display: "User 1" })
+        usersModel.append({ session: "s2", name: "user2", display: "User 2" })
+
+        testSetup.resetGreeter("user2", "s2")
+        greeter.setSelectUserHint("")
+        greeter.setSelectGuestHint(false)
+
+        let primary = createPrimary()
+
+        let usersList = findUsersList(primary)
+        verify(usersList)
+        verify(usersList.currentIndex === 2)
+
+        // no preferred user: index falls back to 0
+        testSetup.resetGreeter("", "")
+        wait(100)
+        verify(usersList.currentIndex === 0)
     }
 }
