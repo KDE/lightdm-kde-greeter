@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:50+0000\n"
+"POT-Creation-Date: 2026-11-11 01:04+0000\n"
 "PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -140,68 +140,68 @@ msgstr ""
 msgid "Login failed"
 msgstr "प्रवेशः विफलः अभवत्"
 
-#: PrimaryScreen.qml:563
+#: PrimaryScreen.qml:590
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock चालू अस्ति"
 
-#: PrimaryScreen.qml:566
+#: PrimaryScreen.qml:593
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock चालू अस्ति"
 
-#: PrimaryScreen.qml:569
+#: PrimaryScreen.qml:596
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock तथा Num Lock चालू अस्ति"
 
-#: PrimaryScreen.qml:582
+#: PrimaryScreen.qml:609
 #, kde-format
 msgid "Log in"
 msgstr "प्रवेशं कुर्वन्तु"
 
-#: PrimaryScreen.qml:601
+#: PrimaryScreen.qml:628
 #, kde-format
 msgid "Log in as another user"
 msgstr "अन्यः उपयोक्ता इति रूपेण प्रवेशं कुर्वन्तु"
 
-#: PrimaryScreen.qml:794
+#: PrimaryScreen.qml:821
 #, kde-format
 msgid "Keyboard layout"
 msgstr "कीबोर्डविन्यासः"
 
-#: PrimaryScreen.qml:839
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Desktop session"
 msgstr "डेस्कटॉप सत्रम्"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:893
 #, kde-format
 msgid "Suspend"
 msgstr "निलम्बनम्"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:905
 #, kde-format
 msgid "Hibernate"
 msgstr "शीतनिद्रा"
 
-#: PrimaryScreen.qml:891
+#: PrimaryScreen.qml:918
 #, kde-format
 msgid "Restart"
 msgstr "पुनः आरभत"
 
-#: PrimaryScreen.qml:903
+#: PrimaryScreen.qml:930
 #, kde-format
 msgid "Shutdown"
 msgstr "शटडाउन"
 
-#: PrimaryScreen.qml:940
+#: PrimaryScreen.qml:967
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
 msgstr ""
 
-#: PrimaryScreen.qml:950
+#: PrimaryScreen.qml:977
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"

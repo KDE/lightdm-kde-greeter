@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:50+0000\n"
+"POT-Creation-Date: 2026-11-11 01:04+0000\n"
 "PO-Revision-Date: 2026-10-17 12:45+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -39,12 +39,12 @@ msgstr "%1%"
 msgid "Battery at %1%"
 msgstr "Akumuliatorius ties %1%"
 
-#: accessibility.cpp:77
+#: accessibility.cpp:76
 #, kde-format
 msgid "Screen reading service failed to start."
 msgstr "Nepavyko paleisti ekrano skaitymo tarnybos."
 
-#: accessibility.cpp:167
+#: accessibility.cpp:166
 #, kde-format
 msgid "Screen reading service not found."
 msgstr "Nerasta ekrano skaitymo tarnyba."
@@ -138,7 +138,7 @@ msgstr "HTTP įgaliotojo serverio slaptažodis"
 msgid "Previously Used Session"
 msgstr "Anksčiau naudotas seansas"
 
-#: usersmodel.cpp:37
+#: usersmodel.cpp:34
 #, kde-format
 msgid "Guest"
 msgstr "Svečias"

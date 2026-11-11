@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:50+0000\n"
+"POT-Creation-Date: 2026-11-11 01:04+0000\n"
 "PO-Revision-Date: 2026-10-31 17:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -38,12 +38,12 @@ msgstr "%1٪"
 msgid "Battery at %1%"
 msgstr "البطّاريّة عند %1٪"
 
-#: accessibility.cpp:77
+#: accessibility.cpp:76
 #, kde-format
 msgid "Screen reading service failed to start."
 msgstr "فشلت خدمة قراءة الشاشة في البدء."
 
-#: accessibility.cpp:167
+#: accessibility.cpp:166
 #, kde-format
 msgid "Screen reading service not found."
 msgstr "لم يعثر على خدمة قراءة الشاشة."
@@ -137,7 +137,7 @@ msgstr "كملة سر وكيل HTTP"
 msgid "Previously Used Session"
 msgstr "جلسة مستخدمة سابقًا"
 
-#: usersmodel.cpp:37
+#: usersmodel.cpp:34
 #, kde-format
 msgid "Guest"
 msgstr "ضيف"

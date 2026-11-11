@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:50+0000\n"
+"POT-Creation-Date: 2026-11-11 01:04+0000\n"
 "PO-Revision-Date: 2026-10-16 06:17+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -38,12 +38,12 @@ msgstr "%1%"
 msgid "Battery at %1%"
 msgstr "ელემენტის მუხტია %1%"
 
-#: accessibility.cpp:77
+#: accessibility.cpp:76
 #, kde-format
 msgid "Screen reading service failed to start."
 msgstr "ეკრანის წამკითხველის სერვისის გაშვება ჩავარდა."
 
-#: accessibility.cpp:167
+#: accessibility.cpp:166
 #, kde-format
 msgid "Screen reading service not found."
 msgstr "ეკრანის წამკითხველის სერვისი აღმოჩენილი არაა."
@@ -139,7 +139,7 @@ msgstr "HTTP პროქსის პაროლი"
 msgid "Previously Used Session"
 msgstr "ადრე გამოყენებული სესია"
 
-#: usersmodel.cpp:37
+#: usersmodel.cpp:34
 #, kde-format
 msgid "Guest"
 msgstr "სტუმარი"

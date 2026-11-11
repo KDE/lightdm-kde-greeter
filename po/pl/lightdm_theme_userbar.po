@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:50+0000\n"
+"POT-Creation-Date: 2026-11-11 01:04+0000\n"
 "PO-Revision-Date: 2025-12-06 15:48+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -139,68 +139,68 @@ msgstr "Uruchomiona jest wersja zapasowa ekranu logowania"
 msgid "Login failed"
 msgstr "Nie udało się zalogować"
 
-#: PrimaryScreen.qml:563
+#: PrimaryScreen.qml:590
 #, kde-format
 msgid "Caps Lock is on"
 msgstr "Caps Lock jest włączony"
 
-#: PrimaryScreen.qml:566
+#: PrimaryScreen.qml:593
 #, kde-format
 msgid "Num Lock is on"
 msgstr "Num Lock jest włączony"
 
-#: PrimaryScreen.qml:569
+#: PrimaryScreen.qml:596
 #, kde-format
 msgid "Caps Lock and Num Lock is on"
 msgstr "Caps Lock oraz Num Lock jest włączony"
 
-#: PrimaryScreen.qml:582
+#: PrimaryScreen.qml:609
 #, kde-format
 msgid "Log in"
 msgstr "Zaloguj"
 
-#: PrimaryScreen.qml:601
+#: PrimaryScreen.qml:628
 #, kde-format
 msgid "Log in as another user"
 msgstr "Zaloguj się jako inny użytkownik"
 
-#: PrimaryScreen.qml:794
+#: PrimaryScreen.qml:821
 #, kde-format
 msgid "Keyboard layout"
 msgstr "Układ klawiatury"
 
-#: PrimaryScreen.qml:839
+#: PrimaryScreen.qml:866
 #, kde-format
 msgid "Desktop session"
 msgstr "Posiedzenie pulpitu"
 
-#: PrimaryScreen.qml:866
+#: PrimaryScreen.qml:893
 #, kde-format
 msgid "Suspend"
 msgstr "Uśpij"
 
-#: PrimaryScreen.qml:878
+#: PrimaryScreen.qml:905
 #, kde-format
 msgid "Hibernate"
 msgstr "Zahibernuj"
 
-#: PrimaryScreen.qml:891
+#: PrimaryScreen.qml:918
 #, kde-format
 msgid "Restart"
 msgstr "Uruchom ponownie"
 
-#: PrimaryScreen.qml:903
+#: PrimaryScreen.qml:930
 #, kde-format
 msgid "Shutdown"
 msgstr "Wyłącz"
 
-#: PrimaryScreen.qml:940
+#: PrimaryScreen.qml:967
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
 msgstr ""
 
-#: PrimaryScreen.qml:950
+#: PrimaryScreen.qml:977
 #, kde-format
 msgctxt "Button to show/hide virtual keyboard"
 msgid "Virtual Keyboard"
