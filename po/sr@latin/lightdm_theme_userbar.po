@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-11 01:04+0000\n"
-"PO-Revision-Date: 2026-10-06 10:30+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button to enable/disable screen reader"
 msgid "Screen Reader"
-msgstr ""
+msgstr "Čitač ekrana"
 
 #: config.qml:37
 #, kde-format
@@ -197,7 +197,7 @@ msgstr "Ugasi"
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
-msgstr ""
+msgstr "Pristupačnost"
 
 #: PrimaryScreen.qml:977
 #, kde-format
