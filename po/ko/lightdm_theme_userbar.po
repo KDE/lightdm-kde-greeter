@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-11 01:04+0000\n"
-"PO-Revision-Date: 2026-02-03 23:49+0100\n"
+"PO-Revision-Date: 2026-11-22 00:32+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: AccessibilityButton.qml:41
 #, kde-format
 msgctxt "Button to enable/disable screen reader"
 msgid "Screen Reader"
-msgstr ""
+msgstr "스크린 리더"
 
 #: config.qml:37
 #, kde-format
@@ -197,7 +197,7 @@ msgstr "컴퓨터 끄기"
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
-msgstr ""
+msgstr "접근성"
 
 #: PrimaryScreen.qml:977
 #, kde-format
