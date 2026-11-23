@@ -41,12 +41,12 @@ msgstr "电量 %1%"
 #: accessibility.cpp:76
 #, kde-format
 msgid "Screen reading service failed to start."
-msgstr ""
+msgstr "屏幕阅读服务启动失败。"
 
 #: accessibility.cpp:166
 #, kde-format
 msgid "Screen reading service not found."
-msgstr ""
+msgstr "找不到屏幕阅读服务。"
 
 #: connectionsmodel.cpp:146
 #, kde-format
