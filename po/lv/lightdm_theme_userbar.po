@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the lightdm-kde-greeter package.
 #
-# SPDX-FileCopyrightText: 2024, 2025, 2026 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024-2026 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: lightdm-kde-greeter\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-11 01:04+0000\n"
-"PO-Revision-Date: 2026-02-06 14:14+0200\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2026-11-24 15:08+0200\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: AccessibilityButton.qml:41
 #, kde-format
 msgctxt "Button to enable/disable screen reader"
 msgid "Screen Reader"
-msgstr ""
+msgstr "Ekrāna lasītājs"
 
 #: config.qml:37
 #, kde-format
@@ -198,7 +198,7 @@ msgstr "Izslēgt"
 #, kde-format
 msgctxt "Button to show/hide accessibility menu"
 msgid "Accessibility"
-msgstr ""
+msgstr "Piekļūstamība"
 
 #: PrimaryScreen.qml:977
 #, kde-format
